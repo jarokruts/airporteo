@@ -46,10 +46,10 @@ const services = [
 
 export function ServicesBanner() {
   return (
-    <section className="py-12 px-5 lg:px-8">
+    <section className="py-8 md:py-12 px-5 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div
-          className="rounded-2xl p-12 flex flex-col lg:flex-row gap-12 items-start lg:items-center"
+          className="rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row gap-8 md:gap-12 items-start lg:items-center"
           style={{
             background: 'linear-gradient(135deg, #F0F4F8 0%, #E8EDF5 100%)',
           }}
@@ -86,9 +86,72 @@ export function ServicesBanner() {
             </Link>
           </div>
 
-          {/* Right Side - Grid */}
+          {/* Right Side - Grid (Desktop) / Carousel (Mobile) */}
           <div className="flex-1 w-full">
-            <div className="grid grid-cols-3 gap-4">
+            {/* Mobile Carousel */}
+            <div
+              className="md:hidden overflow-x-auto -mx-5 px-5"
+              style={{
+                scrollBehavior: 'smooth',
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                msOverflowStyle: 'none',
+                scrollbarWidth: 'none',
+              } as any}
+            >
+              <div
+                className="flex gap-4"
+                style={{
+                  width: 'fit-content',
+                }}
+              >
+                {services.map((service) => (
+                  <Link
+                    key={service.id}
+                    href={service.href}
+                    className="group flex-shrink-0"
+                    style={{
+                      width: '120px',
+                      scrollSnapAlign: 'start',
+                    }}
+                  >
+                    <div
+                      className={`rounded-2xl p-3 h-32 flex flex-col items-center justify-center transition-all hover:shadow-lg hover:-translate-y-1 ${
+                        service.isSpecial ? 'shadow-md' : 'bg-white shadow-sm'
+                      }`}
+                      style={
+                        service.isSpecial
+                          ? {
+                              background: 'linear-gradient(135deg, #1D215E 0%, #3F5CA6 100%)',
+                            }
+                          : {}
+                      }
+                    >
+                      <div className="relative w-16 h-16 mb-1">
+                        <Image
+                          src={service.image}
+                          alt={service.label}
+                          fill
+                          className="object-contain"
+                          sizes="64px"
+                        />
+                      </div>
+                      <p
+                        className="text-xs font-semibold text-center line-clamp-2"
+                        style={{
+                          color: service.isSpecial ? '#CA8A04' : '#1D215E',
+                        }}
+                      >
+                        {service.label}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop Grid */}
+            <div className="hidden md:grid grid-cols-3 gap-4">
               {services.map((service) => (
                 <Link
                   key={service.id}
@@ -131,6 +194,15 @@ export function ServicesBanner() {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        div[style*="scrollBehavior"] {
+          scrollbar-width: none;
+        }
+        div[style*="scrollBehavior"]::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   )
 }
