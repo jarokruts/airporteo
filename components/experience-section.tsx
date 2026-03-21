@@ -5,12 +5,12 @@ const HIGHLIGHTS = [
   {
     icon: Users,
     title: "Dedicated Personnel",
-    description: "Every service is delivered by a trained, multilingual concierge agent assigned exclusively to you.",
+    description: "Every service is delivered by a professionally trained agent assigned exclusively to you.",
   },
   {
     icon: ShieldCheck,
     title: "Vetted & Certified",
-    description: "All staff are airport-certified, background-checked, and trained in premium hospitality standards.",
+    description: "All staff are airport-certified, background-checked, and trained to five-star hospitality standards.",
   },
   {
     icon: Globe,
@@ -40,7 +40,7 @@ export function ExperienceSection() {
                 <div className="absolute bottom-4 left-4 right-4">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm">
                     <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                    VIP Lounge Access Included
+                    First-class treatment
                   </span>
                 </div>
               </div>
@@ -48,8 +48,8 @@ export function ExperienceSection() {
               {/* Personnel at work */}
               <div className="relative h-40 lg:h-48 overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/service-arrival.jpg"
-                  alt="Concierge personnel greeting travelers at the airport"
+                  src="/images/concierge-travelers.jpg"
+                  alt="Concierge personnel walking through airport terminal with travelers"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
@@ -60,8 +60,8 @@ export function ExperienceSection() {
               {/* Luxury transport */}
               <div className="relative h-40 lg:h-48 overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/private-transfer.jpg"
-                  alt="Luxury chauffeur service at airport VIP terminal"
+                  src="/images/concierge-greeting.jpg"
+                  alt="Professional concierge greeting traveler at airport terminal"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
@@ -77,7 +77,7 @@ export function ExperienceSection() {
                   <Users className="h-6 w-6 text-blue" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">2,400+</p>
+                  <p className="text-2xl font-bold text-foreground">500+</p>
                   <p className="text-xs text-muted-foreground">Trained concierge agents</p>
                 </div>
               </div>
@@ -86,7 +86,7 @@ export function ExperienceSection() {
 
           {/* Right: Content */}
           <div className="flex-1 lg:max-w-lg">
-            <p className="text-sm font-semibold uppercase tracking-widest text-blue">The Airporteo Experience</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-gold" style={{ letterSpacing: '0.1em', fontSize: '13px' }}>The Airporteo Experience</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
               Your personal team, at every airport
             </h2>
@@ -111,7 +111,7 @@ export function ExperienceSection() {
 
             <a
               href="#hero"
-              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-blue px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-blue-hover"
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-gold/80"
             >
               Book Your Concierge
               <ArrowRight className="h-4 w-4" />

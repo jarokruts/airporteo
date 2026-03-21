@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { ChevronDown, Globe, DollarSign, UserPlus, LogIn } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useCurrency, CURRENCIES } from "./currency-context"
 
 const LANGUAGES = [
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -10,14 +11,6 @@ const LANGUAGES = [
   { code: "ar", label: "العربية", flag: "🇸🇦" },
   { code: "zh", label: "普通话", flag: "🇨🇳" },
   { code: "hi", label: "हिन्दी", flag: "🇮🇳" },
-]
-
-const CURRENCIES = [
-  { code: "USD", symbol: "$", label: "US Dollar" },
-  { code: "EUR", symbol: "€", label: "Euro" },
-  { code: "QAR", symbol: "﷼", label: "Qatari Riyal" },
-  { code: "SAR", symbol: "﷼", label: "Saudi Riyal" },
-  { code: "AED", symbol: "د.إ", label: "UAE Dirham" },
 ]
 
 function Dropdown({
@@ -70,7 +63,7 @@ function Dropdown({
 
 export function TopBar() {
   const [selectedLang, setSelectedLang] = useState(LANGUAGES[0])
-  const [selectedCurrency, setSelectedCurrency] = useState(CURRENCIES[0])
+  const { selectedCurrency, setSelectedCurrency } = useCurrency()
 
   return (
     <div className="relative z-50 w-full bg-navy border-b border-white/10">
@@ -96,14 +89,14 @@ export function TopBar() {
                   className={cn(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-secondary",
                     selectedLang.code === lang.code
-                      ? "font-semibold text-blue"
+                      ? "font-semibold text-gold"
                       : "text-foreground"
                   )}
                 >
                   <span className="text-base leading-none">{lang.flag}</span>
                   <span>{lang.label}</span>
                   {selectedLang.code === lang.code && (
-                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue" />
+                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-gold" />
                   )}
                 </button>
               ))}
@@ -130,7 +123,7 @@ export function TopBar() {
                   className={cn(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-secondary",
                     selectedCurrency.code === currency.code
-                      ? "font-semibold text-blue"
+                      ? "font-semibold text-gold"
                       : "text-foreground"
                   )}
                 >
@@ -140,7 +133,7 @@ export function TopBar() {
                   <span>{currency.code}</span>
                   <span className="text-xs text-muted-foreground">{currency.label}</span>
                   {selectedCurrency.code === currency.code && (
-                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue" />
+                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-gold" />
                   )}
                 </button>
               ))}
@@ -160,7 +153,7 @@ export function TopBar() {
 
           <button
             type="button"
-            className="flex items-center gap-1.5 rounded-md bg-blue px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-blue-hover"
+            className="flex items-center gap-1.5 rounded-md bg-gold px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-gold/80"
           >
             <UserPlus className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Register</span>

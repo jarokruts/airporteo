@@ -4,7 +4,7 @@ import { MapPin } from "lucide-react"
 const AIRPORTS = [
   {
     city: "London",
-    code: "HTR",
+    code: "LHR",
     price: 150,
     image: "/images/airport-london.jpg",
   },
@@ -26,15 +26,27 @@ const AIRPORTS = [
     price: 150,
     image: "/images/airport-newyork.jpg",
   },
+  {
+    city: "Dubai",
+    code: "DXB",
+    price: 180,
+    image: "/images/airport-dubai.jpg",
+  },
+  {
+    city: "Singapore",
+    code: "SIN",
+    price: 200,
+    image: "/images/airport-singapore.jpg",
+  },
 ]
 
 export function PopularAirports() {
   return (
-    <section className="bg-secondary py-16 md:py-20">
+    <section className="bg-secondary py-10 md:py-12">
       <div className="mx-auto max-w-6xl px-5">
         {/* Heading */}
-        <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-blue">
+        <div className="mb-8 text-center">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-gold">
             Top Destinations
           </p>
           <h2 className="text-balance text-2xl font-bold tracking-tight text-foreground md:text-3xl">
@@ -43,39 +55,39 @@ export function PopularAirports() {
         </div>
 
         {/* Cards */}
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+        <div className="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {AIRPORTS.map((airport) => (
             <a
               key={airport.code}
               href="#"
-              className="group flex flex-col items-center gap-3 transition-transform duration-200 hover:-translate-y-1"
+              className="group flex flex-col items-center gap-2 transition-transform duration-200 hover:-translate-y-1"
             >
               {/* Image */}
-              <div className="h-[174px] w-[174px] overflow-hidden rounded-2xl border-2 border-border shadow-sm transition-shadow duration-200 group-hover:shadow-lg group-hover:border-blue">
+              <div className="h-24 w-24 overflow-hidden rounded-xl border-2 border-border shadow-sm transition-shadow duration-200 group-hover:shadow-lg group-hover:border-gold md:h-28 md:w-28">
                 <Image
                   src={airport.image}
                   alt={`${airport.city} ${airport.code} airport`}
-                  width={174}
-                  height={174}
+                  width={112}
+                  height={112}
                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
 
               {/* Info */}
-              <div className="flex flex-col items-center gap-0.5">
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="h-3.5 w-3.5 text-blue" />
-                  <span className="text-sm font-bold text-foreground">
+              <div className="flex flex-col items-center gap-0.5 text-center">
+                <div className="flex items-center gap-1">
+                  <MapPin className="h-3 w-3 text-gold" />
+                  <span className="text-xs font-bold text-foreground md:text-sm">
                     {airport.city}{" "}
                     <span className="font-semibold text-muted-foreground">
                       {airport.code}
                     </span>
                   </span>
                 </div>
-                <span className="text-sm font-medium text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   from{" "}
-                  <span className="font-bold text-blue">
-                    {airport.price} USD
+                  <span className="font-bold text-gold">
+                    ${airport.price}
                   </span>
                 </span>
               </div>

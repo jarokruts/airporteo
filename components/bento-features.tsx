@@ -60,19 +60,8 @@ export function BentoFeatures() {
   return (
     <section id="features" className="bg-secondary/50 py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue">Why Airporteo</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
-            Everything you need, nothing you don{"'"}t
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground lg:text-lg">
-            Six pillars of a stress-free airport experience, delivered by a dedicated concierge at every step.
-          </p>
-        </div>
-
         {/* Bento Grid */}
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature, idx) => {
             const Icon = feature.icon
             const isLarge = feature.size === "large"
@@ -83,7 +72,7 @@ export function BentoFeatures() {
                 key={feature.title}
                 className={cn(
                   "group relative flex overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300",
-                  "hover:border-blue/30 hover:shadow-lg hover:shadow-blue/5",
+                  "hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5",
                   isLarge && "md:col-span-2 lg:col-span-1",
                   idx === 0 && "md:col-span-2 lg:col-span-2",
                   idx === FEATURES.length - 1 && "md:col-span-2 lg:col-span-2",
@@ -120,7 +109,7 @@ export function BentoFeatures() {
                 {/* Content area */}
                 <div className={cn("relative flex flex-1 flex-col justify-center p-6", hasImage && idx === 0 && "lg:p-8")}>
                   {/* Subtle gradient accent on hover */}
-                  <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-blue/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gold/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                   <div className="relative">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-primary-foreground">

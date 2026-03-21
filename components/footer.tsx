@@ -1,67 +1,103 @@
 import Image from "next/image"
+import { Facebook, MessageCircle, Instagram, Send } from "lucide-react"
 
 const FOOTER_LINKS = [
   {
     heading: "Services",
     links: [
-      { label: "Arrival Concierge", href: "#services" },
-      { label: "Departure Assist", href: "#services" },
-      { label: "Transit Connect", href: "#services" },
-      { label: "Private Transfers", href: "#features" },
+      { label: "Meet and Greet", href: "#services" },
+      { label: "VIP Platinum", href: "#services" },
+      { label: "Private Car Transfers", href: "#services" },
+      { label: "Golf Cart and Buggy", href: "#services" },
+      { label: "Luggage Assistance", href: "#services" },
+      { label: "Fast Track Service", href: "#services" },
     ],
   },
   {
     heading: "Company",
     links: [
       { label: "About Us", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
+      { label: "Reviews", href: "#" },
       { label: "Blog", href: "#" },
     ],
   },
   {
     heading: "Support",
     links: [
-      { label: "Help Center", href: "#" },
       { label: "Contact Us", href: "#" },
-      { label: "FAQs", href: "#" },
       { label: "Live Chat", href: "#" },
+      { label: "FAQs", href: "#" },
     ],
   },
 ]
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-navy text-primary-foreground">
-      <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8 lg:py-16">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <a href="#" className="flex items-center gap-2">
+    <footer className="bg-[#1D215E] text-white">
+      <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+        {/* Main Footer Content - Desktop only (hidden on mobile) */}
+        <div className="hidden md:grid grid-cols-4 gap-12 items-start">
+          {/* Left Column - Brand (30% width) - Hidden on mobile, shown on desktop */}
+          <div>
+            <a href="#" className="inline-block">
               <Image
                 src="/images/airporteo-logo.svg"
                 alt="Airporteo logo"
-                width={40}
-                height={40}
-                className="h-10 w-10 object-contain mix-blend-screen"
+                width={120}
+                height={120}
+                className="h-28 w-28 object-contain"
               />
-              <span className="text-lg font-bold tracking-tight text-primary-foreground">Airporteo</span>
             </a>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-light">
+            {/* Description */}
+            <p className="mt-4 text-sm leading-relaxed text-gray-400">
               Premium airport concierge services at 120+ airports worldwide. Making every airport moment seamless since 2018.
             </p>
+            {/* Social Icons */}
+            <div className="mt-5 flex gap-4">
+              <a
+                href="#"
+                className="text-white transition-opacity hover:opacity-70"
+                aria-label="Facebook"
+              >
+                <Facebook size={20} />
+              </a>
+              <a
+                href="#"
+                className="text-white transition-opacity hover:opacity-70"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={20} />
+              </a>
+              <a
+                href="#"
+                className="text-white transition-opacity hover:opacity-70"
+                aria-label="Instagram"
+              >
+                <Instagram size={20} />
+              </a>
+              <a
+                href="#"
+                className="text-white transition-opacity hover:opacity-70"
+                aria-label="Telegram"
+              >
+                <Send size={20} />
+              </a>
+            </div>
           </div>
 
-          {/* Links */}
+          {/* Right Columns - Links (3 columns, equal width ~23% each) */}
           {FOOTER_LINKS.map((group) => (
             <div key={group.heading}>
-              <h3 className="text-sm font-semibold text-primary-foreground">{group.heading}</h3>
-              <ul className="mt-4 space-y-3">
+              <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px' }}>
+                {group.heading}
+              </h3>
+              <ul className="mt-4 space-y-2">
                 {group.links.map((link) => (
-                  <li key={link.label}>
+                  <li key={link.label} style={{ lineHeight: '2' }}>
                     <a
                       href={link.href}
-                      className="text-sm text-slate-light transition-colors hover:text-primary-foreground"
+                      className="text-gray-400 transition-colors hover:text-white whitespace-nowrap"
+                      style={{ fontSize: '14px' }}
                     >
                       {link.label}
                     </a>
@@ -72,14 +108,181 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-primary-foreground/10 pt-8 md:flex-row">
-          <p className="text-sm text-slate-light">
-            {"\u00A9"} {new Date().getFullYear()} Airporteo. All rights reserved.
+        {/* Mobile-only content - shown on mobile, hidden on desktop */}
+        <div className="md:hidden flex flex-col px-0">
+          {/* 2-Column Link Grid */}
+          <div className="grid grid-cols-2 gap-8 mb-8">
+            {/* LEFT COLUMN - Services & Support */}
+            <div className="text-left">
+              {/* Services Section */}
+              <div className="mb-8">
+                <h3 className="font-semibold text-white text-base mb-3">Services</h3>
+                <ul className="space-y-2">
+                  {FOOTER_LINKS[0].links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 transition-colors hover:text-white text-sm"
+                        style={{ fontSize: '14px', lineHeight: '2' }}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Support Section */}
+              <div>
+                <h3 className="font-semibold text-white text-base mb-3">Support</h3>
+                <ul className="space-y-2">
+                  {FOOTER_LINKS[2].links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 transition-colors hover:text-white text-sm"
+                        style={{ fontSize: '14px', lineHeight: '2' }}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN - Company & Legal */}
+            <div className="text-left">
+              {/* Company Section */}
+              <div className="mb-8">
+                <h3 className="font-semibold text-white text-base mb-3">Company</h3>
+                <ul className="space-y-2">
+                  {FOOTER_LINKS[1].links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 transition-colors hover:text-white text-sm"
+                        style={{ fontSize: '14px', lineHeight: '2' }}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Legal Section */}
+              <div>
+                <h3 className="font-semibold text-white text-base mb-3">Legal</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      Privacy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      Terms
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      AML Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      GDPR
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      Cookies
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', marginBottom: '24px' }} />
+
+          {/* Social Icons Row - Centered */}
+          <div className="flex gap-6 justify-center mb-6">
+            <a
+              href="#"
+              className="text-white transition-opacity hover:opacity-70"
+              aria-label="Facebook"
+            >
+              <Facebook size={24} />
+            </a>
+            <a
+              href="#"
+              className="text-white transition-opacity hover:opacity-70"
+              aria-label="WhatsApp"
+            >
+              <MessageCircle size={24} />
+            </a>
+            <a
+              href="#"
+              className="text-white transition-opacity hover:opacity-70"
+              aria-label="Instagram"
+            >
+              <Instagram size={24} />
+            </a>
+            <a
+              href="#"
+              className="text-white transition-opacity hover:opacity-70"
+              aria-label="Telegram"
+            >
+              <Send size={24} />
+            </a>
+          </div>
+
+          {/* Copyright Line - Centered */}
+          <p className="text-center text-sm text-gray-400">
+            {"\u00A9"} 2026 Airporteo. All rights reserved.
+          </p>
+        </div>
+
+        {/* Bottom Bar - Desktop only */}
+        <div 
+          className="hidden md:flex mt-8 items-center justify-between gap-4"
+          style={{ 
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            paddingTop: '24px'
+          }}
+        >
+          <p className="text-sm text-gray-400">
+            {"\u00A9"} 2026 Airporteo. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-sm text-slate-light transition-colors hover:text-primary-foreground">Privacy</a>
-            <a href="#" className="text-sm text-slate-light transition-colors hover:text-primary-foreground">Terms</a>
-            <a href="#" className="text-sm text-slate-light transition-colors hover:text-primary-foreground">Cookies</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Privacy</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Terms</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">AML Policy</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">GDPR</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Cookies</a>
           </div>
         </div>
       </div>
