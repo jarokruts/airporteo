@@ -13,7 +13,7 @@ const services = [
   },
   {
     id: 2,
-    label: 'Luggage',
+    label: 'Luggage Assist',
     image: '/images/luggage-new.png',
     href: '/services/luggage',
   },
@@ -26,7 +26,7 @@ const services = [
   },
   {
     id: 4,
-    label: 'Transfers',
+    label: 'Hotel Transfers',
     image: '/images/transfers-new.png',
     href: '/services/transfers',
   },
@@ -38,7 +38,7 @@ const services = [
   },
   {
     id: 6,
-    label: 'Immigration',
+    label: 'Immigration Assist',
     image: '/images/immigration-new.png',
     href: '/services/immigration',
   },
