@@ -26,10 +26,10 @@ export function AirportHero({ airport }: AirportHeroProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-[#1D215E]/70 via-[#1D215E]/75 to-[#1D215E]/85" />
 
       {/* Content Container */}
-      <div className="relative z-10 flex items-center h-full p-5 md:p-8 lg:p-12">
+      <div className="relative z-10 flex items-start pt-20 md:pt-24 lg:pt-28 min-h-screen p-5 md:p-8 lg:p-12">
         <div className="mx-auto max-w-7xl w-full">
           {/* Two Column Layout */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             
             {/* LEFT COLUMN - Airport Info */}
             <div className="flex flex-col">
