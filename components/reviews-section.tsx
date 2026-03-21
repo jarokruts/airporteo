@@ -7,20 +7,17 @@ export function ReviewsSection() {
     <section id="reviews" className="bg-[#F8FAFC] py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center mb-12">
+        <div className="mx-auto max-w-xl text-center mb-12">
           <p className="text-xs font-semibold uppercase tracking-wider text-gold" style={{ letterSpacing: '0.1em', fontSize: '13px' }}>
             What Our Clients Say
           </p>
           <h2 className="mt-3 text-4xl font-semibold text-[#1D215E]" style={{ fontSize: '36px' }}>
             Trusted by thousands of travelers
           </h2>
-          <p className="mt-4 text-[#64748B]" style={{ fontSize: '15px' }}>
-            See what our customers say about us on Google
-          </p>
         </div>
 
         {/* Google Reviews Placeholder */}
-        <div className="mx-auto max-w-2xl mb-8">
+        <div className="mx-auto max-w-xl">
           <div 
             className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed bg-white p-12"
             style={{ borderColor: '#CBD5E1', minHeight: '300px' }}
@@ -38,18 +35,6 @@ export function ReviewsSection() {
               <p className="text-lg font-semibold text-[#1D215E] mb-2">Google Reviews Widget</p>
               <p className="text-sm text-[#64748B]">Embed code will be added here</p>
             </div>
-          </div>
-        </div>
-
-        {/* Rating Summary */}
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-2">
-            <span className="text-sm text-[#64748B]">Average rating</span>
-            <div className="flex items-center gap-1">
-              <span className="font-semibold text-[#1D215E]">4.9</span>
-              <Star className="h-4 w-4" style={{ color: '#CA8A04', fill: '#CA8A04' }} />
-            </div>
-            <span className="text-sm text-[#64748B]">from 2,000+ reviews</span>
           </div>
         </div>
       </div>
