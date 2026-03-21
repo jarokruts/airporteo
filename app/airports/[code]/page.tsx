@@ -12,15 +12,16 @@ import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 
 interface AirportPageProps {
-  params: {
+  params: Promise<{
     code: string
-  }
+  }>
 }
 
 export async function generateMetadata({
   params,
 }: AirportPageProps): Promise<Metadata> {
-  const airport = getAirport(params.code.toUpperCase())
+  const resolvedParams = await params
+  const airport = getAirport(resolvedParams.code.toUpperCase())
 
   if (!airport) {
     return {
@@ -46,8 +47,9 @@ export async function generateStaticParams() {
   ]
 }
 
-export default function AirportPage({ params }: AirportPageProps) {
-  const airport = getAirport(params.code.toUpperCase())
+export default async function AirportPage({ params }: AirportPageProps) {
+  const resolvedParams = await params
+  const airport = getAirport(resolvedParams.code.toUpperCase())
 
   if (!airport) {
     notFound()
