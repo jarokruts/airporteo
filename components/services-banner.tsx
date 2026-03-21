@@ -48,27 +48,6 @@ export function ServicesBanner() {
   return (
     <section className="py-12 px-5 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        {/* Featured Image Section */}
-        <div
-          className="rounded-2xl overflow-hidden mb-8 relative h-64 lg:h-80"
-        >
-          <Image
-            src="/images/airport-concierge.jpg"
-            alt="Airport concierge greetings a traveler at the arrivals gate"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6 lg:p-8">
-            <p
-              className="text-white font-semibold text-lg lg:text-2xl"
-              style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
-            >
-              Airport concierge greetings a traveler at the arrivals gate
-            </p>
-          </div>
-        </div>
-
         <div
           className="rounded-2xl p-12 flex flex-col lg:flex-row gap-12 items-start lg:items-center"
           style={{
