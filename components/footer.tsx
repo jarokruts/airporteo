@@ -1,31 +1,32 @@
 import Image from "next/image"
+import { Facebook, MessageCircle, Instagram, Send } from "lucide-react"
 
 const FOOTER_LINKS = [
   {
     heading: "Services",
     links: [
-      { label: "Arrival Concierge", href: "#services" },
-      { label: "Departure Assist", href: "#services" },
-      { label: "Transit Connect", href: "#services" },
-      { label: "Private Transfers", href: "#features" },
+      { label: "Meet and Greet", href: "#services" },
+      { label: "VIP Platinum", href: "#services" },
+      { label: "Private Car Transfers", href: "#services" },
+      { label: "Golf Cart and Buggy", href: "#services" },
+      { label: "Luggage Assistance", href: "#services" },
+      { label: "Fast Track Service", href: "#services" },
     ],
   },
   {
     heading: "Company",
     links: [
       { label: "About Us", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
+      { label: "Reviews", href: "#" },
       { label: "Blog", href: "#" },
     ],
   },
   {
     heading: "Support",
     links: [
-      { label: "Help Center", href: "#" },
       { label: "Contact Us", href: "#" },
-      { label: "FAQs", href: "#" },
       { label: "Live Chat", href: "#" },
+      { label: "FAQs", href: "#" },
     ],
   },
 ]
@@ -41,15 +42,45 @@ export function Footer() {
               <Image
                 src="/images/airporteo-logo.svg"
                 alt="Airporteo logo"
-                width={40}
-                height={40}
-                className="h-10 w-10 object-contain mix-blend-screen"
+                width={60}
+                height={60}
+                className="h-15 w-15 object-contain mix-blend-screen"
               />
-              <span className="text-lg font-bold tracking-tight text-primary-foreground">Airporteo</span>
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-light">
               Premium airport concierge services at 120+ airports worldwide. Making every airport moment seamless since 2018.
             </p>
+            {/* Social Media Icons */}
+            <div className="mt-4 flex gap-4">
+              <a
+                href="#"
+                className="text-white transition-opacity hover:opacity-70"
+                aria-label="Facebook"
+              >
+                <Facebook size={24} />
+              </a>
+              <a
+                href="#"
+                className="text-white transition-opacity hover:opacity-70"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={24} />
+              </a>
+              <a
+                href="#"
+                className="text-white transition-opacity hover:opacity-70"
+                aria-label="Instagram"
+              >
+                <Instagram size={24} />
+              </a>
+              <a
+                href="#"
+                className="text-white transition-opacity hover:opacity-70"
+                aria-label="Telegram"
+              >
+                <Send size={24} />
+              </a>
+            </div>
           </div>
 
           {/* Links */}
@@ -74,11 +105,13 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-primary-foreground/10 pt-8 md:flex-row">
           <p className="text-sm text-slate-light">
-            {"\u00A9"} {new Date().getFullYear()} Airporteo. All rights reserved.
+            {"\u00A9"} 2026 Airporteo. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-sm text-slate-light transition-colors hover:text-primary-foreground">Privacy</a>
             <a href="#" className="text-sm text-slate-light transition-colors hover:text-primary-foreground">Terms</a>
+            <a href="#" className="text-sm text-slate-light transition-colors hover:text-primary-foreground">AML Policy</a>
+            <a href="#" className="text-sm text-slate-light transition-colors hover:text-primary-foreground">GDPR</a>
             <a href="#" className="text-sm text-slate-light transition-colors hover:text-primary-foreground">Cookies</a>
           </div>
         </div>
