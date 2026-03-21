@@ -35,10 +35,10 @@ export function Footer() {
   return (
     <footer className="bg-[#1D215E] text-white">
       <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
-        {/* Main Footer Content */}
-        <div className="flex flex-col md:grid md:grid-cols-4 md:gap-12 md:items-start items-center text-center md:text-left">
+        {/* Main Footer Content - Desktop only (hidden on mobile) */}
+        <div className="hidden md:grid grid-cols-4 gap-12 items-start">
           {/* Left Column - Brand (30% width) - Hidden on mobile, shown on desktop */}
-          <div className="hidden md:block">
+          <div>
             <a href="#" className="inline-block">
               <Image
                 src="/images/airporteo-logo.svg"
@@ -87,7 +87,7 @@ export function Footer() {
 
           {/* Right Columns - Links (3 columns, equal width ~23% each) */}
           {FOOTER_LINKS.map((group) => (
-            <div key={group.heading} className="md:text-left">
+            <div key={group.heading}>
               <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px' }}>
                 {group.heading}
               </h3>
