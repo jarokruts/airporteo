@@ -40,7 +40,7 @@ export function ServicesSection() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
             Premium assistance at every stage
           </h2>
         </div>
