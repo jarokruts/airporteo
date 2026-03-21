@@ -36,16 +36,13 @@ const SERVICES = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="bg-background py-8 lg:py-16">
+    <section id="services" className="bg-background py-4 lg:py-8">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
             Premium assistance at every stage
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground lg:text-lg">
-            Whether arriving, departing, or connecting, our expert concierge team ensures a seamless airport experience.
-          </p>
         </div>
 
         {/* Cards */}
