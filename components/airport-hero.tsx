@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { Airport } from '@/lib/airports'
-import { BookingWidget } from './booking-widget'
+import { AirportBookingForm } from './airport-booking-form'
 
 interface AirportHeroProps {
   airport: Airport
@@ -82,9 +82,7 @@ export function AirportHero({ airport }: AirportHeroProps) {
 
             {/* RIGHT COLUMN - Booking Form */}
             <div className="mt-8 md:mt-0">
-              <div className="bg-white rounded-2xl p-4 md:p-6 shadow-xl">
-                <BookingWidget />
-              </div>
+              <AirportBookingForm airport={airport} />
             </div>
           </div>
         </div>
