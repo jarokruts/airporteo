@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, Minus, Plus, X } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X } from 'lucide-react'
 import { createPortal } from 'react-dom'
 import { Airport } from '@/lib/airports'
 
@@ -9,299 +9,506 @@ interface AirportBookingFormProps {
   airport: Airport
 }
 
-// Month calendar renderer
-function renderMonth(monthDate: Date, daysInMonth: number) {
-  const year = monthDate.getFullYear()
-  const month = monthDate.getMonth()
-  const firstDay = new Date(year, month, 1).getDay()
-
-  return (
-    <div key={`${year}-${month}`} style={{ padding: '20px' }}>
-      <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#1D215E', marginBottom: '12px', textAlign: 'center' }}>
-        {monthDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-      </h4>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '8px' }}>
-        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-          <div key={day} style={{ fontSize: '11px', fontWeight: 600, color: '#94A3B8', textAlign: 'center', height: '24px' }}>
-            {day}
-          </div>
-        ))}
-        {Array(firstDay).fill(null).map((_, i) => (
-          <div key={`empty-${i}`} style={{ height: '32px' }} />
-        ))}
-        {Array(daysInMonth).fill(null).map((_, i) => {
-          const day = i + 1
-          const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
-          return (
-            <div key={day} style={{ height: '32px' }}>
-              <button
-                type="button"
-                onClick={() => {}}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  border: 'none',
-                  background: '#F5F7FA',
-                  borderRadius: '6px',
-                  fontSize: '13px',
-                  cursor: 'pointer',
-                  color: '#1D215E'
-                }}
-              >
-                {day}
-              </button>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-// Date picker modal
-function DatePickerModal({ open, onClose, onConfirm }: any) {
-  const [selectedDate, setSelectedDate] = useState<string>('')
+// Bottom Sheet Component
+function BottomSheet({ 
+  open, 
+  onClose, 
+  title, 
+  children 
+}: { 
+  open: boolean
+  onClose: () => void
+  title: string
+  children: React.ReactNode 
+}) {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [open])
 
   if (!open) return null
 
-  const today = new Date()
-  const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1)
-  const daysInCurrentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
-  const daysInNextMonth = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 0).getDate()
-
   return createPortal(
     <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0, 0, 0, 0.5)' }} onClick={onClose} />
-      <div style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        background: 'white',
-        borderTopLeftRadius: '20px',
-        borderTopRightRadius: '20px',
-        maxHeight: '80vh',
-        overflow: 'hidden',
-        zIndex: 9999
-      }}>
+      {/* Backdrop */}
+      <div 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.5)'
+        }}
+        onClick={onClose}
+      />
+      {/* Sheet */}
+      <div 
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          background: 'white',
+          borderTopLeftRadius: '20px',
+          borderTopRightRadius: '20px',
+          maxHeight: '80vh',
+          overflow: 'hidden',
+          zIndex: 9999
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Drag handle */}
         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '12px', paddingBottom: '8px' }}>
           <div style={{ width: '40px', height: '4px', borderRadius: '2px', background: '#E2E8F0' }} />
         </div>
+        {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingLeft: '20px', paddingRight: '20px', paddingBottom: '12px', borderBottom: '1px solid #E2E8F0' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#1D215E' }}>Select Date</h3>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+          <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#1D215E' }}>{title}</h3>
+          <button 
+            onClick={onClose}
+            style={{
+              padding: '4px',
+              borderRadius: '50%',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+          >
             <X className="h-5 w-5" style={{ color: '#94A3B8' }} />
           </button>
         </div>
-        <div style={{ overflowY: 'auto', maxHeight: 'calc(80vh - 80px)', display: 'flex' }}>
-          {renderMonth(today, daysInCurrentMonth)}
-          <div style={{ height: '1px', background: '#E2E8F0', margin: '0 20px 20px 20px', width: '100%' }} />
-          {renderMonth(nextMonth, daysInNextMonth)}
+        {/* Content */}
+        <div style={{ overflowY: 'auto', maxHeight: 'calc(80vh - 80px)' }}>
+          {children}
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            if (selectedDate) {
-              onConfirm(selectedDate)
-              onClose()
-            }
-          }}
-          style={{
-            display: 'block',
-            width: 'calc(100% - 32px)',
-            margin: '0 16px 16px 16px',
-            height: '48px',
-            borderRadius: '10px',
-            background: selectedDate ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
-            color: 'white',
-            fontWeight: 'bold',
-            fontSize: '15px',
-            border: 'none',
-            cursor: selectedDate ? 'pointer' : 'not-allowed'
-          }}
-        >
-          {selectedDate ? `Confirm — ${selectedDate}` : 'Select a date'}
-        </button>
       </div>
     </div>,
     document.body
   )
 }
 
+// Counter component
+function Counter({ 
+  label, 
+  value, 
+  onChange 
+}: { 
+  label: string
+  value: number
+  onChange: (v: number) => void
+}) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingLeft: '20px', paddingRight: '20px', paddingTop: '14px', paddingBottom: '14px', borderBottom: '1px solid #E2E8F0' }}>
+      <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>{label}</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <button
+          type="button"
+          onClick={() => onChange(Math.max(0, value - 1))}
+          disabled={value <= 0}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            border: '1px solid #E2E8F0',
+            color: '#1D215E',
+            background: 'white',
+            cursor: value > 0 ? 'pointer' : 'not-allowed',
+            opacity: value > 0 ? 1 : 0.3,
+            transition: 'all 200ms'
+          }}
+          onMouseEnter={(e) => value > 0 && (e.currentTarget.style.borderColor = '#C9A84C')}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#E2E8F0')}
+        >
+          <span style={{ fontSize: '16px', fontWeight: 600 }}>−</span>
+        </button>
+        <span style={{ width: '24px', textAlign: 'center', fontSize: '15px', fontWeight: 600, color: '#1D215E' }}>{value}</span>
+        <button
+          type="button"
+          onClick={() => onChange(Math.min(10, value + 1))}
+          disabled={value >= 10}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            border: '1px solid #E2E8F0',
+            color: '#1D215E',
+            background: 'white',
+            cursor: value < 10 ? 'pointer' : 'not-allowed',
+            opacity: value < 10 ? 1 : 0.3,
+            transition: 'all 200ms'
+          }}
+          onMouseEnter={(e) => value < 10 && (e.currentTarget.style.borderColor = '#C9A84C')}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#E2E8F0')}
+        >
+          <span style={{ fontSize: '16px', fontWeight: 600 }}>+</span>
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const [direction, setDirection] = useState('arrival')
-  const [serviceType, setServiceType] = useState('meet-greet')
+  const [service, setService] = useState('Meet & Greet')
   const [airportValue, setAirportValue] = useState(`${airport.city} ${airport.code}`)
   const [flightNumber, setFlightNumber] = useState('')
   const [date, setDate] = useState('')
-  const [passengers, setPassengers] = useState(1)
-  const [luggage, setLuggage] = useState(0)
-  const [carryon, setCarryon] = useState(0)
+  const [adults, setAdults] = useState(1)
+  const [cabinBags, setCabinBags] = useState(0)
+  const [checkedBags, setCheckedBags] = useState(0)
   const [email, setEmail] = useState('')
-  const [datePickerOpen, setDatePickerOpen] = useState(false)
+  const [showDirectionServiceSheet, setShowDirectionServiceSheet] = useState(false)
+  const [showPassengersSheet, setShowPassengersSheet] = useState(false)
 
   return (
-    <div className="bg-white rounded-2xl p-6 md:p-7 shadow-2xl">
-      {/* Row 1 — Two dropdowns side by side */}
-      <div className="flex gap-3 mb-3">
-        {/* Direction Dropdown */}
-        <div className="flex-1 relative">
-          <select
-            value={direction}
-            onChange={(e) => setDirection(e.target.value)}
-            style={{
-              appearance: 'none',
-              width: '100%',
-              padding: '12px 16px',
-              paddingRight: '32px',
-              border: '1px solid #E2E8F0',
-              borderRadius: '10px',
-              backgroundColor: 'white',
-              color: '#1D215E',
-              fontSize: '14px',
-              fontWeight: 500,
-              cursor: 'pointer',
-              backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 8px center',
-              backgroundSize: '20px'
-            }}
-          >
-            <option value="arrival">Arrival</option>
-            <option value="departure">Departure</option>
-            <option value="connection">Connection</option>
-          </select>
-        </div>
-
-        {/* Service Type Dropdown */}
-        <div className="flex-1 relative">
-          <select
-            value={serviceType}
-            onChange={(e) => setServiceType(e.target.value)}
-            style={{
-              appearance: 'none',
-              width: '100%',
-              padding: '12px 16px',
-              paddingRight: '32px',
-              border: '1px solid #E2E8F0',
-              borderRadius: '10px',
-              backgroundColor: 'white',
-              color: '#1D215E',
-              fontSize: '14px',
-              fontWeight: 500,
-              cursor: 'pointer',
-              backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 8px center',
-              backgroundSize: '20px'
-            }}
-          >
-            <option value="meet-greet">Meet & Greet</option>
-            <option value="vip-tarmac">VIP Tarmac</option>
-            <option value="lounge">Lounge Access</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Row 2 — Airport or city (searchable, editable) */}
-      <div className="mb-3">
-        <div className="flex items-center px-4 py-3 border border-gray-300 rounded-lg bg-white">
-          <Plane size={20} className="text-gold opacity-60 mr-3 flex-shrink-0" />
-          <input
-            type="text"
-            placeholder="Airport or city"
-            value={airportValue}
-            onChange={(e) => setAirportValue(e.target.value)}
-            className="flex-1 bg-transparent text-navy placeholder:text-gray-400 outline-none text-sm"
-          />
-        </div>
-      </div>
-
-      {/* Row 3 — Flight number */}
-      <div className="mb-3">
-        <input
-          type="text"
-          placeholder="Flight #   e.g. BA206"
-          value={flightNumber}
-          onChange={(e) => setFlightNumber(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-navy placeholder:text-gray-400 outline-none focus:border-blue transition-colors text-sm"
-        />
-      </div>
-
-      {/* Row 4 — Select date (opens calendar modal) */}
-      <div className="mb-3">
+    <div className="bg-white rounded-2xl p-4 md:p-6 space-y-2">
+      {/* Row 1: Direction + Service - Two containers */}
+      <div style={{ display: 'flex', height: '40px', borderRadius: '10px', border: '1.5px solid #E2E8F0', overflow: 'visible', position: 'relative', zIndex: 2 }}>
+        {/* Left: Direction */}
         <button
           type="button"
-          onClick={() => setDatePickerOpen(true)}
+          onClick={() => setShowDirectionServiceSheet(true)}
           style={{
-            width: '100%',
+            all: 'unset',
             display: 'flex',
             alignItems: 'center',
-            padding: '12px 16px',
-            border: '1px solid #E2E8F0',
-            borderRadius: '10px',
-            backgroundColor: 'white',
+            justifyContent: 'space-between',
+            flex: 1,
+            padding: '0 12px',
+            boxSizing: 'border-box',
             cursor: 'pointer',
-            gap: '12px'
+            fontSize: '14px',
+            fontWeight: 500,
+            color: '#1D215E',
+            background: 'white',
+            transition: 'all 200ms',
+            borderRadius: '9px 0 0 9px',
+            userSelect: 'none'
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
         >
-          <Calendar size={20} className="text-gray-500" />
-          <span style={{ flex: 1, textAlign: 'left', color: date ? '#1D215E' : '#94A3B8', fontSize: '14px' }}>
-            {date || 'Select date'}
-          </span>
+          <span>{direction === 'arrival' ? 'Arrival' : direction === 'departure' ? 'Departure' : 'Connection'}</span>
+          <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px' }} />
+        </button>
+
+        {/* Divider */}
+        <div style={{ width: '1px', background: '#E2E8F0' }} />
+
+        {/* Right: Service */}
+        <button
+          type="button"
+          onClick={() => setShowDirectionServiceSheet(true)}
+          style={{
+            all: 'unset',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flex: 1,
+            padding: '0 12px',
+            boxSizing: 'border-box',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: 500,
+            color: '#1D215E',
+            background: 'white',
+            transition: 'all 200ms',
+            borderRadius: '0 9px 9px 0',
+            userSelect: 'none',
+            minWidth: 0
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+        >
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{service}</span>
+          <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
         </button>
       </div>
 
-      {/* Row 5 — Passengers, Luggage, Carry-on combined */}
-      <div className="mb-3">
-        <div style={{ display: 'flex', alignItems: 'stretch', border: '1px solid #E2E8F0', borderRadius: '10px', backgroundColor: 'white', overflow: 'hidden' }}>
-          {/* Passengers */}
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingLeft: '16px', paddingRight: '16px' }}>
-            <Users size={20} className="text-gray-500 mr-2 flex-shrink-0" />
-            <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>{passengers} Pax</span>
-          </div>
-
-          {/* Divider */}
-          <div style={{ width: '1px', background: '#E2E8F0' }} />
-
-          {/* Luggage */}
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingLeft: '16px', paddingRight: '16px', gap: '8px' }}>
-            <Luggage size={20} className="text-gray-500 flex-shrink-0" />
-            <span style={{ fontSize: '14px', color: '#1D215E' }}>{luggage}</span>
-          </div>
-
-          {/* Divider */}
-          <div style={{ width: '1px', background: '#E2E8F0' }} />
-
-          {/* Carry-on */}
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingLeft: '16px', paddingRight: '16px', gap: '8px' }}>
-            <BriefcaseBusiness size={20} className="text-gray-500 flex-shrink-0" />
-            <span style={{ fontSize: '14px', color: '#1D215E' }}>{carryon}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Row 6 — Email */}
-      <div className="mb-4">
-        <div className="flex items-center px-4 py-3 border border-gray-300 rounded-lg bg-white">
-          <Mail size={20} className="text-gray-500 mr-3 flex-shrink-0" />
-          <input
-            type="email"
-            placeholder="your@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 bg-transparent text-navy placeholder:text-gray-400 outline-none text-sm"
-          />
-        </div>
-      </div>
-
-      {/* Row 7 — Submit button */}
-      <button className="w-full py-3 rounded-full font-semibold text-navy text-sm transition-all hover:shadow-md" style={{ backgroundColor: '#D4C5A9' }}>
-        Get a Quote
+      {/* Row 2: Airport field */}
+      <button
+        type="button"
+        onClick={() => {}}
+        style={{
+          width: '100%',
+          height: '40px',
+          display: 'flex',
+          alignItems: 'center',
+          borderRadius: '10px',
+          border: '1px solid #E2E8F0',
+          paddingLeft: '10px',
+          paddingRight: '10px',
+          background: 'white',
+          cursor: 'pointer',
+          transition: 'all 200ms'
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+      >
+        <Plane size={13} style={{ color: '#C9A84C', flexShrink: 0, marginRight: '6px' }} />
+        <input
+          type="text"
+          value={airportValue}
+          onChange={(e) => setAirportValue(e.target.value)}
+          onClick={(e) => e.stopPropagation()}
+          placeholder="Airport or city"
+          style={{
+            flex: 1,
+            minWidth: 0,
+            textAlign: 'left',
+            fontSize: '12px',
+            color: '#1D215E',
+            background: 'transparent',
+            border: 'none',
+            outline: 'none',
+            padding: 0
+          }}
+        />
+        {airportValue && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setAirportValue('')
+            }}
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, marginLeft: '6px', display: 'flex', alignItems: 'center' }}
+          >
+            <X size={14} style={{ color: '#94A3B8' }} />
+          </button>
+        )}
       </button>
 
-      {/* Date Picker Modal */}
-      <DatePickerModal open={datePickerOpen} onClose={() => setDatePickerOpen(false)} onConfirm={setDate} />
+      {/* Row 3: Flight # */}
+      <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
+        <span style={{ fontSize: '12px', fontWeight: 400, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
+        <input
+          type="text"
+          value={flightNumber}
+          onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+          placeholder="e.g. BA206"
+          maxLength={6}
+          style={{
+            marginLeft: '8px',
+            flex: 1,
+            minWidth: 0,
+            background: 'transparent',
+            border: 'none',
+            outline: 'none',
+            fontSize: '12px',
+            color: '#1D215E',
+            padding: 0
+          }}
+        />
+      </div>
+
+      {/* Row 4: Date */}
+      <button
+        type="button"
+        onClick={() => {}}
+        style={{
+          width: '100%',
+          height: '40px',
+          display: 'flex',
+          alignItems: 'center',
+          borderRadius: '10px',
+          border: '1px solid #E2E8F0',
+          paddingLeft: '10px',
+          paddingRight: '10px',
+          background: 'white',
+          cursor: 'pointer',
+          transition: 'all 200ms'
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+      >
+        <Calendar size={14} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
+        <span style={{ flex: 1, textAlign: 'left', fontSize: '12px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Select date'}
+        </span>
+        <ChevronDown size={12} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
+      </button>
+
+      {/* Row 5: Passengers + Luggage */}
+      <button
+        type="button"
+        onClick={() => setShowPassengersSheet(true)}
+        style={{
+          width: '100%',
+          height: '40px',
+          display: 'flex',
+          overflow: 'visible',
+          borderRadius: '10px',
+          border: '1px solid #E2E8F0',
+          background: 'white',
+          cursor: 'pointer',
+          transition: 'all 200ms'
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+      >
+        {/* Left: Passengers */}
+        <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', gap: '4px', borderRight: '1px solid #E2E8F0' }}>
+          <Users size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
+          <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
+        </div>
+        {/* Middle: Luggage */}
+        <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
+          <BriefcaseBusiness size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
+          <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
+          <Luggage size={13} style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
+          <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
+        </div>
+        {/* Right: Chevron */}
+        <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
+          <ChevronDown size={12} style={{ color: '#94A3B8' }} />
+        </div>
+      </button>
+
+      {/* Row 6: Email */}
+      <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
+        <Mail size={13} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          style={{
+            flex: 1,
+            background: 'transparent',
+            border: 'none',
+            outline: 'none',
+            fontSize: '12px',
+            color: '#1D215E',
+            padding: 0
+          }}
+        />
+      </div>
+
+      {/* Row 7: CTA Button */}
+      <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>
+        <button
+          type="button"
+          style={{
+            width: '60%',
+            height: '44px',
+            borderRadius: '9999px',
+            fontSize: '13px',
+            fontWeight: 700,
+            color: 'white',
+            background: '#A16207',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'all 200ms'
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#8B4E06')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = '#A16207')}
+        >
+          Get a Quote
+        </button>
+      </div>
+
+      {/* Direction & Service Sheet */}
+      <BottomSheet 
+        open={showDirectionServiceSheet} 
+        onClose={() => setShowDirectionServiceSheet(false)}
+        title="Direction & Service"
+      >
+        <div>
+          {['arrival', 'departure', 'connection'].map(d => (
+            <button
+              key={d}
+              onClick={() => {
+                setDirection(d)
+                setShowDirectionServiceSheet(false)
+              }}
+              style={{
+                width: '100%',
+                textAlign: 'left',
+                padding: '14px 20px',
+                borderBottom: '1px solid #E2E8F0',
+                background: direction === d ? '#FDF8E8' : 'white',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 500,
+                color: direction === d ? '#C9A84C' : '#1D215E',
+                transition: 'all 200ms'
+              }}
+              onMouseEnter={(e) => !direction || direction !== d && (e.currentTarget.style.background = '#F5F7FA')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = direction === d ? '#FDF8E8' : 'white')}
+            >
+              {d.charAt(0).toUpperCase() + d.slice(1)}
+            </button>
+          ))}
+          {['Meet & Greet', 'VIP Tarmac', 'Lounge Access'].map(s => (
+            <button
+              key={s}
+              onClick={() => {
+                setService(s)
+                setShowDirectionServiceSheet(false)
+              }}
+              style={{
+                width: '100%',
+                textAlign: 'left',
+                padding: '14px 20px',
+                borderBottom: '1px solid #E2E8F0',
+                background: service === s ? '#FDF8E8' : 'white',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 500,
+                color: service === s ? '#C9A84C' : '#1D215E',
+                transition: 'all 200ms'
+              }}
+              onMouseEnter={(e) => service !== s && (e.currentTarget.style.background = '#F5F7FA')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = service === s ? '#FDF8E8' : 'white')}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      </BottomSheet>
+
+      {/* Passengers Sheet */}
+      <BottomSheet 
+        open={showPassengersSheet} 
+        onClose={() => setShowPassengersSheet(false)}
+        title="Passengers & Luggage"
+      >
+        <Counter label="Adults" value={adults} onChange={setAdults} />
+        <Counter label="Cabin Bags" value={cabinBags} onChange={setCabinBags} />
+        <Counter label="Checked Bags" value={checkedBags} onChange={setCheckedBags} />
+        <div style={{ padding: '16px 20px' }}>
+          <button
+            onClick={() => setShowPassengersSheet(false)}
+            style={{
+              width: '100%',
+              height: '44px',
+              borderRadius: '10px',
+              background: '#A16207',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '14px',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+          >
+            Done
+          </button>
+        </div>
+      </BottomSheet>
     </div>
   )
 }
