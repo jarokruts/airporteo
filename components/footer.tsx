@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Facebook, MessageCircle, Instagram, Send } from "lucide-react"
+import { SolariBackground } from "./solari-background"
 
 const FOOTER_LINKS = [
   {
@@ -33,8 +34,9 @@ const FOOTER_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#1D215E] text-white">
-      <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+    <footer className="bg-[#1D215E] text-white relative overflow-hidden">
+      <SolariBackground />
+      <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8 relative z-10">
         {/* Main Footer Content - Desktop only (hidden on mobile) */}
         <div className="hidden md:grid grid-cols-4 gap-12 items-start">
           {/* Left Column - Brand (30% width) - Hidden on mobile, shown on desktop */}
