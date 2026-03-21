@@ -90,21 +90,22 @@ export function ServicesBanner() {
           <div className="flex-1 w-full">
             {/* Mobile Carousel */}
             <div
-              className="md:hidden overflow-x-auto -mx-6 px-6"
+              className="md:hidden overflow-x-auto"
               style={{
                 scrollBehavior: 'smooth',
                 scrollSnapType: 'x mandatory',
                 WebkitOverflowScrolling: 'touch',
                 msOverflowStyle: 'none',
                 scrollbarWidth: 'none',
+                marginRight: '-24px',
+                paddingRight: '24px',
               } as any}
             >
               <div
                 className="flex gap-4"
                 style={{
                   width: 'fit-content',
-                  paddingRight: '60px',
-                  paddingLeft: '0',
+                  paddingRight: '36px',
                 }}
               >
                 {services.map((service) => (
