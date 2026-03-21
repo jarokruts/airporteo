@@ -2102,7 +2102,7 @@ export function BookingWidget() {
         {/* Disclaimer */}
         <p className="text-right text-xs text-[#94A3B8] mt-3">
           By clicking "Get a Quote" you agree to our{" "}
-          <a href="https://airporteo.com/terms" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline font-medium">
+          <a href="https://airporteo.com/terms" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline font-medium">
             Terms & Conditions
           </a>
         </p>
@@ -2276,7 +2276,17 @@ export function BookingWidget() {
               (state.serviceType === "connection" && (!state.connectionFlightNumber || !state.connectionDate)) ||
               state.booking
             }
-            className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-xl bg-blue px-7 text-base font-bold text-primary-foreground shadow-lg shadow-blue/25 transition-all hover:bg-blue-hover active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none sm:w-auto w-full"
+            className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-xl px-7 text-base font-bold text-primary-foreground shadow-lg transition-all hover:shadow-lg active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none sm:w-auto w-full"
+            style={{
+              backgroundImage: 'linear-gradient(90deg, #A16207, #CA8A04)',
+              boxShadow: '0 10px 25px rgba(161, 98, 7, 0.15)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = '0 15px 35px rgba(161, 98, 7, 0.25)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = '0 10px 25px rgba(161, 98, 7, 0.15)';
+            }}
           >
             {state.booking ? (
               <><Loader2 className="h-5 w-5 animate-spin" /> Checking...</>
