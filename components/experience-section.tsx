@@ -40,7 +40,7 @@ export function ExperienceSection() {
                 <div className="absolute bottom-4 left-4 right-4">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm">
                     <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                    VIP Lounge Access Included
+                    First-class treatment
                   </span>
                 </div>
               </div>
@@ -77,7 +77,7 @@ export function ExperienceSection() {
                   <Users className="h-6 w-6 text-blue" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">2,400+</p>
+                  <p className="text-2xl font-bold text-foreground">500+</p>
                   <p className="text-xs text-muted-foreground">Trained concierge agents</p>
                 </div>
               </div>
