@@ -2,21 +2,15 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ChevronRight, Plane } from 'lucide-react'
-import { useState } from 'react'
+import { ChevronRight } from 'lucide-react'
 import { Airport } from '@/lib/airports'
+import { BookingWidget } from './booking-widget'
 
 interface AirportHeroProps {
   airport: Airport
 }
 
 export function AirportHero({ airport }: AirportHeroProps) {
-  const [tripType, setTripType] = useState('arrival')
-  const [serviceType, setServiceType] = useState('meet-greet')
-  const [flightNumber, setFlightNumber] = useState('')
-  const [date, setDate] = useState('')
-  const [passengers, setPassengers] = useState('1')
-
   return (
     <section className="relative w-full h-screen flex flex-col overflow-hidden bg-navy">
       {/* Background Image */}
@@ -86,115 +80,10 @@ export function AirportHero({ airport }: AirportHeroProps) {
               </div>
             </div>
 
-            {/* RIGHT COLUMN - Compact Booking Form */}
+            {/* RIGHT COLUMN - Booking Form */}
             <div className="mt-8 md:mt-0">
-              <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-5 md:p-6 shadow-xl">
-                {/* Form Title */}
-                <h3 className="text-white font-bold text-base md:text-lg mb-4 md:mb-5">Book Your Service</h3>
-
-                {/* Service Type Toggles */}
-                <div className="mb-4">
-                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-2.5">Trip Type</p>
-                  <div className="flex gap-2">
-                    {['arrival', 'departure'].map(type => (
-                      <button
-                        key={type}
-                        onClick={() => setTripType(type)}
-                        className={`flex-1 px-3 py-2 rounded-lg font-medium text-xs md:text-sm transition-all ${
-                          tripType === type
-                            ? 'bg-blue text-white'
-                            : 'bg-white/10 text-white/80 hover:bg-white/20'
-                        }`}
-                      >
-                        {type.charAt(0).toUpperCase() + type.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Service Toggles */}
-                <div className="mb-5 pb-5 border-b border-white/10">
-                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-2.5">Service</p>
-                  <div className="flex gap-2">
-                    {['meet-greet', 'vip'].map(service => (
-                      <button
-                        key={service}
-                        onClick={() => setServiceType(service)}
-                        className={`flex-1 px-3 py-2 rounded-lg font-medium text-xs md:text-sm transition-all ${
-                          serviceType === service
-                            ? 'bg-gold text-navy'
-                            : 'bg-white/10 text-white/80 hover:bg-white/20'
-                        }`}
-                      >
-                        {service === 'meet-greet' ? 'Meet & Greet' : 'VIP'}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Form Fields - Stacked */}
-                <div className="space-y-3">
-                  {/* Airport - Pre-filled and locked */}
-                  <div>
-                    <label className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1.5 block">Airport</label>
-                    <div className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2.5 border border-white/10">
-                      <Plane size={16} className="text-blue flex-shrink-0" />
-                      <input
-                        type="text"
-                        value={`${airport.city} ${airport.code}`}
-                        readOnly
-                        className="bg-transparent text-white text-sm font-medium outline-none flex-1"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Flight Number */}
-                  <div>
-                    <label className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1.5 block">Flight #</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. BA 478"
-                      value={flightNumber}
-                      onChange={(e) => setFlightNumber(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-white placeholder:text-white/40 text-sm outline-none focus:border-blue transition-colors"
-                    />
-                  </div>
-
-                  {/* Date */}
-                  <div>
-                    <label className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1.5 block">Date</label>
-                    <input
-                      type="date"
-                      value={date}
-                      onChange={(e) => setDate(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm outline-none focus:border-blue transition-colors"
-                    />
-                  </div>
-
-                  {/* Passengers */}
-                  <div>
-                    <label className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1.5 block">Passengers</label>
-                    <select
-                      value={passengers}
-                      onChange={(e) => setPassengers(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm outline-none focus:border-blue transition-colors"
-                    >
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
-                        <option key={n} value={n} className="text-navy">{n} {n === 1 ? 'Passenger' : 'Passengers'}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* CTA Button */}
-                <button className="w-full mt-5 px-4 py-3 bg-blue hover:bg-blue/90 text-white font-bold rounded-lg transition-colors text-sm">
-                  Get a Quote
-                </button>
-
-                {/* Footer Text */}
-                <p className="text-white/40 text-xs text-center mt-3">
-                  Instant confirmation at {airport.code}
-                </p>
+              <div className="bg-white rounded-2xl p-4 md:p-6 shadow-xl">
+                <BookingWidget />
               </div>
             </div>
           </div>
