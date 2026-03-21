@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { ChevronDown, Globe, DollarSign, UserPlus, LogIn } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useCurrency, CURRENCIES } from "./currency-context"
 
 const LANGUAGES = [
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -10,14 +11,6 @@ const LANGUAGES = [
   { code: "ar", label: "العربية", flag: "🇸🇦" },
   { code: "zh", label: "普通话", flag: "🇨🇳" },
   { code: "hi", label: "हिन्दी", flag: "🇮🇳" },
-]
-
-const CURRENCIES = [
-  { code: "USD", symbol: "$", label: "US Dollar" },
-  { code: "EUR", symbol: "€", label: "Euro" },
-  { code: "QAR", symbol: "﷼", label: "Qatari Riyal" },
-  { code: "SAR", symbol: "﷼", label: "Saudi Riyal" },
-  { code: "AED", symbol: "د.إ", label: "UAE Dirham" },
 ]
 
 function Dropdown({
@@ -70,7 +63,7 @@ function Dropdown({
 
 export function TopBar() {
   const [selectedLang, setSelectedLang] = useState(LANGUAGES[0])
-  const [selectedCurrency, setSelectedCurrency] = useState(CURRENCIES[0])
+  const { selectedCurrency, setSelectedCurrency } = useCurrency()
 
   return (
     <div className="relative z-50 w-full bg-navy border-b border-white/10">

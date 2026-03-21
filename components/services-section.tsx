@@ -1,16 +1,24 @@
 "use client"
 
+"use client"
+
 import Image from "next/image"
 import { PlaneLanding, PlaneTakeoff, ArrowLeftRight, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useCurrency } from "./currency-context"
 
 const SERVICES = [
   {
     icon: PlaneLanding,
     title: "Arrival Service",
     description: "Your personal concierge greets you at the gate, expedites immigration and customs, and escorts you to your transport.",
-    features: ["Gate greeting", "Immigration fast-track", "Luggage assistance", "Transport coordination"],
-    price: "From €49",
+    features: [
+      { text: "Gate greeting", asterisks: 0 },
+      { text: "Immigration fast-track", asterisks: 1 },
+      { text: "Luggage assistance", asterisks: 2 },
+      { text: "Transport coordination", asterisks: 0 },
+    ],
+    basePrice: 150,
     image: "/images/arrival-service.png",
     imageAlt: "Business professionals arriving at airport terminal with luggage",
   },
@@ -19,7 +27,7 @@ const SERVICES = [
     title: "Departure Service",
     description: "Breeze through check-in, security, and passport control with priority access. Relax in a private lounge before your flight.",
     features: ["Priority check-in", "Fast-track security", "Lounge access", "Gate escort"],
-    price: "From €45",
+    basePrice: 140,
     image: "/images/airport-departure.png",
     imageAlt: "Airport concierge assisting a traveler at check-in desk",
   },
@@ -28,13 +36,29 @@ const SERVICES = [
     title: "Connection Service",
     description: "Seamless terminal transfers with a dedicated assistant. Never miss a tight connection, even across terminals.",
     features: ["Terminal transfer", "Priority re-screening", "Flight monitoring", "Lounge access"],
-    price: "From €79",
+    basePrice: 190,
     image: "/images/connection-service.png",
     imageAlt: "Airport concierge professionals greeting travelers in terminal lounge",
   },
 ]
 
 export function ServicesSection() {
+  const { selectedCurrency } = useCurrency()
+
+  // Price conversion ratios (base prices are in USD)
+  const conversionRates: Record<string, number> = {
+    USD: 1,
+    EUR: 0.92,
+    QAR: 3.64,
+    SAR: 3.75,
+    AED: 3.67,
+  }
+
+  const convertPrice = (basePrice: number) => {
+    const rate = conversionRates[selectedCurrency.code] || 1
+    const convertedPrice = Math.round(basePrice * rate)
+    return `${selectedCurrency.symbol}${convertedPrice}`
+  }
   return (
     <section id="services" className="bg-background py-4 lg:py-8">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
@@ -80,21 +104,32 @@ export function ServicesSection() {
 
                   {/* Features */}
                   <ul className="mt-5 flex-1 space-y-2">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2.5 text-sm text-foreground">
-                        <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-                          <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
-                            <path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                        {feature}
-                      </li>
-                    ))}
+                    {service.features.map((feature, idx) => {
+                      const featureText = typeof feature === 'string' ? feature : feature.text
+                      const asterisks = typeof feature === 'string' ? 0 : feature.asterisks
+                      const asteriskDisplay = asterisks > 0 ? " " + "*".repeat(asterisks) : ""
+                      
+                      return (
+                        <li key={idx} className="flex items-center gap-2.5 text-sm text-foreground">
+                          <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                            <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
+                              <path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </span>
+                          <span>
+                            {featureText}
+                            {asteriskDisplay && (
+                              <span className="ml-1 text-gold font-semibold">{asteriskDisplay}</span>
+                            )}
+                          </span>
+                        </li>
+                      )
+                    })}
                   </ul>
 
                   {/* Footer */}
                   <div className="mt-6 flex items-center justify-between border-t border-border pt-5">
-                    <span className="text-lg font-bold text-foreground">{service.price}</span>
+                    <span className="text-lg font-bold text-foreground">From {convertPrice(service.basePrice)}</span>
                     <a
                       href="#hero"
                       className="flex items-center gap-1.5 text-sm font-semibold text-gold transition-colors hover:text-gold/80"
