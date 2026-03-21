@@ -40,7 +40,7 @@ export function ServicesSection() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue">Our Services</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-gold">Our Services</p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
             Premium assistance at every stage
           </h2>
@@ -58,7 +58,7 @@ export function ServicesSection() {
                 key={service.title}
                 className={cn(
                   "group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300",
-                  "hover:border-blue/30 hover:shadow-lg hover:shadow-blue/5 hover:-translate-y-1"
+                  "hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5 hover:-translate-y-1"
                 )}
               >
                 {/* Image */}
@@ -72,7 +72,7 @@ export function ServicesSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-navy/10 to-transparent" />
                   {/* Icon badge on image */}
-                  <div className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-card/95 backdrop-blur-sm text-blue shadow-md">
+                  <div className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-card/95 backdrop-blur-sm text-gold shadow-md">
                     <Icon className="h-5 w-5" />
                   </div>
                 </div>
@@ -101,7 +101,7 @@ export function ServicesSection() {
                     <span className="text-lg font-bold text-foreground">{service.price}</span>
                     <a
                       href="#hero"
-                      className="flex items-center gap-1.5 text-sm font-semibold text-blue transition-colors hover:text-blue-hover"
+                      className="flex items-center gap-1.5 text-sm font-semibold text-gold transition-colors hover:text-gold/80"
                     >
                       Book now
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

@@ -182,7 +182,7 @@ function DesktopDropdown({ item }: { item: NavItem }) {
                 key={child.label}
                 href={child.href}
                 onClick={() => setOpen(false)}
-                className="flex items-center rounded-lg px-3.5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary hover:text-blue"
+                className="flex items-center rounded-lg px-3.5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary hover:text-gold"
               >
                 {child.label}
               </a>

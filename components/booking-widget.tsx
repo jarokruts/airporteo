@@ -475,7 +475,7 @@ function PassengersBagsDropdown({
                     fontWeight: '500',
                     border: 'none',
                     cursor: 'pointer',
-                    backgroundColor: travelClass === cls ? '#DB2623' : '#F5F7FA',
+                    backgroundColor: travelClass === cls ? '#A16207' : '#F5F7FA',
                     color: travelClass === cls ? 'white' : '#1D215E',
                     transition: 'background-color 200ms ease, color 200ms ease'
                   }}
@@ -666,7 +666,7 @@ function DatePickerBottomSheet({
                 justifyContent: 'center',
                 borderRadius: '50%',
                 border: isToday ? '2px solid #1D215E' : 'none',
-                background: isSelected ? '#DB2623' : isPast ? 'transparent' : 'transparent',
+                background: isSelected ? '#A16207' : isPast ? 'transparent' : 'transparent',
                 color: isSelected ? 'white' : isPast ? '#CBD5E0' : '#1D215E',
                 fontSize: '14px',
                 fontWeight: isToday || isSelected ? 700 : 500,
@@ -826,7 +826,7 @@ function DatePickerBottomSheet({
             margin: '0 16px 16px 16px',
             height: '48px',
             borderRadius: '10px',
-            background: selectedDate ? '#DB2623' : 'rgba(219, 38, 35, 0.45)',
+            background: selectedDate ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
             color: 'white',
             fontWeight: 'bold',
             fontSize: '15px',
@@ -1774,7 +1774,7 @@ export function BookingWidget() {
                   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.trim())
                 );
                 
-                const buttonColor = isFormValid ? '#DB2623' : 'rgba(219, 38, 35, 0.45)';
+                const buttonColor = isFormValid ? '#A16207' : 'rgba(161, 98, 7, 0.45)';
                 const buttonShadow = isFormValid 
                   ? '0 4px 12px rgba(219, 38, 35, 0.4)' 
                   : 'none';
@@ -2080,7 +2080,7 @@ export function BookingWidget() {
             height: '52px',
             borderRadius: '10px',
             border: 'none',
-            backgroundColor: state.airport && state.flightNumber && state.date && state.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email) && (state.serviceType !== "connection" || (state.connectionFlightNumber && state.connectionDate)) ? '#DB2623' : 'rgba(219, 38, 35, 0.45)',
+            backgroundColor: state.airport && state.flightNumber && state.date && state.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email) && (state.serviceType !== "connection" || (state.connectionFlightNumber && state.connectionDate)) ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
             color: 'white',
             fontSize: '16px',
             fontWeight: 600,
@@ -2510,7 +2510,7 @@ export function BookingWidget() {
                     height: '48px',
                     borderRadius: '10px',
                     border: 'none',
-                    background: (state.serviceType && state.service) ? '#DB2623' : 'rgba(219, 38, 35, 0.45)',
+                    background: (state.serviceType && state.service) ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
                     color: 'white',
                     fontSize: '15px',
                     fontWeight: 'bold',
@@ -2598,7 +2598,7 @@ export function BookingWidget() {
                   height: '48px',
                   borderRadius: '10px',
                   border: 'none',
-                  background: state.adults >= 1 ? '#DB2623' : 'rgba(219, 38, 35, 0.45)',
+                  background: state.adults >= 1 ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
                   color: 'white',
                   fontSize: '15px',
                   fontWeight: 'bold',

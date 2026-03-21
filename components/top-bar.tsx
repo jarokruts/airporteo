@@ -96,14 +96,14 @@ export function TopBar() {
                   className={cn(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-secondary",
                     selectedLang.code === lang.code
-                      ? "font-semibold text-blue"
+                      ? "font-semibold text-gold"
                       : "text-foreground"
                   )}
                 >
                   <span className="text-base leading-none">{lang.flag}</span>
                   <span>{lang.label}</span>
                   {selectedLang.code === lang.code && (
-                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue" />
+                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-gold" />
                   )}
                 </button>
               ))}
@@ -130,7 +130,7 @@ export function TopBar() {
                   className={cn(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-secondary",
                     selectedCurrency.code === currency.code
-                      ? "font-semibold text-blue"
+                      ? "font-semibold text-gold"
                       : "text-foreground"
                   )}
                 >
@@ -140,7 +140,7 @@ export function TopBar() {
                   <span>{currency.code}</span>
                   <span className="text-xs text-muted-foreground">{currency.label}</span>
                   {selectedCurrency.code === currency.code && (
-                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue" />
+                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-gold" />
                   )}
                 </button>
               ))}
@@ -160,7 +160,7 @@ export function TopBar() {
 
           <button
             type="button"
-            className="flex items-center gap-1.5 rounded-md bg-blue px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-blue-hover"
+            className="flex items-center gap-1.5 rounded-md bg-gold px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-gold/80"
           >
             <UserPlus className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Register</span>
