@@ -16,7 +16,7 @@ export function HeroSection() {
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
 
         {/* ── MOBILE LAYOUT ── */}
-        <div className="block sm:hidden pt-8 pb-8 flex flex-col items-center gap-6">
+        <div className="block sm:hidden pt-4 pb-8 flex flex-col items-center gap-6">
           {/* Section Label */}
           <div 
             className="uppercase text-xs font-semibold tracking-wider"
@@ -54,16 +54,8 @@ export function HeroSection() {
 
           {/* Booking Widget */}
           <div className="w-full pt-4">
-            <div 
-              className="rounded-lg overflow-hidden shadow-lg"
-              style={{ backgroundColor: '#ffffff' }}
-            >
-              <div className="p-4 border-b" style={{ borderColor: '#E2E8F0' }}>
-                <h2 className="text-sm font-medium" style={{ color: '#1D215E' }}>Book your service</h2>
-              </div>
-              <div className="p-4">
-                <BookingWidget />
-              </div>
+            <div className="rounded-2xl bg-white shadow-2xl shadow-black/40 overflow-hidden" style={{ position: 'relative', zIndex: 50, isolation: 'isolate' }}>
+              <BookingWidget />
             </div>
           </div>
         </div>
@@ -109,35 +101,8 @@ export function HeroSection() {
 
           {/* Right Column - Booking Form */}
           <div>
-            <div 
-              className="rounded-lg overflow-hidden shadow-xl"
-              style={{ backgroundColor: '#ffffff' }}
-            >
-              <div className="p-6 border-b" style={{ borderColor: '#E2E8F0' }}>
-                <h2 className="text-base font-medium" style={{ color: '#1D215E' }}>Book your service</h2>
-              </div>
-              <div className="p-6">
-                <style>{`
-                  [data-booking-widget] input {
-                    background-color: #F8FAFC !important;
-                    border-color: #E2E8F0 !important;
-                    border-radius: 4px !important;
-                  }
-                `}</style>
-                <BookingWidget />
-              </div>
-              <div className="px-6 pb-6">
-                <button 
-                  className="w-full py-3 rounded-lg font-medium text-white transition-all"
-                  style={{
-                    backgroundImage: 'linear-gradient(90deg, #A16207, #CA8A04)',
-                    fontSize: '14px',
-                    fontWeight: '500'
-                  }}
-                >
-                  Get instant quote
-                </button>
-              </div>
+            <div className="rounded-2xl bg-white shadow-2xl shadow-black/40 overflow-hidden" style={{ position: 'relative', zIndex: 50, isolation: 'isolate' }}>
+              <BookingWidget />
             </div>
           </div>
 
