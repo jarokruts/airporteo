@@ -5,7 +5,7 @@ const HIGHLIGHTS = [
   {
     icon: Users,
     title: "Dedicated Personnel",
-    description: "Every service is delivered by a trained, multilingual concierge agent assigned exclusively to you.",
+    description: "Every service is delivered by a professionally trained agent assigned exclusively to you.",
   },
   {
     icon: ShieldCheck,
