@@ -59,7 +59,7 @@ export function PopularAirports() {
           {AIRPORTS.map((airport) => (
             <a
               key={airport.code}
-              href="#"
+              href={`/airports/${airport.code.toLowerCase()}`}
               className="group flex flex-col items-center gap-2 transition-transform duration-200 hover:-translate-y-1"
             >
               {/* Image */}
