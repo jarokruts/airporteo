@@ -10,9 +10,9 @@ const SERVICES = [
     title: "Arrival Service",
     description: "Your personal concierge greets you at the gate, expedites immigration and customs, and escorts you to your transport.",
     features: ["Gate greeting", "Immigration fast-track", "Luggage assistance", "Transport coordination"],
-    price: "From \u20AC49",
-    image: "/images/service-arrival.jpg",
-    imageAlt: "Airport concierge greeting a traveler at the arrivals gate",
+    price: "From €49",
+    image: "/images/airport-concierge.jpg",
+    imageAlt: "Airport concierge greetings a traveler at the arrivals gate",
   },
   {
     icon: PlaneTakeoff,
