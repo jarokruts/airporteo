@@ -28,9 +28,9 @@ const SERVICES = [
     title: "Connection Service",
     description: "Seamless terminal transfers with a dedicated assistant. Never miss a tight connection, even across terminals.",
     features: ["Terminal transfer", "Priority re-screening", "Flight monitoring", "Lounge access"],
-    price: "From \u20AC79",
-    image: "/images/service-connection.jpg",
-    imageAlt: "Concierge guiding a traveler through airport terminal",
+    price: "From €79",
+    image: "/images/connection-service.png",
+    imageAlt: "Airport concierge professionals greeting travelers in terminal lounge",
   },
 ]
 
