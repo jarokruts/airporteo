@@ -36,12 +36,11 @@ const SERVICES = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="bg-background py-16 lg:py-24">
+    <section id="services" className="bg-background py-8 lg:py-16">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">Our Services</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
             Premium assistance at every stage
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground lg:text-lg">
