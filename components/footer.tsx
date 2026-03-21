@@ -109,127 +109,161 @@ export function Footer() {
         </div>
 
         {/* Mobile-only content - shown on mobile, hidden on desktop */}
-        <div className="md:hidden flex flex-col items-center text-center">
-          <a href="#" className="inline-block">
-            <Image
-              src="/images/airporteo-logo.svg"
-              alt="Airporteo logo"
-              width={120}
-              height={120}
-              className="h-28 w-28 object-contain"
-            />
-          </a>
-          
-          {/* Description */}
-          <p className="mt-4 text-sm leading-relaxed text-gray-400 max-w-xs" style={{ marginBottom: '24px' }}>
-            Premium airport concierge services at 120+ airports worldwide. Making every airport moment seamless since 2018.
-          </p>
-          
-          {/* Social Icons */}
-          <div className="flex gap-5 justify-center" style={{ marginBottom: '32px' }}>
+        <div className="md:hidden flex flex-col px-0">
+          {/* 2-Column Link Grid */}
+          <div className="grid grid-cols-2 gap-8 mb-8">
+            {/* LEFT COLUMN - Services & Support */}
+            <div className="text-left">
+              {/* Services Section */}
+              <div className="mb-8">
+                <h3 className="font-semibold text-white text-base mb-3">Services</h3>
+                <ul className="space-y-2">
+                  {FOOTER_LINKS[0].links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 transition-colors hover:text-white text-sm"
+                        style={{ fontSize: '14px', lineHeight: '2' }}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Support Section */}
+              <div>
+                <h3 className="font-semibold text-white text-base mb-3">Support</h3>
+                <ul className="space-y-2">
+                  {FOOTER_LINKS[2].links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 transition-colors hover:text-white text-sm"
+                        style={{ fontSize: '14px', lineHeight: '2' }}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN - Company & Legal */}
+            <div className="text-left">
+              {/* Company Section */}
+              <div className="mb-8">
+                <h3 className="font-semibold text-white text-base mb-3">Company</h3>
+                <ul className="space-y-2">
+                  {FOOTER_LINKS[1].links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-gray-400 transition-colors hover:text-white text-sm"
+                        style={{ fontSize: '14px', lineHeight: '2' }}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Legal Section */}
+              <div>
+                <h3 className="font-semibold text-white text-base mb-3">Legal</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      Privacy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      Terms
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      AML Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      GDPR
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-gray-400 transition-colors hover:text-white text-sm"
+                      style={{ fontSize: '14px', lineHeight: '2' }}
+                    >
+                      Cookies
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', marginBottom: '24px' }} />
+
+          {/* Social Icons Row - Centered */}
+          <div className="flex gap-6 justify-center mb-6">
             <a
               href="#"
               className="text-white transition-opacity hover:opacity-70"
               aria-label="Facebook"
             >
-              <Facebook size={20} />
+              <Facebook size={24} />
             </a>
             <a
               href="#"
               className="text-white transition-opacity hover:opacity-70"
               aria-label="WhatsApp"
             >
-              <MessageCircle size={20} />
+              <MessageCircle size={24} />
             </a>
             <a
               href="#"
               className="text-white transition-opacity hover:opacity-70"
               aria-label="Instagram"
             >
-              <Instagram size={20} />
+              <Instagram size={24} />
             </a>
             <a
               href="#"
               className="text-white transition-opacity hover:opacity-70"
               aria-label="Telegram"
             >
-              <Send size={20} />
+              <Send size={24} />
             </a>
           </div>
 
-          {/* Services Column */}
-          <div style={{ marginBottom: '24px' }}>
-            <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px', marginBottom: '16px' }}>
-              Services
-            </h3>
-            <ul className="space-y-2">
-              {FOOTER_LINKS[0].links.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 transition-colors hover:text-white text-sm whitespace-nowrap"
-                    style={{ fontSize: '14px' }}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Column */}
-          <div style={{ marginBottom: '24px' }}>
-            <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px', marginBottom: '16px' }}>
-              Company
-            </h3>
-            <ul className="space-y-2">
-              {FOOTER_LINKS[1].links.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 transition-colors hover:text-white text-sm whitespace-nowrap"
-                    style={{ fontSize: '14px' }}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support Column */}
-          <div style={{ marginBottom: '32px' }}>
-            <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px', marginBottom: '16px' }}>
-              Support
-            </h3>
-            <ul className="space-y-2">
-              {FOOTER_LINKS[2].links.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 transition-colors hover:text-white text-sm whitespace-nowrap"
-                    style={{ fontSize: '14px' }}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Copyright Line */}
-          <p className="text-sm text-gray-400" style={{ marginBottom: '16px' }}>
+          {/* Copyright Line - Centered */}
+          <p className="text-center text-sm text-gray-400">
             {"\u00A9"} 2026 Airporteo. All rights reserved.
           </p>
-
-          {/* Policy Links */}
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>Privacy</a>
-            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>Terms</a>
-            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>AML Policy</a>
-            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>GDPR</a>
-            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>Cookies</a>
-          </div>
         </div>
 
         {/* Bottom Bar - Desktop only */}
