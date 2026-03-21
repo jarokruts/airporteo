@@ -49,7 +49,7 @@ export function ServicesBanner() {
     <section className="py-8 md:py-12 px-5 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div
-          className="rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row gap-8 md:gap-12 items-start lg:items-center"
+          className="rounded-2xl p-6 md:p-12 flex flex-col lg:flex-row gap-6 md:gap-12 items-start lg:items-center"
           style={{
             background: 'linear-gradient(135deg, #F0F4F8 0%, #E8EDF5 100%)',
           }}
@@ -76,7 +76,7 @@ export function ServicesBanner() {
             </p>
             <Link
               href="/services"
-              className="mt-6 inline-flex items-center justify-center px-7 py-3.5 rounded-lg font-semibold text-white transition-all hover:shadow-lg"
+              className="hidden md:inline-flex mt-6 items-center justify-center px-7 py-3.5 rounded-lg font-semibold text-white transition-all hover:shadow-lg"
               style={{
                 backgroundImage: 'linear-gradient(90deg, #A16207 0%, #CA8A04 100%)',
               }}
@@ -90,7 +90,7 @@ export function ServicesBanner() {
           <div className="flex-1 w-full">
             {/* Mobile Carousel */}
             <div
-              className="md:hidden overflow-x-auto -mx-5 px-5"
+              className="md:hidden overflow-x-auto -mx-6 px-6"
               style={{
                 scrollBehavior: 'smooth',
                 scrollSnapType: 'x mandatory',
@@ -103,6 +103,7 @@ export function ServicesBanner() {
                 className="flex gap-4"
                 style={{
                   width: 'fit-content',
+                  paddingRight: '60px',
                 }}
               >
                 {services.map((service) => (
