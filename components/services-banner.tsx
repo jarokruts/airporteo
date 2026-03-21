@@ -104,6 +104,7 @@ export function ServicesBanner() {
                 style={{
                   width: 'fit-content',
                   paddingRight: '60px',
+                  paddingLeft: '0',
                 }}
               >
                 {services.map((service) => (
