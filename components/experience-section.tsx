@@ -67,12 +67,6 @@ export function ExperienceSection() {
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />
-                <div className="absolute top-4 right-4">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm">
-                    <span className="h-2 w-2 rounded-full bg-gold" />
-                    120+ Airports Worldwide
-                  </span>
-                </div>
               </div>
             </div>
 
