@@ -4,7 +4,7 @@ import { Star } from 'lucide-react'
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="bg-[#F8FAFC] py-16 lg:py-20">
+    <section id="reviews" className="bg-[#F8FAFC] py-12">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-xl text-center mb-12">
@@ -20,7 +20,7 @@ export function ReviewsSection() {
         <div className="mx-auto max-w-xl">
           <div 
             className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed bg-white p-12"
-            style={{ borderColor: '#CBD5E1', minHeight: '300px' }}
+            style={{ borderColor: '#CBD5E1', minHeight: '180px' }}
           >
             {/* Replace this placeholder with Google Reviews embed code */}
             <div className="text-center">
