@@ -33,25 +33,27 @@ const FOOTER_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-navy text-primary-foreground">
-      <div className="mx-auto max-w-7xl px-5 py-8 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 lg:items-start">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <a href="#" className="inline-flex">
+    <footer className="bg-[#1D215E] text-white">
+      <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-4 gap-12 items-start">
+          {/* Left Column - Brand (30% width) */}
+          <div>
+            <a href="#" className="inline-block">
               <Image
                 src="/images/airporteo-logo.svg"
                 alt="Airporteo logo"
-                width={140}
-                height={140}
-                className="h-32 w-32 object-contain mix-blend-screen"
+                width={120}
+                height={120}
+                className="h-28 w-28 object-contain"
               />
             </a>
-            <p className="mt-2 max-w-sm text-xs leading-relaxed text-slate-light">
+            {/* Description */}
+            <p className="mt-4 text-sm leading-relaxed text-gray-400">
               Premium airport concierge services at 120+ airports worldwide. Making every airport moment seamless since 2018.
             </p>
-            {/* Social Media Icons */}
-            <div className="mt-2 flex gap-3">
+            {/* Social Icons */}
+            <div className="mt-5 flex gap-4">
               <a
                 href="#"
                 className="text-white transition-opacity hover:opacity-70"
@@ -83,16 +85,19 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links */}
+          {/* Right Columns - Links (3 columns, equal width ~23% each) */}
           {FOOTER_LINKS.map((group) => (
             <div key={group.heading}>
-              <h3 className="text-sm font-semibold text-primary-foreground">{group.heading}</h3>
-              <ul className="mt-3 space-y-2">
+              <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px' }}>
+                {group.heading}
+              </h3>
+              <ul className="mt-4 space-y-2">
                 {group.links.map((link) => (
-                  <li key={link.label}>
+                  <li key={link.label} style={{ lineHeight: '2' }}>
                     <a
                       href={link.href}
-                      className="text-xs text-slate-light transition-colors hover:text-primary-foreground"
+                      className="text-gray-400 transition-colors hover:text-white"
+                      style={{ fontSize: '14px' }}
                     >
                       {link.label}
                     </a>
@@ -103,16 +108,23 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-primary-foreground/10 pt-6 md:flex-row">
-          <p className="text-xs text-slate-light">
+        {/* Bottom Bar */}
+        <div 
+          className="mt-8 flex flex-col items-center justify-between gap-4 md:flex-row"
+          style={{ 
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            paddingTop: '24px'
+          }}
+        >
+          <p className="text-sm text-gray-400">
             {"\u00A9"} 2026 Airporteo. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-xs text-slate-light transition-colors hover:text-primary-foreground">Privacy</a>
-            <a href="#" className="text-xs text-slate-light transition-colors hover:text-primary-foreground">Terms</a>
-            <a href="#" className="text-xs text-slate-light transition-colors hover:text-primary-foreground">AML Policy</a>
-            <a href="#" className="text-xs text-slate-light transition-colors hover:text-primary-foreground">GDPR</a>
-            <a href="#" className="text-xs text-slate-light transition-colors hover:text-primary-foreground">Cookies</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Privacy</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Terms</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">AML Policy</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">GDPR</a>
+            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Cookies</a>
           </div>
         </div>
       </div>
