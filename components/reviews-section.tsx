@@ -11,7 +11,7 @@ export function ReviewsSection() {
           <p className="text-xs font-semibold uppercase tracking-wider text-gold" style={{ letterSpacing: '0.1em', fontSize: '13px' }}>
             What Our Clients Say
           </p>
-          <h2 className="mt-3 text-4xl font-semibold text-[#1D215E]" style={{ fontSize: '36px' }}>
+          <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-foreground">
             Trusted by thousands of travelers
           </h2>
         </div>
