@@ -10,7 +10,7 @@ const HIGHLIGHTS = [
   {
     icon: ShieldCheck,
     title: "Vetted & Certified",
-    description: "All staff are airport-certified, background-checked, and trained in premium hospitality standards.",
+    description: "All staff are airport-certified, background-checked, and trained to five-star hospitality standards.",
   },
   {
     icon: Globe,
@@ -67,6 +67,12 @@ export function ExperienceSection() {
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />
+                <div className="absolute top-4 right-4">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm">
+                    <span className="h-2 w-2 rounded-full bg-gold" />
+                    120+ Airports Worldwide
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -86,7 +92,7 @@ export function ExperienceSection() {
 
           {/* Right: Content */}
           <div className="flex-1 lg:max-w-lg">
-            <p className="text-sm font-semibold uppercase tracking-widest text-blue">The Airporteo Experience</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-gold" style={{ letterSpacing: '0.1em', fontSize: '13px' }}>The Airporteo Experience</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
               Your personal team, at every airport
             </h2>
