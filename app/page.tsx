@@ -4,6 +4,7 @@ import { ServicesBanner } from "@/components/services-banner"
 import { AirlinesSection } from "@/components/airlines-section"
 import { ServicesSection } from "@/components/services-section"
 import { ExperienceSection } from "@/components/experience-section"
+import { ReviewsSection } from "@/components/reviews-section"
 import { PopularAirports } from "@/components/popular-airports"
 import { Footer } from "@/components/footer"
 import { MobileBottomNav } from "@/components/mobile-bottom-nav"
@@ -19,6 +20,7 @@ export default function Home() {
         <AirlinesSection />
         <ServicesSection />
         <ExperienceSection />
+        <ReviewsSection />
         <PopularAirports />
       </main>
 
