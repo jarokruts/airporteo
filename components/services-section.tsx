@@ -1,0 +1,118 @@
+"use client"
+
+import Image from "next/image"
+import { PlaneLanding, PlaneTakeoff, ArrowLeftRight, ArrowRight } from "lucide-react"
+import { cn } from "@/lib/utils"
+
+const SERVICES = [
+  {
+    icon: PlaneLanding,
+    title: "Arrival Service",
+    description: "Your personal concierge greets you at the gate, expedites immigration and customs, and escorts you to your transport.",
+    features: ["Gate greeting", "Immigration fast-track", "Luggage assistance", "Transport coordination"],
+    price: "From \u20AC49",
+    image: "/images/service-arrival.jpg",
+    imageAlt: "Airport concierge greeting a traveler at the arrivals gate",
+  },
+  {
+    icon: PlaneTakeoff,
+    title: "Departure Service",
+    description: "Breeze through check-in, security, and passport control with priority access. Relax in a private lounge before your flight.",
+    features: ["Priority check-in", "Fast-track security", "Lounge access", "Gate escort"],
+    price: "From \u20AC45",
+    image: "/images/service-departure.jpg",
+    imageAlt: "Traveler being escorted through VIP fast-track security",
+  },
+  {
+    icon: ArrowLeftRight,
+    title: "Connection Service",
+    description: "Seamless terminal transfers with a dedicated assistant. Never miss a tight connection, even across terminals.",
+    features: ["Terminal transfer", "Priority re-screening", "Flight monitoring", "Lounge access"],
+    price: "From \u20AC79",
+    image: "/images/service-connection.jpg",
+    imageAlt: "Concierge guiding a traveler through airport terminal",
+  },
+]
+
+export function ServicesSection() {
+  return (
+    <section id="services" className="bg-background py-16 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        {/* Section Header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-widest text-blue">Our Services</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
+            Premium assistance at every stage
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground lg:text-lg">
+            Whether arriving, departing, or connecting, our expert concierge team ensures a seamless airport experience.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {SERVICES.map((service) => {
+            const Icon = service.icon
+            return (
+              <div
+                key={service.title}
+                className={cn(
+                  "group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300",
+                  "hover:border-blue/30 hover:shadow-lg hover:shadow-blue/5 hover:-translate-y-1"
+                )}
+              >
+                {/* Image */}
+                <div className="relative h-48 w-full overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.imageAlt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-navy/10 to-transparent" />
+                  {/* Icon badge on image */}
+                  <div className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-card/95 backdrop-blur-sm text-blue shadow-md">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-xl font-bold text-foreground">{service.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+
+                  {/* Features */}
+                  <ul className="mt-5 flex-1 space-y-2">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2.5 text-sm text-foreground">
+                        <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                          <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
+                            <path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Footer */}
+                  <div className="mt-6 flex items-center justify-between border-t border-border pt-5">
+                    <span className="text-lg font-bold text-foreground">{service.price}</span>
+                    <a
+                      href="#hero"
+                      className="flex items-center gap-1.5 text-sm font-semibold text-blue transition-colors hover:text-blue-hover"
+                    >
+                      Book now
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}

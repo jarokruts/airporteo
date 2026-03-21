@@ -1,0 +1,273 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Brand: Deep Blue #1D215E + Red #DB2623 + White */
+  --background: #ffffff;
+  --foreground: #1D215E;
+  --card: #ffffff;
+  --card-foreground: #1D215E;
+  --popover: #ffffff;
+  --popover-foreground: #1D215E;
+  --primary: #DB2623;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f1f8;
+  --secondary-foreground: #1D215E;
+  --muted: #f0f1f8;
+  --muted-foreground: #6b6e94;
+  --accent: #1D215E;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ef4444;
+  --border: #dfe0ec;
+  --input: #dfe0ec;
+  --ring: #DB2623;
+  --chart-1: #DB2623;
+  --chart-2: #1D215E;
+  --chart-3: #6b6e94;
+  --chart-4: #dfe0ec;
+  --chart-5: #f0f1f8;
+  --radius: 0.5rem;
+  --sidebar: #f7f7fb;
+  --sidebar-foreground: #1D215E;
+  --sidebar-primary: #DB2623;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f1f8;
+  --sidebar-accent-foreground: #1D215E;
+  --sidebar-border: #dfe0ec;
+  --sidebar-ring: #DB2623;
+
+  /* Custom Airporteo tokens */
+  --navy: #1D215E;
+  --navy-light: #2A2F7A;
+  --hero-navy: #1D215E;
+  --blue: #DB2623;
+  --blue-hover: #C41F1C;
+  --blue-light: #FDEAEA;
+  --slate: #6b6e94;
+  --slate-light: #9b9dba;
+  --gold: #C9A84C;
+  --gold-light: #D4B85E;
+}
+
+.dark {
+  --background: #12153D;
+  --foreground: #f7f7fb;
+  --card: #1D215E;
+  --card-foreground: #f7f7fb;
+  --popover: #1D215E;
+  --popover-foreground: #f7f7fb;
+  --primary: #DB2623;
+  --primary-foreground: #ffffff;
+  --secondary: #2A2F7A;
+  --secondary-foreground: #f7f7fb;
+  --muted: #2A2F7A;
+  --muted-foreground: #9b9dba;
+  --accent: #DB2623;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ef4444;
+  --border: #3a3f8a;
+  --input: #3a3f8a;
+  --ring: #DB2623;
+  --chart-1: #DB2623;
+  --chart-2: #f7f7fb;
+  --chart-3: #9b9dba;
+  --chart-4: #3a3f8a;
+  --chart-5: #2A2F7A;
+  --sidebar: #1D215E;
+  --sidebar-foreground: #f7f7fb;
+  --sidebar-primary: #DB2623;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #3a3f8a;
+  --sidebar-accent-foreground: #f7f7fb;
+  --sidebar-border: #3a3f8a;
+  --sidebar-ring: #DB2623;
+
+  --navy: #1D215E;
+  --navy-light: #2A2F7A;
+  --hero-navy: #0B1F3A;
+  --blue: #DB2623;
+  --blue-hover: #C41F1C;
+  --blue-light: #3D1515;
+  --slate: #9b9dba;
+  --slate-light: #c8c9de;
+  --gold: #C9A84C;
+  --gold-light: #D4B85E;
+}
+
+@theme inline {
+  --font-sans: 'Inter', 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-hero-navy: var(--hero-navy);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-blue: var(--blue);
+  --color-blue-hover: var(--blue-hover);
+  --color-blue-light: var(--blue-light);
+  --color-slate-mid: var(--slate);
+  --color-slate-light: var(--slate-light);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Marquee animation for trust bar */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hero grid pattern */
+.hero-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Email input autofill and focus styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #1D215E !important;
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  caret-color: #1D215E !important;
+}
+
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #1D215E !important;
+}
+
+input[type="email"]:focus {
+  border-color: #1D215E !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #FFFFFF !important;
+}
+
+input[data-form-type="other"] {
+  background-color: #FFFFFF !important;
+  -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #1D215E !important;
+  border: 1.5px solid #E2E8F0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+input[data-form-type="other"]:focus {
+  border: 1.5px solid #1D215E !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Email input field styling - removes all browser defaults */
+input[data-email-field="true"] {
+  all: unset !important;
+  width: 100% !important;
+  color: #1D215E !important;
+  font-size: 12px !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+input[data-email-field="true"]:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+input[data-email-field="true"]::placeholder {
+  color: #94A3B8 !important;
+}
+
+/* Autofill styling with 5000s transition to prevent browser highlighting */
+input[data-email-field="true"]:-webkit-autofill,
+input[data-email-field="true"]:-webkit-autofill:hover,
+input[data-email-field="true"]:-webkit-autofill:focus,
+input[data-email-field="true"]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #1D215E !important;
+  background-color: #FFFFFF !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #1D215E !important;
+  background-color: #FFFFFF !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
