@@ -42,9 +42,9 @@ export function Footer() {
               <Image
                 src="/images/airporteo-logo.svg"
                 alt="Airporteo logo"
-                width={100}
-                height={100}
-                className="h-24 w-24 object-contain mix-blend-screen"
+                width={200}
+                height={200}
+                className="h-56 w-56 object-contain mix-blend-screen"
               />
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-light">
