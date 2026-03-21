@@ -19,9 +19,9 @@ const SERVICES = [
     title: "Departure Service",
     description: "Breeze through check-in, security, and passport control with priority access. Relax in a private lounge before your flight.",
     features: ["Priority check-in", "Fast-track security", "Lounge access", "Gate escort"],
-    price: "From \u20AC45",
-    image: "/images/service-departure.jpg",
-    imageAlt: "Traveler being escorted through VIP fast-track security",
+    price: "From €45",
+    image: "/images/airport-departure.png",
+    imageAlt: "Airport concierge assisting a traveler at check-in desk",
   },
   {
     icon: ArrowLeftRight,
