@@ -36,9 +36,9 @@ export function Footer() {
     <footer className="bg-[#1D215E] text-white">
       <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-4 gap-12 items-start">
-          {/* Left Column - Brand (30% width) */}
-          <div>
+        <div className="flex flex-col md:grid md:grid-cols-4 md:gap-12 md:items-start items-center text-center md:text-left">
+          {/* Left Column - Brand (30% width) - Hidden on mobile, shown on desktop */}
+          <div className="hidden md:block">
             <a href="#" className="inline-block">
               <Image
                 src="/images/airporteo-logo.svg"
@@ -87,7 +87,7 @@ export function Footer() {
 
           {/* Right Columns - Links (3 columns, equal width ~23% each) */}
           {FOOTER_LINKS.map((group) => (
-            <div key={group.heading}>
+            <div key={group.heading} className="md:text-left">
               <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px' }}>
                 {group.heading}
               </h3>
@@ -96,7 +96,7 @@ export function Footer() {
                   <li key={link.label} style={{ lineHeight: '2' }}>
                     <a
                       href={link.href}
-                      className="text-gray-400 transition-colors hover:text-white"
+                      className="text-gray-400 transition-colors hover:text-white whitespace-nowrap"
                       style={{ fontSize: '14px' }}
                     >
                       {link.label}
@@ -108,9 +108,133 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Bottom Bar */}
+        {/* Mobile-only content - shown on mobile, hidden on desktop */}
+        <div className="md:hidden flex flex-col items-center text-center">
+          <a href="#" className="inline-block">
+            <Image
+              src="/images/airporteo-logo.svg"
+              alt="Airporteo logo"
+              width={120}
+              height={120}
+              className="h-28 w-28 object-contain"
+            />
+          </a>
+          
+          {/* Description */}
+          <p className="mt-4 text-sm leading-relaxed text-gray-400 max-w-xs" style={{ marginBottom: '24px' }}>
+            Premium airport concierge services at 120+ airports worldwide. Making every airport moment seamless since 2018.
+          </p>
+          
+          {/* Social Icons */}
+          <div className="flex gap-5 justify-center" style={{ marginBottom: '32px' }}>
+            <a
+              href="#"
+              className="text-white transition-opacity hover:opacity-70"
+              aria-label="Facebook"
+            >
+              <Facebook size={20} />
+            </a>
+            <a
+              href="#"
+              className="text-white transition-opacity hover:opacity-70"
+              aria-label="WhatsApp"
+            >
+              <MessageCircle size={20} />
+            </a>
+            <a
+              href="#"
+              className="text-white transition-opacity hover:opacity-70"
+              aria-label="Instagram"
+            >
+              <Instagram size={20} />
+            </a>
+            <a
+              href="#"
+              className="text-white transition-opacity hover:opacity-70"
+              aria-label="Telegram"
+            >
+              <Send size={20} />
+            </a>
+          </div>
+
+          {/* Services Column */}
+          <div style={{ marginBottom: '24px' }}>
+            <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px', marginBottom: '16px' }}>
+              Services
+            </h3>
+            <ul className="space-y-2">
+              {FOOTER_LINKS[0].links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-gray-400 transition-colors hover:text-white text-sm whitespace-nowrap"
+                    style={{ fontSize: '14px' }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company Column */}
+          <div style={{ marginBottom: '24px' }}>
+            <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px', marginBottom: '16px' }}>
+              Company
+            </h3>
+            <ul className="space-y-2">
+              {FOOTER_LINKS[1].links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-gray-400 transition-colors hover:text-white text-sm whitespace-nowrap"
+                    style={{ fontSize: '14px' }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support Column */}
+          <div style={{ marginBottom: '32px' }}>
+            <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px', marginBottom: '16px' }}>
+              Support
+            </h3>
+            <ul className="space-y-2">
+              {FOOTER_LINKS[2].links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-gray-400 transition-colors hover:text-white text-sm whitespace-nowrap"
+                    style={{ fontSize: '14px' }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Copyright Line */}
+          <p className="text-sm text-gray-400" style={{ marginBottom: '16px' }}>
+            {"\u00A9"} 2026 Airporteo. All rights reserved.
+          </p>
+
+          {/* Policy Links */}
+          <div className="flex flex-wrap gap-4 justify-center">
+            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>Privacy</a>
+            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>Terms</a>
+            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>AML Policy</a>
+            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>GDPR</a>
+            <a href="#" className="text-gray-400 transition-colors hover:text-white" style={{ fontSize: '12px' }}>Cookies</a>
+          </div>
+        </div>
+
+        {/* Bottom Bar - Desktop only */}
         <div 
-          className="mt-8 flex flex-col items-center justify-between gap-4 md:flex-row"
+          className="hidden md:flex mt-8 items-center justify-between gap-4"
           style={{ 
             borderTop: '1px solid rgba(255, 255, 255, 0.1)',
             paddingTop: '24px'
