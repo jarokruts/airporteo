@@ -48,8 +48,8 @@ export function ExperienceSection() {
               {/* Personnel at work */}
               <div className="relative h-40 lg:h-48 overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/service-arrival.jpg"
-                  alt="Concierge personnel greeting travelers at the airport"
+                  src="/images/concierge-travelers.jpg"
+                  alt="Concierge personnel walking through airport terminal with travelers"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
@@ -60,8 +60,8 @@ export function ExperienceSection() {
               {/* Luxury transport */}
               <div className="relative h-40 lg:h-48 overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/private-transfer.jpg"
-                  alt="Luxury chauffeur service at airport VIP terminal"
+                  src="/images/concierge-greeting.jpg"
+                  alt="Professional concierge greeting traveler at airport terminal"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
