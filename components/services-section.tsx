@@ -11,8 +11,8 @@ const SERVICES = [
     description: "Your personal concierge greets you at the gate, expedites immigration and customs, and escorts you to your transport.",
     features: ["Gate greeting", "Immigration fast-track", "Luggage assistance", "Transport coordination"],
     price: "From €49",
-    image: "/images/airport-concierge.jpg",
-    imageAlt: "Airport concierge greetings a traveler at the arrivals gate",
+    image: "/images/arrival-service.png",
+    imageAlt: "Business professionals arriving at airport terminal with luggage",
   },
   {
     icon: PlaneTakeoff,
