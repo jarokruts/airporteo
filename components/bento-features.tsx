@@ -60,19 +60,8 @@ export function BentoFeatures() {
   return (
     <section id="features" className="bg-secondary/50 py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">Why Airporteo</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
-            Everything you need, nothing you don{"'"}t
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground lg:text-lg">
-            Six pillars of a stress-free airport experience, delivered by a dedicated concierge at every step.
-          </p>
-        </div>
-
         {/* Bento Grid */}
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature, idx) => {
             const Icon = feature.icon
             const isLarge = feature.size === "large"
