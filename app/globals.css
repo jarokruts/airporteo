@@ -4,14 +4,14 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Brand: Deep Blue #1D215E + Gold #A16207/#CA8A04 + White */
+  /* Brand: Deep Blue #1D215E + Gold #B8913A + White */
   --background: #ffffff;
   --foreground: #1D215E;
   --card: #ffffff;
   --card-foreground: #1D215E;
   --popover: #ffffff;
   --popover-foreground: #1D215E;
-  --primary: #A16207;
+  --primary: #B8913A;
   --primary-foreground: #ffffff;
   --secondary: #f0f1f8;
   --secondary-foreground: #1D215E;
@@ -23,8 +23,8 @@
   --destructive-foreground: #ef4444;
   --border: #dfe0ec;
   --input: #dfe0ec;
-  --ring: #A16207;
-  --chart-1: #A16207;
+  --ring: #B8913A;
+  --chart-1: #B8913A;
   --chart-2: #1D215E;
   --chart-3: #6b6e94;
   --chart-4: #dfe0ec;
@@ -32,20 +32,20 @@
   --radius: 0.5rem;
   --sidebar: #f7f7fb;
   --sidebar-foreground: #1D215E;
-  --sidebar-primary: #A16207;
+  --sidebar-primary: #B8913A;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #f0f1f8;
   --sidebar-accent-foreground: #1D215E;
   --sidebar-border: #dfe0ec;
-  --sidebar-ring: #A16207;
+  --sidebar-ring: #B8913A;
 
   /* Custom Airporteo tokens */
   --navy: #1D215E;
   --navy-light: #2A2F7A;
   --hero-navy: #1D215E;
-  --gold-dark: #A16207;
-  --gold: #CA8A04;
-  --gold-light: #D4B85E;
+  --gold-dark: #B8913A;
+  --gold: #B8913A;
+  --gold-light: #D4AF37;
 }
 
 .dark {
@@ -55,39 +55,39 @@
   --card-foreground: #f7f7fb;
   --popover: #1D215E;
   --popover-foreground: #f7f7fb;
-  --primary: #A16207;
+  --primary: #B8913A;
   --primary-foreground: #ffffff;
   --secondary: #2A2F7A;
   --secondary-foreground: #f7f7fb;
   --muted: #2A2F7A;
   --muted-foreground: #9b9dba;
-  --accent: #A16207;
+  --accent: #B8913A;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ef4444;
   --border: #3a3f8a;
   --input: #3a3f8a;
-  --ring: #A16207;
-  --chart-1: #A16207;
+  --ring: #B8913A;
+  --chart-1: #B8913A;
   --chart-2: #f7f7fb;
   --chart-3: #9b9dba;
   --chart-4: #3a3f8a;
   --chart-5: #2A2F7A;
   --sidebar: #1D215E;
   --sidebar-foreground: #f7f7fb;
-  --sidebar-primary: #A16207;
+  --sidebar-primary: #B8913A;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #3a3f8a;
   --sidebar-accent-foreground: #f7f7fb;
   --sidebar-border: #3a3f8a;
-  --sidebar-ring: #A16207;
+  --sidebar-ring: #B8913A;
 
   --navy: #1D215E;
   --navy-light: #2A2F7A;
   --hero-navy: #0B1F3A;
-  --gold-dark: #A16207;
-  --gold: #CA8A04;
-  --gold-light: #D4B85E;
+  --gold-dark: #B8913A;
+  --gold: #B8913A;
+  --gold-light: #D4AF37;
 }
 
 @theme inline {

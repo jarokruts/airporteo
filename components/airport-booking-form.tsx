@@ -28,14 +28,14 @@ type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 function getDirectionIcon(direction: string) {
   switch (direction) {
     case 'Arrival':
-      return <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
+      return <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
     case 'Departure':
-      return <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
+      return <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
     case 'Connection':
       return (
         <div style={{ display: 'flex', gap: '2px' }}>
-          <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
-          <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
+          <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
+          <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
         </div>
       )
     default:
@@ -528,7 +528,7 @@ function PassengersLuggageDropdown({
                 padding: '8px 12px',
                 borderRadius: '6px',
                 border: cabinClass === className ? 'none' : '1px solid #1D215E',
-                background: cabinClass === className ? '#D4AF37' : 'white',
+                background: cabinClass === className ? '#B8913A' : 'white',
                 color: cabinClass === className ? 'white' : '#1D215E',
                 fontSize: '13px',
                 fontWeight: 600,
@@ -623,7 +623,7 @@ function AirportSearchField({
         onMouseEnter={(e) => !isOpen && (e.currentTarget.style.background = '#F5F7FA')}
         onMouseLeave={(e) => !isOpen && (e.currentTarget.style.background = 'white')}
       >
-        <div style={{ display: 'flex', alignItems: 'center', color: '#C9A84C', flexShrink: 0, marginRight: '6px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', color: '#B8913A', flexShrink: 0, marginRight: '6px' }}>
           {getDirectionIcon(direction)}
         </div>
         <input
@@ -821,13 +821,13 @@ function SimpleDropdown({
                 width: '100%',
                 padding: '12px 12px',
                 textAlign: 'left',
-                background: value === option ? '#FDF8E8' : 'white',
-                border: 'none',
-                borderBottom: idx < options.length - 1 ? '1px solid #E2E8F0' : 'none',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 500,
-                color: value === option ? '#C9A84C' : '#1D215E',
+          background: value === option ? '#FDF8E8' : 'white',
+          border: 'none',
+          borderBottom: idx < options.length - 1 ? '1px solid #E2E8F0' : 'none',
+          cursor: 'pointer',
+          fontSize: '14px',
+          fontWeight: 500,
+          color: value === option ? '#B8913A' : '#1D215E',
                 transition: 'all 200ms'
               }}
               onMouseEnter={(e) => (e.currentTarget.style.background = value === option ? '#FDF8E8' : '#F5F7FA')}
@@ -874,7 +874,7 @@ function Counter({
             opacity: value > 0 ? 1 : 0.3,
             transition: 'all 200ms'
           }}
-          onMouseEnter={(e) => value > 0 && (e.currentTarget.style.borderColor = '#C9A84C')}
+          onMouseEnter={(e) => value > 0 && (e.currentTarget.style.borderColor = '#B8913A')}
           onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#E2E8F0')}
         >
           <span style={{ fontSize: '16px', fontWeight: 600 }}>−</span>
@@ -898,7 +898,7 @@ function Counter({
             opacity: value < 10 ? 1 : 0.3,
             transition: 'all 200ms'
           }}
-          onMouseEnter={(e) => value < 10 && (e.currentTarget.style.borderColor = '#C9A84C')}
+          onMouseEnter={(e) => value < 10 && (e.currentTarget.style.borderColor = '#B8913A')}
           onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#E2E8F0')}
         >
           <span style={{ fontSize: '16px', fontWeight: 600 }}>+</span>

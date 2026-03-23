@@ -129,18 +129,18 @@ function SheetOption({
         selected ? "bg-[#FDF8E8]" : "hover:bg-[#F5F7FA]"
       )}
     >
-      <span className={cn("shrink-0", selected ? "text-[#C9A84C]" : "text-[#94A3B8]")}>
+      <span className={cn("shrink-0", selected ? "text-[#B8913A]" : "text-[#94A3B8]")}>
         {icon}
       </span>
       <span className="flex-1 text-left">
-        <span className={cn("block text-[14px] font-medium", selected ? "text-[#C9A84C]" : "text-[#1D215E]")}>
+        <span className={cn("block text-[14px] font-medium", selected ? "text-[#B8913A]" : "text-[#1D215E]")}>
           {label}
         </span>
         {subtitle && (
           <span className="block text-[11px] text-[#94A3B8] font-normal">{subtitle}</span>
         )}
       </span>
-      {selected && <Check className="h-5 w-5 text-[#C9A84C]" />}
+      {selected && <Check className="h-5 w-5 text-[#B8913A]" />}
     </button>
   )
 }
@@ -167,7 +167,7 @@ function SheetCounter({
           type="button"
           onClick={() => onChange(Math.max(min, value - 1))}
           disabled={value <= min}
-          className="flex items-center justify-center w-8 h-8 rounded-full border border-[#E2E8F0] text-[#1D215E] disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#C9A84C] transition-colors"
+          className="flex items-center justify-center w-8 h-8 rounded-full border border-[#E2E8F0] text-[#1D215E] disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#B8913A] transition-colors"
         >
           <Minus className="h-4 w-4" />
         </button>
@@ -176,7 +176,7 @@ function SheetCounter({
           type="button"
           onClick={() => onChange(Math.min(max, value + 1))}
           disabled={value >= max}
-          className="flex items-center justify-center w-8 h-8 rounded-full border border-[#E2E8F0] text-[#1D215E] disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#C9A84C] transition-colors"
+          className="flex items-center justify-center w-8 h-8 rounded-full border border-[#E2E8F0] text-[#1D215E] disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#B8913A] transition-colors"
         >
           <Plus className="h-4 w-4" />
         </button>
@@ -475,7 +475,7 @@ function PassengersBagsDropdown({
                     fontWeight: '500',
                     border: 'none',
                     cursor: 'pointer',
-                    backgroundColor: travelClass === cls ? '#A16207' : '#F5F7FA',
+                    backgroundColor: travelClass === cls ? '#B8913A' : '#F5F7FA',
                     color: travelClass === cls ? 'white' : '#1D215E',
                     transition: 'background-color 200ms ease, color 200ms ease'
                   }}
@@ -666,7 +666,7 @@ function DatePickerBottomSheet({
                 justifyContent: 'center',
                 borderRadius: '50%',
                 border: isToday ? '2px solid #1D215E' : 'none',
-                background: isSelected ? '#A16207' : isPast ? 'transparent' : 'transparent',
+                background: isSelected ? '#B8913A' : isPast ? 'transparent' : 'transparent',
                 color: isSelected ? 'white' : isPast ? '#CBD5E0' : '#1D215E',
                 fontSize: '14px',
                 fontWeight: isToday || isSelected ? 700 : 500,
@@ -826,7 +826,7 @@ function DatePickerBottomSheet({
             margin: '0 16px 16px 16px',
             height: '48px',
             borderRadius: '10px',
-            background: selectedDate ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
+            background: selectedDate ? '#B8913A' : 'rgba(184, 145, 58, 0.45)',
             color: 'white',
             fontWeight: 'bold',
             fontSize: '15px',
@@ -964,7 +964,7 @@ function AirportSearchBottomSheet({
           >
             <Plane
               className="h-5 w-5 shrink-0"
-              style={{ color: "#C9A84C" }}
+              style={{ color: "#B8913A" }}
             />
             <input
               ref={inputRef}
@@ -1547,15 +1547,13 @@ export function BookingWidget() {
                 e.stopPropagation()
                 setShowAirportSearchSheet(true)
               }}
-              className="flex h-10 items-center rounded-[10px] border border-[#E2E8F0] px-2.5 focus-within:border-[#C9A84C] transition-colors w-full"
+              className="flex h-10 items-center rounded-[10px] border border-[#E2E8F0] px-2.5 focus-within:border-[#B8913A] transition-colors w-full"
               style={{ position: 'relative', zIndex: 1, marginTop: '0', background: 'white', cursor: 'pointer', touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent', userSelect: 'none' }}
             >
               {state.serviceType === "connection" ? (
-                <Plane className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#C9A84C' }} />
-              ) : state.serviceType === "departure" ? (
-                <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#C9A84C' }} />
-              ) : (
-                <PlaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#C9A84C' }} />
+          <Plane className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+          <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+          <PlaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
               )}
               <span className="flex-1 min-w-0 text-left text-xs" style={{ color: state.airport ? '#1D215E' : '#94A3B8' }}>
                 {state.airport ? `${state.airport.code} - ${state.airport.city}` : (state.serviceType === "connection" ? "Airport of service" : "Airport or city")}
@@ -1774,7 +1772,7 @@ export function BookingWidget() {
                   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.trim())
                 );
                 
-                const buttonColor = isFormValid ? '#A16207' : 'rgba(161, 98, 7, 0.45)';
+                const buttonColor = isFormValid ? '#B8913A' : 'rgba(184, 145, 58, 0.45)';
                 const buttonShadow = isFormValid 
                   ? '0 4px 12px rgba(219, 38, 35, 0.4)' 
                   : 'none';
@@ -2080,7 +2078,7 @@ export function BookingWidget() {
             height: '52px',
             borderRadius: '10px',
             border: 'none',
-            backgroundColor: state.airport && state.flightNumber && state.date && state.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email) && (state.serviceType !== "connection" || (state.connectionFlightNumber && state.connectionDate)) ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
+            backgroundColor: state.airport && state.flightNumber && state.date && state.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email) && (state.serviceType !== "connection" || (state.connectionFlightNumber && state.connectionDate)) ? '#B8913A' : 'rgba(184, 145, 58, 0.45)',
             color: 'white',
             fontSize: '16px',
             fontWeight: 600,
@@ -2278,7 +2276,7 @@ export function BookingWidget() {
             }
             className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-xl px-7 text-base font-bold text-primary-foreground shadow-lg transition-all hover:shadow-lg active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none sm:w-auto w-full"
             style={{
-              backgroundImage: 'linear-gradient(90deg, #A16207, #CA8A04)',
+              backgroundImage: 'linear-gradient(90deg, #B8913A, #B8913A)',
               boxShadow: '0 10px 25px rgba(161, 98, 7, 0.15)',
             }}
             onMouseEnter={(e) => {
@@ -2373,7 +2371,7 @@ export function BookingWidget() {
                       alignItems: 'center',
                       padding: '0 14px',
                       borderRadius: '10px',
-                      border: state.serviceType === value ? '3px solid #C9A84C' : '1.5px solid #E2E8F0',
+                      border: state.serviceType === value ? '3px solid #B8913A' : '1.5px solid #E2E8F0',
                       background: state.serviceType === value ? '#FFFBF0' : 'white',
                       cursor: 'pointer',
                       transition: 'all 200ms',
@@ -2390,18 +2388,18 @@ export function BookingWidget() {
                       }
                     }}
                   >
-                    <span style={{ color: '#C9A84C', flexShrink: 0, display: 'flex' }}>
+                    <span style={{ color: '#B8913A', flexShrink: 0, display: 'flex' }}>
                       <Icon className="h-5 w-5" />
                     </span>
                     <span style={{ flex: 1, marginLeft: '12px' }}>
-                      <div style={{ fontSize: '14px', fontWeight: 'bold', color: state.serviceType === value ? '#C9A84C' : '#1D215E' }}>
+                      <div style={{ fontSize: '14px', fontWeight: 'bold', color: state.serviceType === value ? '#B8913A' : '#1D215E' }}>
                         {label}
                       </div>
                       <div style={{ fontSize: '12px', color: '#94A3B8', marginTop: '2px' }}>
                         {desc}
                       </div>
                     </span>
-                    {state.serviceType === value && <Check className="h-5 w-5" style={{ color: '#C9A84C', flexShrink: 0 }} />}
+                    {state.serviceType === value && <Check className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
                   </button>
                 ))}
               </div>
@@ -2445,7 +2443,7 @@ export function BookingWidget() {
                           alignItems: 'center',
                           padding: '0 14px',
                           borderRadius: '10px',
-                          border: state.service === value ? '3px solid #C9A84C' : '1.5px solid #E2E8F0',
+                          border: state.service === value ? '3px solid #B8913A' : '1.5px solid #E2E8F0',
                           background: state.service === value ? '#FFFBF0' : 'white',
                           cursor: 'pointer',
                           transition: 'all 200ms',
@@ -2462,18 +2460,18 @@ export function BookingWidget() {
                           }
                         }}
                       >
-                        <span style={{ color: '#C9A84C', flexShrink: 0, display: 'flex' }}>
+                        <span style={{ color: '#B8913A', flexShrink: 0, display: 'flex' }}>
                           <Icon className="h-5 w-5" />
                         </span>
                         <span style={{ flex: 1, marginLeft: '12px' }}>
-                          <div style={{ fontSize: '14px', fontWeight: 'bold', color: state.service === value ? '#C9A84C' : '#1D215E' }}>
+                          <div style={{ fontSize: '14px', fontWeight: 'bold', color: state.service === value ? '#B8913A' : '#1D215E' }}>
                             {label}
                           </div>
                           <div style={{ fontSize: '12px', color: '#94A3B8', marginTop: '2px' }}>
                             {desc}
                           </div>
                         </span>
-                        {state.service === value && <Check className="h-5 w-5" style={{ color: '#C9A84C', flexShrink: 0 }} />}
+                        {state.service === value && <Check className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
                       </button>
                     ))
                 })()}
@@ -2520,7 +2518,7 @@ export function BookingWidget() {
                     height: '48px',
                     borderRadius: '10px',
                     border: 'none',
-                    background: (state.serviceType && state.service) ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
+                    background: (state.serviceType && state.service) ? '#B8913A' : 'rgba(184, 145, 58, 0.45)',
                     color: 'white',
                     fontSize: '15px',
                     fontWeight: 'bold',
@@ -2608,7 +2606,7 @@ export function BookingWidget() {
                   height: '48px',
                   borderRadius: '10px',
                   border: 'none',
-                  background: state.adults >= 1 ? '#A16207' : 'rgba(161, 98, 7, 0.45)',
+                  background: state.adults >= 1 ? '#B8913A' : 'rgba(184, 145, 58, 0.45)',
                   color: 'white',
                   fontSize: '15px',
                   fontWeight: 'bold',

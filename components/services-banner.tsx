@@ -58,7 +58,7 @@ export function ServicesBanner() {
           <div className="max-w-xs flex-shrink-0">
             <p
               className="text-sm font-semibold uppercase tracking-widest"
-              style={{ color: '#CA8A04' }}
+              style={{ color: '#B8913A' }}
             >
               Our services
             </p>
@@ -78,7 +78,7 @@ export function ServicesBanner() {
               href="/services"
               className="hidden md:inline-flex mt-6 items-center justify-center px-7 py-3.5 rounded-lg font-semibold text-white transition-all hover:shadow-lg"
               style={{
-                backgroundImage: 'linear-gradient(90deg, #A16207 0%, #CA8A04 100%)',
+                backgroundImage: 'linear-gradient(90deg, #B8913A 0%, #B8913A 100%)',
               }}
             >
               Explore all services
