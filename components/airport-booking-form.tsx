@@ -2,11 +2,27 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X } from 'lucide-react'
-import { Airport, AIRPORTS } from '@/lib/airports'
+import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
   airport: Airport
 }
+
+// Local AIRPORTS array matching the main page
+const TRENDING_AIRPORTS = [
+  { code: "LHR", city: "London", name: "Heathrow" },
+  { code: "LGW", city: "London", name: "Gatwick" },
+  { code: "CDG", city: "Paris", name: "Charles de Gaulle" },
+  { code: "AMS", city: "Amsterdam", name: "Schiphol" },
+  { code: "FRA", city: "Frankfurt", name: "Frankfurt Airport" },
+  { code: "MAD", city: "Madrid", name: "Barajas" },
+  { code: "BCN", city: "Barcelona", name: "El Prat" },
+  { code: "JFK", city: "New York", name: "John F. Kennedy" },
+  { code: "DXB", city: "Dubai", name: "Dubai International" },
+  { code: "IST", city: "Istanbul", name: "Istanbul Airport" },
+]
+
+type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 
 // Airport Search Field Component
 function AirportSearchField({
@@ -14,16 +30,12 @@ function AirportSearchField({
   onChange
 }: {
   value: string
-  onChange: (airport: string) => void
+  onChange: (value: string) => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [query, setQuery] = useState(value)
+  const [query, setQuery] = useState('')
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    setQuery(value)
-  }, [value])
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -38,16 +50,16 @@ function AirportSearchField({
     }
   }, [isOpen])
 
-  const filteredAirports = Object.values(AIRPORTS).filter(
+  const filteredAirports = TRENDING_AIRPORTS.filter(
     a =>
       a.city.toLowerCase().includes(query.toLowerCase()) ||
       a.code.toLowerCase().includes(query.toLowerCase()) ||
       a.name.toLowerCase().includes(query.toLowerCase())
   )
 
-  const handleSelectAirport = (airport: Airport) => {
+  const handleSelectAirport = (airport: TrendingAirport) => {
     const displayValue = `${airport.city} ${airport.code}`
-    setQuery(displayValue)
+    setQuery('')
     onChange(displayValue)
     setIsOpen(false)
   }
@@ -74,14 +86,15 @@ function AirportSearchField({
           transition: 'all 200ms',
           cursor: 'text'
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = isOpen ? 'white' : '#F5F7FA')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+        onClick={() => setIsOpen(true)}
+        onMouseEnter={(e) => !isOpen && (e.currentTarget.style.background = '#F5F7FA')}
+        onMouseLeave={(e) => !isOpen && (e.currentTarget.style.background = 'white')}
       >
         <Plane size={13} style={{ color: '#C9A84C', flexShrink: 0, marginRight: '6px' }} />
         <input
           ref={inputRef}
           type="text"
-          value={query}
+          value={query || value}
           onChange={handleInputChange}
           onFocus={() => setIsOpen(true)}
           placeholder="Airport or city"
@@ -99,8 +112,8 @@ function AirportSearchField({
         />
       </div>
 
-      {/* Dropdown Menu - Shows filtered airports */}
-      {isOpen && filteredAirports.length > 0 && (
+      {/* Dropdown Menu - Shows filtered airports with "TRENDING AIRPORTS" header */}
+      {isOpen && (
         <div
           style={{
             position: 'absolute',
@@ -113,61 +126,74 @@ function AirportSearchField({
             borderRadius: '10px',
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
             zIndex: 1000,
-            maxHeight: '240px',
-            overflowY: 'auto'
+            overflow: 'hidden'
           }}
         >
-          {filteredAirports.slice(0, 7).map((airport) => (
-            <button
-              key={airport.code}
-              type="button"
-              onClick={() => handleSelectAirport(airport)}
-              style={{
-                width: '100%',
-                padding: '10px 10px',
-                textAlign: 'left',
-                background: 'white',
-                border: 'none',
-                borderBottom: '1px solid #E2E8F0',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 500,
-                color: '#1D215E',
-                transition: 'all 200ms',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
-            >
-              <div
+          {/* Header */}
+          <div style={{ paddingLeft: '12px', paddingRight: '12px', paddingTop: '10px', paddingBottom: '8px', borderBottom: '1px solid #E2E8F0' }}>
+            <p style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#94A3B8' }}>
+              Trending Airports
+            </p>
+          </div>
+
+          {/* Airport List */}
+          {filteredAirports.length > 0 ? (
+            filteredAirports.map((airport) => (
+              <button
+                key={airport.code}
+                type="button"
+                onClick={() => handleSelectAirport(airport)}
                 style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  textAlign: 'left',
+                  background: 'white',
+                  border: 'none',
+                  borderBottom: '1px solid #E2E8F0',
+                  cursor: 'pointer',
+                  transition: 'all 200ms',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '24px',
-                  height: '24px',
-                  borderRadius: '6px',
-                  background: '#1D215E',
-                  color: 'white',
-                  fontSize: '11px',
-                  fontWeight: 'bold',
-                  flexShrink: 0
+                  gap: '12px'
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
               >
-                {airport.code}
-              </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>
-                  {airport.city}
+                {/* Badge */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '8px',
+                    background: '#F0F4F8',
+                    color: '#1D215E',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    flexShrink: 0
+                  }}
+                >
+                  {airport.code}
                 </div>
-                <div style={{ fontSize: '12px', color: '#94A3B8' }}>
-                  {airport.name}
+
+                {/* City and Airport Name */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#1D215E' }}>
+                    {airport.city}
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#94A3B8' }}>
+                    {airport.name}
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))
+          ) : (
+            <div style={{ padding: '12px', textAlign: 'center', fontSize: '13px', color: '#94A3B8' }}>
+              No airports found
+            </div>
+          )}
         </div>
       )}
     </div>
