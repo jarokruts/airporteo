@@ -1,96 +1,117 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X } from 'lucide-react'
-import { createPortal } from 'react-dom'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
   airport: Airport
 }
 
-// Bottom Sheet Component
-function BottomSheet({ 
-  open, 
-  onClose, 
-  title, 
-  children 
-}: { 
-  open: boolean
-  onClose: () => void
-  title: string
-  children: React.ReactNode 
+// Simple Dropdown Component
+function SimpleDropdown({
+  value,
+  onChange,
+  options,
+  label
+}: {
+  value: string
+  onChange: (value: string) => void
+  options: string[]
+  label: string
 }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
     }
-    return () => { document.body.style.overflow = '' }
-  }, [open])
 
-  if (!open) return null
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
 
-  return createPortal(
-    <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
-      {/* Backdrop */}
-      <div 
+  return (
+    <div ref={containerRef} style={{ position: 'relative', flex: 1 }}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
         style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(0, 0, 0, 0.5)'
-        }}
-        onClick={onClose}
-      />
-      {/* Sheet */}
-      <div 
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
+          width: '100%',
+          height: '40px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 12px',
+          borderRadius: '10px',
+          border: '1px solid #E2E8F0',
           background: 'white',
-          borderTopLeftRadius: '20px',
-          borderTopRightRadius: '20px',
-          maxHeight: '80vh',
-          overflow: 'hidden',
-          zIndex: 9999
+          cursor: 'pointer',
+          fontSize: '14px',
+          fontWeight: 500,
+          color: '#1D215E',
+          transition: 'all 200ms',
+          userSelect: 'none'
         }}
-        onClick={(e) => e.stopPropagation()}
+        onMouseEnter={(e) => !isOpen && (e.currentTarget.style.background = '#F5F7FA')}
+        onMouseLeave={(e) => !isOpen && (e.currentTarget.style.background = 'white')}
       >
-        {/* Drag handle */}
-        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '12px', paddingBottom: '8px' }}>
-          <div style={{ width: '40px', height: '4px', borderRadius: '2px', background: '#E2E8F0' }} />
+        <span>{value}</span>
+        <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+      </button>
+
+      {/* Dropdown Menu - Opens Downward */}
+      {isOpen && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            marginTop: '4px',
+            background: 'white',
+            border: '1px solid #E2E8F0',
+            borderRadius: '10px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+            zIndex: 1000,
+            overflow: 'hidden'
+          }}
+        >
+          {options.map((option, idx) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => {
+                onChange(option)
+                setIsOpen(false)
+              }}
+              style={{
+                width: '100%',
+                padding: '12px 12px',
+                textAlign: 'left',
+                background: value === option ? '#FDF8E8' : 'white',
+                border: 'none',
+                borderBottom: idx < options.length - 1 ? '1px solid #E2E8F0' : 'none',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 500,
+                color: value === option ? '#C9A84C' : '#1D215E',
+                transition: 'all 200ms'
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = value === option ? '#FDF8E8' : '#F5F7FA')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = value === option ? '#FDF8E8' : 'white')}
+            >
+              {option}
+            </button>
+          ))}
         </div>
-        {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingLeft: '20px', paddingRight: '20px', paddingBottom: '12px', borderBottom: '1px solid #E2E8F0' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#1D215E' }}>{title}</h3>
-          <button 
-            onClick={onClose}
-            style={{
-              padding: '4px',
-              borderRadius: '50%',
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
-          >
-            <X className="h-5 w-5" style={{ color: '#94A3B8' }} />
-          </button>
-        </div>
-        {/* Content */}
-        <div style={{ overflowY: 'auto', maxHeight: 'calc(80vh - 80px)' }}>
-          {children}
-        </div>
-      </div>
-    </div>,
-    document.body
+      )}
+    </div>
   )
 }
 
@@ -160,8 +181,87 @@ function Counter({
   )
 }
 
+// Bottom Sheet Component
+function BottomSheet({ 
+  open, 
+  onClose, 
+  title, 
+  children 
+}: { 
+  open: boolean
+  onClose: () => void
+  title: string
+  children: React.ReactNode 
+}) {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  if (!open) return null
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+      <div 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.5)'
+        }}
+        onClick={onClose}
+      />
+      <div 
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          background: 'white',
+          borderTopLeftRadius: '20px',
+          borderTopRightRadius: '20px',
+          maxHeight: '80vh',
+          overflow: 'hidden',
+          zIndex: 9999
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '12px', paddingBottom: '8px' }}>
+          <div style={{ width: '40px', height: '4px', borderRadius: '2px', background: '#E2E8F0' }} />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingLeft: '20px', paddingRight: '20px', paddingBottom: '12px', borderBottom: '1px solid #E2E8F0' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#1D215E' }}>{title}</h3>
+          <button 
+            onClick={onClose}
+            style={{
+              padding: '4px',
+              borderRadius: '50%',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+          >
+            <X className="h-5 w-5" style={{ color: '#94A3B8' }} />
+          </button>
+        </div>
+        <div style={{ overflowY: 'auto', maxHeight: 'calc(80vh - 80px)' }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function AirportBookingForm({ airport }: AirportBookingFormProps) {
-  const [direction, setDirection] = useState('arrival')
+  const [direction, setDirection] = useState('Arrival')
   const [service, setService] = useState('Meet & Greet')
   const [airportValue, setAirportValue] = useState(`${airport.city} ${airport.code}`)
   const [flightNumber, setFlightNumber] = useState('')
@@ -170,69 +270,27 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const [cabinBags, setCabinBags] = useState(0)
   const [checkedBags, setCheckedBags] = useState(0)
   const [email, setEmail] = useState('')
-  const [showDirectionServiceSheet, setShowDirectionServiceSheet] = useState(false)
   const [showPassengersSheet, setShowPassengersSheet] = useState(false)
+
+  const directionOptions = ['Arrival', 'Departure', 'Connection']
+  const serviceOptions = ['Meet & Greet', 'VIP Platinum', 'Hotel Transfer']
 
   return (
     <div className="bg-white rounded-2xl p-4 md:p-6 space-y-2">
-      {/* Row 1: Direction + Service - Two separate dropdowns */}
+      {/* Row 1: Direction + Service - Two separate equal-width dropdowns */}
       <div style={{ display: 'flex', gap: '12px' }}>
-        {/* Left: Direction Dropdown */}
-        <button
-          type="button"
-          onClick={() => setShowDirectionServiceSheet(true)}
-          style={{
-            flex: 1,
-            height: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 12px',
-            borderRadius: '10px',
-            border: '1px solid #E2E8F0',
-            background: 'white',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: 500,
-            color: '#1D215E',
-            transition: 'all 200ms',
-            userSelect: 'none'
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
-        >
-          <span>{direction === 'arrival' ? 'Arrival' : direction === 'departure' ? 'Departure' : 'Connection'}</span>
-          <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
-        </button>
-
-        {/* Right: Service Dropdown */}
-        <button
-          type="button"
-          onClick={() => setShowDirectionServiceSheet(true)}
-          style={{
-            flex: 1,
-            height: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 12px',
-            borderRadius: '10px',
-            border: '1px solid #E2E8F0',
-            background: 'white',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: 500,
-            color: '#1D215E',
-            transition: 'all 200ms',
-            userSelect: 'none',
-            minWidth: 0
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
-        >
-          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{service}</span>
-          <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
-        </button>
+        <SimpleDropdown 
+          value={direction}
+          onChange={setDirection}
+          options={directionOptions}
+          label="Direction"
+        />
+        <SimpleDropdown 
+          value={service}
+          onChange={setService}
+          options={serviceOptions}
+          label="Service"
+        />
       </div>
 
       {/* Row 2: Airport field */}
@@ -355,19 +413,16 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
         onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
         onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
       >
-        {/* Left: Passengers */}
         <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', gap: '4px', borderRight: '1px solid #E2E8F0' }}>
           <Users size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
           <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
         </div>
-        {/* Middle: Luggage */}
         <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
           <BriefcaseBusiness size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
           <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
           <Luggage size={13} style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
           <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
         </div>
-        {/* Right: Chevron */}
         <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
           <ChevronDown size={12} style={{ color: '#94A3B8' }} />
         </div>
@@ -415,68 +470,6 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
           Get a Quote
         </button>
       </div>
-
-      {/* Direction & Service Sheet */}
-      <BottomSheet 
-        open={showDirectionServiceSheet} 
-        onClose={() => setShowDirectionServiceSheet(false)}
-        title="Direction & Service"
-      >
-        <div>
-          {['arrival', 'departure', 'connection'].map(d => (
-            <button
-              key={d}
-              onClick={() => {
-                setDirection(d)
-                setShowDirectionServiceSheet(false)
-              }}
-              style={{
-                width: '100%',
-                textAlign: 'left',
-                padding: '14px 20px',
-                borderBottom: '1px solid #E2E8F0',
-                background: direction === d ? '#FDF8E8' : 'white',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 500,
-                color: direction === d ? '#C9A84C' : '#1D215E',
-                transition: 'all 200ms'
-              }}
-              onMouseEnter={(e) => direction !== d && (e.currentTarget.style.background = '#F5F7FA')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = direction === d ? '#FDF8E8' : 'white')}
-            >
-              {d.charAt(0).toUpperCase() + d.slice(1)}
-            </button>
-          ))}
-          {['Meet & Greet', 'VIP Platinum', 'Hotel Transfer'].map(s => (
-            <button
-              key={s}
-              onClick={() => {
-                setService(s)
-                setShowDirectionServiceSheet(false)
-              }}
-              style={{
-                width: '100%',
-                textAlign: 'left',
-                padding: '14px 20px',
-                borderBottom: '1px solid #E2E8F0',
-                background: service === s ? '#FDF8E8' : 'white',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 500,
-                color: service === s ? '#C9A84C' : '#1D215E',
-                transition: 'all 200ms'
-              }}
-              onMouseEnter={(e) => service !== s && (e.currentTarget.style.background = '#F5F7FA')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = service === s ? '#FDF8E8' : 'white')}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-      </BottomSheet>
 
       {/* Passengers Sheet */}
       <BottomSheet 
