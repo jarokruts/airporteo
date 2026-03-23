@@ -1210,13 +1210,11 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
             fontSize: '13px',
             fontWeight: 700,
             color: 'white',
-            background: '#A16207',
+            background: (airportValue && date && email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && adults >= 1) ? '#B8913A' : 'rgba(184, 145, 58, 0.45)',
             border: 'none',
-            cursor: 'pointer',
-            transition: 'all 200ms'
+            cursor: (airportValue && date && email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && adults >= 1) ? 'pointer' : 'not-allowed',
+            transition: 'background 300ms ease'
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = '#8B4E06')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = '#A16207')}
         >
           Get a Quote
         </button>
