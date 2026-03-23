@@ -142,7 +142,8 @@ export function ServicesSection() {
                     <span className="text-lg font-bold text-foreground">From {convertPrice(service.basePrice)}</span>
                     <a
                       href="#hero"
-                      className="flex items-center gap-1.5 text-sm font-semibold text-gold transition-colors hover:text-gold/80"
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white transition-colors"
+                      style={{ backgroundColor: '#B8913A' }}
                     >
                       Book now
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

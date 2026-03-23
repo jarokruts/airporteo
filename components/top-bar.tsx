@@ -153,7 +153,8 @@ export function TopBar() {
 
           <button
             type="button"
-            className="flex items-center gap-1.5 rounded-md bg-gold px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-gold/80"
+            className="flex items-center gap-1.5 rounded-md px-3 py-1 text-xs font-semibold text-white transition-colors"
+            style={{ backgroundColor: '#B8913A' }}
           >
             <UserPlus className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Register</span>

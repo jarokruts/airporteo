@@ -78,7 +78,7 @@ export function ServicesBanner() {
               href="/services"
               className="hidden md:inline-flex mt-6 items-center justify-center px-7 py-3.5 rounded-lg font-semibold text-white transition-all hover:shadow-lg"
               style={{
-                backgroundImage: 'linear-gradient(90deg, #B8913A 0%, #B8913A 100%)',
+                backgroundColor: '#B8913A',
               }}
             >
               Explore all services
