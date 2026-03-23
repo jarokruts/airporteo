@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X } from 'lucide-react'
+import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X, PlaneLanding, PlaneTakeoff } from 'lucide-react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
@@ -24,42 +24,15 @@ const TRENDING_AIRPORTS = [
 
 type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 
-// Icon components for direction
-function ArrivalIcon() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 19V5M5 12l7 7 7-7" />
-    </svg>
-  )
-}
-
-function DepartureIcon() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 5v14M5 12l7-7 7 7" />
-    </svg>
-  )
-}
-
-function ConnectionIcon() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <g>
-        <path d="M6 9V5M6 5l3 3" />
-        <path d="M18 15v4m0 0l-3-3" />
-      </g>
-    </svg>
-  )
-}
-
+// Helper function to get the appropriate icon
 function getDirectionIcon(direction: string) {
   switch (direction) {
     case 'Arrival':
-      return <ArrivalIcon />
+      return <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
     case 'Departure':
-      return <DepartureIcon />
+      return <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
     case 'Connection':
-      return <ConnectionIcon />
+      return <Plane className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
     default:
       return null
   }
