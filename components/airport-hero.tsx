@@ -43,16 +43,14 @@ export function AirportHero({ airport }: AirportHeroProps) {
               </div>
 
               {/* City Name - Georgia Serif */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 md:mb-6" style={{ fontFamily: 'Georgia, serif' }}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-3 md:mb-4" style={{ fontFamily: 'Georgia, serif' }}>
                 {airport.city}
               </h1>
 
-              {/* Badge + Subtitle */}
-              <div className="mb-6 md:mb-8">
-                <div className="flex items-center gap-3 mb-3 flex-wrap">
-                  <div className="px-4 py-2 border-2 border-blue rounded-full">
-                    <span className="text-white font-bold text-lg">{airport.code}</span>
-                  </div>
+              {/* Badge + Airport Name - Horizontal Row */}
+              <div className="flex items-center gap-3 mb-6 md:mb-8">
+                <div className="px-4 py-2 border-2 border-blue rounded-full flex-shrink-0">
+                  <span className="text-white font-bold text-lg">{airport.code}</span>
                 </div>
                 <p className="text-white/80 text-sm md:text-base">
                   Josep Tarradellas Barcelona–El Prat Airport
