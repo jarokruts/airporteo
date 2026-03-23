@@ -24,13 +24,56 @@ const TRENDING_AIRPORTS = [
 
 type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 
+// Icon components for direction
+function ArrivalIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 19V5M5 12l7 7 7-7" />
+    </svg>
+  )
+}
+
+function DepartureIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 5v14M5 12l7-7 7 7" />
+    </svg>
+  )
+}
+
+function ConnectionIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <g>
+        <path d="M6 9V5M6 5l3 3" />
+        <path d="M18 15v4m0 0l-3-3" />
+      </g>
+    </svg>
+  )
+}
+
+function getDirectionIcon(direction: string) {
+  switch (direction) {
+    case 'Arrival':
+      return <ArrivalIcon />
+    case 'Departure':
+      return <DepartureIcon />
+    case 'Connection':
+      return <ConnectionIcon />
+    default:
+      return null
+  }
+}
+
 // Airport Search Field Component
 function AirportSearchField({
   value,
-  onChange
+  onChange,
+  direction = 'Arrival'
 }: {
   value: string
   onChange: (value: string) => void
+  direction?: string
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -90,7 +133,9 @@ function AirportSearchField({
         onMouseEnter={(e) => !isOpen && (e.currentTarget.style.background = '#F5F7FA')}
         onMouseLeave={(e) => !isOpen && (e.currentTarget.style.background = 'white')}
       >
-        <Plane size={13} style={{ color: '#C9A84C', flexShrink: 0, marginRight: '6px' }} />
+        <div style={{ display: 'flex', alignItems: 'center', color: '#C9A84C', flexShrink: 0, marginRight: '6px' }}>
+          {getDirectionIcon(direction)}
+        </div>
         <input
           ref={inputRef}
           type="text"
@@ -519,7 +564,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
       </div>
 
       {/* Row 2: Airport field with autocomplete search */}
-      <AirportSearchField value={airportValue} onChange={setAirportValue} />
+      <AirportSearchField value={airportValue} onChange={setAirportValue} direction={direction} />
 
       {/* Row 3: Flight # */}
       <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
