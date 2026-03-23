@@ -275,20 +275,53 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const directionOptions = ['Arrival', 'Departure', 'Connection']
   const serviceOptions = ['Meet & Greet', 'VIP Platinum', 'Hotel Transfer']
 
+  // Compute filtered options based on current selections
+  const getFilteredServiceOptions = () => {
+    if (direction === 'Connection') {
+      return ['Meet & Greet', 'VIP Platinum']
+    }
+    return serviceOptions
+  }
+
+  const getFilteredDirectionOptions = () => {
+    if (service === 'Hotel Transfer') {
+      return ['Arrival', 'Departure']
+    }
+    return directionOptions
+  }
+
+  // Handle direction change with auto-reset logic
+  const handleDirectionChange = (newDirection: string) => {
+    setDirection(newDirection)
+    // Auto-reset: If "Connection" is selected and service is "Hotel Transfer", reset service to "Meet & Greet"
+    if (newDirection === 'Connection' && service === 'Hotel Transfer') {
+      setService('Meet & Greet')
+    }
+  }
+
+  // Handle service change with auto-reset logic
+  const handleServiceChange = (newService: string) => {
+    setService(newService)
+    // Auto-reset: If "Hotel Transfer" is selected and direction is "Connection", reset direction to "Arrival"
+    if (newService === 'Hotel Transfer' && direction === 'Connection') {
+      setDirection('Arrival')
+    }
+  }
+
   return (
     <div className="bg-white rounded-2xl p-4 md:p-6 space-y-2">
       {/* Row 1: Direction + Service - Two separate equal-width dropdowns */}
       <div style={{ display: 'flex', gap: '12px' }}>
         <SimpleDropdown 
           value={direction}
-          onChange={setDirection}
-          options={directionOptions}
+          onChange={handleDirectionChange}
+          options={getFilteredDirectionOptions()}
           label="Direction"
         />
         <SimpleDropdown 
           value={service}
-          onChange={setService}
-          options={serviceOptions}
+          onChange={handleServiceChange}
+          options={getFilteredServiceOptions()}
           label="Service"
         />
       </div>
