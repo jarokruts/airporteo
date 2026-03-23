@@ -12,7 +12,7 @@ interface AirportHeroProps {
 
 export function AirportHero({ airport }: AirportHeroProps) {
   return (
-    <section className="relative w-full h-screen flex flex-col overflow-hidden bg-navy">
+    <section className="relative w-full flex flex-col overflow-hidden bg-navy">
       {/* Background Image */}
       <Image
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Barcelona%20El%20Prat%20Airport%20-%20BCN-b9CStxmwiYZeutGCgay7n532qH2Pqr.jpg"
@@ -26,7 +26,7 @@ export function AirportHero({ airport }: AirportHeroProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-[#1D215E]/70 via-[#1D215E]/75 to-[#1D215E]/85" />
 
       {/* Content Container */}
-      <div className="relative z-10 flex items-start pt-4 md:pt-6 lg:pt-8 p-5 md:p-8 lg:p-12" style={{ minHeight: 'calc(100vh - 80px)' }}>
+      <div className="relative z-10 flex items-start pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 p-5 md:p-8 lg:p-12">
         <div className="mx-auto max-w-7xl w-full">
           {/* Two Column Layout */}
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
