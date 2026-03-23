@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X, PlaneLanding, PlaneTakeoff } from 'lucide-react'
+import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X, PlaneLanding, PlaneTakeoff, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
@@ -41,6 +41,235 @@ function getDirectionIcon(direction: string) {
     default:
       return null
   }
+}
+
+// Date Picker Dropdown Component
+function DatePickerDropdown({
+  value,
+  onChange,
+  isOpen,
+  onClose
+}: {
+  value: string
+  onChange: (date: string) => void
+  isOpen: boolean
+  onClose: () => void
+}) {
+  const [displayMonth, setDisplayMonth] = useState(() => {
+    if (value) {
+      const d = new Date(value + 'T00:00:00')
+      return new Date(d.getFullYear(), d.getMonth(), 1)
+    }
+    return new Date()
+  })
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen, onClose])
+
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const firstDay = new Date(year, month, 1)
+    const lastDay = new Date(year, month + 1, 0)
+    const daysInMonth = lastDay.getDate()
+    const startingDayOfWeek = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1
+
+    const days = []
+    for (let i = 0; i < startingDayOfWeek; i++) {
+      days.push(null)
+    }
+    for (let day = 1; day <= daysInMonth; day++) {
+      days.push(new Date(year, month, day))
+    }
+    return days
+  }
+
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const month1 = displayMonth
+  const month2 = new Date(displayMonth.getFullYear(), displayMonth.getMonth() + 1, 1)
+  const days1 = getDaysInMonth(month1)
+  const days2 = getDaysInMonth(month2)
+
+  const handlePrevMonth = () => {
+    setDisplayMonth(new Date(displayMonth.getFullYear(), displayMonth.getMonth() - 1, 1))
+  }
+
+  const handleNextMonth = () => {
+    setDisplayMonth(new Date(displayMonth.getFullYear(), displayMonth.getMonth() + 1, 1))
+  }
+
+  const formatDate = (date: Date) => {
+    return date.toISOString().split('T')[0]
+  }
+
+  const isDatePast = (date: Date) => {
+    const d = new Date(date)
+    d.setHours(0, 0, 0, 0)
+    return d < today
+  }
+
+  const isDateToday = (date: Date) => {
+    const d = new Date(date)
+    d.setHours(0, 0, 0, 0)
+    return d.getTime() === today.getTime()
+  }
+
+  const isDateSelected = (date: Date) => {
+    const dateStr = formatDate(date)
+    return dateStr === value
+  }
+
+  const renderMonth = (month: Date, days: (Date | null)[]) => (
+    <div key={month.toISOString()} style={{ padding: '0 12px', flex: 1, minWidth: 0 }}>
+      <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#1D215E', margin: '0 0 12px 0', textAlign: 'center' }}>
+        {month.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+      </h4>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0', marginBottom: '12px' }}>
+        {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
+          <div key={day} style={{ textAlign: 'center', fontSize: '11px', fontWeight: 600, color: '#94A3B8', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {day}
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px', marginBottom: '12px' }}>
+        {days.map((date, idx) => {
+          if (!date) {
+            return <div key={`empty-${idx}`} style={{ height: '32px' }} />
+          }
+
+          const isPast = isDatePast(date)
+          const isToday = isDateToday(date)
+          const isSelected = isDateSelected(date)
+          const dateStr = formatDate(date)
+
+          return (
+            <button
+              key={dateStr}
+              type="button"
+              onClick={() => !isPast && (onChange(dateStr), onClose())}
+              disabled={isPast}
+              style={{
+                width: '100%',
+                aspectRatio: '1',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '6px',
+                border: isToday ? '2px solid #1D215E' : 'none',
+                background: isSelected ? '#A16207' : 'transparent',
+                color: isSelected ? 'white' : isPast ? '#CBD5E0' : '#1D215E',
+                fontSize: '13px',
+                fontWeight: isToday || isSelected ? 700 : 500,
+                cursor: isPast ? 'default' : 'pointer',
+                transition: 'all 200ms',
+                padding: 0
+              }}
+              onMouseEnter={(e) => {
+                if (!isPast) {
+                  e.currentTarget.style.background = '#F5F7FA'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isSelected) {
+                  e.currentTarget.style.background = 'transparent'
+                }
+              }}
+            >
+              {date.getDate()}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+
+  if (!isOpen) return null
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        position: 'absolute',
+        top: '100%',
+        left: 0,
+        right: 0,
+        marginTop: '4px',
+        background: 'white',
+        border: '1px solid #E2E8F0',
+        borderRadius: '10px',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        zIndex: 1000,
+        overflow: 'hidden',
+        padding: '12px 0'
+      }}
+    >
+      {/* Header with navigation */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingLeft: '12px', paddingRight: '12px', marginBottom: '12px' }}>
+        <button
+          type="button"
+          onClick={handlePrevMonth}
+          style={{
+            width: '28px',
+            height: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%',
+            border: '1px solid #E2E8F0',
+            background: 'white',
+            cursor: 'pointer',
+            transition: 'all 200ms'
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+        >
+          <ChevronLeft className="h-4 w-4" style={{ color: '#1D215E' }} />
+        </button>
+
+        <button
+          type="button"
+          onClick={handleNextMonth}
+          style={{
+            width: '28px',
+            height: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%',
+            border: '1px solid #E2E8F0',
+            background: 'white',
+            cursor: 'pointer',
+            transition: 'all 200ms'
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+        >
+          <ChevronRight className="h-4 w-4" style={{ color: '#1D215E' }} />
+        </button>
+      </div>
+
+      {/* Two month calendars side by side */}
+      <div style={{ display: 'flex', gap: '12px' }}>
+        {renderMonth(month1, days1)}
+        {renderMonth(month2, days2)}
+      </div>
+    </div>
+  )
 }
 
 // Airport Search Field Component
@@ -486,6 +715,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const [checkedBags, setCheckedBags] = useState(0)
   const [email, setEmail] = useState('')
   const [showPassengersSheet, setShowPassengersSheet] = useState(false)
+  const [showDatePicker, setShowDatePicker] = useState(false)
 
   const directionOptions = ['Arrival', 'Departure', 'Connection']
   const serviceOptions = ['Meet & Greet', 'VIP Platinum', 'Hotel Transfer']
@@ -569,31 +799,40 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
       </div>
 
       {/* Row 4: Date */}
-      <button
-        type="button"
-        onClick={() => {}}
-        style={{
-          width: '100%',
-          height: '40px',
-          display: 'flex',
-          alignItems: 'center',
-          borderRadius: '10px',
-          border: '1px solid #E2E8F0',
-          paddingLeft: '10px',
-          paddingRight: '10px',
-          background: 'white',
-          cursor: 'pointer',
-          transition: 'all 200ms'
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
-      >
-        <Calendar size={14} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
-        <span style={{ flex: 1, textAlign: 'left', fontSize: '14px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Select date'}
-        </span>
-        <ChevronDown size={12} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
-      </button>
+      <div style={{ position: 'relative', width: '100%' }}>
+        <button
+          type="button"
+          onClick={() => setShowDatePicker(!showDatePicker)}
+          style={{
+            width: '100%',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            borderRadius: '10px',
+            border: '1px solid #E2E8F0',
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            background: 'white',
+            cursor: 'pointer',
+            transition: 'all 200ms'
+          }}
+          onMouseEnter={(e) => !showDatePicker && (e.currentTarget.style.background = '#F5F7FA')}
+          onMouseLeave={(e) => !showDatePicker && (e.currentTarget.style.background = 'white')}
+        >
+          <Calendar size={14} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
+          <span style={{ flex: 1, textAlign: 'left', fontSize: '14px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Select date'}
+          </span>
+          <ChevronDown size={12} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: showDatePicker ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+        </button>
+        
+        <DatePickerDropdown 
+          value={date}
+          onChange={setDate}
+          isOpen={showDatePicker}
+          onClose={() => setShowDatePicker(false)}
+        />
+      </div>
 
       {/* Row 5: Passengers + Luggage */}
       <button
