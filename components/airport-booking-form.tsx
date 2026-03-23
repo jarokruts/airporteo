@@ -48,12 +48,14 @@ function DatePickerDropdown({
   value,
   onChange,
   isOpen,
-  onClose
+  onClose,
+  buttonRef
 }: {
   value: string
   onChange: (date: string) => void
   isOpen: boolean
   onClose: () => void
+  buttonRef: React.RefObject<HTMLButtonElement>
 }) {
   const [displayMonth, setDisplayMonth] = useState(() => {
     if (value) {
@@ -63,10 +65,30 @@ function DatePickerDropdown({
     return new Date()
   })
   const containerRef = useRef<HTMLDivElement>(null)
+  const [position, setPosition] = useState({ top: 0, left: 0, width: 0 })
+
+  useEffect(() => {
+    function updatePosition() {
+      if (buttonRef.current) {
+        const rect = buttonRef.current.getBoundingClientRect()
+        setPosition({
+          top: rect.bottom + 4 + window.scrollY,
+          left: rect.left + window.scrollX,
+          width: rect.width
+        })
+      }
+    }
+
+    if (isOpen) {
+      updatePosition()
+      window.addEventListener('scroll', updatePosition)
+      return () => window.removeEventListener('scroll', updatePosition)
+    }
+  }, [isOpen, buttonRef])
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node) && buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
         onClose()
       }
     }
@@ -75,7 +97,7 @@ function DatePickerDropdown({
       document.addEventListener('mousedown', handleClickOutside)
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [isOpen, onClose])
+  }, [isOpen, onClose, buttonRef])
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear()
@@ -200,18 +222,14 @@ function DatePickerDropdown({
 
   if (!isOpen) return null
 
-  const buttonRect = containerRef.current?.getBoundingClientRect()
-  const top = buttonRect ? buttonRect.bottom + 4 : 0
-  const left = buttonRect ? buttonRect.left : 0
-
   return (
     <div
       ref={containerRef}
       style={{
         position: 'fixed',
-        top: `${top}px`,
-        left: `${left}px`,
-        width: buttonRect ? `${buttonRect.width}px` : 'auto',
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+        width: `${position.width}px`,
         background: 'white',
         border: '1px solid #E2E8F0',
         borderRadius: '10px',
@@ -719,6 +737,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const [email, setEmail] = useState('')
   const [showPassengersSheet, setShowPassengersSheet] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
+  const dateButtonRef = useRef<HTMLButtonElement>(null)
 
   const directionOptions = ['Arrival', 'Departure', 'Connection']
   const serviceOptions = ['Meet & Greet', 'VIP Platinum', 'Hotel Transfer']
@@ -804,6 +823,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
       {/* Row 4: Date */}
       <div style={{ position: 'relative', width: '100%' }}>
         <button
+          ref={dateButtonRef}
           type="button"
           onClick={() => setShowDatePicker(!showDatePicker)}
           style={{
@@ -834,6 +854,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
           onChange={setDate}
           isOpen={showDatePicker}
           onClose={() => setShowDatePicker(false)}
+          buttonRef={dateButtonRef}
         />
       </div>
 
