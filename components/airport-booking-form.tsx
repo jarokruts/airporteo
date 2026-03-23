@@ -38,7 +38,7 @@ function AirportSearchField({
     }
   }, [isOpen])
 
-  const filteredAirports = AIRPORTS.filter(
+  const filteredAirports = Object.values(AIRPORTS).filter(
     a =>
       a.city.toLowerCase().includes(query.toLowerCase()) ||
       a.code.toLowerCase().includes(query.toLowerCase()) ||
