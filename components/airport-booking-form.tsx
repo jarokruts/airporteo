@@ -24,6 +24,52 @@ const TRENDING_AIRPORTS = [
 
 type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 
+// Icon components for direction
+function ArrivalIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      <path d="M12 19v-8M9 16h6" />
+    </svg>
+  )
+}
+
+function DepartureIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      <path d="M12 5v8M9 8h6" />
+    </svg>
+  )
+}
+
+function ConnectionIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M10 8v4m0 4v4M14 8v4m0 4v4" />
+      <circle cx="6" cy="6" r="2" />
+      <circle cx="18" cy="6" r="2" />
+      <circle cx="6" cy="18" r="2" />
+      <circle cx="18" cy="18" r="2" />
+      <path d="M7 8h10M7 16h10" />
+    </svg>
+  )
+}
+
+// Helper function to get the appropriate icon
+function getDirectionIcon(direction: string) {
+  switch (direction) {
+    case 'Arrival':
+      return <ArrivalIcon />
+    case 'Departure':
+      return <DepartureIcon />
+    case 'Connection':
+      return <ConnectionIcon />
+    default:
+      return null
+  }
+}
+
 // Airport Search Field Component
 function AirportSearchField({
   value,
@@ -253,7 +299,10 @@ function SimpleDropdown({
         onMouseEnter={(e) => !isOpen && (e.currentTarget.style.background = '#F5F7FA')}
         onMouseLeave={(e) => !isOpen && (e.currentTarget.style.background = 'white')}
       >
-        <span>{value}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {getDirectionIcon(value)}
+          <span>{value}</span>
+        </div>
         <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
       </button>
 
@@ -293,12 +342,16 @@ function SimpleDropdown({
                 fontSize: '14px',
                 fontWeight: 500,
                 color: value === option ? '#C9A84C' : '#1D215E',
-                transition: 'all 200ms'
+                transition: 'all 200ms',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
               }}
               onMouseEnter={(e) => (e.currentTarget.style.background = value === option ? '#FDF8E8' : '#F5F7FA')}
               onMouseLeave={(e) => (e.currentTarget.style.background = value === option ? '#FDF8E8' : 'white')}
             >
-              {option}
+              {getDirectionIcon(option)}
+              <span>{option}</span>
             </button>
           ))}
         </div>
