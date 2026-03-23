@@ -32,7 +32,12 @@ function getDirectionIcon(direction: string) {
     case 'Departure':
       return <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
     case 'Connection':
-      return <Plane className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
+      return (
+        <div style={{ display: 'flex', gap: '2px' }}>
+          <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
+          <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#C9A84C' }} />
+        </div>
+      )
     default:
       return null
   }
