@@ -293,6 +293,171 @@ function DatePickerDropdown({
   )
 }
 
+// Stepper Component (+ / - buttons)
+function Stepper({ value, onChange, min = 0, max = 10 }: { value: number; onChange: (v: number) => void; min?: number; max?: number }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <button
+        type="button"
+        onClick={() => onChange(Math.max(min, value - 1))}
+        disabled={value <= min}
+        style={{
+          display: 'flex',
+          height: '24px',
+          width: '24px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '50%',
+          background: '#F5F7FA',
+          color: '#1D215E',
+          fontSize: '16px',
+          fontWeight: 'bold',
+          border: 'none',
+          cursor: value <= min ? 'default' : 'pointer',
+          opacity: value <= min ? 0.5 : 1,
+          transition: 'all 200ms'
+        }}
+        onMouseEnter={(e) => value > min && (e.currentTarget.style.background = '#E2E8F0')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+      >
+        −
+      </button>
+      <span style={{ width: '16px', textAlign: 'center', fontSize: '14px', fontWeight: 600, color: '#1D215E' }}>{value}</span>
+      <button
+        type="button"
+        onClick={() => onChange(Math.min(max, value + 1))}
+        disabled={value >= max}
+        style={{
+          display: 'flex',
+          height: '24px',
+          width: '24px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '50%',
+          background: '#F5F7FA',
+          color: '#1D215E',
+          fontSize: '16px',
+          fontWeight: 'bold',
+          border: 'none',
+          cursor: value >= max ? 'default' : 'pointer',
+          opacity: value >= max ? 0.5 : 1,
+          transition: 'all 200ms'
+        }}
+        onMouseEnter={(e) => value < max && (e.currentTarget.style.background = '#E2E8F0')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+      >
+        +
+      </button>
+    </div>
+  )
+}
+
+// Passengers & Luggage Dropdown Component
+function PassengersLuggageDropdown({
+  adults,
+  cabinBags,
+  checkedBags,
+  onAdultsChange,
+  onCabinBagsChange,
+  onCheckedBagsChange,
+  isOpen,
+  onClose,
+  buttonRef
+}: {
+  adults: number
+  cabinBags: number
+  checkedBags: number
+  onAdultsChange: (value: number) => void
+  onCabinBagsChange: (value: number) => void
+  onCheckedBagsChange: (value: number) => void
+  isOpen: boolean
+  onClose: () => void
+  buttonRef: React.RefObject<HTMLButtonElement>
+}) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [position, setPosition] = useState({ top: 0, left: 0, width: 0 })
+
+  useEffect(() => {
+    function updatePosition() {
+      if (buttonRef.current) {
+        const rect = buttonRef.current.getBoundingClientRect()
+        setPosition({
+          top: rect.bottom + 4 + window.scrollY,
+          left: rect.left + window.scrollX,
+          width: rect.width
+        })
+      }
+    }
+
+    if (isOpen) {
+      updatePosition()
+      window.addEventListener('scroll', updatePosition)
+      return () => window.removeEventListener('scroll', updatePosition)
+    }
+  }, [isOpen, buttonRef])
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node) && buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen, onClose, buttonRef])
+
+  if (!isOpen) return null
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        position: 'fixed',
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+        width: `${position.width}px`,
+        background: 'white',
+        border: '1px solid #E2E8F0',
+        borderRadius: '10px',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        zIndex: 9999,
+        overflow: 'hidden',
+        padding: '12px'
+      }}
+    >
+      {/* Row 1: Passengers */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', paddingBottom: '12px', borderBottom: '1px solid #E2E8F0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <Users size={14} style={{ color: '#94A3B8' }} />
+          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>Passengers</span>
+        </div>
+        <Stepper value={adults} onChange={onAdultsChange} min={1} max={10} />
+      </div>
+
+      {/* Row 2: Check-in luggage */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', paddingBottom: '12px', borderBottom: '1px solid #E2E8F0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <BriefcaseBusiness size={14} style={{ color: '#94A3B8' }} />
+          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>Check-in luggage</span>
+        </div>
+        <Stepper value={checkedBags} onChange={onCheckedBagsChange} min={0} max={10} />
+      </div>
+
+      {/* Row 3: Cabin bags */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <Luggage size={14} style={{ color: '#94A3B8' }} />
+          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>Cabin bags</span>
+        </div>
+        <Stepper value={cabinBags} onChange={onCabinBagsChange} min={0} max={10} />
+      </div>
+    </div>
+  )
+}
+
 // Airport Search Field Component
 function AirportSearchField({
   value,
@@ -737,7 +902,9 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const [email, setEmail] = useState('')
   const [showPassengersSheet, setShowPassengersSheet] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
+  const [showPassengersDropdown, setShowPassengersDropdown] = useState(false)
   const dateButtonRef = useRef<HTMLButtonElement>(null)
+  const passengersButtonRef = useRef<HTMLButtonElement>(null)
 
   const directionOptions = ['Arrival', 'Departure', 'Connection']
   const serviceOptions = ['Meet & Greet', 'VIP Platinum', 'Hotel Transfer']
@@ -859,37 +1026,52 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
       </div>
 
       {/* Row 5: Passengers + Luggage */}
-      <button
-        type="button"
-        onClick={() => setShowPassengersSheet(true)}
-        style={{
-          width: '100%',
-          height: '40px',
-          display: 'flex',
-          overflow: 'visible',
-          borderRadius: '10px',
-          border: '1px solid #E2E8F0',
-          background: 'white',
-          cursor: 'pointer',
-          transition: 'all 200ms'
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
-      >
-        <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', gap: '4px', borderRight: '1px solid #E2E8F0' }}>
-          <Users size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
-          <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
-        </div>
-        <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
-          <BriefcaseBusiness size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
-          <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
-          <Luggage size={13} style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
-          <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
-          <ChevronDown size={12} style={{ color: '#94A3B8' }} />
-        </div>
-      </button>
+      <div style={{ position: 'relative', width: '100%' }}>
+        <button
+          ref={passengersButtonRef}
+          type="button"
+          onClick={() => setShowPassengersDropdown(!showPassengersDropdown)}
+          style={{
+            width: '100%',
+            height: '40px',
+            display: 'flex',
+            overflow: 'visible',
+            borderRadius: '10px',
+            border: '1px solid #E2E8F0',
+            background: 'white',
+            cursor: 'pointer',
+            transition: 'all 200ms'
+          }}
+          onMouseEnter={(e) => !showPassengersDropdown && (e.currentTarget.style.background = '#F5F7FA')}
+          onMouseLeave={(e) => !showPassengersDropdown && (e.currentTarget.style.background = 'white')}
+        >
+          <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', gap: '4px', borderRight: '1px solid #E2E8F0' }}>
+            <Users size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
+            <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
+          </div>
+          <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
+            <BriefcaseBusiness size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
+            <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
+            <Luggage size={13} style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
+            <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
+            <ChevronDown size={12} style={{ color: '#94A3B8', transform: showPassengersDropdown ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+          </div>
+        </button>
+
+        <PassengersLuggageDropdown
+          adults={adults}
+          cabinBags={cabinBags}
+          checkedBags={checkedBags}
+          onAdultsChange={setAdults}
+          onCabinBagsChange={setCabinBags}
+          onCheckedBagsChange={setCheckedBags}
+          isOpen={showPassengersDropdown}
+          onClose={() => setShowPassengersDropdown(false)}
+          buttonRef={passengersButtonRef}
+        />
+      </div>
 
       {/* Row 6: Email */}
       <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
