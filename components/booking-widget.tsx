@@ -1551,9 +1551,15 @@ export function BookingWidget() {
               style={{ position: 'relative', zIndex: 1, marginTop: '0', background: 'white', cursor: 'pointer', touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent', userSelect: 'none' }}
             >
               {state.serviceType === "connection" ? (
-          <Plane className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
-          <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
-          <PlaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+                <>
+                  <Plane className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+                  <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+                  <PlaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+                </>
+              ) : state.serviceType === "departure" ? (
+                <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+              ) : (
+                <PlaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
               )}
               <span className="flex-1 min-w-0 text-left text-xs" style={{ color: state.airport ? '#1D215E' : '#94A3B8' }}>
                 {state.airport ? `${state.airport.code} - ${state.airport.city}` : (state.serviceType === "connection" ? "Airport of service" : "Airport or city")}

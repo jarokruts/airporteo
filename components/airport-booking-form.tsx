@@ -1000,7 +1000,6 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const [checkedBags, setCheckedBags] = useState(0)
   const [cabinClass, setCabinClass] = useState('Economy')
   const [email, setEmail] = useState('')
-  const [showPassengersSheet, setShowPassengersSheet] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showPassengersDropdown, setShowPassengersDropdown] = useState(false)
   const dateButtonRef = useRef<HTMLButtonElement>(null)
@@ -1219,35 +1218,6 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
           Get a Quote
         </button>
       </div>
-
-      {/* Passengers Sheet */}
-      <BottomSheet 
-        open={showPassengersSheet} 
-        onClose={() => setShowPassengersSheet(false)}
-        title="Passengers & Luggage"
-      >
-        <Counter label="Adults" value={adults} onChange={setAdults} />
-        <Counter label="Cabin Bags" value={cabinBags} onChange={setCabinBags} />
-        <Counter label="Checked Bags" value={checkedBags} onChange={setCheckedBags} />
-        <div style={{ padding: '16px 20px' }}>
-          <button
-            onClick={() => setShowPassengersSheet(false)}
-            style={{
-              width: '100%',
-              height: '44px',
-              borderRadius: '10px',
-              background: '#A16207',
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: '14px',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            Done
-          </button>
-        </div>
-      </BottomSheet>
     </div>
   )
 }
