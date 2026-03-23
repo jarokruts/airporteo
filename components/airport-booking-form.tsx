@@ -175,58 +175,55 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
 
   return (
     <div className="bg-white rounded-2xl p-4 md:p-6 space-y-2">
-      {/* Row 1: Direction + Service - Two containers */}
-      <div style={{ display: 'flex', height: '40px', borderRadius: '10px', border: '1.5px solid #E2E8F0', overflow: 'visible', position: 'relative', zIndex: 2 }}>
-        {/* Left: Direction */}
+      {/* Row 1: Direction + Service - Two separate dropdowns */}
+      <div style={{ display: 'flex', gap: '12px' }}>
+        {/* Left: Direction Dropdown */}
         <button
           type="button"
           onClick={() => setShowDirectionServiceSheet(true)}
           style={{
-            all: 'unset',
+            flex: 1,
+            height: '40px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            flex: 1,
             padding: '0 12px',
-            boxSizing: 'border-box',
+            borderRadius: '10px',
+            border: '1px solid #E2E8F0',
+            background: 'white',
             cursor: 'pointer',
             fontSize: '14px',
             fontWeight: 500,
             color: '#1D215E',
-            background: 'white',
             transition: 'all 200ms',
-            borderRadius: '9px 0 0 9px',
             userSelect: 'none'
           }}
           onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
           onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
         >
           <span>{direction === 'arrival' ? 'Arrival' : direction === 'departure' ? 'Departure' : 'Connection'}</span>
-          <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px' }} />
+          <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
         </button>
 
-        {/* Divider */}
-        <div style={{ width: '1px', background: '#E2E8F0' }} />
-
-        {/* Right: Service */}
+        {/* Right: Service Dropdown */}
         <button
           type="button"
           onClick={() => setShowDirectionServiceSheet(true)}
           style={{
-            all: 'unset',
+            flex: 1,
+            height: '40px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            flex: 1,
             padding: '0 12px',
-            boxSizing: 'border-box',
+            borderRadius: '10px',
+            border: '1px solid #E2E8F0',
+            background: 'white',
             cursor: 'pointer',
             fontSize: '14px',
             fontWeight: 500,
             color: '#1D215E',
-            background: 'white',
             transition: 'all 200ms',
-            borderRadius: '0 9px 9px 0',
             userSelect: 'none',
             minWidth: 0
           }}
@@ -446,13 +443,13 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
                 color: direction === d ? '#C9A84C' : '#1D215E',
                 transition: 'all 200ms'
               }}
-              onMouseEnter={(e) => !direction || direction !== d && (e.currentTarget.style.background = '#F5F7FA')}
+              onMouseEnter={(e) => direction !== d && (e.currentTarget.style.background = '#F5F7FA')}
               onMouseLeave={(e) => (e.currentTarget.style.background = direction === d ? '#FDF8E8' : 'white')}
             >
               {d.charAt(0).toUpperCase() + d.slice(1)}
             </button>
           ))}
-          {['Meet & Greet', 'VIP Tarmac', 'Lounge Access'].map(s => (
+          {['Meet & Greet', 'VIP Platinum', 'Hotel Transfer'].map(s => (
             <button
               key={s}
               onClick={() => {
