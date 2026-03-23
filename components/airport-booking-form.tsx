@@ -200,20 +200,23 @@ function DatePickerDropdown({
 
   if (!isOpen) return null
 
+  const buttonRect = containerRef.current?.getBoundingClientRect()
+  const top = buttonRect ? buttonRect.bottom + 4 : 0
+  const left = buttonRect ? buttonRect.left : 0
+
   return (
     <div
       ref={containerRef}
       style={{
-        position: 'absolute',
-        top: '100%',
-        left: 0,
-        right: 0,
-        marginTop: '4px',
+        position: 'fixed',
+        top: `${top}px`,
+        left: `${left}px`,
+        width: buttonRect ? `${buttonRect.width}px` : 'auto',
         background: 'white',
         border: '1px solid #E2E8F0',
         borderRadius: '10px',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-        zIndex: 1000,
+        zIndex: 9999,
         overflow: 'hidden',
         padding: '12px 0'
       }}
@@ -754,7 +757,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   }
 
   return (
-    <div className="bg-white rounded-2xl p-4 md:p-6 space-y-2">
+    <div className="bg-white rounded-2xl p-4 md:p-6 space-y-2" style={{ overflow: 'visible' }}>
       {/* Row 1: Direction + Service - Two separate equal-width dropdowns */}
       <div style={{ display: 'flex', gap: '12px' }}>
         <SimpleDropdown 
