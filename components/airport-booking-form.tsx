@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X, PlaneLanding, PlaneTakeoff, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X, PlaneLanding, PlaneTakeoff, ChevronLeft, ChevronRight, Baby, Smile } from 'lucide-react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
@@ -308,17 +308,17 @@ function Stepper({ value, onChange, min = 0, max = 10 }: { value: number; onChan
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: '50%',
-          background: '#F5F7FA',
+          background: 'white',
           color: '#1D215E',
           fontSize: '16px',
           fontWeight: 'bold',
-          border: 'none',
+          border: '1px solid #E2E8F0',
           cursor: value <= min ? 'default' : 'pointer',
           opacity: value <= min ? 0.5 : 1,
           transition: 'all 200ms'
         }}
-        onMouseEnter={(e) => value > min && (e.currentTarget.style.background = '#E2E8F0')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+        onMouseEnter={(e) => value > min && ((e.currentTarget.style.borderColor = '#1D215E'), (e.currentTarget.style.background = '#F5F7FA'))}
+        onMouseLeave={(e) => ((e.currentTarget.style.borderColor = '#E2E8F0'), (e.currentTarget.style.background = 'white'))}
       >
         −
       </button>
@@ -334,17 +334,17 @@ function Stepper({ value, onChange, min = 0, max = 10 }: { value: number; onChan
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: '50%',
-          background: '#F5F7FA',
+          background: 'white',
           color: '#1D215E',
           fontSize: '16px',
           fontWeight: 'bold',
-          border: 'none',
+          border: '1px solid #E2E8F0',
           cursor: value >= max ? 'default' : 'pointer',
           opacity: value >= max ? 0.5 : 1,
           transition: 'all 200ms'
         }}
-        onMouseEnter={(e) => value < max && (e.currentTarget.style.background = '#E2E8F0')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+        onMouseEnter={(e) => value < max && ((e.currentTarget.style.borderColor = '#1D215E'), (e.currentTarget.style.background = '#F5F7FA'))}
+        onMouseLeave={(e) => ((e.currentTarget.style.borderColor = '#E2E8F0'), (e.currentTarget.style.background = 'white'))}
       >
         +
       </button>
@@ -355,21 +355,33 @@ function Stepper({ value, onChange, min = 0, max = 10 }: { value: number; onChan
 // Passengers & Luggage Dropdown Component
 function PassengersLuggageDropdown({
   adults,
+  children,
+  infants,
   cabinBags,
   checkedBags,
+  cabinClass,
   onAdultsChange,
+  onChildrenChange,
+  onInfantsChange,
   onCabinBagsChange,
   onCheckedBagsChange,
+  onCabinClassChange,
   isOpen,
   onClose,
   buttonRef
 }: {
   adults: number
+  children: number
+  infants: number
   cabinBags: number
   checkedBags: number
+  cabinClass: string
   onAdultsChange: (value: number) => void
+  onChildrenChange: (value: number) => void
+  onInfantsChange: (value: number) => void
   onCabinBagsChange: (value: number) => void
   onCheckedBagsChange: (value: number) => void
+  onCabinClassChange: (value: string) => void
   isOpen: boolean
   onClose: () => void
   buttonRef: React.RefObject<HTMLButtonElement>
@@ -419,40 +431,125 @@ function PassengersLuggageDropdown({
         top: `${position.top}px`,
         left: `${position.left}px`,
         width: `${position.width}px`,
+        minWidth: '400px',
         background: 'white',
         border: '1px solid #E2E8F0',
         borderRadius: '10px',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
         zIndex: 9999,
         overflow: 'hidden',
-        padding: '12px'
+        padding: '16px'
       }}
     >
-      {/* Row 1: Passengers */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', paddingBottom: '12px', borderBottom: '1px solid #E2E8F0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Users size={14} style={{ color: '#94A3B8' }} />
-          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>Passengers</span>
+      {/* Two columns container */}
+      <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
+        {/* Left Column - PASSENGERS */}
+        <div style={{ flex: 1, borderRight: '1px solid #E2E8F0', paddingRight: '16px' }}>
+          <h4 style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#1D215E', margin: '0 0 12px 0' }}>
+            Passengers
+          </h4>
+
+          {/* Adults (Over 12) */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Users size={14} style={{ color: '#94A3B8' }} />
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Adults</div>
+                <div style={{ fontSize: '11px', color: '#94A3B8' }}>Over 12</div>
+              </div>
+            </div>
+            <Stepper value={adults} onChange={onAdultsChange} min={1} max={10} />
+          </div>
+
+          {/* Children (2-12) */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Smile size={14} style={{ color: '#94A3B8' }} />
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Children</div>
+                <div style={{ fontSize: '11px', color: '#94A3B8' }}>2–12</div>
+              </div>
+            </div>
+            <Stepper value={children} onChange={onChildrenChange} min={0} max={10} />
+          </div>
+
+          {/* Infants (Under 2) */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Baby size={14} style={{ color: '#94A3B8' }} />
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Infants</div>
+                <div style={{ fontSize: '11px', color: '#94A3B8' }}>Under 2</div>
+              </div>
+            </div>
+            <Stepper value={infants} onChange={onInfantsChange} min={0} max={10} />
+          </div>
         </div>
-        <Stepper value={adults} onChange={onAdultsChange} min={1} max={10} />
+
+        {/* Right Column - LUGGAGE */}
+        <div style={{ flex: 1 }}>
+          <h4 style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#1D215E', margin: '0 0 12px 0' }}>
+            Luggage
+          </h4>
+
+          {/* Cabin baggage */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Luggage size={14} style={{ color: '#94A3B8' }} />
+              <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Cabin baggage</div>
+            </div>
+            <Stepper value={cabinBags} onChange={onCabinBagsChange} min={0} max={10} />
+          </div>
+
+          {/* Checked baggage */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <BriefcaseBusiness size={14} style={{ color: '#94A3B8' }} />
+              <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Checked baggage</div>
+            </div>
+            <Stepper value={checkedBags} onChange={onCheckedBagsChange} min={0} max={10} />
+          </div>
+        </div>
       </div>
 
-      {/* Row 2: Check-in luggage */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', paddingBottom: '12px', borderBottom: '1px solid #E2E8F0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <BriefcaseBusiness size={14} style={{ color: '#94A3B8' }} />
-          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>Check-in luggage</span>
+      {/* Class selector */}
+      <div style={{ borderTop: '1px solid #E2E8F0', paddingTop: '16px' }}>
+        <h4 style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#1D215E', margin: '0 0 12px 0' }}>
+          Class
+        </h4>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {['Economy', 'Business', 'First'].map((className) => (
+            <button
+              key={className}
+              type="button"
+              onClick={() => onCabinClassChange(className)}
+              style={{
+                flex: 1,
+                padding: '8px 12px',
+                borderRadius: '6px',
+                border: cabinClass === className ? 'none' : '1px solid #1D215E',
+                background: cabinClass === className ? '#D4AF37' : 'white',
+                color: cabinClass === className ? 'white' : '#1D215E',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 200ms'
+              }}
+              onMouseEnter={(e) => {
+                if (cabinClass !== className) {
+                  e.currentTarget.style.background = '#F5F7FA'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (cabinClass !== className) {
+                  e.currentTarget.style.background = 'white'
+                }
+              }}
+            >
+              {className}
+            </button>
+          ))}
         </div>
-        <Stepper value={checkedBags} onChange={onCheckedBagsChange} min={0} max={10} />
-      </div>
-
-      {/* Row 3: Cabin bags */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Luggage size={14} style={{ color: '#94A3B8' }} />
-          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>Cabin bags</span>
-        </div>
-        <Stepper value={cabinBags} onChange={onCabinBagsChange} min={0} max={10} />
       </div>
     </div>
   )
@@ -897,8 +994,11 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const [flightNumber, setFlightNumber] = useState('')
   const [date, setDate] = useState('')
   const [adults, setAdults] = useState(1)
+  const [children, setChildren] = useState(0)
+  const [infants, setInfants] = useState(0)
   const [cabinBags, setCabinBags] = useState(0)
   const [checkedBags, setCheckedBags] = useState(0)
+  const [cabinClass, setCabinClass] = useState('Economy')
   const [email, setEmail] = useState('')
   const [showPassengersSheet, setShowPassengersSheet] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
@@ -1062,11 +1162,17 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
 
         <PassengersLuggageDropdown
           adults={adults}
+          children={children}
+          infants={infants}
           cabinBags={cabinBags}
           checkedBags={checkedBags}
+          cabinClass={cabinClass}
           onAdultsChange={setAdults}
+          onChildrenChange={setChildren}
+          onInfantsChange={setInfants}
           onCabinBagsChange={setCabinBags}
           onCheckedBagsChange={setCheckedBags}
+          onCabinClassChange={setCabinClass}
           isOpen={showPassengersDropdown}
           onClose={() => setShowPassengersDropdown(false)}
           buttonRef={passengersButtonRef}
