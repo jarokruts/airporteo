@@ -2,10 +2,176 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X } from 'lucide-react'
-import { Airport } from '@/lib/airports'
+import { Airport, AIRPORTS } from '@/lib/airports'
 
 interface AirportBookingFormProps {
   airport: Airport
+}
+
+// Airport Search Field Component
+function AirportSearchField({
+  value,
+  onChange
+}: {
+  value: string
+  onChange: (airport: string) => void
+}) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [query, setQuery] = useState(value)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    setQuery(value)
+  }, [value])
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
+  const filteredAirports = AIRPORTS.filter(
+    a =>
+      a.city.toLowerCase().includes(query.toLowerCase()) ||
+      a.code.toLowerCase().includes(query.toLowerCase()) ||
+      a.name.toLowerCase().includes(query.toLowerCase())
+  )
+
+  const handleSelectAirport = (airport: Airport) => {
+    const displayValue = `${airport.city} ${airport.code}`
+    setQuery(displayValue)
+    onChange(displayValue)
+    setIsOpen(false)
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value
+    setQuery(newValue)
+    onChange(newValue)
+    setIsOpen(true)
+  }
+
+  return (
+    <div ref={containerRef} style={{ position: 'relative', width: '100%' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          height: '40px',
+          borderRadius: '10px',
+          border: '1px solid #E2E8F0',
+          paddingLeft: '10px',
+          paddingRight: '10px',
+          background: 'white',
+          transition: 'all 200ms',
+          cursor: 'text'
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = isOpen ? 'white' : '#F5F7FA')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+      >
+        <Plane size={13} style={{ color: '#C9A84C', flexShrink: 0, marginRight: '6px' }} />
+        <input
+          ref={inputRef}
+          type="text"
+          value={query}
+          onChange={handleInputChange}
+          onFocus={() => setIsOpen(true)}
+          placeholder="Airport or city"
+          style={{
+            flex: 1,
+            minWidth: 0,
+            background: 'transparent',
+            border: 'none',
+            outline: 'none',
+            fontSize: '14px',
+            fontWeight: 500,
+            color: '#1D215E',
+            padding: 0
+          }}
+        />
+      </div>
+
+      {/* Dropdown Menu - Shows filtered airports */}
+      {isOpen && filteredAirports.length > 0 && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            marginTop: '4px',
+            background: 'white',
+            border: '1px solid #E2E8F0',
+            borderRadius: '10px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+            zIndex: 1000,
+            maxHeight: '240px',
+            overflowY: 'auto'
+          }}
+        >
+          {filteredAirports.slice(0, 7).map((airport) => (
+            <button
+              key={airport.code}
+              type="button"
+              onClick={() => handleSelectAirport(airport)}
+              style={{
+                width: '100%',
+                padding: '10px 10px',
+                textAlign: 'left',
+                background: 'white',
+                border: 'none',
+                borderBottom: '1px solid #E2E8F0',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 500,
+                color: '#1D215E',
+                transition: 'all 200ms',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '6px',
+                  background: '#1D215E',
+                  color: 'white',
+                  fontSize: '11px',
+                  fontWeight: 'bold',
+                  flexShrink: 0
+                }}
+              >
+                {airport.code}
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E' }}>
+                  {airport.city}
+                </div>
+                <div style={{ fontSize: '12px', color: '#94A3B8' }}>
+                  {airport.name}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 // Simple Dropdown Component
@@ -326,61 +492,12 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
         />
       </div>
 
-      {/* Row 2: Airport field */}
-      <button
-        type="button"
-        onClick={() => {}}
-        style={{
-          width: '100%',
-          height: '40px',
-          display: 'flex',
-          alignItems: 'center',
-          borderRadius: '10px',
-          border: '1px solid #E2E8F0',
-          paddingLeft: '10px',
-          paddingRight: '10px',
-          background: 'white',
-          cursor: 'pointer',
-          transition: 'all 200ms'
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
-      >
-        <Plane size={13} style={{ color: '#C9A84C', flexShrink: 0, marginRight: '6px' }} />
-        <input
-          type="text"
-          value={airportValue}
-          onChange={(e) => setAirportValue(e.target.value)}
-          onClick={(e) => e.stopPropagation()}
-          placeholder="Airport or city"
-          style={{
-            flex: 1,
-            minWidth: 0,
-            textAlign: 'left',
-            fontSize: '12px',
-            color: '#1D215E',
-            background: 'transparent',
-            border: 'none',
-            outline: 'none',
-            padding: 0
-          }}
-        />
-        {airportValue && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              setAirportValue('')
-            }}
-            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, marginLeft: '6px', display: 'flex', alignItems: 'center' }}
-          >
-            <X size={14} style={{ color: '#94A3B8' }} />
-          </button>
-        )}
-      </button>
+      {/* Row 2: Airport field with autocomplete search */}
+      <AirportSearchField value={airportValue} onChange={setAirportValue} />
 
       {/* Row 3: Flight # */}
       <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
-        <span style={{ fontSize: '12px', fontWeight: 400, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
+        <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
         <input
           type="text"
           value={flightNumber}
@@ -394,7 +511,8 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
             background: 'transparent',
             border: 'none',
             outline: 'none',
-            fontSize: '12px',
+            fontSize: '14px',
+            fontWeight: 500,
             color: '#1D215E',
             padding: 0
           }}
@@ -422,7 +540,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
         onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
       >
         <Calendar size={14} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
-        <span style={{ flex: 1, textAlign: 'left', fontSize: '12px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <span style={{ flex: 1, textAlign: 'left', fontSize: '14px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Select date'}
         </span>
         <ChevronDown size={12} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
@@ -448,13 +566,13 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
       >
         <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', gap: '4px', borderRight: '1px solid #E2E8F0' }}>
           <Users size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
-          <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
+          <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
         </div>
         <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
           <BriefcaseBusiness size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
-          <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
+          <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
           <Luggage size={13} style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
-          <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
+          <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
           <ChevronDown size={12} style={{ color: '#94A3B8' }} />
@@ -474,7 +592,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
             background: 'transparent',
             border: 'none',
             outline: 'none',
-            fontSize: '12px',
+            fontSize: '14px',
             color: '#1D215E',
             padding: 0
           }}
