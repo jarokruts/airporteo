@@ -105,8 +105,8 @@ export function AirportHero({ airport }: AirportHeroProps) {
                 {airport.city}
               </h1>
 
-              {/* Badge + Airport Name - Stacked */}
-              <div className="flex items-start gap-3 mb-4">
+              {/* Badge + Airport Name - Stacked - Hidden on Mobile */}
+              <div className="hidden md:flex items-start gap-3 mb-4">
                 <div className="px-3 py-1.5 border-2 border-blue rounded-full flex-shrink-0 mt-1">
                   <span className="text-white font-bold text-sm">{airport.code}</span>
                 </div>
