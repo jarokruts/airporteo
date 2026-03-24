@@ -62,13 +62,13 @@ export default async function AirportPage({ params }: AirportPageProps) {
 
       <main>
         <AirportHero airport={airport} />
-        <AirportInfoSection airport={airport} />
         <AirportServices airport={airport} />
         <AirportTerminals airport={airport} />
         <ReviewsSection />
         <FAQSection />
         <RelatedAirports currentAirportCode={airport.code} />
         <CustomQuoteCTA airportName={airport.name} />
+        <AirportInfoSection airport={airport} />
       </main>
 
       <Footer />
