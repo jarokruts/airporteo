@@ -1455,7 +1455,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
   return (
     <>
       <style>{inputOverflowStyle}</style>
-      <div className="md:hidden px-2.5" style={{ borderRadius: '16px' }}>
+      <div className="md:hidden" style={{ padding: '0 8px', borderRadius: '16px' }}>
         {/* White card container - wraps all fields */}
         <div className="space-y-2" style={{ borderRadius: '16px', overflow: 'hidden', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '16px' }}>
 
