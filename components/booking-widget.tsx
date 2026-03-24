@@ -1362,11 +1362,11 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
   )
 }
 
-export function BookingWidget() {
+export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: string; city: string } } = {}) {
   const [state, setState] = useState<BookingState>({
     serviceType: "arrival",
     service: "Meet & Greet",
-    airport: null,
+    airport: defaultAirport || null,
     flightNumber: "",
     date: "",
     email: "",

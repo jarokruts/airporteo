@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { Airport } from '@/lib/airports'
 import { AirportBookingForm } from './airport-booking-form'
+import { BookingWidget } from './booking-widget'
 
 interface AirportHeroProps {
   airport: Airport
@@ -28,8 +29,9 @@ export function AirportHero({ airport }: AirportHeroProps) {
       {/* Content Container */}
       <div className="relative z-10 flex items-start pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 p-5 md:p-8 lg:p-12">
         <div className="mx-auto max-w-7xl w-full">
-          {/* Two Column Layout */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+          
+          {/* DESKTOP LAYOUT - Two Column */}
+          <div className="hidden md:grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             
             {/* LEFT COLUMN - Airport Info */}
             <div className="flex flex-col">
@@ -81,6 +83,62 @@ export function AirportHero({ airport }: AirportHeroProps) {
             {/* RIGHT COLUMN - Booking Form */}
             <div className="mt-8 md:mt-0">
               <AirportBookingForm airport={airport} />
+            </div>
+          </div>
+
+          {/* MOBILE LAYOUT - Stacked */}
+          <div className="md:hidden flex flex-col gap-4">
+            
+            {/* Airport Info - Stacked Vertically */}
+            <div className="flex flex-col">
+              {/* Breadcrumbs */}
+              <div className="flex items-center gap-2 text-white/70 text-xs uppercase tracking-wide font-medium mb-4">
+                <Link href="/" className="hover:text-white transition-colors">Home</Link>
+                <ChevronRight size={12} />
+                <Link href="#" className="hover:text-white transition-colors">Airports</Link>
+                <ChevronRight size={12} />
+                <span className="text-blue font-semibold">{airport.code}</span>
+              </div>
+
+              {/* City Name */}
+              <h1 className="text-4xl font-bold text-white leading-tight mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+                {airport.city}
+              </h1>
+
+              {/* Badge + Airport Name - Stacked */}
+              <div className="flex items-start gap-3 mb-4">
+                <div className="px-3 py-1.5 border-2 border-blue rounded-full flex-shrink-0 mt-1">
+                  <span className="text-white font-bold text-sm">{airport.code}</span>
+                </div>
+                <p className="text-white/80 text-xs leading-snug">
+                  Josep Tarradellas Barcelona–El Prat Airport
+                </p>
+              </div>
+
+              {/* Stats Grid - 2x2 */}
+              <div className="grid grid-cols-2 gap-2">
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Passengers/Year</p>
+                  <p className="text-white font-bold text-sm">50M+</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Terminals</p>
+                  <p className="text-white font-bold text-sm">T1 & T2</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">To City Center</p>
+                  <p className="text-white font-bold text-sm">12 km</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Our Team</p>
+                  <p className="text-white font-bold text-sm">24/7</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Booking Form */}
+            <div className="pt-2">
+              <BookingWidget defaultAirport={{ code: airport.code, city: airport.city }} />
             </div>
           </div>
         </div>
