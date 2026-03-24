@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAirport } from '@/lib/airports'
 import { AirportHero } from '@/components/airport-hero'
+import { AirportInfoSection } from '@/components/airport-info-section'
 import { AirportServices } from '@/components/airport-services'
 import { AirportTerminals } from '@/components/airport-terminals'
 import { ReviewsSection } from '@/components/reviews-section'
@@ -61,6 +62,7 @@ export default async function AirportPage({ params }: AirportPageProps) {
 
       <main>
         <AirportHero airport={airport} />
+        <AirportInfoSection airport={airport} />
         <AirportServices airport={airport} />
         <AirportTerminals airport={airport} />
         <ReviewsSection />
