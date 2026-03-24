@@ -115,8 +115,8 @@ export function AirportHero({ airport }: AirportHeroProps) {
                 </p>
               </div>
 
-              {/* Stats Grid - 2x2 */}
-              <div className="grid grid-cols-2 gap-2">
+              {/* Stats Grid - 2x2 - Hidden on Mobile */}
+              <div className="hidden md:grid grid-cols-2 gap-2">
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Passengers/Year</p>
                   <p className="text-white font-bold text-sm">50M+</p>
