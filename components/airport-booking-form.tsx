@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley, Calendar, Users, Backpack, AirplaneInFlight } from '@phosphor-icons/react'
+import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley, Calendar, Users, Backpack, AirplaneTakeoff } from '@phosphor-icons/react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
@@ -31,12 +31,12 @@ function getDirectionIcon(direction: string) {
     case 'Arrival':
       return <AirplaneLanding size={16} weight="light" style={{ color: '#B8913A' }} />
     case 'Departure':
-      return <AirplaneInFlight size={16} weight="light" style={{ color: '#B8913A' }} />
+      return <AirplaneTakeoff size={16} weight="light" style={{ color: '#B8913A' }} />
     case 'Connection':
       return (
         <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
           <AirplaneLanding size={16} weight="light" style={{ color: '#B8913A' }} />
-          <AirplaneInFlight size={16} weight="light" style={{ color: '#B8913A' }} />
+          <AirplaneTakeoff size={16} weight="light" style={{ color: '#B8913A' }} />
         </div>
       )
     default:

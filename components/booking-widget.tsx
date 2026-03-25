@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp, Shield, Clock, Star, Backpack, AirplaneInFlight } from "@phosphor-icons/react"
+import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp, Shield, Clock, Star, Backpack, AirplaneTakeoff } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 // CSS to prevent text overflow in inputs and buttons
@@ -1558,7 +1558,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                   <AirplaneLanding weight="light" className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
                 </>
               ) : state.serviceType === "departure" ? (
-                <AirplaneInFlight weight="light" className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
+                <AirplaneTakeoff weight="light" className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               ) : (
                 <AirplaneLanding weight="light" className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               )}
@@ -1864,7 +1864,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                   state.serviceType === "connection" ? (
                     <Airplane weight="light" className="h-4 w-4" />
                   ) : state.serviceType === "departure" ? (
-                    <AirplaneInFlight weight="light" className="h-4 w-4" />
+                    <AirplaneTakeoff weight="light" className="h-4 w-4" />
                   ) : (
                     <AirplaneLanding weight="light" className="h-4 w-4" />
                   )
@@ -2361,7 +2361,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
                 {[
                   { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: AirplaneLanding },
-                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: Airplane },
+                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: AirplaneTakeoff },
                   { value: 'connection', label: 'Connection', desc: 'Connecting flight', icon: ArrowsDownUp }
                 ].map(({ value, label, desc, icon: Icon }) => (
                   <button
