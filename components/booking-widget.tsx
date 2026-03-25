@@ -1556,7 +1556,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               {state.serviceType === "connection" ? (
                 <>
                   <AirplaneLanding weight="light" className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '4px' }} />
-                  <AirplaneLanding weight="light" className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
+                  <AirplaneTakeoff weight="light" className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
                 </>
               ) : state.serviceType === "departure" ? (
                 <AirplaneTakeoff weight="light" className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
