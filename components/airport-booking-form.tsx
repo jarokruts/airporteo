@@ -496,7 +496,7 @@ function PassengersLuggageDropdown({
           {/* Cabin baggage */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Suitcase size={14} weight="light" style={{ color: '#94A3B8' }} />
+              <Backpack size={14} weight="light" style={{ color: '#94A3B8' }} />
               <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Cabin baggage</div>
             </div>
             <Stepper value={cabinBags} onChange={onCabinBagsChange} min={0} max={10} />
