@@ -43,7 +43,7 @@ const FlipChar = ({ char, charIndex, resolveTime, animationCycle }: FlipCharProp
       transition={{ delay: 0, duration: 0.05 }}
       className="relative inline-flex items-center justify-center flex-shrink-0"
       style={{
-        width: char === ' ' ? '0.4em' : '1.1em',
+        width: char === ' ' ? '0.5em' : '0.65em',
         height: '2rem',
         fontFamily: 'JetBrains Mono, Space Mono, monospace',
         fontSize: '1.125rem',
