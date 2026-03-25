@@ -1554,13 +1554,13 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             >
               {state.serviceType === "connection" ? (
                 <>
-                  <PlaneLanding className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '4px' }} />
+                  <AirplaneLanding className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '4px' }} />
                   <PlaneTakeoff className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
                 </>
               ) : state.serviceType === "departure" ? (
                 <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               ) : (
-                <PlaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
+                <AirplaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               )}
               <span className="flex-1 min-w-0 text-left text-xs" style={{ color: state.airport ? '#1D215E' : '#94A3B8' }}>
                 {state.airport ? `${state.airport.code} - ${state.airport.city}` : (state.serviceType === "connection" ? "Airport of service" : "Airport or city")}
@@ -1599,7 +1599,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               <>
                 {/* Arriving flight # for Connection */}
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <PlaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.flightNumber}
@@ -1866,7 +1866,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                   ) : state.serviceType === "departure" ? (
                     <PlaneTakeoff className="h-4 w-4" />
                   ) : (
-                    <PlaneLanding className="h-4 w-4" />
+                    <AirplaneLanding className="h-4 w-4" />
                   )
                 }
                 placeholder={state.serviceType === "connection" ? "Airport" : "Airport or city"}
@@ -1910,7 +1910,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 </div>
               ) : (
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <PlaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.flightNumber}
@@ -2152,7 +2152,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               ) : state.serviceType === "departure" ? (
                 <PlaneTakeoff className="h-4 w-4" />
               ) : (
-                <PlaneLanding className="h-4 w-4" />
+                <AirplaneLanding className="h-4 w-4" />
               )
             }
                 placeholder={state.serviceType === "connection" ? "Airport" : "Airport or city"}
@@ -2166,7 +2166,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
           <div className="flex flex-col gap-2 flex-1 min-w-0">
               <div className="relative flex h-14 min-w-0 w-full items-center gap-1 rounded-xl border-2 border-border bg-card px-4 focus-within:border-blue focus-within:shadow-[0_0_0_3px_rgba(219,38,35,0.1)] transition-all hover:border-slate-mid">
               {state.serviceType === "connection" ? (
-                <PlaneLanding size={16} color="#1D215E" style={{ position: 'absolute', left: '12px', flexShrink: 0 }} />
+                <AirplaneLanding size={16} color="#1D215E" style={{ position: 'absolute', left: '12px', flexShrink: 0 }} />
               ) : null}
               <input
                 type="text"
