@@ -13,7 +13,7 @@ interface AirportHeroProps {
 
 export function AirportHero({ airport }: AirportHeroProps) {
   return (
-    <section className="relative w-full flex flex-col overflow-visible bg-navy">
+    <section id="hero" className="relative w-full flex flex-col overflow-visible bg-navy">
       {/* Background Image */}
       <Image
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Barcelona%20El%20Prat%20Airport%20-%20BCN-b9CStxmwiYZeutGCgay7n532qH2Pqr.jpg"

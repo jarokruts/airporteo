@@ -1,16 +1,48 @@
 'use client'
 
 import { Airport } from '@/lib/airports'
-import { Check } from 'lucide-react'
 
 interface AirportServicesProps {
   airport: Airport
 }
 
 export function AirportServices({ airport }: AirportServicesProps) {
-  const arrivalServices = airport.services.filter(s => s.type === 'arrival')
-  const departureServices = airport.services.filter(s => s.type === 'departure')
-  const vipServices = airport.services.filter(s => s.type === 'vip')
+  const handleServiceClick = () => {
+    const heroSection = document.getElementById('hero')
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const arrivalServices = [
+    'Meet & Greet',
+    'Fast Track',
+    'Luggage Assistance',
+    'Golf Cart & Buggy',
+    'Special Needs'
+  ]
+
+  const departureServices = [
+    'Meet & Greet',
+    'Fast Track',
+    'Luggage Assistance',
+    'Golf Cart & Buggy',
+    'Special Needs'
+  ]
+
+  const connectionServices = [
+    'Meet & Greet',
+    'Fast Track',
+    'Luggage Assistance',
+    'Golf Cart & Buggy'
+  ]
+
+  const vipServices = [
+    'VIP Terminal',
+    'VIP Tarmac',
+    'VIP Lounge',
+    'VIP Exclusive Suite'
+  ]
 
   return (
     <section className="py-8 md:py-16 px-5 lg:px-8 bg-background">
@@ -24,54 +56,71 @@ export function AirportServices({ airport }: AirportServicesProps) {
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {/* Arrival Services */}
-          <div className="rounded-2xl border border-border bg-card p-6 md:p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-5 md:mb-6">On Arrival</h3>
-            <ul className="space-y-4">
-              {arrivalServices.map(service => (
-                <li key={service.id} className="flex gap-3">
-                  <Check size={20} className="text-gold flex-shrink-0 mt-1" />
-                  <div className="min-w-0">
-                    <p className="font-semibold text-foreground text-sm md:text-base">{service.name}</p>
-                    <p className="text-xs md:text-sm text-muted-foreground">{service.description}</p>
-                    <p className="text-gold font-bold mt-2 text-sm md:text-base">${service.price}</p>
-                  </div>
+        {/* 4-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+          {/* Column 1: Arrival */}
+          <div className="bg-white rounded-xl p-6 border border-border">
+            <h3 className="text-lg font-bold text-foreground mb-4">Arrival</h3>
+            <ul className="space-y-3">
+              {arrivalServices.map((service, idx) => (
+                <li key={idx}>
+                  <button
+                    onClick={handleServiceClick}
+                    className="text-foreground text-sm hover:text-gold transition-colors text-left font-medium"
+                  >
+                    {service}
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Departure Services */}
-          <div className="rounded-2xl border border-border bg-card p-6 md:p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-5 md:mb-6">On Departure</h3>
-            <ul className="space-y-4">
-              {departureServices.map(service => (
-                <li key={service.id} className="flex gap-3">
-                  <Check size={20} className="text-gold flex-shrink-0 mt-1" />
-                  <div className="min-w-0">
-                    <p className="font-semibold text-foreground text-sm md:text-base">{service.name}</p>
-                    <p className="text-xs md:text-sm text-muted-foreground">{service.description}</p>
-                    <p className="text-gold font-bold mt-2 text-sm md:text-base">${service.price}</p>
-                  </div>
+          {/* Column 2: Departure */}
+          <div className="bg-white rounded-xl p-6 border border-border">
+            <h3 className="text-lg font-bold text-foreground mb-4">Departure</h3>
+            <ul className="space-y-3">
+              {departureServices.map((service, idx) => (
+                <li key={idx}>
+                  <button
+                    onClick={handleServiceClick}
+                    className="text-foreground text-sm hover:text-gold transition-colors text-left font-medium"
+                  >
+                    {service}
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* VIP Services */}
-          <div className="rounded-2xl border-2 border-gold bg-gradient-to-br from-navy/5 to-blue/5 p-6 md:p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-5 md:mb-6">VIP Experience</h3>
-            <ul className="space-y-4">
-              {vipServices.map(service => (
-                <li key={service.id} className="flex gap-3">
-                  <Check size={20} className="text-gold flex-shrink-0 mt-1" />
-                  <div className="min-w-0">
-                    <p className="font-semibold text-foreground text-sm md:text-base">{service.name}</p>
-                    <p className="text-xs md:text-sm text-muted-foreground">{service.description}</p>
-                    <p className="text-gold font-bold mt-2 text-sm md:text-base">${service.price}</p>
-                  </div>
+          {/* Column 3: Connection */}
+          <div className="bg-white rounded-xl p-6 border border-border">
+            <h3 className="text-lg font-bold text-foreground mb-4">Connection</h3>
+            <ul className="space-y-3">
+              {connectionServices.map((service, idx) => (
+                <li key={idx}>
+                  <button
+                    onClick={handleServiceClick}
+                    className="text-foreground text-sm hover:text-gold transition-colors text-left font-medium"
+                  >
+                    {service}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: VIP Platinum */}
+          <div className="bg-white rounded-xl p-6 border border-border">
+            <h3 className="text-lg font-bold text-foreground mb-4">VIP Platinum</h3>
+            <ul className="space-y-3">
+              {vipServices.map((service, idx) => (
+                <li key={idx}>
+                  <button
+                    onClick={handleServiceClick}
+                    className="text-foreground text-sm hover:text-gold transition-colors text-left font-medium"
+                  >
+                    {service}
+                  </button>
                 </li>
               ))}
             </ul>
