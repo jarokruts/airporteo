@@ -1,6 +1,6 @@
 "use client"
 
-import { PlaneLanding, PlaneTakeoff, ArrowLeftRight } from "lucide-react"
+import { AirplaneLanding, ArrowsDownUp } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 type ServiceType = "arrival" | "departure" | "connection"
@@ -15,19 +15,19 @@ const services: { type: ServiceType; label: string; desc: string; icon: React.El
     type: "arrival",
     label: "Arrival",
     desc: "Airport pickup",
-    icon: PlaneLanding,
+    icon: AirplaneLanding,
   },
   {
     type: "departure",
     label: "Departure",
     desc: "Airport drop-off",
-    icon: PlaneTakeoff,
+    icon: AirplaneLanding,
   },
   {
     type: "connection",
     label: "Connection",
     desc: "Terminal transfer",
-    icon: ArrowLeftRight,
+    icon: ArrowsDownUp,
   },
 ]
 
@@ -59,7 +59,7 @@ export function ServiceTypeSelector({ value, onChange }: ServiceTypeSelectorProp
                     : "bg-secondary text-muted-foreground group-hover:text-foreground"
                 )}
               >
-                <Icon className="h-5 w-5" />
+                <Icon size={20} weight="light" />
               </div>
               <div className="text-center">
                 <p
