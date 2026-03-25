@@ -99,18 +99,18 @@ export function AirportSolariBoard() {
   if (timings.length === 0) return null
 
   return (
-    <section className="hidden md:block py-8 md:py-16 px-4 md:px-8 bg-background">
-      <div className="mx-auto max-w-5xl">
+    <section className="hidden md:block py-4 md:py-6 px-4 md:px-8 bg-background">
+      <div className="mx-auto max-w-7xl">
         {/* VIP Information Board */}
         <div 
-          className="rounded-2xl p-8 md:p-12 border border-white/10 relative overflow-hidden"
+          className="rounded-2xl p-6 md:p-8 border border-white/10 relative overflow-hidden"
           style={{
             backgroundColor: '#1D215E',
           }}
         >
           {/* Text content - clean and readable with proper spacing */}
           <motion.p 
-            className="font-mono text-sm md:text-base lg:text-lg leading-relaxed text-center"
+            className="font-mono text-lg leading-relaxed text-center"
             style={{
               color: '#f8f9fa',
               fontFamily: 'JetBrains Mono, Space Mono, monospace',
