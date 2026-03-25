@@ -4,7 +4,6 @@ import { getAirport } from '@/lib/airports'
 import { AirportHero } from '@/components/airport-hero'
 import { AirportInfoSection } from '@/components/airport-info-section'
 import { AirportServices } from '@/components/airport-services'
-import { AirportTerminals } from '@/components/airport-terminals'
 import { ReviewsSection } from '@/components/reviews-section'
 import { FAQSection } from '@/components/faq-section'
 import { RelatedAirports } from '@/components/related-airports'
@@ -63,7 +62,6 @@ export default async function AirportPage({ params }: AirportPageProps) {
       <main>
         <AirportHero airport={airport} />
         <AirportServices airport={airport} />
-        <AirportTerminals airport={airport} />
         <ReviewsSection />
         <AirportInfoSection airport={airport} />
         <FAQSection />
