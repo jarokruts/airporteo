@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Airport, getRelatedAirports } from '@/lib/airports'
 import { MapPin, Star } from 'lucide-react'
+import { CaretRight } from '@phosphor-icons/react'
 
 interface RelatedAirportsProps {
   currentAirportCode: string
