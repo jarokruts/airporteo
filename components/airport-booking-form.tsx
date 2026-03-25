@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley, Calendar, Users } from '@phosphor-icons/react'
+import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley, Calendar, Users, Backpack } from '@phosphor-icons/react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
@@ -1203,7 +1203,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
           </div>
           <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
-            <Briefcase size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0 }} />
+            <Backpack size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0 }} />
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
             <Suitcase size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
