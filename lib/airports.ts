@@ -228,6 +228,38 @@ export const AIRPORTS: Record<string, Airport> = {
     },
     facilities: ['WiFi', 'Restaurants', 'Shopping', 'Lounges', 'Hotels', 'ATM', 'Gardens'],
   },
+  FRA: {
+    id: 'frankfurt',
+    code: 'FRA',
+    name: 'Frankfurt am Main',
+    city: 'Frankfurt',
+    country: 'Germany',
+    image: '/images/airport-frankfurt.jpg',
+    rating: 4.7,
+    reviews: 1550,
+    terminals: [
+      {
+        name: 'Terminal 1',
+        airlines: ['Lufthansa', 'Air France', 'British Airways', 'Swiss International'],
+        facilities: ['Restaurants', 'Shopping', 'Lounges', 'Business Center'],
+      },
+      {
+        name: 'Terminal 2',
+        airlines: ['Condor', 'Eurowings', 'Air Europa'],
+        facilities: ['Dining', 'Shops', 'WiFi', 'Lounges'],
+      },
+    ],
+    services: [
+      { id: '1', name: 'Meet & Greet', description: 'Personal welcome service', type: 'arrival', price: 52 },
+      { id: '2', name: 'Fast Track', description: 'Express security & check-in', type: 'departure', price: 42 },
+      { id: '3', name: 'VIP Platinum', description: 'Premium lounge access', type: 'vip', price: 170 },
+    ],
+    hours: {
+      arrival: '04:00 - 23:00',
+      departure: '04:00 - 23:00',
+    },
+    facilities: ['WiFi', 'Restaurants', 'Shopping', 'Lounges', 'Hotels', 'ATM', 'Currency Exchange'],
+  },
 }
 
 export function getAirport(code: string): Airport | null {
