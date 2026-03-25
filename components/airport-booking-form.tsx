@@ -1234,7 +1234,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
 
       {/* Row 6: Email */}
       <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
-        <Mail size={13} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
+        <Envelope size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
         <input
           type="email"
           value={email}
