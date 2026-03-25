@@ -30,7 +30,7 @@ export function ServiceHero({ service }: ServiceHeroProps) {
 
             {/* One-liner Description */}
             <p className="text-lg md:text-xl opacity-60" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-              {service.tagline}
+              {service.shortDescription}
             </p>
 
             {/* Pricing */}
