@@ -8,7 +8,6 @@ import { AirportServices } from '@/components/airport-services'
 import { ReviewsSection } from '@/components/reviews-section'
 import { FAQSection } from '@/components/faq-section'
 import { RelatedAirports } from '@/components/related-airports'
-import { CustomQuoteCTA } from '@/components/custom-quote-cta'
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 
@@ -68,7 +67,6 @@ export default async function AirportPage({ params }: AirportPageProps) {
         <AirportInfoSection airport={airport} />
         <FAQSection />
         <RelatedAirports currentAirportCode={airport.code} />
-        <CustomQuoteCTA airportName={airport.name} />
       </main>
 
       <Footer />
