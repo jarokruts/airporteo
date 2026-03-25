@@ -6,6 +6,7 @@ import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
   airport: Airport
+  preSelectedService?: string
 }
 
 // Local AIRPORTS array matching the main page
@@ -987,10 +988,10 @@ function BottomSheet({
   )
 }
 
-export function AirportBookingForm({ airport }: AirportBookingFormProps) {
+export function AirportBookingForm({ airport, preSelectedService }: AirportBookingFormProps) {
   const [direction, setDirection] = useState('Arrival')
-  const [service, setService] = useState('Meet & Greet')
-  const [airportValue, setAirportValue] = useState(`${airport.city} ${airport.code}`)
+  const [service, setService] = useState(preSelectedService || 'Meet & Greet')
+  const [airportValue, setAirportValue] = useState(airport.code ? `${airport.city} ${airport.code}` : '')
   const [flightNumber, setFlightNumber] = useState('')
   const [connectionFlightNumber, setConnectionFlightNumber] = useState('')
   const [date, setDate] = useState('')

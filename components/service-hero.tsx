@@ -2,6 +2,7 @@
 
 import { Service } from '@/lib/services'
 import { ChevronRight } from 'lucide-react'
+import { ServiceBookingForm } from '@/components/service-booking-form'
 
 interface ServiceHeroProps {
   service: Service
@@ -40,33 +41,17 @@ export function ServiceHero({ service }: ServiceHeroProps) {
                 ${service.pricing[0].price}
               </span>
             </div>
-
-            {/* CTA Button */}
-            <button
-              onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full md:w-fit px-8 py-3 font-semibold rounded-full transition-all hover:shadow-lg"
-              style={{
-                backgroundColor: 'var(--gold)',
-                color: 'white',
-                fontFamily: 'var(--font-dm-sans)',
-              }}
-            >
-              Book Now
-            </button>
           </div>
 
-          {/* Right Side (40%) - Image Placeholder */}
-          <div className="hidden md:flex items-center justify-center">
-            <div
-              className="w-full aspect-square rounded-2xl bg-white/10 flex items-center justify-center"
-              style={{ maxWidth: '300px' }}
-            >
-              <div className="text-center opacity-50">
-                <div className="text-6xl mb-4">✈️</div>
-                <p style={{ fontFamily: 'var(--font-dm-sans)' }}>Service Image</p>
-              </div>
-            </div>
+          {/* Right Side (40%) - Booking Form */}
+          <div className="hidden md:block">
+            <ServiceBookingForm service={service} preSelectedService={service.name} />
           </div>
+        </div>
+
+        {/* Mobile Booking Form - Below content */}
+        <div className="md:hidden mt-8">
+          <ServiceBookingForm service={service} preSelectedService={service.name} />
         </div>
       </div>
     </section>

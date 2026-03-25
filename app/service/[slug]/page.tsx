@@ -26,7 +26,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
-  const service = getService(params.slug)
+  const { slug } = await params
+  const service = getService(slug)
 
   if (!service) {
     return {
@@ -47,8 +48,9 @@ export async function generateMetadata({
   }
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
-  const service = getService(params.slug)
+export default async function ServicePage({ params }: ServicePageProps) {
+  const { slug } = await params
+  const service = getService(slug)
 
   if (!service) {
     notFound()
