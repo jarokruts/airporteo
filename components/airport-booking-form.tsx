@@ -1162,7 +1162,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
           onMouseEnter={(e) => !showDatePicker && (e.currentTarget.style.background = '#F5F7FA')}
           onMouseLeave={(e) => !showDatePicker && (e.currentTarget.style.background = 'white')}
         >
-          <Calendar size={14} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
+          <Calendar size={14} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
           <span style={{ flex: 1, textAlign: 'left', fontSize: '14px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Select date'}
           </span>
