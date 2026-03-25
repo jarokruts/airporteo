@@ -47,15 +47,15 @@ export function ServiceHero({ service }: ServiceHeroProps) {
               <div className="grid grid-cols-2 gap-3 md:gap-4">
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-3 md:px-4 py-3 md:py-4 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1">Price/Person</p>
-                  <p className="text-white font-bold text-base md:text-lg">${service.pricing[0].price}</p>
+                  <p className="text-white font-bold text-base md:text-lg">from $45</p>
                 </div>
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-3 md:px-4 py-3 md:py-4 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1">Duration</p>
-                  <p className="text-white font-bold text-base md:text-lg">{service.duration}</p>
+                  <p className="text-white font-bold text-base md:text-lg">20+ minutes</p>
                 </div>
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-3 md:px-4 py-3 md:py-4 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1">Available At</p>
-                  <p className="text-white font-bold text-base md:text-lg">6 Airports</p>
+                  <p className="text-white font-bold text-base md:text-lg">50+ airports</p>
                 </div>
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-3 md:px-4 py-3 md:py-4 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1">Support</p>
@@ -98,15 +98,15 @@ export function ServiceHero({ service }: ServiceHeroProps) {
               <div className="grid grid-cols-2 gap-2">
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Price/Person</p>
-                  <p className="text-white font-bold text-sm">${service.pricing[0].price}</p>
+                  <p className="text-white font-bold text-sm">from $45</p>
                 </div>
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Duration</p>
-                  <p className="text-white font-bold text-sm">{service.duration}</p>
+                  <p className="text-white font-bold text-sm">20+ minutes</p>
                 </div>
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Available At</p>
-                  <p className="text-white font-bold text-sm">6 Airports</p>
+                  <p className="text-white font-bold text-sm">50+ airports</p>
                 </div>
                 <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
                   <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Support</p>
