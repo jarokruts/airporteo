@@ -1723,9 +1723,9 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.adults + state.children + state.infants} Pax</span>
               </div>
               <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
-                <BriefcaseBusiness className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0 }} />
+                <Briefcase weight="light" className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0 }} />
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.cabinBags}</span>
-                <Luggage className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
+                <Suitcase weight="light" className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.checkedBags}</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
