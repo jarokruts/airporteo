@@ -51,10 +51,10 @@ export function FAQSection() {
   const [openId, setOpenId] = useState<number | null>(null)
 
   return (
-    <section className="bg-white py-16 lg:py-24">
-      <div className="mx-auto max-w-4xl px-5 lg:px-8">
+    <section className="bg-white py-8 lg:py-12">
+      <div className="mx-auto max-w-2xl px-4 md:px-6">
         {/* Header */}
-        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
           FAQs
         </h2>
 
@@ -64,14 +64,14 @@ export function FAQSection() {
             <div key={faq.id}>
               <button
                 onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
-                className="w-full flex items-center justify-between py-6 text-left transition-all hover:opacity-70"
+                className="w-full flex items-center justify-between py-4 md:py-5 text-left transition-all hover:opacity-70"
               >
-                <span className="text-lg font-medium text-foreground pr-4">
+                <span className="text-sm md:text-base font-medium text-foreground pr-3">
                   {faq.question}
                 </span>
                 <ChevronDown
                   className={cn(
-                    "h-5 w-5 flex-shrink-0 text-foreground transition-transform duration-300",
+                    "h-4 w-4 md:h-5 md:w-5 flex-shrink-0 text-foreground transition-transform duration-300",
                     openId === faq.id && "rotate-180"
                   )}
                 />
@@ -79,7 +79,7 @@ export function FAQSection() {
 
               {/* Answer */}
               {openId === faq.id && (
-                <div className="pb-6 text-base text-muted-foreground leading-relaxed animate-in fade-in duration-300">
+                <div className="pb-4 md:pb-5 text-xs md:text-sm text-muted-foreground leading-relaxed animate-in fade-in duration-300">
                   {faq.answer}
                 </div>
               )}
