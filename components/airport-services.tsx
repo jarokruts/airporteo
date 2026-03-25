@@ -2,15 +2,59 @@
 
 import { Airport } from '@/lib/airports'
 import { Check } from 'lucide-react'
+import { useState } from 'react'
 
 interface AirportServicesProps {
   airport: Airport
 }
 
+type TabType = 'arrival' | 'departure' | 'connection' | 'vip'
+
 export function AirportServices({ airport }: AirportServicesProps) {
-  const arrivalServices = airport.services.filter(s => s.type === 'arrival')
-  const departureServices = airport.services.filter(s => s.type === 'departure')
-  const vipServices = airport.services.filter(s => s.type === 'vip')
+  const [activeTab, setActiveTab] = useState<TabType>('arrival')
+
+  const tabContents: Record<TabType, string[]> = {
+    arrival: [
+      'Personal meet & greet directly at aircraft door',
+      'Dedicated escort through terminal to baggage claim',
+      'Priority immigration processing',
+      'Professional assistance with customs and arrival procedures',
+      'Expert baggage collection and porter services',
+      'Personal escort to your waiting vehicle or transfer'
+    ],
+    departure: [
+      'Curbside meet & greet at departure terminal entrance',
+      'Complete check-in assistance and support',
+      'Professional baggage handling from vehicle to counter',
+      'Expert guidance through customs and departure formalities',
+      'Priority fast track security access and processing',
+      'Personal escort service to aircraft door with lounge option'
+    ],
+    connection: [
+      'Aircraft door reception by dedicated connection specialist',
+      'Priority escort through terminal for seamless connections',
+      'Fast track immigration processing for international transit',
+      'Professional baggage handling and connection coordination',
+      'Expedited security screening for connecting flights',
+      'Aircraft door escort with optional lounge access during layover'
+    ],
+    vip: [
+      'Dedicated Personal VIP Advisor to guide and assist you throughout',
+      'Private lounge access for up to 3 hours',
+      'Individual limousine transfer from/to the aircraft to/from the VIP terminal',
+      'Assistance with checked luggage items',
+      'Personal greeting at the aircraft',
+      'Customs and passport control via premium fast-track lanes',
+      'No airport crowds, no stress — just serenity, style, and Platinum service'
+    ]
+  }
+
+  const tabs = [
+    { id: 'arrival', label: 'Arrival' },
+    { id: 'departure', label: 'Departure' },
+    { id: 'connection', label: 'Connection' },
+    { id: 'vip', label: 'VIP Platinum' }
+  ]
 
   return (
     <section className="py-8 md:py-16 px-5 lg:px-8 bg-background">
@@ -24,58 +68,59 @@ export function AirportServices({ airport }: AirportServicesProps) {
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {/* Arrival Services */}
-          <div className="rounded-2xl border border-border bg-card p-6 md:p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-5 md:mb-6">On Arrival</h3>
-            <ul className="space-y-4">
-              {arrivalServices.map(service => (
-                <li key={service.id} className="flex gap-3">
-                  <Check size={20} className="text-gold flex-shrink-0 mt-1" />
-                  <div className="min-w-0">
-                    <p className="font-semibold text-foreground text-sm md:text-base">{service.name}</p>
-                    <p className="text-xs md:text-sm text-muted-foreground">{service.description}</p>
-                    <p className="text-gold font-bold mt-2 text-sm md:text-base">${service.price}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+        {/* Tab Navigation */}
+        <div className="flex gap-0 mb-0 overflow-x-auto md:overflow-x-visible -mx-5 md:mx-0 px-5 md:px-0">
+          <div className="flex gap-0 w-full">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id
+              const isVIP = tab.id === 'vip'
+              
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as TabType)}
+                  className="flex-1 px-3 md:px-6 py-3 md:py-4 text-xs md:text-base font-semibold transition-all duration-200 border-b"
+                  style={{
+                    backgroundColor: isActive 
+                      ? (isVIP ? '#B8913A' : '#1D215E')
+                      : 'white',
+                    color: isActive
+                      ? 'white'
+                      : (isVIP ? '#B8913A' : '#1D215E'),
+                    borderRadius: isActive ? '12px 12px 0 0' : '0',
+                    border: isActive 
+                      ? 'none' 
+                      : '1px solid #E2E8F0',
+                    borderTop: isActive ? 'none' : '1px solid #E2E8F0',
+                    borderLeft: isActive ? 'none' : '1px solid #E2E8F0',
+                    borderRight: isActive ? 'none' : '1px solid #E2E8F0',
+                    borderBottom: isActive ? 'none' : '1px solid #E2E8F0',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {tab.label}
+                </button>
+              )
+            })}
           </div>
+        </div>
 
-          {/* Departure Services */}
-          <div className="rounded-2xl border border-border bg-card p-6 md:p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-5 md:mb-6">On Departure</h3>
-            <ul className="space-y-4">
-              {departureServices.map(service => (
-                <li key={service.id} className="flex gap-3">
-                  <Check size={20} className="text-gold flex-shrink-0 mt-1" />
-                  <div className="min-w-0">
-                    <p className="font-semibold text-foreground text-sm md:text-base">{service.name}</p>
-                    <p className="text-xs md:text-sm text-muted-foreground">{service.description}</p>
-                    <p className="text-gold font-bold mt-2 text-sm md:text-base">${service.price}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* VIP Services */}
-          <div className="rounded-2xl border-2 border-gold bg-gradient-to-br from-navy/5 to-blue/5 p-6 md:p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-5 md:mb-6">VIP Experience</h3>
-            <ul className="space-y-4">
-              {vipServices.map(service => (
-                <li key={service.id} className="flex gap-3">
-                  <Check size={20} className="text-gold flex-shrink-0 mt-1" />
-                  <div className="min-w-0">
-                    <p className="font-semibold text-foreground text-sm md:text-base">{service.name}</p>
-                    <p className="text-xs md:text-sm text-muted-foreground">{service.description}</p>
-                    <p className="text-gold font-bold mt-2 text-sm md:text-base">${service.price}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Tab Content */}
+        <div
+          className="rounded-b-xl border border-t-0 border-border bg-white p-8"
+          style={{
+            borderTop: activeTab === 'vip' ? '4px solid #B8913A' : 'none'
+          }}
+        >
+          <ul className="space-y-4">
+            {tabContents[activeTab].map((service, idx) => (
+              <li key={idx} className="flex gap-4">
+                <Check size={20} className="text-[#B8913A] flex-shrink-0 mt-0.5" />
+                <span className="text-foreground text-sm md:text-base leading-relaxed">{service}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

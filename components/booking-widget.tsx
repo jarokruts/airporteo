@@ -1362,11 +1362,11 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
   )
 }
 
-export function BookingWidget() {
+export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: string; city: string } } = {}) {
   const [state, setState] = useState<BookingState>({
     serviceType: "arrival",
     service: "Meet & Greet",
-    airport: null,
+    airport: defaultAirport || null,
     flightNumber: "",
     date: "",
     email: "",
@@ -1455,7 +1455,9 @@ export function BookingWidget() {
   return (
     <>
       <style>{inputOverflowStyle}</style>
-      <div className="md:hidden p-3 space-y-1.5" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+      <div className="md:hidden" style={{ padding: '0 8px', borderRadius: '16px' }}>
+        {/* White card container - wraps all fields */}
+        <div className="space-y-2" style={{ borderRadius: '16px', overflow: 'hidden', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '16px' }}>
 
             {/* Row 1: Arrival + Meet & Greet - Two containers in wrapper */}
             <div style={{ display: 'flex', height: '40px', borderRadius: '10px', border: '1.5px solid #E2E8F0', borderBottom: '1.5px solid #E2E8F0', overflow: 'visible', position: 'relative', zIndex: 2, marginBottom: '8px' }}>
@@ -1526,7 +1528,7 @@ export function BookingWidget() {
                   color: '#1D215E',
                   background: 'white',
                   transition: 'all 200ms',
-                  minWidth: 0,
+                  minWidth: '100px',
                   zIndex: 10,
                   position: 'relative',
                   borderRadius: '0 10px 10px 0',
@@ -1570,7 +1572,7 @@ export function BookingWidget() {
                     e.stopPropagation()
                     set({ airport: null })
                   }}
-                  className="ml-1.5 text-[#94A3B8] hover:text-[#1D215E] shrink-0"
+                  className="ml-1.5 text-[#94A3B8] hover:text-[#1D215E] shrink-0 hidden"
                   style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
                 >
                   <X className="h-3.5 w-3.5" />
@@ -1581,7 +1583,7 @@ export function BookingWidget() {
             {/* Row 3: Flight # - splits into two fields for Connection */}
             {state.serviceType !== 'connection' ? (
               <div className="flex h-10 items-center rounded-[10px] border border-[#E2E8F0] px-2.5">
-                <span className="shrink-0 text-[12px] font-normal text-[#1D215E]">Flight #</span>
+                <label style={{ fontSize: '12px', fontWeight: 600, color: '#1D215E', flexShrink: 0, whiteSpace: 'nowrap', marginRight: '4px' }}>Flight #</label>
                 <input
                   type="text"
                   value={state.flightNumber}
@@ -1591,7 +1593,7 @@ export function BookingWidget() {
                   }}
                   placeholder="e.g. BA206"
                   maxLength={6}
-                  className="ml-2 flex-1 min-w-0 bg-transparent text-[12px] text-[#1D215E] placeholder:text-[#94A3B8] outline-none"
+                  className="flex-1 min-w-0 bg-transparent text-[12px] text-[#1D215E] placeholder:text-[#94A3B8] outline-none"
                 />
               </div>
             ) : (
@@ -1764,8 +1766,8 @@ export function BookingWidget() {
               />
             </div>
 
-            {/* CTA Button - Centered 60% width */}
-            <div className="flex justify-center">
+            {/* CTA Button - Full width inside white card */}
+            <div className="flex justify-center pt-2">
               {(() => {
                 const isFormValid = Boolean(
                   state.airport &&
@@ -1779,9 +1781,6 @@ export function BookingWidget() {
                 );
                 
                 const buttonColor = isFormValid ? '#B8913A' : 'rgba(184, 145, 58, 0.45)';
-                const buttonShadow = isFormValid 
-                  ? '0 4px 12px rgba(219, 38, 35, 0.4)' 
-                  : 'none';
 
                 return (
                   <button
@@ -1796,12 +1795,11 @@ export function BookingWidget() {
                       (state.serviceType === "connection" && (!state.connectionFlightNumber || !state.connectionDate)) ||
                       state.booking
                     }
-                    className="flex h-[44px] w-3/5 items-center justify-center gap-2 rounded-full text-sm font-bold text-white transition-all active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="flex h-[44px] w-full items-center justify-center gap-2 rounded-full text-sm font-bold text-white transition-all active:scale-[0.98]"
                     style={{ 
                       backgroundColor: buttonColor,
-                      boxShadow: buttonShadow,
                       transitionDuration: '300ms',
-                      transitionProperty: 'background-color, box-shadow',
+                      transitionProperty: 'background-color',
                       transitionTimingFunction: 'ease',
                       cursor: isFormValid ? 'pointer' : 'not-allowed'
                     }}
@@ -1815,6 +1813,7 @@ export function BookingWidget() {
                 );
               })()}
             </div>
+        </div>
       </div>
 
       {/* Tablet Layout - Portrait (768px-1023px) and Landscape (1024px-1179px) */}
