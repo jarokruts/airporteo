@@ -1,7 +1,8 @@
 'use client'
 
-import { Service } from '@/lib/services'
+import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
+import { Service } from '@/lib/services'
 import { ServiceBookingForm } from '@/components/service-booking-form'
 
 interface ServiceHeroProps {
@@ -10,48 +11,125 @@ interface ServiceHeroProps {
 
 export function ServiceHero({ service }: ServiceHeroProps) {
   return (
-    <section className="bg-[var(--navy)] text-white" style={{ minHeight: '50vh' }}>
-      <div className="mx-auto max-w-7xl px-4 md:px-8 py-12 md:py-20 h-full">
-        <div className="grid md:grid-cols-[55%_45%] gap-8 md:gap-12 items-center h-full">
-          {/* Left Side (60%) */}
-          <div className="flex flex-col gap-6">
-            {/* Breadcrumbs */}
-            <div className="flex items-center gap-2 text-sm opacity-80">
-              <a href="/" className="hover:opacity-100 transition-opacity">Home</a>
-              <ChevronRight size={16} />
-              <a href="/service" className="hover:opacity-100 transition-opacity">Services</a>
-              <ChevronRight size={16} />
-              <span className="font-medium">{service.name}</span>
+    <section className="relative w-full flex flex-col overflow-visible bg-[var(--navy)]">
+      {/* Navy Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85" />
+
+      {/* Content Container */}
+      <div className="relative z-10 flex items-start pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 p-5 md:p-8 lg:p-12">
+        <div className="mx-auto max-w-7xl w-full">
+          
+          {/* DESKTOP LAYOUT - Two Column (50/50) */}
+          <div className="hidden md:grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+            
+            {/* LEFT COLUMN - Service Info */}
+            <div className="flex flex-col">
+              {/* Breadcrumbs */}
+              <div className="flex items-center gap-2 text-white/70 text-xs md:text-sm uppercase tracking-wide font-medium mb-6 md:mb-8">
+                <Link href="/" className="hover:text-white transition-colors">Home</Link>
+                <ChevronRight size={14} />
+                <Link href="/service" className="hover:text-white transition-colors">Services</Link>
+                <ChevronRight size={14} />
+                <span className="text-[var(--gold)] font-semibold">{service.name}</span>
+              </div>
+
+              {/* Service Name - Georgia Serif (matching airport) */}
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-3 md:mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+                {service.name}
+              </h1>
+
+              {/* Badge + Description - Horizontal Row (matching airport) */}
+              <div className="flex items-center gap-3 mb-6 md:mb-8">
+                <div className="px-4 py-2 border-2 border-[var(--gold)] rounded-full flex-shrink-0">
+                  <span className="text-white font-bold text-lg">{service.name.substring(0, 1)}</span>
+                </div>
+                <p className="text-white/80 text-sm md:text-base">
+                  {service.shortDescription}
+                </p>
+              </div>
+
+              {/* Stats Grid - 2x2 (matching airport) */}
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-3 md:px-4 py-3 md:py-4 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1">Price/Person</p>
+                  <p className="text-white font-bold text-base md:text-lg">${service.pricing[0].price}</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-3 md:px-4 py-3 md:py-4 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1">Duration</p>
+                  <p className="text-white font-bold text-base md:text-lg">{service.duration}</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-3 md:px-4 py-3 md:py-4 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1">Available At</p>
+                  <p className="text-white font-bold text-base md:text-lg">6 Airports</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-3 md:px-4 py-3 md:py-4 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-1">Support</p>
+                  <p className="text-white font-bold text-base md:text-lg">24/7</p>
+                </div>
+              </div>
             </div>
 
-            {/* Service Name */}
-            <h1 className="text-5xl md:text-6xl font-bold" style={{ fontFamily: 'var(--font-playfair)' }}>
-              {service.name}
-            </h1>
-
-            {/* One-liner Description */}
-            <p className="text-lg md:text-xl opacity-60" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-              {service.shortDescription}
-            </p>
-
-            {/* Pricing */}
-            <div className="flex items-baseline gap-2">
-              <span className="text-sm opacity-60">Starting from</span>
-              <span className="text-4xl md:text-5xl font-bold" style={{ color: 'var(--gold)', fontFamily: 'var(--font-playfair)' }}>
-                ${service.pricing[0].price}
-              </span>
+            {/* RIGHT COLUMN - Booking Form */}
+            <div className="mt-8 md:mt-0">
+              <ServiceBookingForm service={service} preSelectedService={service.name} />
             </div>
           </div>
 
-          {/* Right Side (40%) - Booking Form */}
-          <div className="hidden md:block">
-            <ServiceBookingForm service={service} preSelectedService={service.name} />
-          </div>
-        </div>
+          {/* MOBILE LAYOUT - Stacked (matching airport mobile) */}
+          <div className="md:hidden flex flex-col gap-4">
+            
+            {/* Service Info - Stacked Vertically */}
+            <div className="flex flex-col">
+              {/* Breadcrumbs */}
+              <div className="flex items-center gap-2 text-white/70 text-xs uppercase tracking-wide font-medium mb-4">
+                <Link href="/" className="hover:text-white transition-colors">Home</Link>
+                <ChevronRight size={12} />
+                <Link href="/service" className="hover:text-white transition-colors">Services</Link>
+                <ChevronRight size={12} />
+                <span className="text-[var(--gold)] font-semibold">{service.name}</span>
+              </div>
 
-        {/* Mobile Booking Form - Below content */}
-        <div className="md:hidden mt-8">
-          <ServiceBookingForm service={service} preSelectedService={service.name} />
+              {/* Service Name */}
+              <h1 className="text-4xl font-bold text-white leading-tight mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+                {service.name}
+              </h1>
+
+              {/* Badge + Description */}
+              <div className="flex items-start gap-3 mb-4">
+                <div className="px-3 py-1.5 border-2 border-[var(--gold)] rounded-full flex-shrink-0 mt-1">
+                  <span className="text-white font-bold text-sm">{service.name.substring(0, 1)}</span>
+                </div>
+                <p className="text-white/80 text-xs leading-snug">
+                  {service.shortDescription}
+                </p>
+              </div>
+
+              {/* Stats Grid - 2x2 */}
+              <div className="grid grid-cols-2 gap-2">
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Price/Person</p>
+                  <p className="text-white font-bold text-sm">${service.pricing[0].price}</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Duration</p>
+                  <p className="text-white font-bold text-sm">{service.duration}</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Available At</p>
+                  <p className="text-white font-bold text-sm">6 Airports</p>
+                </div>
+                <div className="backdrop-blur-md bg-white/10 rounded-lg px-2.5 py-2.5 border border-white/10">
+                  <p className="text-white/60 text-xs uppercase tracking-wide font-medium mb-0.5">Support</p>
+                  <p className="text-white font-bold text-sm">24/7</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Booking Form */}
+            <div className="pt-2">
+              <ServiceBookingForm service={service} preSelectedService={service.name} />
+            </div>
+          </div>
         </div>
       </div>
     </section>
