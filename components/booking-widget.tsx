@@ -1735,7 +1735,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
 
             {/* Row 6: Email field - standalone full width */}
             <div style={{ border: '1.5px solid #E2E8F0', borderRadius: '10px', backgroundColor: '#FFFFFF', display: 'flex', alignItems: 'center', padding: '0 12px', height: '40px' }}>
-              <Mail className="mr-1.5 h-[13px] w-[13px] shrink-0 text-[#94A3B8]" />
+              <Envelope weight="light" className="mr-1.5 h-[13px] w-[13px] shrink-0 text-[#94A3B8]" />
               <input
                 type="text"
                 value={state.email}
@@ -2236,7 +2236,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
 
           {/* Email */}
           <div style={{ border: '1.5px solid #E2E8F0', borderRadius: '10px', backgroundColor: '#FFFFFF', display: 'flex', alignItems: 'center', padding: '0 12px', height: '56px', minWidth: '0', flex: '1', gap: '8px' }}>
-            <Mail className="h-4 w-4 shrink-0 text-muted-foreground" />
+              <Envelope weight="light" className="h-4 w-4 shrink-0 text-muted-foreground" />
             <input
               type="text"
               value={state.email}
