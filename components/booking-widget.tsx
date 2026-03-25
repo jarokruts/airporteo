@@ -1555,10 +1555,10 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               {state.serviceType === "connection" ? (
                 <>
                   <AirplaneLanding className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '4px' }} />
-                  <PlaneTakeoff className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
+                  <AirplaneLanding className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
                 </>
               ) : state.serviceType === "departure" ? (
-                <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
+                <AirplaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               ) : (
                 <AirplaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               )}
@@ -1624,7 +1624,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 
                 {/* Departing flight # for Connection */}
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <PlaneTakeoff size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.connectionFlightNumber}
@@ -1864,7 +1864,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                   state.serviceType === "connection" ? (
                     <Plane className="h-4 w-4" />
                   ) : state.serviceType === "departure" ? (
-                    <PlaneTakeoff className="h-4 w-4" />
+                    <AirplaneLanding className="h-4 w-4" />
                   ) : (
                     <AirplaneLanding className="h-4 w-4" />
                   )
@@ -1960,7 +1960,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               />
             </div>
             <div style={{position:'relative', display:'flex', alignItems:'center', flex: 1}}>
-              <PlaneTakeoff size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+              <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
               <input
                 type="text"
                 value={state.connectionFlightNumber}
@@ -2009,7 +2009,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               />
             </div>
             <div style={{position:'relative', display:'flex', alignItems:'center', flex: 1}}>
-              <PlaneTakeoff size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+              <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
               <input
                 type="text"
                 value={state.connectionFlightNumber}
@@ -2150,7 +2150,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               state.serviceType === "connection" ? (
                 <Plane className="h-4 w-4" />
               ) : state.serviceType === "departure" ? (
-                <PlaneTakeoff className="h-4 w-4" />
+                <AirplaneLanding className="h-4 w-4" />
               ) : (
                 <AirplaneLanding className="h-4 w-4" />
               )
@@ -2192,7 +2192,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             </div>
             {state.serviceType === "connection" && (
               <div className="relative flex h-14 min-w-0 w-full items-center gap-1 rounded-xl border-2 border-border bg-card px-4 focus-within:border-blue focus-within:shadow-[0_0_0_3px_rgba(219,38,35,0.1)] transition-all hover:border-slate-mid">
-                <PlaneTakeoff size={16} color="#1D215E" style={{ position: 'absolute', left: '12px', flexShrink: 0 }} />
+                <AirplaneLanding size={16} color="#1D215E" style={{ position: 'absolute', left: '12px', flexShrink: 0 }} />
                 <input
                   type="text"
                   value={state.connectionFlightNumber}
