@@ -790,7 +790,7 @@ function SimpleDropdown({
         onMouseLeave={(e) => !isOpen && (e.currentTarget.style.background = 'white')}
       >
         <span>{value}</span>
-        <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+        <CaretDown size={14} weight="light" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
       </button>
 
       {/* Dropdown Menu - Opens Downward */}
@@ -1166,7 +1166,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
           <span style={{ flex: 1, textAlign: 'left', fontSize: '14px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Select date'}
           </span>
-          <ChevronDown size={12} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: showDatePicker ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+          <CaretDown size={12} weight="light" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: showDatePicker ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
         </button>
         
         <DatePickerDropdown 
@@ -1209,7 +1209,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
-            <ChevronDown size={12} style={{ color: '#94A3B8', transform: showPassengersDropdown ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+            <CaretDown size={12} weight="light" style={{ color: '#94A3B8', transform: showPassengersDropdown ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
           </div>
         </button>
 
