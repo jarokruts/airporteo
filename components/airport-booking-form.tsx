@@ -28,14 +28,14 @@ type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 function getDirectionIcon(direction: string) {
   switch (direction) {
     case 'Arrival':
-      return <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
+      return <PlaneLanding className="h-[13px] w-[13px]" style={{ color: 'var(--gold)' }} />
     case 'Departure':
-      return <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
+      return <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: 'var(--gold)' }} />
     case 'Connection':
       return (
         <div style={{ display: 'flex', gap: '2px' }}>
-          <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
-          <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
+          <PlaneLanding className="h-[13px] w-[13px]" style={{ color: 'var(--gold)' }} />
+          <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: 'var(--gold)' }} />
         </div>
       )
     default:

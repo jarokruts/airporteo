@@ -103,7 +103,7 @@ export function AirportSolariBoard() {
         <div
           className="rounded-lg p-6 border border-white/15 relative overflow-hidden"
           style={{
-            backgroundColor: '#1D215E',
+            backgroundColor: 'var(--navy)',
           }}
         >
           {/* Text content with split-flap mechanics */}

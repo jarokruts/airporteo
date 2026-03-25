@@ -102,7 +102,7 @@ export function ServicesSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-navy/10 to-transparent" />
                   {/* Icon badge on image */}
-                  <div className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-card/95 backdrop-blur-sm text-gold shadow-md">
+                  <div className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-card/95 backdrop-blur-sm text-[var(--gold)] shadow-md">
                     <Icon className="h-5 w-5" />
                   </div>
                 </div>
@@ -129,7 +129,7 @@ export function ServicesSection() {
                           <span>
                             {featureText}
                             {asteriskDisplay && (
-                              <span className="ml-1 text-gold font-semibold">{asteriskDisplay}</span>
+                              <span className="ml-1 text-[var(--gold)] font-semibold">{asteriskDisplay}</span>
                             )}
                           </span>
                         </li>
@@ -143,7 +143,7 @@ export function ServicesSection() {
                     <a
                       href="#hero"
                       className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white transition-colors"
-                      style={{ backgroundColor: '#B8913A' }}
+                      style={{ backgroundColor: 'var(--gold)' }}
                     >
                       Book now
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

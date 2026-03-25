@@ -82,19 +82,19 @@ export function AirportServices({ airport }: AirportServicesProps) {
                   className="flex-1 px-3 md:px-6 py-3 md:py-4 text-xs md:text-base font-semibold transition-all duration-200 border-b"
                   style={{
                     backgroundColor: isActive 
-                      ? (isVIP ? '#B8913A' : '#1D215E')
+                      ? (isVIP ? 'var(--gold)' : 'var(--navy)')
                       : 'white',
                     color: isActive
                       ? 'white'
-                      : (isVIP ? '#B8913A' : '#1D215E'),
+                      : (isVIP ? 'var(--gold)' : 'var(--navy)'),
                     borderRadius: isActive ? '12px 12px 0 0' : '0',
                     border: isActive 
                       ? 'none' 
-                      : '1px solid #E2E8F0',
-                    borderTop: isActive ? 'none' : '1px solid #E2E8F0',
-                    borderLeft: isActive ? 'none' : '1px solid #E2E8F0',
-                    borderRight: isActive ? 'none' : '1px solid #E2E8F0',
-                    borderBottom: isActive ? 'none' : '1px solid #E2E8F0',
+                      : '1px solid var(--border)',
+                    borderTop: isActive ? 'none' : '1px solid var(--border)',
+                    borderLeft: isActive ? 'none' : '1px solid var(--border)',
+                    borderRight: isActive ? 'none' : '1px solid var(--border)',
+                    borderBottom: isActive ? 'none' : '1px solid var(--border)',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap'
                   }}
@@ -110,14 +110,14 @@ export function AirportServices({ airport }: AirportServicesProps) {
         <div
           className="rounded-b-xl border border-t-0 border-border bg-white p-8 flex flex-col"
           style={{
-            borderTop: activeTab === 'vip' ? '4px solid #B8913A' : 'none',
+            borderTop: activeTab === 'vip' ? '4px solid var(--gold)' : 'none',
             minHeight: '400px',
           }}
         >
           <ul className="space-y-4 flex-1">
             {tabContents[activeTab].map((service, idx) => (
               <li key={idx} className="flex gap-4">
-                <Check size={20} className="text-[#B8913A] flex-shrink-0 mt-0.5" />
+                <Check size={20} className="text-[var(--gold)] flex-shrink-0 mt-0.5" />
                 <span className="text-foreground text-sm md:text-base leading-relaxed">{service}</span>
               </li>
             ))}
@@ -132,9 +132,9 @@ export function AirportServices({ airport }: AirportServicesProps) {
                   heroForm.scrollIntoView({ behavior: 'smooth' })
                 }
               }}
-              className="px-6 py-3 text-sm md:text-base font-semibold text-white transition-all duration-200 rounded-lg border-b-2 border-b-transparent hover:border-b-[#B8913A]"
+              className="px-6 py-3 text-sm md:text-base font-semibold text-white transition-all duration-200 rounded-lg border-b-2 border-b-transparent hover:border-b-[var(--gold)]"
               style={{
-                backgroundColor: '#1D215E',
+                backgroundColor: 'var(--navy)',
               }}
             >
               Get a Detailed Quote
@@ -144,7 +144,7 @@ export function AirportServices({ airport }: AirportServicesProps) {
               href="https://wa.me/1234567890"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm md:text-base font-medium text-[#1D215E] hover:text-[#B8913A] transition-colors duration-200"
+              className="flex items-center gap-2 text-sm md:text-base font-medium text-[var(--navy)] hover:text-[var(--gold)] transition-colors duration-200"
             >
               <MessageCircle size={18} className="text-green-500" />
               Chat with an Agent Now

@@ -24,7 +24,7 @@ export function AirportHero({ airport }: AirportHeroProps) {
       />
 
       {/* Navy Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1D215E]/70 via-[#1D215E]/75 to-[#1D215E]/85" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85" />
 
       {/* Content Container */}
       <div className="relative z-10 flex items-start pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 p-5 md:p-8 lg:p-12">
