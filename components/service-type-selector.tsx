@@ -1,6 +1,6 @@
 "use client"
 
-import { AirplaneLanding, Airplane } from "@phosphor-icons/react"
+import { AirplaneLanding, Airplane, AirplaneInFlight } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 type ServiceType = "arrival" | "departure" | "connection"
@@ -15,7 +15,7 @@ function ConnectionIcon({ size = 20, weight = "light" }: { size?: number; weight
   return (
     <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
       <AirplaneLanding size={size} weight={weight as any} />
-      <Airplane size={size} weight={weight as any} />
+      <AirplaneInFlight size={size} weight={weight as any} />
     </div>
   )
 }
@@ -31,7 +31,7 @@ const services: { type: ServiceType; label: string; desc: string; icon: React.El
     type: "departure",
     label: "Departure",
     desc: "Airport drop-off",
-    icon: Airplane,
+    icon: AirplaneInFlight,
   },
   {
     type: "connection",
