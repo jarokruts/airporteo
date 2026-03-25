@@ -90,7 +90,7 @@ export function ServiceHero({ service }: ServiceHeroProps) {
               </h1>
 
               {/* Description */}
-              <p className="text-white/80 text-xs leading-snug mb-4">
+              <p className="hidden md:block text-white/80 text-xs leading-snug mb-4">
                 {service.shortDescription}
               </p>
             </div>
