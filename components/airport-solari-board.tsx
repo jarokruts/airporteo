@@ -3,66 +3,67 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-interface ScrambleCharProps {
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,'
+
+interface FlipCharProps {
   char: string
-  index: number
-  startTime: number
-  lockTime: number
-  animationKey: number
+  charIndex: number
+  resolveTime: number
+  animationCycle: number
 }
 
-const ScrambleChar = ({ char, index, startTime, lockTime, animationKey }: ScrambleCharProps) => {
-  const [displayChar, setDisplayChar] = useState(char === ' ' ? ' ' : 'A')
-  const [isLocked, setIsLocked] = useState(false)
-  
-  const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*'
+const FlipChar = ({ char, charIndex, resolveTime, animationCycle }: FlipCharProps) => {
+  const [displayChar, setDisplayChar] = useState(' ')
 
   useEffect(() => {
-    setIsLocked(false)
-    setDisplayChar(char === ' ' ? ' ' : 'A')
-    
-    let scrambleInterval: NodeJS.Timeout
-    let startTimer: NodeJS.Timeout
-    let lockTimer: NodeJS.Timeout
+    setDisplayChar(' ')
 
-    // Delay start based on randomized start time
-    startTimer = setTimeout(() => {
-      // Start scrambling
-      scrambleInterval = setInterval(() => {
-        if (char === ' ') {
-          setDisplayChar(' ')
-        } else {
-          setDisplayChar(randomChars[Math.floor(Math.random() * randomChars.length)])
-        }
-      }, 60) // Update every 60ms for smooth scramble effect
-    }, startTime)
+    // Start flipping immediately
+    const flipInterval = setInterval(() => {
+      setDisplayChar(CHARS[Math.floor(Math.random() * CHARS.length)])
+    }, 80) // Flip every 80ms for mechanical feel
 
-    // Lock to final character at lockTime
-    lockTimer = setTimeout(() => {
+    // Resolve at randomized time
+    const resolveTimer = setTimeout(() => {
       setDisplayChar(char)
-      setIsLocked(true)
-      if (scrambleInterval) clearInterval(scrambleInterval)
-    }, startTime + lockTime)
+      clearInterval(flipInterval)
+    }, resolveTime)
 
     return () => {
-      clearTimeout(startTimer)
-      clearTimeout(lockTimer)
-      if (scrambleInterval) clearInterval(scrambleInterval)
+      clearInterval(flipInterval)
+      clearTimeout(resolveTimer)
     }
-  }, [char, startTime, lockTime, animationKey])
+  }, [char, resolveTime, animationCycle])
 
   return (
     <motion.span
-      key={animationKey}
+      key={`${animationCycle}-${charIndex}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 0, duration: 0.1 }}
+      transition={{ delay: 0, duration: 0.05 }}
+      className="relative inline-flex items-center justify-center flex-shrink-0"
       style={{
-        display: 'inline',
-        whiteSpace: char === ' ' ? 'pre' : 'normal',
+        width: char === ' ' ? '0.4em' : '1.1em',
+        height: '2rem',
+        fontFamily: 'JetBrains Mono, Space Mono, monospace',
+        fontSize: '1.125rem',
+        fontWeight: '600',
+        color: '#f8f9fa',
+        lineHeight: 1,
+        whiteSpace: 'pre',
+        overflow: 'hidden',
       }}
     >
       {displayChar}
+      {/* Horizontal split line across middle */}
+      <div
+        className="absolute left-0 right-0 h-px"
+        style={{
+          top: '50%',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          zIndex: 10,
+        }}
+      />
     </motion.span>
   )
 }
@@ -70,66 +71,60 @@ const ScrambleChar = ({ char, index, startTime, lockTime, animationKey }: Scramb
 export function AirportSolariBoard() {
   const text = 'Premium meet and greet and VIP concierge services at Barcelona El Prat Airport (BCN). Our dedicated team operates across Terminal 1 and Terminal 2, providing personal escort, fast track immigration, luggage assistance, and exclusive private tarmac transfers for arrivals, departures, and connections.'
 
-  // Generate random start times and lock durations for each character
-  const [timings, setTimings] = useState<Array<{ startTime: number; lockTime: number }>>([])
-  const [animationKey, setAnimationKey] = useState(0)
+  const [timings, setTimings] = useState<number[]>([])
+  const [animationCycle, setAnimationCycle] = useState(0)
 
-  // Generate timings on first mount
+  // Generate random resolve times for each character
   useEffect(() => {
     const generateTimings = () => {
-      const newTimings = text.split('').map(() => ({
-        startTime: Math.random() * 1000, // Start between 0ms and 1000ms (staggered start)
-        lockTime: Math.random() * 1500 + 1500, // Lock duration between 1.5s and 3s
-      }))
+      const newTimings = text.split('').map(() =>
+        Math.random() * 2200 + 600 // Resolve between 600ms and 2800ms for slow, mechanical feel
+      )
       setTimings(newTimings)
-      setAnimationKey(0)
     }
 
     generateTimings()
 
-    // Re-trigger animation every 120 seconds (2 minutes)
-    const loopInterval = setInterval(() => {
-      setAnimationKey(prev => prev + 1)
+    // Static display for 120 seconds, then trigger re-flip
+    const loopTimer = setInterval(() => {
+      setAnimationCycle(prev => prev + 1)
       generateTimings()
     }, 120000)
 
-    return () => clearInterval(loopInterval)
+    return () => clearInterval(loopTimer)
   }, [])
 
   if (timings.length === 0) return null
 
   return (
-    <section className="hidden md:block py-4 md:py-6 px-4 md:px-8 bg-background">
+    <section className="hidden md:block py-5 md:py-6 px-4 md:px-8 bg-background">
       <div className="mx-auto max-w-7xl">
-        {/* VIP Information Board */}
-        <div 
-          className="rounded-2xl p-6 md:p-8 border border-white/10 relative overflow-hidden"
+        {/* VIP Information Board - Slim and Professional */}
+        <div
+          className="rounded-lg p-6 border border-white/15 relative overflow-hidden"
           style={{
             backgroundColor: '#1D215E',
           }}
         >
-          {/* Text content - clean and readable with proper spacing */}
-          <motion.p 
-            className="font-mono text-lg leading-relaxed text-center"
+          {/* Text content with split-flap mechanics */}
+          <motion.div
+            className="flex flex-wrap justify-center items-center gap-0"
             style={{
-              color: '#f8f9fa',
-              fontFamily: 'JetBrains Mono, Space Mono, monospace',
-              letterSpacing: '0.3px',
-              wordSpacing: '0.2em',
-              textAlign: 'justify',
+              lineHeight: '2rem',
+              textAlign: 'center',
+              justifyContent: 'center',
             }}
           >
             {text.split('').map((char, idx) => (
-              <ScrambleChar 
-                key={`${animationKey}-${idx}`}
+              <FlipChar
+                key={`${animationCycle}-${idx}`}
                 char={char}
-                index={idx}
-                startTime={timings[idx]?.startTime || 0}
-                lockTime={timings[idx]?.lockTime || 2000}
-                animationKey={animationKey}
+                charIndex={idx}
+                resolveTime={timings[idx] || 1500}
+                animationCycle={animationCycle}
               />
             ))}
-          </motion.p>
+          </motion.div>
         </div>
       </div>
 
