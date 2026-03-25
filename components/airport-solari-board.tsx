@@ -6,42 +6,54 @@ import { motion } from 'framer-motion'
 interface ScrambleCharProps {
   char: string
   index: number
-  randomLockTime: number
+  startTime: number
+  lockTime: number
+  animationKey: number
 }
 
-const ScrambleChar = ({ char, index, randomLockTime }: ScrambleCharProps) => {
+const ScrambleChar = ({ char, index, startTime, lockTime, animationKey }: ScrambleCharProps) => {
   const [displayChar, setDisplayChar] = useState(char === ' ' ? ' ' : 'A')
   const [isLocked, setIsLocked] = useState(false)
   
   const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*'
 
   useEffect(() => {
-    if (isLocked) return
+    setIsLocked(false)
+    setDisplayChar(char === ' ' ? ' ' : 'A')
+    
+    let scrambleInterval: NodeJS.Timeout
+    let startTimer: NodeJS.Timeout
+    let lockTimer: NodeJS.Timeout
 
-    // Start scrambling immediately
-    const scrambleInterval = setInterval(() => {
-      if (char === ' ') {
-        setDisplayChar(' ')
-      } else {
-        setDisplayChar(randomChars[Math.floor(Math.random() * randomChars.length)])
-      }
-    }, 50) // Update every 50ms for fast scrambling effect
+    // Delay start based on randomized start time
+    startTimer = setTimeout(() => {
+      // Start scrambling
+      scrambleInterval = setInterval(() => {
+        if (char === ' ') {
+          setDisplayChar(' ')
+        } else {
+          setDisplayChar(randomChars[Math.floor(Math.random() * randomChars.length)])
+        }
+      }, 60) // Update every 60ms for smooth scramble effect
+    }, startTime)
 
-    // Lock to final character at randomLockTime
-    const lockTimer = setTimeout(() => {
+    // Lock to final character at lockTime
+    lockTimer = setTimeout(() => {
       setDisplayChar(char)
       setIsLocked(true)
-      clearInterval(scrambleInterval)
-    }, randomLockTime)
+      if (scrambleInterval) clearInterval(scrambleInterval)
+    }, startTime + lockTime)
 
     return () => {
-      clearInterval(scrambleInterval)
+      clearTimeout(startTimer)
       clearTimeout(lockTimer)
+      if (scrambleInterval) clearInterval(scrambleInterval)
     }
-  }, [char, randomLockTime, isLocked])
+  }, [char, startTime, lockTime, animationKey])
 
   return (
     <motion.span
+      key={animationKey}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0, duration: 0.1 }}
@@ -55,17 +67,33 @@ const ScrambleChar = ({ char, index, randomLockTime }: ScrambleCharProps) => {
 export function AirportSolariBoard() {
   const text = 'Premium meet and greet and VIP concierge services at Barcelona El Prat Airport (BCN). Our dedicated team operates across Terminal 1 and Terminal 2, providing personal escort, fast track immigration, luggage assistance, and exclusive private tarmac transfers for arrivals, departures, and connections.'
 
-  // Generate random lock times for each character (distributed across 3-4 seconds)
-  const [lockTimes, setLockTimes] = useState<number[]>([])
+  // Generate random start times and lock durations for each character
+  const [timings, setTimings] = useState<Array<{ startTime: number; lockTime: number }>>([])
+  const [animationKey, setAnimationKey] = useState(0)
 
+  // Generate timings on first mount
   useEffect(() => {
-    const times = text.split('').map(() => 
-      Math.random() * 3500 + 500 // Random between 500ms and 4000ms
-    )
-    setLockTimes(times)
+    const generateTimings = () => {
+      const newTimings = text.split('').map(() => ({
+        startTime: Math.random() * 1000, // Start between 0ms and 1000ms (staggered start)
+        lockTime: Math.random() * 1500 + 1500, // Lock duration between 1.5s and 3s
+      }))
+      setTimings(newTimings)
+      setAnimationKey(0)
+    }
+
+    generateTimings()
+
+    // Re-trigger animation every 120 seconds (2 minutes)
+    const loopInterval = setInterval(() => {
+      setAnimationKey(prev => prev + 1)
+      generateTimings()
+    }, 120000)
+
+    return () => clearInterval(loopInterval)
   }, [])
 
-  if (lockTimes.length === 0) return null
+  if (timings.length === 0) return null
 
   return (
     <section className="py-8 md:py-16 px-4 md:px-8 bg-background">
@@ -79,20 +107,23 @@ export function AirportSolariBoard() {
         >
           {/* Text content - clean and readable with proper spacing */}
           <motion.p 
-            className="font-mono text-sm md:text-base lg:text-lg leading-relaxed tracking-normal text-center whitespace-pre-wrap break-words"
+            className="font-mono text-sm md:text-base lg:text-lg leading-relaxed text-center"
             style={{
               color: '#f8f9fa',
               fontFamily: 'JetBrains Mono, Space Mono, monospace',
               letterSpacing: '0.3px',
-              wordSpacing: '0.25em',
+              wordSpacing: '0.2em',
+              textAlign: 'justify',
             }}
           >
             {text.split('').map((char, idx) => (
               <ScrambleChar 
-                key={idx}
+                key={`${animationKey}-${idx}`}
                 char={char}
                 index={idx}
-                randomLockTime={lockTimes[idx] || 2000}
+                startTime={timings[idx]?.startTime || 0}
+                lockTime={timings[idx]?.lockTime || 2000}
+                animationKey={animationKey}
               />
             ))}
           </motion.p>
