@@ -12,7 +12,7 @@ export function ServiceHero({ service }: ServiceHeroProps) {
   return (
     <section className="bg-[var(--navy)] text-white" style={{ minHeight: '50vh' }}>
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-12 md:py-20 h-full">
-        <div className="grid md:grid-cols-[60%_40%] gap-8 md:gap-12 items-center h-full">
+        <div className="grid md:grid-cols-[55%_45%] gap-8 md:gap-12 items-center h-full">
           {/* Left Side (60%) */}
           <div className="flex flex-col gap-6">
             {/* Breadcrumbs */}
