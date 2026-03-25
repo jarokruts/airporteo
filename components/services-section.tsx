@@ -3,13 +3,13 @@
 "use client"
 
 import Image from "next/image"
-import { PlaneLanding, PlaneTakeoff, ArrowLeftRight, ArrowRight } from "lucide-react"
+import { AirplaneLanding, ArrowsDownUp, CaretRight } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 import { useCurrency } from "./currency-context"
 
 const SERVICES = [
   {
-    icon: PlaneLanding,
+    icon: AirplaneLanding,
     title: "Arrival Service",
     description: "Your personal concierge greets you at the gate, expedites immigration and customs, and escorts you to your transport.",
     features: [
@@ -23,7 +23,7 @@ const SERVICES = [
     imageAlt: "Business professionals arriving at airport terminal with luggage",
   },
   {
-    icon: PlaneTakeoff,
+    icon: AirplaneLanding,
     title: "Departure Service",
     description: "Breeze through check-in, security, and passport control with priority access. Relax in a private lounge before your flight.",
     features: [
@@ -37,7 +37,7 @@ const SERVICES = [
     imageAlt: "Airport concierge assisting a traveler at check-in desk",
   },
   {
-    icon: ArrowLeftRight,
+    icon: ArrowsDownUp,
     title: "Connection Service",
     description: "Seamless terminal transfers with a dedicated assistant. Never miss a tight connection, even across terminals.",
     features: [
@@ -102,8 +102,8 @@ export function ServicesSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-navy/10 to-transparent" />
                   {/* Icon badge on image */}
-                  <div className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-card/95 backdrop-blur-sm text-gold shadow-md">
-                    <Icon className="h-5 w-5" />
+                  <div className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-card/95 backdrop-blur-sm text-[var(--gold)] shadow-md">
+                    <Icon size={20} weight="light" />
                   </div>
                 </div>
 
@@ -129,7 +129,7 @@ export function ServicesSection() {
                           <span>
                             {featureText}
                             {asteriskDisplay && (
-                              <span className="ml-1 text-gold font-semibold">{asteriskDisplay}</span>
+                              <span className="ml-1 text-[var(--gold)] font-semibold">{asteriskDisplay}</span>
                             )}
                           </span>
                         </li>
@@ -143,10 +143,10 @@ export function ServicesSection() {
                     <a
                       href="#hero"
                       className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white transition-colors"
-                      style={{ backgroundColor: '#B8913A' }}
+                      style={{ backgroundColor: 'var(--gold)' }}
                     >
                       Book now
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      <CaretRight size={16} weight="light" />
                     </a>
                   </div>
                 </div>

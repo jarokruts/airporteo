@@ -4,6 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --font-playfair: 'Playfair Display', serif;
+  --font-dm-sans: 'DM Sans', sans-serif;
+  --font-inter: 'Inter', sans-serif;
   /* Brand: Deep Blue #1D215E + Gold #B8913A + White */
   --background: #ffffff;
   --foreground: #1D215E;

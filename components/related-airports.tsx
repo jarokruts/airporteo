@@ -3,14 +3,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Airport, getRelatedAirports } from '@/lib/airports'
-import { MapPin, Star, ArrowRight } from 'lucide-react'
+import { MapPin, Star } from 'lucide-react'
+import { CaretRight } from '@phosphor-icons/react'
 
 interface RelatedAirportsProps {
   currentAirportCode: string
 }
 
 export function RelatedAirports({ currentAirportCode }: RelatedAirportsProps) {
-  const relatedAirports = getRelatedAirports(currentAirportCode, 5)
+  const relatedAirports = getRelatedAirports(currentAirportCode, 6)
 
   return (
     <section className="py-8 md:py-16 px-5 lg:px-8 bg-background">
@@ -25,7 +26,7 @@ export function RelatedAirports({ currentAirportCode }: RelatedAirportsProps) {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
           {relatedAirports.map(airport => (
             <Link
               key={airport.code}
@@ -49,7 +50,7 @@ export function RelatedAirports({ currentAirportCode }: RelatedAirportsProps) {
                     <p className="text-xs font-semibold uppercase text-gold truncate">{airport.code}</p>
                     <h3 className="font-bold text-foreground text-xs md:text-sm mt-1 line-clamp-2">{airport.name}</h3>
                   </div>
-                  <ArrowRight size={14} className="text-gold opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                  <CaretRight size={14} weight="light" className="text-gold opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                 </div>
 
                 <div className="flex items-center gap-2 mb-2 md:mb-3">

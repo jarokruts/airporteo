@@ -97,13 +97,13 @@ export function AirportSolariBoard() {
   if (timings.length === 0) return null
 
   return (
-    <section className="hidden md:block py-4 md:py-8 px-4 md:px-8 bg-background">
+    <section className="hidden md:block py-4 md:py-8 px-4 md:px-8 bg-background relative z-0">
       <div className="mx-auto max-w-7xl">
         {/* VIP Information Board - Slim and Professional */}
         <div
           className="rounded-lg p-6 border border-white/15 relative overflow-hidden"
           style={{
-            backgroundColor: '#1D215E',
+            backgroundColor: 'var(--navy)',
           }}
         >
           {/* Text content with split-flap mechanics */}

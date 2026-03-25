@@ -1,6 +1,6 @@
 "use client"
 
-import { PlaneLanding, PlaneTakeoff, ArrowLeftRight } from "lucide-react"
+import { AirplaneLanding, Airplane, AirplaneTakeoff } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 type ServiceType = "arrival" | "departure" | "connection"
@@ -10,24 +10,34 @@ interface ServiceTypeSelectorProps {
   onChange: (value: ServiceType) => void
 }
 
+// Custom component for connection service (two planes)
+function ConnectionIcon({ size = 20, weight = "light" }: { size?: number; weight?: string }) {
+  return (
+    <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
+      <AirplaneLanding size={size} weight={weight as any} />
+      <AirplaneTakeoff size={size} weight={weight as any} />
+    </div>
+  )
+}
+
 const services: { type: ServiceType; label: string; desc: string; icon: React.ElementType }[] = [
   {
     type: "arrival",
     label: "Arrival",
     desc: "Airport pickup",
-    icon: PlaneLanding,
+    icon: AirplaneLanding,
   },
   {
     type: "departure",
     label: "Departure",
     desc: "Airport drop-off",
-    icon: PlaneTakeoff,
+    icon: AirplaneTakeoff,
   },
   {
     type: "connection",
     label: "Connection",
     desc: "Terminal transfer",
-    icon: ArrowLeftRight,
+    icon: ConnectionIcon,
   },
 ]
 
@@ -59,7 +69,7 @@ export function ServiceTypeSelector({ value, onChange }: ServiceTypeSelectorProp
                     : "bg-secondary text-muted-foreground group-hover:text-foreground"
                 )}
               >
-                <Icon className="h-5 w-5" />
+                <Icon size={20} weight="light" />
               </div>
               <div className="text-center">
                 <p

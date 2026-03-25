@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X, PlaneLanding, PlaneTakeoff, ChevronLeft, ChevronRight, Baby, Smile } from 'lucide-react'
+import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley, Calendar, Users, Backpack, AirplaneTakeoff } from '@phosphor-icons/react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
   airport: Airport
+  preSelectedService?: string
 }
 
 // Local AIRPORTS array matching the main page
@@ -28,14 +29,14 @@ type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 function getDirectionIcon(direction: string) {
   switch (direction) {
     case 'Arrival':
-      return <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
+      return <AirplaneLanding size={16} weight="light" style={{ color: '#B8913A' }} />
     case 'Departure':
-      return <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
+      return <AirplaneTakeoff size={16} weight="light" style={{ color: '#B8913A' }} />
     case 'Connection':
       return (
-        <div style={{ display: 'flex', gap: '2px' }}>
-          <PlaneLanding className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
-          <PlaneTakeoff className="h-[13px] w-[13px]" style={{ color: '#B8913A' }} />
+        <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+          <AirplaneLanding size={16} weight="light" style={{ color: '#B8913A' }} />
+          <AirplaneTakeoff size={16} weight="light" style={{ color: '#B8913A' }} />
         </div>
       )
     default:
@@ -259,7 +260,7 @@ function DatePickerDropdown({
           onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
           onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
         >
-          <ChevronLeft className="h-4 w-4" style={{ color: '#1D215E' }} />
+          <CaretLeft size={16} weight="light" style={{ color: '#1D215E' }} />
         </button>
 
         <button
@@ -280,7 +281,7 @@ function DatePickerDropdown({
           onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
           onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
         >
-          <ChevronRight className="h-4 w-4" style={{ color: '#1D215E' }} />
+          <CaretRight size={16} weight="light" style={{ color: '#1D215E' }} />
         </button>
       </div>
 
@@ -464,7 +465,7 @@ function PassengersLuggageDropdown({
           {/* Children (2-12) */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Smile size={14} style={{ color: '#94A3B8' }} />
+              <Smiley size={14} weight="light" style={{ color: '#94A3B8' }} />
               <div>
                 <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Children</div>
                 <div style={{ fontSize: '11px', color: '#94A3B8' }}>2–12</div>
@@ -495,7 +496,7 @@ function PassengersLuggageDropdown({
           {/* Cabin baggage */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Luggage size={14} style={{ color: '#94A3B8' }} />
+              <Backpack size={14} weight="light" style={{ color: '#94A3B8' }} />
               <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Cabin baggage</div>
             </div>
             <Stepper value={cabinBags} onChange={onCabinBagsChange} min={0} max={10} />
@@ -504,7 +505,7 @@ function PassengersLuggageDropdown({
           {/* Checked baggage */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <BriefcaseBusiness size={14} style={{ color: '#94A3B8' }} />
+              <Briefcase size={14} weight="light" style={{ color: '#94A3B8' }} />
               <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Checked baggage</div>
             </div>
             <Stepper value={checkedBags} onChange={onCheckedBagsChange} min={0} max={10} />
@@ -789,7 +790,7 @@ function SimpleDropdown({
         onMouseLeave={(e) => !isOpen && (e.currentTarget.style.background = 'white')}
       >
         <span>{value}</span>
-        <ChevronDown size={14} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+        <CaretDown size={14} weight="light" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
       </button>
 
       {/* Dropdown Menu - Opens Downward */}
@@ -987,11 +988,12 @@ function BottomSheet({
   )
 }
 
-export function AirportBookingForm({ airport }: AirportBookingFormProps) {
+export function AirportBookingForm({ airport, preSelectedService }: AirportBookingFormProps) {
   const [direction, setDirection] = useState('Arrival')
-  const [service, setService] = useState('Meet & Greet')
-  const [airportValue, setAirportValue] = useState(`${airport.city} ${airport.code}`)
+  const [service, setService] = useState(preSelectedService || 'Meet & Greet')
+  const [airportValue, setAirportValue] = useState(airport.code ? `${airport.city} ${airport.code}` : '')
   const [flightNumber, setFlightNumber] = useState('')
+  const [connectionFlightNumber, setConnectionFlightNumber] = useState('')
   const [date, setDate] = useState('')
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
@@ -1062,29 +1064,81 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
       {/* Row 2: Airport field with autocomplete search */}
       <AirportSearchField value={airportValue} onChange={setAirportValue} direction={direction} />
 
-      {/* Row 3: Flight # */}
-      <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
-        <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
-        <input
-          type="text"
-          value={flightNumber}
-          onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
-          placeholder="e.g. BA206"
-          maxLength={6}
-          style={{
-            marginLeft: '8px',
-            flex: 1,
-            minWidth: 0,
-            background: 'transparent',
-            border: 'none',
-            outline: 'none',
-            fontSize: '14px',
-            fontWeight: 500,
-            color: '#1D215E',
-            padding: 0
-          }}
-        />
-      </div>
+      {/* Row 3: Flight # - splits into two fields for Connection */}
+      {direction !== 'Connection' ? (
+        <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
+          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
+          <input
+            type="text"
+            value={flightNumber}
+            onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+            placeholder="e.g. BA206"
+            maxLength={6}
+            style={{
+              marginLeft: '8px',
+              flex: 1,
+              minWidth: 0,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              fontSize: '14px',
+              fontWeight: 500,
+              color: '#1D215E',
+              padding: 0
+            }}
+          />
+        </div>
+      ) : (
+        <>
+          {/* Arrival Flight # for Connection */}
+          <div style={{position:'relative', display:'flex', alignItems:'center'}}>
+            <AirplaneLanding size={16} weight="light" color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+            <input
+              type="text"
+              value={flightNumber}
+              onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+              placeholder="Arrival Flight #"
+              maxLength={6}
+              style={{
+                width:'100%',
+                height:'40px',
+                paddingLeft:'36px',
+                border:'1px solid #E2E8F0',
+                borderRadius:'10px',
+                fontSize:'14px',
+                fontWeight: 500,
+                color: '#1D215E',
+                backgroundColor: 'white',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+          
+          {/* Departure Flight # for Connection */}
+          <div style={{position:'relative', display:'flex', alignItems:'center'}}>
+            <AirplaneTakeoff weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+            <input
+              type="text"
+              value={connectionFlightNumber}
+              onChange={(e) => setConnectionFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+              placeholder="Departure Flight #"
+              maxLength={6}
+              style={{
+                width:'100%',
+                height:'40px',
+                paddingLeft:'36px',
+                border:'1px solid #E2E8F0',
+                borderRadius:'10px',
+                fontSize:'14px',
+                fontWeight: 500,
+                color: '#1D215E',
+                backgroundColor: 'white',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+        </>
+      )}
 
       {/* Row 4: Date */}
       <div style={{ position: 'relative', width: '100%' }}>
@@ -1108,11 +1162,11 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
           onMouseEnter={(e) => !showDatePicker && (e.currentTarget.style.background = '#F5F7FA')}
           onMouseLeave={(e) => !showDatePicker && (e.currentTarget.style.background = 'white')}
         >
-          <Calendar size={14} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
+          <Calendar size={14} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
           <span style={{ flex: 1, textAlign: 'left', fontSize: '14px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Select date'}
           </span>
-          <ChevronDown size={12} style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: showDatePicker ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+          <CaretDown size={12} weight="light" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: showDatePicker ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
         </button>
         
         <DatePickerDropdown 
@@ -1149,13 +1203,13 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
           </div>
           <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
-            <BriefcaseBusiness size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
+            <Backpack size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0 }} />
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
-            <Luggage size={13} style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
+            <Suitcase size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
-            <ChevronDown size={12} style={{ color: '#94A3B8', transform: showPassengersDropdown ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+            <CaretDown size={12} weight="light" style={{ color: '#94A3B8', transform: showPassengersDropdown ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
           </div>
         </button>
 
@@ -1180,7 +1234,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
 
       {/* Row 6: Email */}
       <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
-        <Mail size={13} style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
+        <Envelope size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
         <input
           type="email"
           value={email}

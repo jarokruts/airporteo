@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { ChevronDown, Mail, Plane, PlaneLanding, PlaneTakeoff, X, Loader2, Handshake, Crown, Car, Check, Calendar, Users, Baby, Luggage, BriefcaseBusiness, Minus, Plus, ChevronLeft, ChevronRight, ArrowRightLeft } from "lucide-react"
+import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp, Shield, Clock, Star, Backpack, AirplaneTakeoff } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 // CSS to prevent text overflow in inputs and buttons
@@ -140,7 +140,7 @@ function SheetOption({
           <span className="block text-[11px] text-[#94A3B8] font-normal">{subtitle}</span>
         )}
       </span>
-      {selected && <Check className="h-5 w-5 text-[#B8913A]" />}
+      {selected && <CheckCircle size={20} weight="light" className="h-5 w-5 text-[#B8913A]" />}
     </button>
   )
 }
@@ -292,10 +292,10 @@ function Dropdown({
       >
         {icon && <span className="text-muted-foreground">{icon}</span>}
         {selected?.label ?? label}
-        <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+        <CaretDown weight="light" className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        <div className="absolute left-0 top-full z-50 mt-1.5 min-w-[160px] overflow-hidden rounded-xl border border-border bg-card shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="absolute left-0 top-full z-[9999] mt-1.5 min-w-[160px] overflow-hidden rounded-xl border border-border bg-card shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
           {options.map((o) => (
             <button
               key={o.value}
@@ -379,8 +379,8 @@ function PassengersBagsDropdown({
     {
       section: "Bags",
       items: [
-        { key: "cabinBags", icon: <Luggage className="h-4 w-4" />, label: "Cabin baggage", hint: "", value: cabinBags, min: 0 },
-        { key: "checkedBags", icon: <Luggage className="h-4 w-4 opacity-70" />, label: "Checked baggage", hint: "", value: checkedBags, min: 0 },
+        { key: "cabinBags", icon: <Backpack weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />, label: "Cabin baggage", hint: "", value: cabinBags, min: 0 },
+        { key: "checkedBags", icon: <Suitcase weight="light" className="h-4 w-4 opacity-70" style={{ color: '#1D215E' }} />, label: "Checked baggage", hint: "", value: checkedBags, min: 0 },
       ],
     },
   ]
@@ -395,15 +395,15 @@ function PassengersBagsDropdown({
         <Users className="h-3.5 w-3.5 text-muted-foreground" />
         {label}
         <span className="mx-1 h-3.5 w-px bg-border" />
-        <BriefcaseBusiness className="h-4 w-4 text-muted-foreground" />
+        <Backpack weight="light" className="h-4 w-4 text-muted-foreground" style={{ color: '#1D215E' }} />
         <span className="font-semibold">{cabinBags}</span>
-        <Luggage className="h-4 w-4 text-muted-foreground" />
+        <Suitcase weight="light" className="h-4 w-4 text-muted-foreground" style={{ color: '#1D215E' }} />
         <span className="font-semibold">{checkedBags}</span>
-        <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+        <CaretDown weight="light" className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-50 mt-1.5 rounded-2xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150" style={{ minWidth: '380px' }}>
+        <div className="absolute left-0 top-full z-[9999] mt-1.5 rounded-2xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150" style={{ minWidth: '380px' }}>
           {/* Two columns: Passengers and Luggage */}
           <div style={{ display: 'flex', paddingTop: '16px', paddingBottom: '16px' }}>
             {/* Left Column - Passengers */}
@@ -593,7 +593,7 @@ function DatePickerBottomSheet({
             cursor: 'pointer',
           }}
         >
-          <ChevronLeft className="h-4 w-4" style={{ color: '#1D215E' }} />
+          <CaretLeft weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />
         </button>
         
         <h4 style={{ fontSize: '16px', fontWeight: 700, color: '#1D215E', margin: 0, flex: 1, textAlign: 'center' }}>
@@ -615,7 +615,7 @@ function DatePickerBottomSheet({
             cursor: 'pointer',
           }}
         >
-          <ChevronRight className="h-4 w-4" style={{ color: '#1D215E' }} />
+          <CaretRight weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />
         </button>
       </div>
 
@@ -962,8 +962,9 @@ function AirportSearchBottomSheet({
               gap: "8px",
             }}
           >
-            <Plane
-              className="h-5 w-5 shrink-0"
+            <Airplane
+              weight="light"
+              size={20}
               style={{ color: "#B8913A" }}
             />
             <input
@@ -1105,9 +1106,9 @@ function AirportSearchBottomSheet({
                 </div>
 
                 {/* Chevron right */}
-                <ChevronDown
-                  className="h-4 w-4 shrink-0 -rotate-90"
-                  style={{ color: "#94A3B8" }}
+<CaretDown
+                  weight="light"
+                  className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")}
                 />
               </button>
             ))
@@ -1192,7 +1193,7 @@ function AirportField({
         )}
       </div>
       {open && filtered.length > 0 && (
-        <div className="absolute left-0 top-full z-50 mt-1.5 w-80 overflow-hidden rounded-xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150">
+          <div className="absolute left-0 top-full z-[9999] mt-1.5 w-80 overflow-hidden rounded-xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150">
           <div className="px-4 py-2.5 border-b border-border">
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Trending Airports</p>
           </div>
@@ -1328,7 +1329,7 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
       </div>
 
       {open && (
-        <div className="absolute top-full left-0 z-50 mt-1.5 rounded-2xl border border-border bg-card p-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150"
+          <div className="absolute top-full left-0 z-[9999] mt-1.5 rounded-2xl border border-border bg-card p-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150"
           style={{ minWidth: "560px" }}
         >
           <div className="flex items-center gap-4">
@@ -1338,7 +1339,7 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary hover:bg-border transition-colors"
               aria-label="Previous month"
             >
-              <ChevronDown className="h-4 w-4 -rotate-90" />
+              <CaretDown weight="light" className="h-4 w-4 -rotate-90" />
             </button>
 
             <div className="flex flex-1 gap-6">
@@ -1353,7 +1354,7 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary hover:bg-border transition-colors"
               aria-label="Next month"
             >
-              <ChevronDown className="h-4 w-4 rotate-90" />
+              <CaretDown weight="light" className="h-4 w-4 rotate-90" />
             </button>
           </div>
         </div>
@@ -1439,7 +1440,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
         </div>
         <div className="flex items-center gap-6 text-xs text-muted-foreground">
           {[{ icon: Shield, text: "Secure" }, { icon: Clock, text: "24/7 Support" }, { icon: Star, text: "4.9/5" }].map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-center gap-1.5"><Icon className="h-3.5 w-3.5" />{text}</div>
+            <div key={text} className="flex items-center gap-1.5"><Icon weight="light" className="h-3.5 w-3.5" />{text}</div>
           ))}
         </div>
         <button
@@ -1455,7 +1456,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
   return (
     <>
       <style>{inputOverflowStyle}</style>
-      <div className="md:hidden" style={{ padding: '0 8px', borderRadius: '16px' }}>
+      <div className="md:hidden" style={{ padding: '0 4px', borderRadius: '16px' }}>
         {/* White card container - wraps all fields */}
         <div className="space-y-2" style={{ borderRadius: '16px', overflow: 'hidden', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '16px' }}>
 
@@ -1496,7 +1497,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
               >
                 <span>{state.serviceType === "arrival" ? "Arrival" : state.serviceType === "departure" ? "Departure" : "Connection"}</span>
-                <ChevronDown className="h-3.5 w-3.5" style={{ color: '#94A3B8', marginLeft: '4px' }} />
+                <CaretDown weight="light" className="h-3.5 w-3.5" style={{ color: '#94A3B8', marginLeft: '4px' }} />
               </button>
 
               {/* Vertical divider */}
@@ -1538,7 +1539,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
               >
                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{state.service}</span>
-                <ChevronDown className="h-3.5 w-3.5" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
+                <CaretDown weight="light" className="h-3.5 w-3.5" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
               </button>
             </div>
 
@@ -1554,14 +1555,13 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             >
               {state.serviceType === "connection" ? (
                 <>
-                  <Plane className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
-                  <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
-                  <PlaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+                  <AirplaneLanding weight="light" className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '4px' }} />
+                  <AirplaneTakeoff weight="light" className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
                 </>
               ) : state.serviceType === "departure" ? (
-                <PlaneTakeoff className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+                <AirplaneTakeoff weight="light" className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               ) : (
-                <PlaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: '#B8913A' }} />
+                <AirplaneLanding weight="light" className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               )}
               <span className="flex-1 min-w-0 text-left text-xs" style={{ color: state.airport ? '#1D215E' : '#94A3B8' }}>
                 {state.airport ? `${state.airport.code} - ${state.airport.city}` : (state.serviceType === "connection" ? "Airport of service" : "Airport or city")}
@@ -1600,7 +1600,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               <>
                 {/* Arriving flight # for Connection */}
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <PlaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneLanding weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.flightNumber}
@@ -1608,7 +1608,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                       const value = e.target.value.replace(/[^A-Za-z0-9]/g, "").slice(0, 6)
                       set({ flightNumber: value })
                     }}
-                    placeholder="Flight #"
+                    placeholder="Arrival Flight #"
                     maxLength={6}
                     style={{
                       width:'100%',
@@ -1625,7 +1625,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 
                 {/* Departing flight # for Connection */}
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <PlaneTakeoff size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneTakeoff weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.connectionFlightNumber}
@@ -1633,7 +1633,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                       const value = e.target.value.replace(/[^A-Za-z0-9]/g, "").slice(0, 6)
                       set({ connectionFlightNumber: value })
                     }}
-                    placeholder="Flight #"
+                    placeholder="Departure Flight #"
                     maxLength={6}
                     style={{
                       width:'100%',
@@ -1693,7 +1693,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               <span style={{ marginLeft: '6px', fontSize: '12px', color: '#1D215E', flex: 1, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {state.date && typeof state.date === 'string' ? new Date(state.date + "T00:00:00").toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "Select date"}
               </span>
-              <ChevronDown className="h-3 w-3" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
+              <CaretDown weight="light" className="h-3 w-3" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
             </button>
 
             {/* Row 5: Passengers + Luggage - opens bottom sheet */}
@@ -1724,19 +1724,19 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.adults + state.children + state.infants} Pax</span>
               </div>
               <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
-                <BriefcaseBusiness className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0 }} />
+                <Backpack weight="light" className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0 }} />
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.cabinBags}</span>
-                <Luggage className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
+                <Suitcase weight="light" className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.checkedBags}</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
-                <ChevronDown className="h-3 w-3" style={{ color: '#94A3B8' }} />
+                <CaretDown weight="light" className="h-3 w-3" style={{ color: '#94A3B8' }} />
               </div>
             </button>
 
             {/* Row 6: Email field - standalone full width */}
             <div style={{ border: '1.5px solid #E2E8F0', borderRadius: '10px', backgroundColor: '#FFFFFF', display: 'flex', alignItems: 'center', padding: '0 12px', height: '40px' }}>
-              <Mail className="mr-1.5 h-[13px] w-[13px] shrink-0 text-[#94A3B8]" />
+              <Envelope weight="light" className="mr-1.5 h-[13px] w-[13px] shrink-0 text-[#94A3B8]" />
               <input
                 type="text"
                 value={state.email}
@@ -1805,7 +1805,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                     }}
                   >
                     {state.booking ? (
-                      <><Loader2 className="h-4 w-4 animate-spin" /> Checking...</>
+                      <><Spinner weight="light" className="h-4 w-4 animate-spin" /> Checking...</>
                     ) : (
                       <>Get a Quote</>
                     )}
@@ -1817,7 +1817,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
       </div>
 
       {/* Tablet Layout - Portrait (768px-1023px) and Landscape (1024px-1179px) */}
-      <div className="hidden md:block lg:hidden p-6" style={{ borderRadius: '16px', overflow: 'hidden', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+      <div className="hidden md:block lg:hidden p-4" style={{ borderRadius: '16px', overflow: 'hidden', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
         {/* Row 1: Same as desktop */}
         <div className="flex flex-wrap items-center gap-1 w-full mb-3">
           <div style={{ height: '48px', border: '1.5px solid #E2E8F0', borderRadius: '10px', backgroundColor: '#FFFFFF', display: 'flex', alignItems: 'center', paddingLeft: '12px', paddingRight: '12px', boxSizing: 'border-box' }}>
@@ -1863,11 +1863,11 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               <AirportField
                 label={
                   state.serviceType === "connection" ? (
-                    <Plane className="h-4 w-4" />
+                    <Airplane weight="light" className="h-4 w-4" />
                   ) : state.serviceType === "departure" ? (
-                    <PlaneTakeoff className="h-4 w-4" />
+                    <AirplaneTakeoff weight="light" className="h-4 w-4" />
                   ) : (
-                    <PlaneLanding className="h-4 w-4" />
+                    <AirplaneLanding weight="light" className="h-4 w-4" />
                   )
                 }
                 placeholder={state.serviceType === "connection" ? "Airport" : "Airport or city"}
@@ -1911,7 +1911,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 </div>
               ) : (
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <PlaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneLanding weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.flightNumber}
@@ -1961,7 +1961,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               />
             </div>
             <div style={{position:'relative', display:'flex', alignItems:'center', flex: 1}}>
-              <PlaneTakeoff size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+              <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
               <input
                 type="text"
                 value={state.connectionFlightNumber}
@@ -2010,7 +2010,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               />
             </div>
             <div style={{position:'relative', display:'flex', alignItems:'center', flex: 1}}>
-              <PlaneTakeoff size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+              <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
               <input
                 type="text"
                 value={state.connectionFlightNumber}
@@ -2096,7 +2096,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
           }}
         >
           {state.booking ? (
-            <><Loader2 className="h-5 w-5 animate-spin" /> Checking...</>
+            <><Spinner weight="light" className="h-5 w-5 animate-spin" /> Checking...</>
           ) : (
             <>Get a Quote</>
           )}
@@ -2112,7 +2112,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:block p-5 space-y-3">
+      <div className="hidden lg:block p-3 space-y-3">
         {/* Top filter row */}
         <div className="flex flex-wrap items-center gap-1 w-full">
           <Dropdown
@@ -2149,11 +2149,11 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             <AirportField
             label={
               state.serviceType === "connection" ? (
-                <Plane className="h-4 w-4" />
+                <Airplane weight="light" className="h-4 w-4" />
               ) : state.serviceType === "departure" ? (
-                <PlaneTakeoff className="h-4 w-4" />
+                <AirplaneLanding className="h-4 w-4" />
               ) : (
-                <PlaneLanding className="h-4 w-4" />
+                <AirplaneLanding className="h-4 w-4" />
               )
             }
                 placeholder={state.serviceType === "connection" ? "Airport" : "Airport or city"}
@@ -2167,7 +2167,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
           <div className="flex flex-col gap-2 flex-1 min-w-0">
               <div className="relative flex h-14 min-w-0 w-full items-center gap-1 rounded-xl border-2 border-border bg-card px-4 focus-within:border-blue focus-within:shadow-[0_0_0_3px_rgba(219,38,35,0.1)] transition-all hover:border-slate-mid">
               {state.serviceType === "connection" ? (
-                <PlaneLanding size={16} color="#1D215E" style={{ position: 'absolute', left: '12px', flexShrink: 0 }} />
+                <AirplaneLanding size={16} color="#1D215E" style={{ position: 'absolute', left: '12px', flexShrink: 0 }} />
               ) : null}
               <input
                 type="text"
@@ -2193,7 +2193,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             </div>
             {state.serviceType === "connection" && (
               <div className="relative flex h-14 min-w-0 w-full items-center gap-1 rounded-xl border-2 border-border bg-card px-4 focus-within:border-blue focus-within:shadow-[0_0_0_3px_rgba(219,38,35,0.1)] transition-all hover:border-slate-mid">
-                <PlaneTakeoff size={16} color="#1D215E" style={{ position: 'absolute', left: '12px', flexShrink: 0 }} />
+                <AirplaneLanding size={16} color="#1D215E" style={{ position: 'absolute', left: '12px', flexShrink: 0 }} />
                 <input
                   type="text"
                   value={state.connectionFlightNumber}
@@ -2237,7 +2237,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
 
           {/* Email */}
           <div style={{ border: '1.5px solid #E2E8F0', borderRadius: '10px', backgroundColor: '#FFFFFF', display: 'flex', alignItems: 'center', padding: '0 12px', height: '56px', minWidth: '0', flex: '1', gap: '8px' }}>
-            <Mail className="h-4 w-4 shrink-0 text-muted-foreground" />
+              <Envelope weight="light" className="h-4 w-4 shrink-0 text-muted-foreground" />
             <input
               type="text"
               value={state.email}
@@ -2292,7 +2292,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             }}
           >
             {state.booking ? (
-              <><Loader2 className="h-5 w-5 animate-spin" /> Checking...</>
+              <><Spinner weight="light" className="h-5 w-5 animate-spin" /> Checking...</>
             ) : (
               <>Get a Quote</>
             )}
@@ -2361,9 +2361,9 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
                 {[
-                  { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: PlaneLanding },
-                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: PlaneTakeoff },
-                  { value: 'connection', label: 'Connection', desc: 'Connecting flight', icon: ArrowRightLeft }
+                  { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: AirplaneLanding },
+                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: AirplaneTakeoff },
+                  { value: 'connection', label: 'Connection', desc: 'Connecting flight', icon: ArrowsDownUp }
                 ].map(({ value, label, desc, icon: Icon }) => (
                   <button
                     key={value}
@@ -2404,7 +2404,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                         {desc}
                       </div>
                     </span>
-                    {state.serviceType === value && <Check className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
+                    {state.serviceType === value && <CheckCircle weight="light" className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
                   </button>
                 ))}
               </div>
@@ -2476,7 +2476,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                             {desc}
                           </div>
                         </span>
-                        {state.service === value && <Check className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
+                        {state.service === value && <CheckCircle weight="light" size={20} className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
                       </button>
                     ))
                 })()}

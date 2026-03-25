@@ -34,7 +34,7 @@ const FOOTER_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#1D215E] text-white relative overflow-hidden">
+    <footer className="bg-[var(--navy)] text-white relative overflow-hidden">
       <SolariBackground />
       <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8 relative z-10">
         {/* Main Footer Content - Desktop only (hidden on mobile) */}
@@ -90,16 +90,15 @@ export function Footer() {
           {/* Right Columns - Links (3 columns, equal width ~23% each) */}
           {FOOTER_LINKS.map((group) => (
             <div key={group.heading}>
-              <h3 className="text-base font-semibold text-white" style={{ fontSize: '15px' }}>
+              <h3 className="text-base font-semibold text-white">
                 {group.heading}
               </h3>
               <ul className="mt-4 space-y-2">
                 {group.links.map((link) => (
-                  <li key={link.label} style={{ lineHeight: '2' }}>
+                  <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-gray-400 transition-colors hover:text-white whitespace-nowrap"
-                      style={{ fontSize: '14px' }}
+                      className="text-sm text-gray-400 transition-colors hover:text-white whitespace-nowrap"
                     >
                       {link.label}
                     </a>
@@ -124,8 +123,7 @@ export function Footer() {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-gray-400 transition-colors hover:text-white text-sm"
-                        style={{ fontSize: '14px', lineHeight: '2' }}
+                        className="text-sm text-gray-400 transition-colors hover:text-white"
                       >
                         {link.label}
                       </a>
@@ -142,8 +140,7 @@ export function Footer() {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-gray-400 transition-colors hover:text-white text-sm"
-                        style={{ fontSize: '14px', lineHeight: '2' }}
+                        className="text-sm text-gray-400 transition-colors hover:text-white"
                       >
                         {link.label}
                       </a>
@@ -163,8 +160,7 @@ export function Footer() {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-gray-400 transition-colors hover:text-white text-sm"
-                        style={{ fontSize: '14px', lineHeight: '2' }}
+                        className="text-sm text-gray-400 transition-colors hover:text-white"
                       >
                         {link.label}
                       </a>
@@ -180,8 +176,7 @@ export function Footer() {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-400 transition-colors hover:text-white text-sm"
-                      style={{ fontSize: '14px', lineHeight: '2' }}
+                      className="text-sm text-gray-400 transition-colors hover:text-white"
                     >
                       Privacy
                     </a>
@@ -189,8 +184,7 @@ export function Footer() {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-400 transition-colors hover:text-white text-sm"
-                      style={{ fontSize: '14px', lineHeight: '2' }}
+                      className="text-sm text-gray-400 transition-colors hover:text-white"
                     >
                       Terms
                     </a>
@@ -198,8 +192,7 @@ export function Footer() {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-400 transition-colors hover:text-white text-sm"
-                      style={{ fontSize: '14px', lineHeight: '2' }}
+                      className="text-sm text-gray-400 transition-colors hover:text-white"
                     >
                       AML Policy
                     </a>
@@ -207,8 +200,7 @@ export function Footer() {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-400 transition-colors hover:text-white text-sm"
-                      style={{ fontSize: '14px', lineHeight: '2' }}
+                      className="text-sm text-gray-400 transition-colors hover:text-white"
                     >
                       GDPR
                     </a>
@@ -216,8 +208,7 @@ export function Footer() {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-400 transition-colors hover:text-white text-sm"
-                      style={{ fontSize: '14px', lineHeight: '2' }}
+                      className="text-sm text-gray-400 transition-colors hover:text-white"
                     >
                       Cookies
                     </a>
@@ -228,7 +219,7 @@ export function Footer() {
           </div>
 
           {/* Divider Line */}
-          <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', marginBottom: '24px' }} />
+          <div className="my-6 border-t border-white/10" />
 
           {/* Social Icons Row - Centered */}
           <div className="flex gap-6 justify-center mb-6">
@@ -269,13 +260,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar - Desktop only */}
-        <div 
-          className="hidden md:flex mt-8 items-center justify-between gap-4"
-          style={{ 
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-            paddingTop: '24px'
-          }}
-        >
+        <div className="hidden md:flex mt-8 items-center justify-between gap-4 border-t border-white/10 pt-6">
           <p className="text-sm text-gray-400">
             {"\u00A9"} 2026 Airporteo. All rights reserved.
           </p>
