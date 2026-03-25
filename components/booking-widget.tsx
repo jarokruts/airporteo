@@ -1862,7 +1862,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               <AirportField
                 label={
                   state.serviceType === "connection" ? (
-                    <Plane className="h-4 w-4" />
+                    <Airplane weight="light" className="h-4 w-4" />
                   ) : state.serviceType === "departure" ? (
                     <AirplaneLanding className="h-4 w-4" />
                   ) : (
@@ -2148,7 +2148,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             <AirportField
             label={
               state.serviceType === "connection" ? (
-                <Plane className="h-4 w-4" />
+                <Airplane weight="light" className="h-4 w-4" />
               ) : state.serviceType === "departure" ? (
                 <AirplaneLanding className="h-4 w-4" />
               ) : (
