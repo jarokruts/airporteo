@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley } from '@phosphor-icons/react'
+import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley, Calendar, Users } from '@phosphor-icons/react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
