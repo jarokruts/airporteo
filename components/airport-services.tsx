@@ -2,54 +2,58 @@
 
 import { Airport } from '@/lib/airports'
 import { Check } from 'lucide-react'
+import { useState } from 'react'
 
 interface AirportServicesProps {
   airport: Airport
 }
 
+type TabType = 'arrival' | 'departure' | 'connection' | 'vip'
+
 export function AirportServices({ airport }: AirportServicesProps) {
-  const handleServiceClick = () => {
-    const heroSection = document.getElementById('hero')
-    if (heroSection) {
-      heroSection.scrollIntoView({ behavior: 'smooth' })
-    }
+  const [activeTab, setActiveTab] = useState<TabType>('arrival')
+
+  const tabContents: Record<TabType, string[]> = {
+    arrival: [
+      'Personal meet & greet directly at aircraft door',
+      'Dedicated escort through terminal to baggage claim',
+      'Priority immigration processing',
+      'Professional assistance with customs and arrival procedures',
+      'Expert baggage collection and porter services',
+      'Personal escort to your waiting vehicle or transfer'
+    ],
+    departure: [
+      'Curbside meet & greet at departure terminal entrance',
+      'Complete check-in assistance and support',
+      'Professional baggage handling from vehicle to counter',
+      'Expert guidance through customs and departure formalities',
+      'Priority fast track security access and processing',
+      'Personal escort service to aircraft door with lounge option'
+    ],
+    connection: [
+      'Aircraft door reception by dedicated connection specialist',
+      'Priority escort through terminal for seamless connections',
+      'Fast track immigration processing for international transit',
+      'Professional baggage handling and connection coordination',
+      'Expedited security screening for connecting flights',
+      'Aircraft door escort with optional lounge access during layover'
+    ],
+    vip: [
+      'Dedicated Personal VIP Advisor to guide and assist you throughout',
+      'Private lounge access for up to 3 hours',
+      'Individual limousine transfer from/to the aircraft to/from the VIP terminal',
+      'Assistance with checked luggage items',
+      'Personal greeting at the aircraft',
+      'Customs and passport control via premium fast-track lanes',
+      'No airport crowds, no stress — just serenity, style, and Platinum service'
+    ]
   }
 
-  const arrivalServices = [
-    'Personal meet & greet directly at aircraft door',
-    'Dedicated escort through terminal to baggage claim',
-    'Priority immigration processing',
-    'Professional assistance with customs and arrival procedures',
-    'Expert baggage collection and porter services',
-    'Personal escort to your waiting vehicle or transfer'
-  ]
-
-  const departureServices = [
-    'Curbside meet & greet at departure terminal entrance',
-    'Complete check-in assistance and support',
-    'Professional baggage handling from vehicle to counter',
-    'Expert guidance through customs and departure formalities',
-    'Priority fast track security access and processing',
-    'Personal escort service to aircraft door with lounge option'
-  ]
-
-  const connectionServices = [
-    'Aircraft door reception by dedicated connection specialist',
-    'Priority escort through terminal for seamless connections',
-    'Fast track immigration processing for international transit',
-    'Professional baggage handling and connection coordination',
-    'Expedited security screening for connecting flights',
-    'Aircraft door escort with optional lounge access during layover'
-  ]
-
-  const vipServices = [
-    'Dedicated Personal VIP Advisor to guide and assist you throughout',
-    'Private lounge access for up to 3 hours',
-    'Individual limousine transfer from/to the aircraft to/from the VIP terminal',
-    'Assistance with checked luggage items',
-    'Personal greeting at the aircraft',
-    'Customs and passport control via premium fast-track lanes',
-    'No airport crowds, no stress — just serenity, style, and Platinum service'
+  const tabs = [
+    { id: 'arrival', label: 'Arrival' },
+    { id: 'departure', label: 'Departure' },
+    { id: 'connection', label: 'Connection' },
+    { id: 'vip', label: 'VIP Platinum' }
   ]
 
   return (
@@ -64,59 +68,59 @@ export function AirportServices({ airport }: AirportServicesProps) {
           </p>
         </div>
 
-        {/* 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
-          {/* Column 1: On Arrival */}
-          <div className="bg-white rounded-xl p-6 md:p-8 border border-border hover:shadow-lg transition-shadow min-h-96">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-6">On Arrival</h3>
-            <ul className="space-y-3">
-              {arrivalServices.map((service, idx) => (
-                <li key={idx} className="flex gap-3">
-                  <Check size={20} className="text-[#B8913A] flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground text-sm leading-snug">{service}</span>
-                </li>
-              ))}
-            </ul>
+        {/* Tab Navigation */}
+        <div className="flex gap-0 mb-0 overflow-x-auto md:overflow-x-visible -mx-5 md:mx-0 px-5 md:px-0">
+          <div className="flex gap-0 w-full">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id
+              const isVIP = tab.id === 'vip'
+              
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as TabType)}
+                  className="flex-1 px-3 md:px-6 py-3 md:py-4 text-xs md:text-base font-semibold transition-all duration-200 border-b"
+                  style={{
+                    backgroundColor: isActive 
+                      ? (isVIP ? '#B8913A' : '#1D215E')
+                      : 'white',
+                    color: isActive
+                      ? 'white'
+                      : (isVIP ? '#B8913A' : '#1D215E'),
+                    borderRadius: isActive ? '12px 12px 0 0' : '0',
+                    border: isActive 
+                      ? 'none' 
+                      : '1px solid #E2E8F0',
+                    borderTop: isActive ? 'none' : '1px solid #E2E8F0',
+                    borderLeft: isActive ? 'none' : '1px solid #E2E8F0',
+                    borderRight: isActive ? 'none' : '1px solid #E2E8F0',
+                    borderBottom: isActive ? 'none' : '1px solid #E2E8F0',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {tab.label}
+                </button>
+              )
+            })}
           </div>
+        </div>
 
-          {/* Column 2: On Departure */}
-          <div className="bg-white rounded-xl p-6 md:p-8 border border-border hover:shadow-lg transition-shadow min-h-96">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-6">On Departure</h3>
-            <ul className="space-y-3">
-              {departureServices.map((service, idx) => (
-                <li key={idx} className="flex gap-3">
-                  <Check size={20} className="text-[#B8913A] flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground text-sm leading-snug">{service}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: On Connection */}
-          <div className="bg-white rounded-xl p-6 md:p-8 border border-border hover:shadow-lg transition-shadow min-h-96">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-6">On Connection</h3>
-            <ul className="space-y-3">
-              {connectionServices.map((service, idx) => (
-                <li key={idx} className="flex gap-3">
-                  <Check size={20} className="text-[#B8913A] flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground text-sm leading-snug">{service}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: VIP Platinum */}
-          <div className="bg-white rounded-xl p-6 md:p-8 border-2 border-[#B8913A] hover:shadow-lg transition-shadow min-h-96">
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-6">VIP Platinum</h3>
-            <ul className="space-y-3">
-              {vipServices.map((service, idx) => (
-                <li key={idx} className="flex gap-3">
-                  <Check size={20} className="text-[#B8913A] flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground text-sm leading-snug">{service}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Tab Content */}
+        <div
+          className="rounded-b-xl border border-t-0 border-border bg-white p-8"
+          style={{
+            borderTop: activeTab === 'vip' ? '4px solid #B8913A' : 'none'
+          }}
+        >
+          <ul className="space-y-4">
+            {tabContents[activeTab].map((service, idx) => (
+              <li key={idx} className="flex gap-4">
+                <Check size={20} className="text-[#B8913A] flex-shrink-0 mt-0.5" />
+                <span className="text-foreground text-sm md:text-base leading-relaxed">{service}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
