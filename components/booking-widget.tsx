@@ -1456,7 +1456,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
   return (
     <>
       <style>{inputOverflowStyle}</style>
-      <div className="md:hidden" style={{ padding: '0 8px', borderRadius: '16px' }}>
+      <div className="md:hidden" style={{ padding: '0 4px', borderRadius: '16px' }}>
         {/* White card container - wraps all fields */}
         <div className="space-y-2" style={{ borderRadius: '16px', overflow: 'hidden', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '16px' }}>
 
@@ -1817,7 +1817,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
       </div>
 
       {/* Tablet Layout - Portrait (768px-1023px) and Landscape (1024px-1179px) */}
-      <div className="hidden md:block lg:hidden p-6" style={{ borderRadius: '16px', overflow: 'hidden', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+      <div className="hidden md:block lg:hidden p-4" style={{ borderRadius: '16px', overflow: 'hidden', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
         {/* Row 1: Same as desktop */}
         <div className="flex flex-wrap items-center gap-1 w-full mb-3">
           <div style={{ height: '48px', border: '1.5px solid #E2E8F0', borderRadius: '10px', backgroundColor: '#FFFFFF', display: 'flex', alignItems: 'center', paddingLeft: '12px', paddingRight: '12px', boxSizing: 'border-box' }}>
@@ -2112,7 +2112,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:block p-5 space-y-3">
+      <div className="hidden lg:block p-3 space-y-3">
         {/* Top filter row */}
         <div className="flex flex-wrap items-center gap-1 w-full">
           <Dropdown
