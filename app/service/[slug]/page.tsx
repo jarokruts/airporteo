@@ -4,11 +4,11 @@ import { getService, getAllServices } from '@/lib/services'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ServiceHero } from '@/components/service-hero'
+import { ServiceHowItWorks } from '@/components/service-how-it-works'
 import { ServiceBenefits } from '@/components/service-benefits'
-import { ServicePricing } from '@/components/service-pricing'
+import { ServicePricingCompact } from '@/components/service-pricing-compact'
 import { ServiceFAQ } from '@/components/service-faq'
 import { ServiceBooking } from '@/components/service-booking'
-import { RelatedServices } from '@/components/related-services'
 
 interface ServicePageProps {
   params: {
@@ -36,7 +36,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${service.name} | Airport Concierge Services`,
+    title: `${service.name} | Airporteo`,
     description: service.longDescription,
     keywords: [service.name, 'airport service', 'concierge', 'fast track', 'meet and greet'],
     openGraph: {
@@ -58,14 +58,26 @@ export default function ServicePage({ params }: ServicePageProps) {
     <>
       <Navbar />
       <main>
+        {/* Section 1: Hero */}
         <ServiceHero service={service} />
+        
+        {/* Section 2: How It Works */}
+        <ServiceHowItWorks service={service} />
+        
+        {/* Section 3: What's Included */}
         <ServiceBenefits service={service} />
-        <ServicePricing service={service} />
+        
+        {/* Section 4: Pricing */}
+        <ServicePricingCompact service={service} />
+        
+        {/* Section 5: FAQ */}
         <ServiceFAQ service={service} />
+        
+        {/* Section 6: Booking Form */}
         <ServiceBooking service={service} />
-        <RelatedServices relatedSlugs={service.relatedServices} />
       </main>
       <Footer />
     </>
   )
 }
+

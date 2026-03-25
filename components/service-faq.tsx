@@ -15,8 +15,12 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
     <section className="py-12 md:py-20 px-4 md:px-8 bg-white">
       <div className="mx-auto max-w-4xl">
         <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg text-muted-foreground">Find answers to common questions about our service</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--navy)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
+            Frequently Asked Questions
+          </h2>
+          <p className="text-lg text-[var(--muted-foreground)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+            Find answers to common questions about our service
+          </p>
         </div>
 
         <div className="space-y-4">
@@ -29,7 +33,7 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                 className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <span className="text-lg font-semibold text-foreground text-left">
+                <span className="text-lg font-semibold text-foreground text-left" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                   {faq.question}
                 </span>
                 <ChevronDown
@@ -43,7 +47,9 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
 
               {openIndex === idx && (
                 <div className="px-6 py-4 bg-gray-50 border-t border-border">
-                  <p className="text-foreground leading-relaxed">{faq.answer}</p>
+                  <p className="text-foreground leading-relaxed" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                    {faq.answer}
+                  </p>
                 </div>
               )}
             </div>
@@ -52,13 +58,18 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
 
         {/* CTA */}
         <div className="mt-12 p-8 bg-gradient-to-r from-[var(--navy)] to-[var(--navy)]/80 rounded-2xl text-center text-white">
-          <h3 className="text-2xl font-bold mb-3">Still have questions?</h3>
-          <p className="mb-6 opacity-90">Our customer support team is available 24/7 to help you</p>
+          <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
+            Still have questions?
+          </h3>
+          <p className="mb-6 opacity-90" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+            Our customer support team is available 24/7 to help you
+          </p>
           <a
             href="https://wa.me/1234567890"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-6 py-3 bg-[var(--gold)] text-[var(--navy)] font-semibold rounded-lg hover:shadow-lg transition-all"
+            style={{ fontFamily: 'var(--font-dm-sans)' }}
           >
             Chat with us on WhatsApp
           </a>

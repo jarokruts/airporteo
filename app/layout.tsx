@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Geist_Mono } from 'next/font/google'
+import { Inter, Geist_Mono, Playfair_Display, DM_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CurrencyProvider } from '@/components/currency-context'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const _playfairDisplay = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const _dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
 
 export const metadata: Metadata = {
   title: 'Airporteo - Premium Airport Services',
@@ -42,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${_inter.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${_inter.variable} ${_playfairDisplay.variable} ${_dmSans.variable} font-sans antialiased`} suppressHydrationWarning>
         <CurrencyProvider>
           {children}
         </CurrencyProvider>

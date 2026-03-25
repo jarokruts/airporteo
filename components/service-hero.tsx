@@ -1,79 +1,70 @@
 'use client'
 
 import { Service } from '@/lib/services'
-import { ArrowRight } from 'lucide-react'
-import * as LucideIcons from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 interface ServiceHeroProps {
   service: Service
 }
 
 export function ServiceHero({ service }: ServiceHeroProps) {
-  // Get the dynamic icon
-  const IconComponent = (LucideIcons as any)[service.icon] || LucideIcons.Zap
-
   return (
-    <section className="py-12 md:py-20 px-4 md:px-8 bg-gradient-to-b from-background to-gray-50">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Left Column - Content */}
+    <section className="bg-[var(--navy)] text-white" style={{ minHeight: '50vh' }}>
+      <div className="mx-auto max-w-7xl px-4 md:px-8 py-12 md:py-20 h-full">
+        <div className="grid md:grid-cols-[60%_40%] gap-8 md:gap-12 items-center h-full">
+          {/* Left Side (60%) */}
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4">
-              <div
-                className="p-4 rounded-xl flex items-center justify-center"
-                style={{ backgroundColor: `${service.color}20` }}
-              >
-                <IconComponent size={32} style={{ color: service.color }} />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-[var(--gold)]">Premium Service</p>
-                <h1 className="text-4xl md:text-5xl font-bold text-foreground">{service.name}</h1>
-              </div>
+            {/* Breadcrumbs */}
+            <div className="flex items-center gap-2 text-sm opacity-80">
+              <a href="/" className="hover:opacity-100 transition-opacity">Home</a>
+              <ChevronRight size={16} />
+              <a href="/service" className="hover:opacity-100 transition-opacity">Services</a>
+              <ChevronRight size={16} />
+              <span className="font-medium">{service.name}</span>
             </div>
 
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              {service.longDescription}
+            {/* Service Name */}
+            <h1 className="text-5xl md:text-6xl font-bold" style={{ fontFamily: 'var(--font-playfair)' }}>
+              {service.name}
+            </h1>
+
+            {/* One-liner Description */}
+            <p className="text-lg md:text-xl opacity-60" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+              {service.tagline}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                className="px-6 py-3 bg-[var(--navy)] text-white font-semibold rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Book Now
-                <ArrowRight size={20} />
-              </button>
-              <button
-                className="px-6 py-3 border-2 border-[var(--navy)] text-[var(--navy)] font-semibold rounded-lg hover:bg-gray-50 transition-all"
-              >
-                Learn More
-              </button>
+            {/* Pricing */}
+            <div className="flex items-baseline gap-2">
+              <span className="text-sm opacity-60">Starting from</span>
+              <span className="text-4xl md:text-5xl font-bold" style={{ color: 'var(--gold)', fontFamily: 'var(--font-playfair)' }}>
+                ${service.pricing[0].price}
+              </span>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border">
-              <div>
-                <p className="text-sm text-muted-foreground">Duration</p>
-                <p className="font-semibold text-foreground">{service.duration}</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Available at</p>
-                <p className="font-semibold text-foreground">{service.pricing.length} Airports</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Perfect For</p>
-                <p className="font-semibold text-foreground text-sm">{service.targetAudience.split(',')[0]}</p>
-              </div>
-            </div>
+            {/* CTA Button */}
+            <button
+              onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full md:w-fit px-8 py-3 font-semibold rounded-full transition-all hover:shadow-lg"
+              style={{
+                backgroundColor: 'var(--gold)',
+                color: 'white',
+                fontFamily: 'var(--font-dm-sans)',
+              }}
+            >
+              Book Now
+            </button>
           </div>
 
-          {/* Right Column - Visual */}
+          {/* Right Side (40%) - Image Placeholder */}
           <div className="hidden md:flex items-center justify-center">
             <div
-              className="w-80 h-80 rounded-2xl flex items-center justify-center shadow-2xl"
-              style={{ backgroundColor: `${service.color}15` }}
+              className="w-full aspect-square rounded-2xl bg-white/10 flex items-center justify-center"
+              style={{ maxWidth: '300px' }}
             >
-              <IconComponent size={120} style={{ color: service.color, opacity: 0.8 }} />
+              <div className="text-center opacity-50">
+                <div className="text-6xl mb-4">✈️</div>
+                <p style={{ fontFamily: 'var(--font-dm-sans)' }}>Service Image</p>
+              </div>
             </div>
           </div>
         </div>

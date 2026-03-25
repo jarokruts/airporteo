@@ -7,51 +7,59 @@ interface ServiceBenefitsProps {
   service: Service
 }
 
+const BENEFITS_PLACEHOLDER = {
+  left: [
+    'Personal meet & greet directly at aircraft door',
+    'Dedicated escort through terminal to baggage claim',
+    'Priority immigration processing',
+    'Professional assistance with customs and arrival procedures',
+  ],
+  right: [
+    'Expert baggage collection and porter services',
+    'Personal escort to your waiting vehicle or transfer',
+    'Real-time flight monitoring',
+    'Multilingual agent support',
+  ],
+}
+
 export function ServiceBenefits({ service }: ServiceBenefitsProps) {
   return (
-    <section className="py-12 md:py-20 px-4 md:px-8 bg-white">
+    <section className="bg-[#F8F9FA] py-16 md:py-24 px-4 md:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Why Choose {service.name}?</h2>
-          <p className="text-lg text-muted-foreground">Discover the key benefits that make our service exceptional</p>
-        </div>
+        {/* Heading */}
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-[var(--navy)] mb-16" style={{ fontFamily: 'var(--font-playfair)' }}>
+          What&apos;s Included
+        </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Benefits */}
-          <div>
-            <h3 className="text-2xl font-semibold text-foreground mb-6">Key Benefits</h3>
-            <ul className="space-y-4">
-              {service.benefits.map((benefit, idx) => (
-                <li key={idx} className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 mt-1">
-                    <Check size={24} className="text-[var(--gold)]" />
-                  </div>
-                  <span className="text-foreground text-lg">{benefit}</span>
-                </li>
-              ))}
-            </ul>
+        {/* Benefits Grid */}
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16">
+          {/* Left Column */}
+          <div className="space-y-4">
+            {BENEFITS_PLACEHOLDER.left.map((benefit, idx) => (
+              <div key={idx} className="flex gap-4">
+                <div className="flex-shrink-0 mt-1">
+                  <Check size={24} style={{ color: 'var(--gold)' }} strokeWidth={3} />
+                </div>
+                <p className="text-base text-foreground" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                  {benefit}
+                </p>
+              </div>
+            ))}
           </div>
 
-          {/* Features */}
-          <div>
-            <h3 className="text-2xl font-semibold text-foreground mb-6">Included Features</h3>
-            <ul className="space-y-4">
-              {service.features.map((feature, idx) => (
-                <li key={idx} className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 mt-1">
-                    <Check size={24} className="text-[var(--navy)]" />
-                  </div>
-                  <span className="text-foreground text-lg">{feature}</span>
-                </li>
-              ))}
-            </ul>
+          {/* Right Column */}
+          <div className="space-y-4">
+            {BENEFITS_PLACEHOLDER.right.map((benefit, idx) => (
+              <div key={idx} className="flex gap-4">
+                <div className="flex-shrink-0 mt-1">
+                  <Check size={24} style={{ color: 'var(--gold)' }} strokeWidth={3} />
+                </div>
+                <p className="text-base text-foreground" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                  {benefit}
+                </p>
+              </div>
+            ))}
           </div>
-        </div>
-
-        {/* Target Audience */}
-        <div className="mt-12 p-6 md:p-8 bg-gradient-to-r from-[var(--navy)]/5 to-[var(--gold)]/5 rounded-2xl border border-border">
-          <h3 className="text-xl font-semibold text-foreground mb-3">Who is this for?</h3>
-          <p className="text-lg text-muted-foreground">{service.targetAudience}</p>
         </div>
       </div>
     </section>
