@@ -395,7 +395,7 @@ function PassengersBagsDropdown({
         <Users className="h-3.5 w-3.5 text-muted-foreground" />
         {label}
         <span className="mx-1 h-3.5 w-px bg-border" />
-        <Briefcase weight="light" className="h-4 w-4 text-muted-foreground" style={{ color: '#1D215E' }} />
+        <Backpack weight="light" className="h-4 w-4 text-muted-foreground" style={{ color: '#1D215E' }} />
         <span className="font-semibold">{cabinBags}</span>
         <Suitcase weight="light" className="h-4 w-4 text-muted-foreground" style={{ color: '#1D215E' }} />
         <span className="font-semibold">{checkedBags}</span>
