@@ -31,8 +31,8 @@ export const SERVICES: Record<string, Service> = {
   'fast-track': {
     id: 'fast-track',
     slug: 'fast-track',
-    name: 'Fast Track Immigration',
-    shortDescription: 'Skip the queues and breeze through immigration with dedicated lanes.',
+    name: 'Fast Track',
+    shortDescription: 'Experience swift airport passage through dedicated lanes.',
     longDescription: 'Experience hassle-free immigration with our Fast Track service. Our team will escort you through dedicated immigration lanes, ensuring a swift and smooth passage through Barcelona El Prat Airport. Perfect for business travelers and those with tight connections.',
     icon: 'Zap',
     color: '#B8913A',

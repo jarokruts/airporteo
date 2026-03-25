@@ -38,15 +38,10 @@ export function ServiceHero({ service }: ServiceHeroProps) {
                 {service.name}
               </h1>
 
-              {/* Badge + Description - Horizontal Row (matching airport) */}
-              <div className="flex items-center gap-3 mb-6 md:mb-8">
-                <div className="px-4 py-2 border-2 border-[var(--gold)] rounded-full flex-shrink-0">
-                  <span className="text-white font-bold text-lg">{service.name.substring(0, 1)}</span>
-                </div>
-                <p className="text-white/80 text-sm md:text-base">
-                  {service.shortDescription}
-                </p>
-              </div>
+              {/* Description */}
+              <p className="text-white/80 text-sm md:text-base mb-6 md:mb-8">
+                {service.shortDescription}
+              </p>
 
               {/* Stats Grid - 2x2 (matching airport) */}
               <div className="grid grid-cols-2 gap-3 md:gap-4">
@@ -94,15 +89,10 @@ export function ServiceHero({ service }: ServiceHeroProps) {
                 {service.name}
               </h1>
 
-              {/* Badge + Description */}
-              <div className="flex items-start gap-3 mb-4">
-                <div className="px-3 py-1.5 border-2 border-[var(--gold)] rounded-full flex-shrink-0 mt-1">
-                  <span className="text-white font-bold text-sm">{service.name.substring(0, 1)}</span>
-                </div>
-                <p className="text-white/80 text-xs leading-snug">
-                  {service.shortDescription}
-                </p>
-              </div>
+              {/* Description */}
+              <p className="text-white/80 text-xs leading-snug mb-4">
+                {service.shortDescription}
+              </p>
 
               {/* Stats Grid - 2x2 */}
               <div className="grid grid-cols-2 gap-2">
