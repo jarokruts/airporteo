@@ -1092,7 +1092,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
         <>
           {/* Arrival Flight # for Connection */}
           <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-            <PlaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+            <AirplaneLanding size={16} weight="light" color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
             <input
               type="text"
               value={flightNumber}
