@@ -962,8 +962,9 @@ function AirportSearchBottomSheet({
               gap: "8px",
             }}
           >
-            <Plane
-              className="h-5 w-5 shrink-0"
+            <Airplane
+              weight="light"
+              size={20}
               style={{ color: "#B8913A" }}
             />
             <input
