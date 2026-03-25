@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { CaretDown, Envelope, Airplane, AirplaneIn, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp } from "@phosphor-icons/react"
+import { CaretDown, Envelope, Airplane, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 // CSS to prevent text overflow in inputs and buttons
@@ -140,7 +140,7 @@ function SheetOption({
           <span className="block text-[11px] text-[#94A3B8] font-normal">{subtitle}</span>
         )}
       </span>
-      {selected && <Check className="h-5 w-5 text-[#B8913A]" />}
+      {selected && <CheckCircle size={20} weight="light" className="h-5 w-5 text-[#B8913A]" />}
     </button>
   )
 }
@@ -292,7 +292,7 @@ function Dropdown({
       >
         {icon && <span className="text-muted-foreground">{icon}</span>}
         {selected?.label ?? label}
-        <ChevronDown weight="light" className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+        <CaretDown weight="light" className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
       </button>
       {open && (
         <div className="absolute left-0 top-full z-[9999] mt-1.5 min-w-[160px] overflow-hidden rounded-xl border border-border bg-card shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
@@ -380,7 +380,7 @@ function PassengersBagsDropdown({
       section: "Bags",
       items: [
         { key: "cabinBags", icon: <Suitcase weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />, label: "Cabin baggage", hint: "", value: cabinBags, min: 0 },
-        { key: "checkedBags", icon: <Luggage className="h-4 w-4 opacity-70" />, label: "Checked baggage", hint: "", value: checkedBags, min: 0 },
+        { key: "checkedBags", icon: <Suitcase weight="light" className="h-4 w-4 opacity-70" style={{ color: '#1D215E' }} />, label: "Checked baggage", hint: "", value: checkedBags, min: 0 },
       ],
     },
   ]
@@ -397,9 +397,9 @@ function PassengersBagsDropdown({
         <span className="mx-1 h-3.5 w-px bg-border" />
         <Briefcase weight="light" className="h-4 w-4 text-muted-foreground" style={{ color: '#1D215E' }} />
         <span className="font-semibold">{cabinBags}</span>
-        <Luggage className="h-4 w-4 text-muted-foreground" />
+        <Suitcase weight="light" className="h-4 w-4 text-muted-foreground" style={{ color: '#1D215E' }} />
         <span className="font-semibold">{checkedBags}</span>
-        <ChevronDown weight="light" className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+        <CaretDown weight="light" className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
       </button>
 
       {open && (

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIn, AirplaneLanding, CaretLeft, CaretRight, Baby, Smile } from '@phosphor-icons/react'
+import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley } from '@phosphor-icons/react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
@@ -29,13 +29,13 @@ type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 function getDirectionIcon(direction: string) {
   switch (direction) {
     case 'Arrival':
-      return <AirplaneIn size={16} weight="light" style={{ color: '#B8913A' }} />
+      return <AirplaneIcon size={16} weight="light" style={{ color: '#B8913A' }} />
     case 'Departure':
       return <AirplaneLanding size={16} weight="light" style={{ color: '#B8913A' }} />
     case 'Connection':
       return (
         <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
-          <AirplaneIn size={16} weight="light" style={{ color: '#B8913A' }} />
+          <AirplaneIcon size={16} weight="light" style={{ color: '#B8913A' }} />
           <AirplaneLanding size={16} weight="light" style={{ color: '#B8913A' }} />
         </div>
       )
@@ -260,7 +260,7 @@ function DatePickerDropdown({
           onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
           onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
         >
-          <ChevronLeft className="h-4 w-4" style={{ color: '#1D215E' }} />
+          <CaretLeft size={16} weight="light" style={{ color: '#1D215E' }} />
         </button>
 
         <button
@@ -281,7 +281,7 @@ function DatePickerDropdown({
           onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F7FA')}
           onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
         >
-          <ChevronRight className="h-4 w-4" style={{ color: '#1D215E' }} />
+          <CaretRight size={16} weight="light" style={{ color: '#1D215E' }} />
         </button>
       </div>
 
@@ -465,7 +465,7 @@ function PassengersLuggageDropdown({
           {/* Children (2-12) */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Smile size={14} style={{ color: '#94A3B8' }} />
+              <Smiley size={14} weight="light" style={{ color: '#94A3B8' }} />
               <div>
                 <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Children</div>
                 <div style={{ fontSize: '11px', color: '#94A3B8' }}>2–12</div>
@@ -496,7 +496,7 @@ function PassengersLuggageDropdown({
           {/* Cabin baggage */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Luggage size={14} style={{ color: '#94A3B8' }} />
+              <Suitcase size={14} weight="light" style={{ color: '#94A3B8' }} />
               <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Cabin baggage</div>
             </div>
             <Stepper value={cabinBags} onChange={onCabinBagsChange} min={0} max={10} />
@@ -505,7 +505,7 @@ function PassengersLuggageDropdown({
           {/* Checked baggage */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <BriefcaseBusiness size={14} style={{ color: '#94A3B8' }} />
+              <Briefcase size={14} weight="light" style={{ color: '#94A3B8' }} />
               <div style={{ fontSize: '13px', fontWeight: 500, color: '#1D215E' }}>Checked baggage</div>
             </div>
             <Stepper value={checkedBags} onChange={onCheckedBagsChange} min={0} max={10} />
