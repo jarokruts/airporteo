@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp } from "@phosphor-icons/react"
+import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp, Shield, Clock, Star } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 // CSS to prevent text overflow in inputs and buttons
@@ -1439,7 +1439,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
         </div>
         <div className="flex items-center gap-6 text-xs text-muted-foreground">
           {[{ icon: Shield, text: "Secure" }, { icon: Clock, text: "24/7 Support" }, { icon: Star, text: "4.9/5" }].map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-center gap-1.5"><Icon className="h-3.5 w-3.5" />{text}</div>
+            <div key={text} className="flex items-center gap-1.5"><Icon weight="light" className="h-3.5 w-3.5" />{text}</div>
           ))}
         </div>
         <button
