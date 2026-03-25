@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { CaretDown, Envelope, Plane, AirplaneIn, AirplaneOut, X, Spinner, Handshake, Crown, Car, Check, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp } from "@phosphor-icons/react"
+import { CaretDown, Envelope, Airplane, AirplaneIn, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 // CSS to prevent text overflow in inputs and buttons
