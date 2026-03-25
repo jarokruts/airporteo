@@ -1105,9 +1105,9 @@ function AirportSearchBottomSheet({
                 </div>
 
                 {/* Chevron right */}
-                <ChevronDown
-                  className="h-4 w-4 shrink-0 -rotate-90"
-                  style={{ color: "#94A3B8" }}
+<CaretDown
+                  weight="light"
+                  className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")}
                 />
               </button>
             ))
@@ -1338,7 +1338,7 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary hover:bg-border transition-colors"
               aria-label="Previous month"
             >
-              <ChevronDown className="h-4 w-4 -rotate-90" />
+              <CaretDown weight="light" className="h-4 w-4 -rotate-90" />
             </button>
 
             <div className="flex flex-1 gap-6">
@@ -1353,7 +1353,7 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary hover:bg-border transition-colors"
               aria-label="Next month"
             >
-              <ChevronDown className="h-4 w-4 rotate-90" />
+              <CaretDown weight="light" className="h-4 w-4 rotate-90" />
             </button>
           </div>
         </div>
@@ -1496,7 +1496,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
               >
                 <span>{state.serviceType === "arrival" ? "Arrival" : state.serviceType === "departure" ? "Departure" : "Connection"}</span>
-                <ChevronDown className="h-3.5 w-3.5" style={{ color: '#94A3B8', marginLeft: '4px' }} />
+                <CaretDown weight="light" className="h-3.5 w-3.5" style={{ color: '#94A3B8', marginLeft: '4px' }} />
               </button>
 
               {/* Vertical divider */}
@@ -1538,7 +1538,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
               >
                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{state.service}</span>
-                <ChevronDown className="h-3.5 w-3.5" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
+                <CaretDown weight="light" className="h-3.5 w-3.5" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
               </button>
             </div>
 
@@ -1692,7 +1692,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               <span style={{ marginLeft: '6px', fontSize: '12px', color: '#1D215E', flex: 1, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {state.date && typeof state.date === 'string' ? new Date(state.date + "T00:00:00").toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "Select date"}
               </span>
-              <ChevronDown className="h-3 w-3" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
+              <CaretDown weight="light" className="h-3 w-3" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0 }} />
             </button>
 
             {/* Row 5: Passengers + Luggage - opens bottom sheet */}
@@ -1729,7 +1729,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.checkedBags}</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
-                <ChevronDown className="h-3 w-3" style={{ color: '#94A3B8' }} />
+                <CaretDown weight="light" className="h-3 w-3" style={{ color: '#94A3B8' }} />
               </div>
             </button>
 
