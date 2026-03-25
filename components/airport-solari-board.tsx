@@ -57,7 +57,10 @@ const ScrambleChar = ({ char, index, startTime, lockTime, animationKey }: Scramb
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0, duration: 0.1 }}
-      className="inline-block"
+      style={{
+        display: 'inline',
+        whiteSpace: char === ' ' ? 'pre' : 'normal',
+      }}
     >
       {displayChar}
     </motion.span>
