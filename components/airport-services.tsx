@@ -1,7 +1,7 @@
 'use client'
 
 import { Airport } from '@/lib/airports'
-import { Check } from 'lucide-react'
+import { Check, MessageCircle } from 'lucide-react'
 import { useState } from 'react'
 
 interface AirportServicesProps {
@@ -108,12 +108,13 @@ export function AirportServices({ airport }: AirportServicesProps) {
 
         {/* Tab Content */}
         <div
-          className="rounded-b-xl border border-t-0 border-border bg-white p-8"
+          className="rounded-b-xl border border-t-0 border-border bg-white p-8 flex flex-col"
           style={{
-            borderTop: activeTab === 'vip' ? '4px solid #B8913A' : 'none'
+            borderTop: activeTab === 'vip' ? '4px solid #B8913A' : 'none',
+            minHeight: '400px',
           }}
         >
-          <ul className="space-y-4">
+          <ul className="space-y-4 flex-1">
             {tabContents[activeTab].map((service, idx) => (
               <li key={idx} className="flex gap-4">
                 <Check size={20} className="text-[#B8913A] flex-shrink-0 mt-0.5" />
@@ -121,6 +122,34 @@ export function AirportServices({ airport }: AirportServicesProps) {
               </li>
             ))}
           </ul>
+
+          {/* Action Footer */}
+          <div className="mt-auto pt-6 border-t border-border flex flex-col md:flex-row gap-4 md:gap-3 items-center md:justify-center">
+            <button
+              onClick={() => {
+                const heroForm = document.getElementById('hero-form') || document.getElementById('hero')
+                if (heroForm) {
+                  heroForm.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+              className="px-6 py-3 text-sm md:text-base font-semibold text-white transition-all duration-200 rounded-lg border-b-2 border-b-transparent hover:border-b-[#B8913A]"
+              style={{
+                backgroundColor: '#1D215E',
+              }}
+            >
+              Get a Detailed Quote
+            </button>
+
+            <a
+              href="https://wa.me/1234567890"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm md:text-base font-medium text-[#1D215E] hover:text-[#B8913A] transition-colors duration-200"
+            >
+              <MessageCircle size={18} className="text-green-500" />
+              Chat with an Agent Now
+            </a>
+          </div>
         </div>
       </div>
     </section>

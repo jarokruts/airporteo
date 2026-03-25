@@ -7,51 +7,104 @@ import { cn } from "@/lib/utils"
 const FAQS = [
   {
     id: 1,
-    question: "What is airport meet and greet service?",
-    answer: "Our meet and greet service provides a personal concierge who meets you at the aircraft door (arrival) or at the terminal entrance (departure). They assist with navigation, fast-track queues, and ensure a seamless airport experience."
+    question: "What is a meet and greet service at Barcelona airport?",
+    answer: "A personal assistant meets you at the aircraft door or terminal entrance, escorts you through immigration, customs, and security using priority lanes, and walks you to your vehicle or gate."
   },
   {
     id: 2,
-    question: "How far in advance should I book?",
-    answer: "We recommend booking at least 24-48 hours in advance. However, we also accommodate last-minute requests subject to availability. For peak travel seasons, booking 1 week ahead is advisable."
+    question: "How much does meet and greet cost at Barcelona El Prat?",
+    answer: "Standard meet and greet starts from $45 per person. VIP Platinum with private lounge and tarmac limousine starts from $150. Get a quote using the form above."
   },
   {
     id: 3,
-    question: "Which airports do you cover?",
-    answer: "We operate in over 120 airports worldwide, including major hubs like London Heathrow, Dubai International, JFK New York, Singapore Changi, and many more. Check our airport list for full coverage."
+    question: "Which terminals do you cover at BCN?",
+    answer: "Both Terminal 1 and Terminal 2. Our agents know every gate, desk, and lounge."
   },
   {
     id: 4,
-    question: "Can I modify or cancel my booking?",
-    answer: "Yes, you can modify or cancel your booking up to 12 hours before your scheduled service. Changes can be made through your confirmation email or by contacting our support team."
+    question: "Can I get fast track through security at Barcelona airport?",
+    answer: "Yes, priority fast track lanes at security and immigration in T1 and T2. Especially useful during peak hours 6-9 AM and 6-10 PM."
   },
   {
     id: 5,
-    question: "What happens if my flight is delayed?",
-    answer: "We monitor all flights in real-time. If your flight is delayed, your concierge will automatically adjust to your new arrival time at no extra charge."
+    question: "Is VIP tarmac service available at BCN?",
+    answer: "Yes. A private limousine meets you on the tarmac at the aircraft steps and drives you to the VIP terminal. Available at T1."
   },
   {
     id: 6,
-    question: "Is the service available for families with children?",
-    answer: "Absolutely. Our service is ideal for families. We assist with strollers, carry-ons, and ensure a smooth journey for travelers of all ages, including unaccompanied minors."
+    question: "How do I get from Terminal 1 to Terminal 2?",
+    answer: "Free shuttle every 6-7 minutes. Our connection agents handle the full inter-terminal transfer with fast track."
   },
   {
     id: 7,
-    question: "What's included in the VIP Platinum service?",
-    answer: "VIP Platinum includes tarmac transfers, private terminal access where available, luxury vehicle service, fast-track through all checkpoints, and a dedicated agent throughout your journey."
+    question: "Can I book meet and greet for someone else?",
+    answer: "Yes. Many clients book for elderly parents, unaccompanied children, or business guests."
   },
   {
     id: 8,
-    question: "How do I contact my concierge on the day?",
-    answer: "After booking, you'll receive your concierge's direct contact details via email and SMS. You can reach them by phone or WhatsApp on the day of your service."
+    question: "What happens if my flight is delayed?",
+    answer: "We monitor flights in real time. Your agent adjusts automatically. No extra charge."
+  },
+  {
+    id: 9,
+    question: "Do you provide wheelchair or special assistance at BCN?",
+    answer: "Yes. Wheelchair, mobility support, and special requirements coordinated in advance."
+  },
+  {
+    id: 10,
+    question: "Is lounge access included?",
+    answer: "Included with VIP Platinum. For standard service, lounge access can be added during booking."
+  },
+  {
+    id: 11,
+    question: "How far in advance should I book?",
+    answer: "Recommended 24 hours before. Same-day bookings accepted subject to availability."
+  },
+  {
+    id: 12,
+    question: "Can you assist with connecting flights?",
+    answer: "Yes. Gate-to-gate transfer, inter-terminal shuttle, fast track transit security, escort to next gate."
+  },
+  {
+    id: 13,
+    question: "How do I get from BCN to Barcelona city center?",
+    answer: "Aerobus 35 min, RENFE train 25 min, taxi flat rate approx 39 euros. Private transfer also available."
+  },
+  {
+    id: 14,
+    question: "Is the service available for private jet passengers?",
+    answer: "Yes. VIP meet and greet with tarmac access, customs handling, and limousine transfers."
+  },
+  {
+    id: 15,
+    question: "What languages do your agents speak?",
+    answer: "English, Spanish, Catalan, French, Russian. Additional languages on request."
   },
 ]
 
 export function FAQSection() {
   const [openId, setOpenId] = useState<number | null>(null)
 
+  // JSON-LD FAQPage structured data
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQS.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }
+
   return (
     <section className="bg-white py-16 lg:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="mx-auto max-w-4xl px-4 md:px-5 lg:px-8">
         {/* Header */}
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 md:mb-8">
