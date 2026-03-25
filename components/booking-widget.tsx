@@ -2475,7 +2475,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                             {desc}
                           </div>
                         </span>
-                        {state.service === value && <Check className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
+                        {state.service === value && <CheckCircle weight="light" size={20} className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
                       </button>
                     ))
                 })()}

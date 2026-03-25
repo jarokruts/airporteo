@@ -1,7 +1,8 @@
 'use client'
 
 import { Airport } from '@/lib/airports'
-import { Check, MessageCircle } from 'lucide-react'
+import { CheckCircle } from '@phosphor-icons/react'
+import { MessageCircle } from 'lucide-react'
 import { useState } from 'react'
 
 interface AirportServicesProps {
@@ -117,7 +118,7 @@ export function AirportServices({ airport }: AirportServicesProps) {
           <ul className="space-y-4 flex-1">
             {tabContents[activeTab].map((service, idx) => (
               <li key={idx} className="flex gap-4">
-                <Check size={20} className="text-[var(--gold)] flex-shrink-0 mt-0.5" />
+                <CheckCircle size={20} weight="light" className="text-[var(--gold)] flex-shrink-0 mt-0.5" />
                 <span className="text-foreground text-sm md:text-base leading-relaxed">{service}</span>
               </li>
             ))}
