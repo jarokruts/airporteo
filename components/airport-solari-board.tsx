@@ -97,7 +97,7 @@ export function AirportSolariBoard() {
   if (timings.length === 0) return null
 
   return (
-    <section className="hidden md:block py-8 md:py-16 px-4 md:px-8 bg-background">
+    <section className="hidden md:block py-4 md:py-8 px-4 md:px-8 bg-background">
       <div className="mx-auto max-w-7xl">
         {/* VIP Information Board - Slim and Professional */}
         <div
