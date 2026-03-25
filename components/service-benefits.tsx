@@ -1,7 +1,7 @@
 'use client'
 
 import { Service } from '@/lib/services'
-import { Check } from 'lucide-react'
+import { CheckCircle } from '@phosphor-icons/react'
 
 interface ServiceBenefitsProps {
   service: Service
@@ -38,7 +38,7 @@ export function ServiceBenefits({ service }: ServiceBenefitsProps) {
             {BENEFITS_PLACEHOLDER.left.map((benefit, idx) => (
               <div key={idx} className="flex gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <Check size={24} style={{ color: 'var(--gold)' }} strokeWidth={3} />
+                  <CheckCircle size={24} weight="light" style={{ color: 'var(--gold)' }} />
                 </div>
                 <p className="text-base text-foreground" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                   {benefit}
@@ -52,7 +52,7 @@ export function ServiceBenefits({ service }: ServiceBenefitsProps) {
             {BENEFITS_PLACEHOLDER.right.map((benefit, idx) => (
               <div key={idx} className="flex gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <Check size={24} style={{ color: 'var(--gold)' }} strokeWidth={3} />
+                  <CheckCircle size={24} weight="light" style={{ color: 'var(--gold)' }} />
                 </div>
                 <p className="text-base text-foreground" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                   {benefit}

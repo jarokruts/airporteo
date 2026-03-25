@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Plane, Calendar, Users, Mail, Luggage, BriefcaseBusiness, ChevronDown, X, PlaneLanding, PlaneTakeoff, ChevronLeft, ChevronRight, Baby, Smile } from 'lucide-react'
+import { Plane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIn, AirplaneOut, CaretLeft, CaretRight, Baby, Smiley } from '@phosphor-icons/react'
 import { Airport } from '@/lib/airports'
 
 interface AirportBookingFormProps {
@@ -29,14 +29,14 @@ type TrendingAirport = (typeof TRENDING_AIRPORTS)[number]
 function getDirectionIcon(direction: string) {
   switch (direction) {
     case 'Arrival':
-      return <PlaneLanding className="h-4 w-4" style={{ color: 'var(--gold)' }} />
+      return <AirplaneIn size={16} weight="light" style={{ color: '#B8913A' }} />
     case 'Departure':
-      return <PlaneTakeoff className="h-4 w-4" style={{ color: 'var(--gold)' }} />
+      return <AirplaneOut size={16} weight="light" style={{ color: '#B8913A' }} />
     case 'Connection':
       return (
         <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
-          <PlaneLanding className="h-4 w-4" style={{ color: 'var(--gold)' }} />
-          <PlaneTakeoff className="h-4 w-4" style={{ color: 'var(--gold)' }} />
+          <AirplaneIn size={16} weight="light" style={{ color: '#B8913A' }} />
+          <AirplaneOut size={16} weight="light" style={{ color: '#B8913A' }} />
         </div>
       )
     default:

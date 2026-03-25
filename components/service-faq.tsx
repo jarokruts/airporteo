@@ -2,7 +2,7 @@
 
 import { Service } from '@/lib/services'
 import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { CaretDown } from '@phosphor-icons/react'
 
 interface ServiceFAQProps {
   service: Service
@@ -36,11 +36,13 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
                 <span className="text-lg font-semibold text-foreground text-left" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                   {faq.question}
                 </span>
-                <ChevronDown
+                <CaretDown
                   size={24}
+                  weight="light"
                   className="text-[var(--gold)] flex-shrink-0 transition-transform"
                   style={{
-                    transform: openIndex === idx ? 'rotate(180deg)' : 'rotate(0deg)'
+                    transform: openIndex === idx ? 'rotate(180deg)' : 'rotate(0deg)',
+                    color: 'var(--gold)'
                   }}
                 />
               </button>

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ChevronRight } from 'lucide-react'
+import { CaretRight } from '@phosphor-icons/react'
 import { Service } from '@/lib/services'
 import { ServiceBookingForm } from '@/components/service-booking-form'
 
@@ -27,9 +27,9 @@ export function ServiceHero({ service }: ServiceHeroProps) {
               {/* Breadcrumbs */}
               <div className="flex items-center gap-2 text-white/70 text-xs md:text-sm uppercase tracking-wide font-medium mb-6 md:mb-8">
                 <Link href="/" className="hover:text-white transition-colors">Home</Link>
-                <ChevronRight size={14} />
+                <CaretRight size={14} weight="light" />
                 <Link href="/service" className="hover:text-white transition-colors">Services</Link>
-                <ChevronRight size={14} />
+                <CaretRight size={14} weight="light" />
                 <span className="text-[var(--gold)] font-semibold">{service.name}</span>
               </div>
 
@@ -78,9 +78,9 @@ export function ServiceHero({ service }: ServiceHeroProps) {
               {/* Breadcrumbs */}
               <div className="flex items-center gap-2 text-white/70 text-xs uppercase tracking-wide font-medium mb-4">
                 <Link href="/" className="hover:text-white transition-colors">Home</Link>
-                <ChevronRight size={12} />
+                <CaretRight size={12} weight="light" />
                 <Link href="/service" className="hover:text-white transition-colors">Services</Link>
-                <ChevronRight size={12} />
+                <CaretRight size={12} weight="light" />
                 <span className="text-[var(--gold)] font-semibold">{service.name}</span>
               </div>
 

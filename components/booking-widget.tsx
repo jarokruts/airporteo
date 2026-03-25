@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { ChevronDown, Mail, Plane, PlaneLanding, PlaneTakeoff, X, Loader2, Handshake, Crown, Car, Check, Calendar, Users, Baby, Luggage, BriefcaseBusiness, Minus, Plus, ChevronLeft, ChevronRight, ArrowRightLeft } from "lucide-react"
+import { CaretDown, Envelope, Plane, AirplaneIn, AirplaneOut, X, Spinner, Handshake, Crown, Car, Check, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 // CSS to prevent text overflow in inputs and buttons
@@ -292,7 +292,7 @@ function Dropdown({
       >
         {icon && <span className="text-muted-foreground">{icon}</span>}
         {selected?.label ?? label}
-        <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+        <ChevronDown weight="light" className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
       </button>
       {open && (
         <div className="absolute left-0 top-full z-[9999] mt-1.5 min-w-[160px] overflow-hidden rounded-xl border border-border bg-card shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
@@ -379,7 +379,7 @@ function PassengersBagsDropdown({
     {
       section: "Bags",
       items: [
-        { key: "cabinBags", icon: <Luggage className="h-4 w-4" />, label: "Cabin baggage", hint: "", value: cabinBags, min: 0 },
+        { key: "cabinBags", icon: <Suitcase weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />, label: "Cabin baggage", hint: "", value: cabinBags, min: 0 },
         { key: "checkedBags", icon: <Luggage className="h-4 w-4 opacity-70" />, label: "Checked baggage", hint: "", value: checkedBags, min: 0 },
       ],
     },
@@ -395,11 +395,11 @@ function PassengersBagsDropdown({
         <Users className="h-3.5 w-3.5 text-muted-foreground" />
         {label}
         <span className="mx-1 h-3.5 w-px bg-border" />
-        <BriefcaseBusiness className="h-4 w-4 text-muted-foreground" />
+        <Briefcase weight="light" className="h-4 w-4 text-muted-foreground" style={{ color: '#1D215E' }} />
         <span className="font-semibold">{cabinBags}</span>
         <Luggage className="h-4 w-4 text-muted-foreground" />
         <span className="font-semibold">{checkedBags}</span>
-        <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
+        <ChevronDown weight="light" className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
       </button>
 
       {open && (
@@ -593,7 +593,7 @@ function DatePickerBottomSheet({
             cursor: 'pointer',
           }}
         >
-          <ChevronLeft className="h-4 w-4" style={{ color: '#1D215E' }} />
+          <CaretLeft weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />
         </button>
         
         <h4 style={{ fontSize: '16px', fontWeight: 700, color: '#1D215E', margin: 0, flex: 1, textAlign: 'center' }}>
@@ -615,7 +615,7 @@ function DatePickerBottomSheet({
             cursor: 'pointer',
           }}
         >
-          <ChevronRight className="h-4 w-4" style={{ color: '#1D215E' }} />
+          <CaretRight weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />
         </button>
       </div>
 
@@ -1804,7 +1804,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                     }}
                   >
                     {state.booking ? (
-                      <><Loader2 className="h-4 w-4 animate-spin" /> Checking...</>
+                      <><Spinner weight="light" className="h-4 w-4 animate-spin" /> Checking...</>
                     ) : (
                       <>Get a Quote</>
                     )}
@@ -2095,7 +2095,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
           }}
         >
           {state.booking ? (
-            <><Loader2 className="h-5 w-5 animate-spin" /> Checking...</>
+            <><Spinner weight="light" className="h-5 w-5 animate-spin" /> Checking...</>
           ) : (
             <>Get a Quote</>
           )}
@@ -2291,7 +2291,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             }}
           >
             {state.booking ? (
-              <><Loader2 className="h-5 w-5 animate-spin" /> Checking...</>
+              <><Spinner weight="light" className="h-5 w-5 animate-spin" /> Checking...</>
             ) : (
               <>Get a Quote</>
             )}
@@ -2360,9 +2360,9 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
                 {[
-                  { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: PlaneLanding },
-                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: PlaneTakeoff },
-                  { value: 'connection', label: 'Connection', desc: 'Connecting flight', icon: ArrowRightLeft }
+                  { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: AirplaneIn },
+                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: AirplaneOut },
+                  { value: 'connection', label: 'Connection', desc: 'Connecting flight', icon: ArrowsDownUp }
                 ].map(({ value, label, desc, icon: Icon }) => (
                   <button
                     key={value}
