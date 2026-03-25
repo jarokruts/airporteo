@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp, Shield, Clock, Star } from "@phosphor-icons/react"
+import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp, Shield, Clock, Star, Backpack } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 // CSS to prevent text overflow in inputs and buttons
@@ -379,7 +379,7 @@ function PassengersBagsDropdown({
     {
       section: "Bags",
       items: [
-        { key: "cabinBags", icon: <Suitcase weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />, label: "Cabin baggage", hint: "", value: cabinBags, min: 0 },
+        { key: "cabinBags", icon: <Backpack weight="light" className="h-4 w-4" style={{ color: '#1D215E' }} />, label: "Cabin baggage", hint: "", value: cabinBags, min: 0 },
         { key: "checkedBags", icon: <Suitcase weight="light" className="h-4 w-4 opacity-70" style={{ color: '#1D215E' }} />, label: "Checked baggage", hint: "", value: checkedBags, min: 0 },
       ],
     },
@@ -1723,7 +1723,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.adults + state.children + state.infants} Pax</span>
               </div>
               <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
-                <Briefcase weight="light" className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0 }} />
+                <Backpack weight="light" className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0 }} />
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.cabinBags}</span>
                 <Suitcase weight="light" className="h-[13px] w-[13px]" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
                 <span style={{ fontSize: '12px', color: '#1D215E', fontWeight: 500 }}>{state.checkedBags}</span>
