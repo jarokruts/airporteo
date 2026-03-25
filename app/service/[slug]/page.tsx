@@ -8,7 +8,6 @@ import { ServiceHowItWorks } from '@/components/service-how-it-works'
 import { ServiceBenefits } from '@/components/service-benefits'
 import { ServicePricingCompact } from '@/components/service-pricing-compact'
 import { ServiceFAQ } from '@/components/service-faq'
-import { ServiceBooking } from '@/components/service-booking'
 
 interface ServicePageProps {
   params: {
@@ -74,9 +73,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
         
         {/* Section 5: FAQ */}
         <ServiceFAQ service={service} />
-        
-        {/* Section 6: Booking Form */}
-        <ServiceBooking service={service} />
       </main>
       <Footer />
     </>

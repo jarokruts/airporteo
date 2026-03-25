@@ -15,10 +15,10 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
     <section className="py-12 md:py-20 px-4 md:px-8 bg-white">
       <div className="mx-auto max-w-4xl">
         <div className="mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--navy)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <h2 className="text-3xl md:text-4xl font-bold text-[var(--navy)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
             Frequently Asked Questions
           </h2>
-          <p className="text-lg text-[var(--muted-foreground)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+          <p className="text-base text-[var(--muted-foreground)]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
             Find answers to common questions about our service
           </p>
         </div>

@@ -39,7 +39,7 @@ export function ServiceHowItWorks({ service }: ServiceHowItWorksProps) {
     <section className="bg-white py-16 md:py-24 px-4 md:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-[var(--navy)] mb-16" style={{ fontFamily: 'var(--font-playfair)' }}>
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[var(--navy)] mb-16" style={{ fontFamily: 'var(--font-playfair)' }}>
           How It Works
         </h2>
 
