@@ -1554,13 +1554,13 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
             >
               {state.serviceType === "connection" ? (
                 <>
-                  <AirplaneLanding className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '4px' }} />
-                  <AirplaneLanding className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
+                  <AirplaneLanding weight="light" className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '4px' }} />
+                  <AirplaneLanding weight="light" className="h-4 w-4 shrink-0" style={{ color: 'var(--gold)', marginRight: '8px' }} />
                 </>
               ) : state.serviceType === "departure" ? (
-                <AirplaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
+                <AirplaneLanding weight="light" className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               ) : (
-                <AirplaneLanding className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
+                <AirplaneLanding weight="light" className="h-[13px] w-[13px] mr-1.5 shrink-0" style={{ color: 'var(--gold)' }} />
               )}
               <span className="flex-1 min-w-0 text-left text-xs" style={{ color: state.airport ? '#1D215E' : '#94A3B8' }}>
                 {state.airport ? `${state.airport.code} - ${state.airport.city}` : (state.serviceType === "connection" ? "Airport of service" : "Airport or city")}
@@ -1599,7 +1599,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               <>
                 {/* Arriving flight # for Connection */}
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneLanding weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.flightNumber}
@@ -1624,7 +1624,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 
                 {/* Departing flight # for Connection */}
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneLanding weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.connectionFlightNumber}
@@ -1864,9 +1864,9 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                   state.serviceType === "connection" ? (
                     <Airplane weight="light" className="h-4 w-4" />
                   ) : state.serviceType === "departure" ? (
-                    <AirplaneLanding className="h-4 w-4" />
+                    <AirplaneLanding weight="light" className="h-4 w-4" />
                   ) : (
-                    <AirplaneLanding className="h-4 w-4" />
+                    <AirplaneLanding weight="light" className="h-4 w-4" />
                   )
                 }
                 placeholder={state.serviceType === "connection" ? "Airport" : "Airport or city"}
@@ -1910,7 +1910,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                 </div>
               ) : (
                 <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-                  <AirplaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+                  <AirplaneLanding weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
                   <input
                     type="text"
                     value={state.flightNumber}
