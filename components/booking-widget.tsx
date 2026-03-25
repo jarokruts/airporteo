@@ -295,7 +295,7 @@ function Dropdown({
         <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        <div className="absolute left-0 top-full z-50 mt-1.5 min-w-[160px] overflow-hidden rounded-xl border border-border bg-card shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="absolute left-0 top-full z-[100] mt-1.5 min-w-[160px] overflow-hidden rounded-xl border border-border bg-card shadow-xl animate-in fade-in slide-in-from-top-2 duration-150">
           {options.map((o) => (
             <button
               key={o.value}
@@ -403,7 +403,7 @@ function PassengersBagsDropdown({
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-50 mt-1.5 rounded-2xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150" style={{ minWidth: '380px' }}>
+        <div className="absolute left-0 top-full z-[100] mt-1.5 rounded-2xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150" style={{ minWidth: '380px' }}>
           {/* Two columns: Passengers and Luggage */}
           <div style={{ display: 'flex', paddingTop: '16px', paddingBottom: '16px' }}>
             {/* Left Column - Passengers */}
@@ -1192,7 +1192,7 @@ function AirportField({
         )}
       </div>
       {open && filtered.length > 0 && (
-        <div className="absolute left-0 top-full z-50 mt-1.5 w-80 overflow-hidden rounded-xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150">
+          <div className="absolute left-0 top-full z-[100] mt-1.5 w-80 overflow-hidden rounded-xl border border-border bg-card shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150">
           <div className="px-4 py-2.5 border-b border-border">
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Trending Airports</p>
           </div>
@@ -1328,7 +1328,7 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
       </div>
 
       {open && (
-        <div className="absolute top-full left-0 z-50 mt-1.5 rounded-2xl border border-border bg-card p-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150"
+          <div className="absolute top-full left-0 z-[100] mt-1.5 rounded-2xl border border-border bg-card p-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-150"
           style={{ minWidth: "560px" }}
         >
           <div className="flex items-center gap-4">
