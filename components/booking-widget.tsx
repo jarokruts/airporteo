@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { CaretDown, Envelope, Airplane, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp } from "@phosphor-icons/react"
+import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 
 // CSS to prevent text overflow in inputs and buttons
@@ -2360,8 +2360,8 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
                 {[
-                  { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: AirplaneIn },
-                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: AirplaneOut },
+                  { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: AirplaneIcon },
+                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: AirplaneLanding },
                   { value: 'connection', label: 'Connection', desc: 'Connecting flight', icon: ArrowsDownUp }
                 ].map(({ value, label, desc, icon: Icon }) => (
                   <button
@@ -2403,7 +2403,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                         {desc}
                       </div>
                     </span>
-                    {state.serviceType === value && <Check className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
+                    {state.serviceType === value && <CheckCircle weight="light" className="h-5 w-5" style={{ color: '#B8913A', flexShrink: 0 }} />}
                   </button>
                 ))}
               </div>
