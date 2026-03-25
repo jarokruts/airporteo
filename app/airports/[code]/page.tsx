@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAirport } from '@/lib/airports'
 import { AirportHero } from '@/components/airport-hero'
+import { AirportSolariBoard } from '@/components/airport-solari-board'
 import { AirportInfoSection } from '@/components/airport-info-section'
 import { AirportServices } from '@/components/airport-services'
 import { ReviewsSection } from '@/components/reviews-section'
@@ -61,16 +62,7 @@ export default async function AirportPage({ params }: AirportPageProps) {
 
       <main>
         <AirportHero airport={airport} />
-        
-        {/* Intro Paragraph */}
-        <section className="py-6 md:py-10 px-5 lg:px-8 bg-background">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-              Premium meet and greet and VIP concierge services at Barcelona El Prat Airport (BCN). Our dedicated team operates across Terminal 1 and Terminal 2, providing personal escort, fast track immigration, luggage assistance, and exclusive private tarmac transfers for arrivals, departures, and connections.
-            </p>
-          </div>
-        </section>
-        
+        <AirportSolariBoard />
         <AirportServices airport={airport} />
         <ReviewsSection />
         <AirportInfoSection airport={airport} />
