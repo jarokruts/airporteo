@@ -992,6 +992,7 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
   const [service, setService] = useState('Meet & Greet')
   const [airportValue, setAirportValue] = useState(`${airport.city} ${airport.code}`)
   const [flightNumber, setFlightNumber] = useState('')
+  const [connectionFlightNumber, setConnectionFlightNumber] = useState('')
   const [date, setDate] = useState('')
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
@@ -1062,29 +1063,81 @@ export function AirportBookingForm({ airport }: AirportBookingFormProps) {
       {/* Row 2: Airport field with autocomplete search */}
       <AirportSearchField value={airportValue} onChange={setAirportValue} direction={direction} />
 
-      {/* Row 3: Flight # */}
-      <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
-        <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
-        <input
-          type="text"
-          value={flightNumber}
-          onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
-          placeholder="e.g. BA206"
-          maxLength={6}
-          style={{
-            marginLeft: '8px',
-            flex: 1,
-            minWidth: 0,
-            background: 'transparent',
-            border: 'none',
-            outline: 'none',
-            fontSize: '14px',
-            fontWeight: 500,
-            color: '#1D215E',
-            padding: 0
-          }}
-        />
-      </div>
+      {/* Row 3: Flight # - splits into two fields for Connection */}
+      {direction !== 'Connection' ? (
+        <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
+          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
+          <input
+            type="text"
+            value={flightNumber}
+            onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+            placeholder="e.g. BA206"
+            maxLength={6}
+            style={{
+              marginLeft: '8px',
+              flex: 1,
+              minWidth: 0,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              fontSize: '14px',
+              fontWeight: 500,
+              color: '#1D215E',
+              padding: 0
+            }}
+          />
+        </div>
+      ) : (
+        <>
+          {/* Arrival Flight # for Connection */}
+          <div style={{position:'relative', display:'flex', alignItems:'center'}}>
+            <PlaneLanding size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+            <input
+              type="text"
+              value={flightNumber}
+              onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+              placeholder="Arrival Flight #"
+              maxLength={6}
+              style={{
+                width:'100%',
+                height:'40px',
+                paddingLeft:'36px',
+                border:'1px solid #E2E8F0',
+                borderRadius:'10px',
+                fontSize:'14px',
+                fontWeight: 500,
+                color: '#1D215E',
+                backgroundColor: 'white',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+          
+          {/* Departure Flight # for Connection */}
+          <div style={{position:'relative', display:'flex', alignItems:'center'}}>
+            <PlaneTakeoff size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+            <input
+              type="text"
+              value={connectionFlightNumber}
+              onChange={(e) => setConnectionFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+              placeholder="Departure Flight #"
+              maxLength={6}
+              style={{
+                width:'100%',
+                height:'40px',
+                paddingLeft:'36px',
+                border:'1px solid #E2E8F0',
+                borderRadius:'10px',
+                fontSize:'14px',
+                fontWeight: 500,
+                color: '#1D215E',
+                backgroundColor: 'white',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+        </>
+      )}
 
       {/* Row 4: Date */}
       <div style={{ position: 'relative', width: '100%' }}>

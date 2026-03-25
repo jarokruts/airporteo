@@ -1607,7 +1607,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                       const value = e.target.value.replace(/[^A-Za-z0-9]/g, "").slice(0, 6)
                       set({ flightNumber: value })
                     }}
-                    placeholder="Flight #"
+                    placeholder="Arrival Flight #"
                     maxLength={6}
                     style={{
                       width:'100%',
@@ -1632,7 +1632,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                       const value = e.target.value.replace(/[^A-Za-z0-9]/g, "").slice(0, 6)
                       set({ connectionFlightNumber: value })
                     }}
-                    placeholder="Flight #"
+                    placeholder="Departure Flight #"
                     maxLength={6}
                     style={{
                       width:'100%',
