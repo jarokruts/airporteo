@@ -211,20 +211,6 @@ export function AirportInfoSection({ airport }: AirportInfoSectionProps) {
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
-
-        {/* CTA Banner - Compact */}
-        <div className="rounded-xl p-5 md:p-6" style={{ backgroundColor: '#E6EEF8' }}>
-          <p className="mb-3 text-sm md:text-base" style={{ color: '#1D215E' }}>
-            Flying through {airport.name}? Book your VIP Meet & Greet — we handle everything from gate to exit.
-          </p>
-          <a
-            href="#hero"
-            className="inline-block px-6 py-2 rounded-lg font-semibold text-white text-sm transition-colors hover:shadow-lg"
-            style={{ backgroundColor: '#B8913A' }}
-          >
-            Book your service
-          </a>
-        </div>
       </div>
     </section>
   )
