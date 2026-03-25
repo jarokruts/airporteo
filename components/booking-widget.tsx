@@ -2360,8 +2360,8 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
                 {[
-                  { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: AirplaneIcon },
-                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: AirplaneLanding },
+                  { value: 'arrival', label: 'Arrival', desc: 'Incoming flight', icon: AirplaneLanding },
+                  { value: 'departure', label: 'Departure', desc: 'Outgoing flight', icon: Airplane },
                   { value: 'connection', label: 'Connection', desc: 'Connecting flight', icon: ArrowsDownUp }
                 ].map(({ value, label, desc, icon: Icon }) => (
                   <button
