@@ -1205,7 +1205,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
           <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
             <Briefcase size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0 }} />
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
-            <Luggage size={13} style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
+            <Suitcase size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
             <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
