@@ -24,7 +24,7 @@ const AIRPORTS = [
     city: "New York",
     code: "JFK",
     price: 150,
-    image: "/images/airport-newyork.jpg",
+    image: "/images/airport-jfk.jpg",
   },
   {
     city: "Dubai",

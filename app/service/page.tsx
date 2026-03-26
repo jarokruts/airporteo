@@ -20,7 +20,7 @@ export default function ServicesPage() {
       <Navbar />
       <main>
         {/* Hero Section */}
-        <section className="py-12 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[var(--navy)] to-[var(--navy)]/90 text-white">
+        <section className="py-10 md:py-16 px-4 md:px-8 bg-gradient-to-b from-[var(--navy)] to-[var(--navy)]/90 text-white">
           <div className="mx-auto max-w-7xl">
             <div className="text-center mb-16">
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -34,7 +34,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Services Grid */}
-        <section className="py-12 md:py-20 px-4 md:px-8 bg-background">
+        <section className="py-10 md:py-16 px-4 md:px-8 bg-background">
           <div className="mx-auto max-w-7xl">
             <div className="grid md:grid-cols-3 gap-6 md:gap-8">
               {services.map((service) => {
@@ -93,7 +93,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Why Choose Us */}
-        <section className="py-12 md:py-20 px-4 md:px-8 bg-gray-50">
+        <section className="py-10 md:py-16 px-4 md:px-8 bg-gray-50">
           <div className="mx-auto max-w-7xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -133,7 +133,7 @@ export default function ServicesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 md:py-20 px-4 md:px-8 bg-[var(--navy)] text-white">
+        <section className="py-10 md:py-16 px-4 md:px-8 bg-[var(--navy)] text-white">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Transform Your Airport Experience?

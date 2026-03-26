@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { CaretRight } from '@phosphor-icons/react'
 import { Service } from '@/lib/services'
@@ -12,6 +13,18 @@ interface ServiceHeroProps {
 export function ServiceHero({ service }: ServiceHeroProps) {
   return (
     <section className="relative w-full flex flex-col overflow-visible bg-[var(--navy)]">
+      {/* Background Image - Only for Fast Track */}
+      {service.slug === 'fast-track' && (
+        <Image
+          src="/images/fast-track-hero.jpg"
+          alt={service.name}
+          fill
+          className="object-cover"
+          style={{ objectPosition: '50% 20%' }}
+          priority
+        />
+      )}
+
       {/* Navy Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85" />
 
