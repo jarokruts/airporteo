@@ -1365,6 +1365,7 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
 }
 
 export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: string; city: string } } = {}) {
+  const router = useRouter()
   const [state, setState] = useState<BookingState>({
     serviceType: "arrival",
     service: "Meet & Greet",
@@ -1408,7 +1409,6 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
   const [showAirportSearchSheet, setShowAirportSearchSheet] = useState(false)
 
   const handleBook = async () => {
-    const router = useRouter()
     if (!state.airport || !state.date) return
     set({ booking: true })
     
