@@ -1,0 +1,340 @@
+'use client'
+
+import { useState } from "react";
+
+const NAVY = "#1D215E";
+const BLUE = "#3F5CA6";
+const GOLD = "#B8913A";
+const BORDER = "#E2E5EB";
+const GRAY_BG = "#F0F2F5";
+const GRAY_TEXT = "#6B7280";
+
+const COUNTRIES = [
+  { code: "+974", flag: "🇶🇦" },
+  { code: "+971", flag: "🇦🇪" },
+  { code: "+1", flag: "🇺🇸" },
+  { code: "+44", flag: "🇬🇧" },
+];
+
+const VEHICLE_TYPES = [
+  "Business Sedan",
+  "Luxury Sedan",
+  "Executive Minivan",
+  "Luxury SUV",
+];
+
+export default function Step2({ data, updateData, onContinue }) {
+  // Initialize state from existing data if available
+  const [lead, setLead] = useState(
+    data?.leadPassenger || {
+      name: "",
+      age: "35",
+      email: "",
+      countryCode: "+974",
+      phone: "",
+    }
+  );
+
+  const [passengers, setPassengers] = useState(
+    data?.additionalPassengers || []
+  );
+
+  const [checkedBags, setCheckedBags] = useState(
+    data?.luggage?.checked ?? 2
+  );
+  const [cabinBags, setCabinBags] = useState(
+    data?.luggage?.cabin ?? 1
+  );
+
+  const [requests, setRequests] = useState(
+    data?.requests || {
+      wheelchair: false,
+      childSeat: false,
+      extraLuggage: false,
+      lounge: false,
+      pet: false,
+    }
+  );
+
+  const [showTransfer, setShowTransfer] = useState(
+    data?.showTransfer || false
+  );
+  const [transfer, setTransfer] = useState(
+    data?.transfer || { address: "", vehicle: "" }
+  );
+
+  // simple total using existing totalAmount or base 1250
+  const baseTotal = data?.totalAmount ?? 1250;
+  const total = baseTotal; // adjust here if you later add dynamic luggage pricing
+
+  const isFormValid =
+    lead.name.trim() !== "" &&
+    lead.email.trim() !== "" &&
+    lead.phone.trim() !== "";
+
+  const toggleRequest = (key) =>
+    setRequests({ ...requests, [key]: !requests[key] });
+
+  const addPassenger = () =>
+    setPassengers([...passengers, { name: "", age: "" }]);
+
+  const updatePassenger = (index, field, value) => {
+    const updated = [...passengers];
+    updated[index][field] = value;
+    setPassengers(updated);
+  };
+
+  const handleContinue = () => {
+  const updatedData = {
+    ...data,
+    trip: { ...data.trip },
+    leadPassenger: lead,
+    additionalPassengers: passengers,
+    luggage: { checked: checkedBags, cabin: cabinBags },
+    requests,
+    showTransfer,
+    transfer,
+    totalAmount: total,
+  };
+  updateData(updatedData);
+  onContinue(updatedData);
+};
+
+  const addressLabel =
+    (data.trip?.type || "Arrival") === "Departure"
+      ? "Pick-up Address"
+      : "Drop-off Address";
+
+  const showTransferSection =
+    (data.trip?.type || "Arrival") !== "Connection";
+
+  return (
+    <div style={{ background: "#fff", minHeight: "100vh", fontFamily: "'DM Sans', sans-serif" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@500;600&display=swap');
+        .field-input { width: 100%; padding: 12px; border: 1px solid ${BORDER}; border-radius: 10px; font-size: 14px; outline: none; box-sizing: border-box; }
+        .field-label { font-size: 11px; font-weight: 700; color: ${NAVY}; margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        .section-card { background: #fff; border: 1px solid ${BORDER}; border-radius: 14px; padding: 24px; margin-bottom: 20px; }
+        .payment-btn { 
+          border: none; border-radius: 12px; padding: 18px; font-weight: 600; width: 100%; font-size: 16px; margin-top: 10px; 
+          transition: all 0.3s ease; cursor: ${isFormValid ? 'pointer' : 'not-allowed'};
+          background: ${isFormValid ? GOLD : '#D1D5DB'};
+          color: ${isFormValid ? '#fff' : '#9CA3AF'};
+          box-shadow: ${isFormValid ? '0 4px 14px rgba(184, 145, 58, 0.4)' : 'none'};
+        }
+        .counter-btn { width: 32px; height: 32px; border: 1px solid ${BORDER}; border-radius: 8px; background: #fff; cursor: pointer; }
+        .toggle-track { width: 44px; height: 24px; border-radius: 12px; cursor: pointer; position: relative; transition: 0.25s; }
+        .toggle-knob { width: 20px; height: 20px; border-radius: 50%; background: #fff; position: absolute; top: 2px; transition: left 0.25s; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .step-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; margin: 0 auto 8px; }
+      `}</style>
+
+      <nav style={{ background: NAVY, padding: "20px 0" }}>
+        <div style={{ textAlign: "center", marginBottom: 20 }}>
+          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, color: "#fff", letterSpacing: 1 }}>AIRPORTEO</span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", color: "#fff" }}>
+          <div style={{ textAlign: "center", opacity: 0.6 }}>
+            <div className="step-circle" style={{ background: "#fff", color: NAVY }}>✓</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase" }}>Trip Details</div>
+          </div>
+          <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.3)" }} />
+          <div style={{ textAlign: "center" }}>
+            <div className="step-circle" style={{ background: BLUE, color: "#fff" }}>2</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", fontWeight: 700 }}>Your Quote</div>
+          </div>
+          <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.3)" }} />
+          <div style={{ textAlign: "center", opacity: 0.6 }}>
+            <div className="step-circle" style={{ border: "1px solid #fff" }}>3</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase" }}>Confirm & Pay</div>
+          </div>
+        </div>
+      </nav>
+
+      <div style={{ maxWidth: 1150, margin: "40px auto", padding: "0 20px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 30 }}>
+        
+        <div className="left-col">
+          <div className="section-card">
+            <h3 style={{ marginBottom: 20, fontSize: 18, color: NAVY }}>👤 Lead Passenger</h3>
+            <div style={{ display: "flex", gap: 12, marginBottom: 15 }}>
+              <div style={{ flex: 1 }}>
+                <label className="field-label">Full Name (as on passport) *</label>
+                <input className="field-input" placeholder="John Smith" value={lead.name} onChange={e => setLead({...lead, name: e.target.value})} />
+              </div>
+              <div style={{ width: 100 }}>
+                <label className="field-label">Age</label>
+                <input className="field-input" type="number" value={lead.age} onChange={e => setLead({...lead, age: e.target.value})} />
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: 12 }}>
+              <div style={{ flex: 1 }}>
+                <label className="field-label">Phone Number *</label>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <select className="field-input" style={{ width: 120 }} value={lead.countryCode} onChange={e => setLead({...lead, countryCode: e.target.value})}>
+                    {COUNTRIES.map(c => <option key={c.code} value={c.code}>{c.flag} {c.code}</option>)}
+                  </select>
+                  <input 
+                    className="field-input" 
+                    placeholder="555 123 4567" 
+                    value={lead.phone} 
+                    maxLength={10}
+                    onChange={e => setLead({...lead, phone: e.target.value.replace(/\D/g, '')})} 
+                  />
+                </div>
+              </div>
+              <div style={{ flex: 1 }}>
+                <label className="field-label">Email Address *</label>
+                <input className="field-input" placeholder="alex@example.com" value={lead.email} onChange={e => setLead({...lead, email: e.target.value})} />
+              </div>
+            </div>
+          </div>
+
+          <div className="section-card">
+            <h3 style={{ marginBottom: 15, fontSize: 18, color: NAVY }}>👥 Additional Passengers</h3>
+            {passengers.map((p, idx) => (
+              <div key={idx} style={{ display: "flex", gap: 12, marginBottom: 12 }}>
+                <div style={{ flex: 1 }}>
+                  <input className="field-input" placeholder="Full Name" value={p.name} onChange={e => updatePassenger(idx, "name", e.target.value)} />
+                </div>
+                <div style={{ width: 100 }}>
+                  <input className="field-input" type="number" placeholder="Age" value={p.age} onChange={e => updatePassenger(idx, "age", e.target.value)} />
+                </div>
+              </div>
+            ))}
+            <button onClick={addPassenger} style={{ background: "none", border: `1px dashed ${BLUE}`, borderRadius: 10, padding: 12, color: BLUE, fontWeight: 700, width: "100%", cursor: "pointer" }}>
+              + Add Passenger
+            </button>
+          </div>
+
+          <div className="section-card">
+            <h3 style={{ marginBottom: 18, fontSize: 18, color: NAVY }}>🧳 Luggage</h3>
+            {[
+              { label: "Checked Bags", sub: "First 2 included, then $15 each", val: checkedBags, set: setCheckedBags },
+              { label: "Cabin Bags", sub: "Included in service", val: cabinBags, set: setCabinBags }
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "12px 0", borderBottom: i === 0 ? `1px solid ${BORDER}` : "none" }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 700 }}>{item.label}</div>
+                  <div style={{ fontSize: 12, color: GRAY_TEXT }}>{item.sub}</div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <button className="counter-btn" onClick={() => item.set(Math.max(0, item.val - 1))}>-</button>
+                  <span style={{ fontWeight: 700 }}>{item.val}</span>
+                  <button className="counter-btn" onClick={() => item.set(item.val + 1)}>+</button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="section-card">
+            <h3 style={{ marginBottom: 18, fontSize: 18, color: NAVY }}>✨ Special Requests</h3>
+            {[
+              { key: "wheelchair", label: "Wheelchair Assistance", sub: "Mobility support throughout the airport" },
+              { key: "childSeat", label: "Child Seat", sub: "For ground transfer vehicles" },
+              { key: "extraLuggage", label: "Extra Luggage Handling", sub: "Oversized or excess baggage support" },
+              { key: "lounge", label: "VIP Lounge Access", sub: "$55 per person" },
+              { key: "pet", label: "Pet Assistance", sub: "Help with pet travel documentation" }
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: `1px solid ${BORDER}` }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 700 }}>{item.label}</div>
+                  <div style={{ fontSize: 12, color: GRAY_TEXT }}>{item.sub}</div>
+                </div>
+                <div className="toggle-track" style={{ background: requests[item.key] ? BLUE : "#D1D5DB" }} onClick={() => toggleRequest(item.key)}>
+                  <div className="toggle-knob" style={{ left: requests[item.key] ? 22 : 2 }} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {showTransferSection && (
+            <div className="section-card">
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <h3 style={{ fontSize: 18, color: NAVY }}>🚗 Hotel Transfer</h3>
+                  <p style={{ fontSize: 13, color: GRAY_TEXT }}>Professional transport to your destination</p>
+                </div>
+                <div className="toggle-track" style={{ background: showTransfer ? BLUE : "#D1D5DB" }} onClick={() => setShowTransfer(!showTransfer)}>
+                  <div className="toggle-knob" style={{ left: showTransfer ? 22 : 2 }} />
+                </div>
+              </div>
+              {showTransfer && (
+                <div style={{ marginTop: 20, display: "flex", gap: 12 }}>
+                  <div style={{ flex: 1.5 }}>
+                    <label className="field-label">{addressLabel}</label>
+                    <input className="field-input" placeholder="Hotel or destination" value={transfer.address} onChange={e => setTransfer({...transfer, address: e.target.value})} />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <label className="field-label">Vehicle Type</label>
+                    <select className="field-input" value={transfer.vehicle} onChange={e => setTransfer({...transfer, vehicle: e.target.value})}>
+                      <option value="">Select vehicle...</option>
+                      {VEHICLE_TYPES.map(v => <option key={v} value={v}>{v}</option>)}
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        <aside>
+          <div style={{ border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px", position: "sticky", top: 20 }}>
+            <h3 style={{ fontSize: 20, marginBottom: 24, color: NAVY }}>Quote Summary</h3>
+            <div style={{ display: "grid", gap: 12, fontSize: 14 }}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: GRAY_TEXT }}>Airport</span>
+                <span style={{ fontWeight: 700 }}>{data.trip.airport}</span>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: GRAY_TEXT }}>Service</span>
+                <span style={{ fontWeight: 700 }}>{data.trip.type} Meet & Greet</span>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: GRAY_TEXT }}>Flight Date</span>
+                <span style={{ fontWeight: 700 }}>{data.trip.date}</span>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: GRAY_TEXT }}>Flight Number</span>
+                <span style={{ fontWeight: 700 }}>{data.trip.arrivalFlight}</span>
+              </div>
+            </div>
+            <div style={{ height: 1, background: BORDER, margin: "20px 0" }} />
+            <div style={{ display: "grid", gap: 10, fontSize: 14, marginBottom: 20 }}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: GRAY_TEXT }}>Services</span>
+                <span style={{ fontWeight: 600 }}>{data.trip.servicePrice} USD</span>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: GRAY_TEXT }}>Luggage Assistance</span>
+                <span style={{ fontWeight: 600 }}>{data.trip.luggagePrice} USD</span>
+              </div>
+            </div>
+            <div style={{ background: GRAY_BG, padding: "20px", borderRadius: 12 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontWeight: 700, fontSize: 16, color: NAVY }}>Total</span>
+                <span style={{ fontSize: 32, fontWeight: 700, color: NAVY, fontFamily: "'Playfair Display', serif" }}>${total}</span>
+              </div>
+            </div>
+
+            <button className="payment-btn" disabled={!isFormValid} onClick={handleContinue}>
+              Continue to Payment
+            </button>
+
+            <div style={{ 
+              marginTop: "20px", border: `1px solid ${GOLD}`, borderRadius: 12, padding: "16px", 
+              background: "rgba(184, 145, 58, 0.03)", textAlign: "left" 
+            }}>
+              <div style={{ color: GOLD, fontSize: 10, fontWeight: 800, textTransform: "uppercase", marginBottom: 4 }}>Upgrade Available</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: NAVY, marginBottom: 12 }}>Switch to VIP Platinum</div>
+              <button style={{ 
+                background: "#fff", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "6px 12px", 
+                fontSize: 12, cursor: "pointer", width: "100%", fontWeight: 600 
+              }}>
+                See what's included
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}

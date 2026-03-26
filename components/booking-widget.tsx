@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { useRouter } from "next/navigation"
 import { createPortal } from "react-dom"
 import { CaretDown, Envelope, Airplane, AirplaneIcon, AirplaneLanding, X, Spinner, Handshake, Crown, Car, CheckCircle, Calendar, Users, Baby, Suitcase, Briefcase, Minus, Plus, CaretLeft, CaretRight, ArrowsDownUp, Shield, Clock, Star, Backpack, AirplaneTakeoff } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
@@ -1364,6 +1365,7 @@ function DateField({ label, value, onChange, containerStyle }: { label: string; 
 }
 
 export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: string; city: string } } = {}) {
+  const router = useRouter()
   const [state, setState] = useState<BookingState>({
     serviceType: "arrival",
     service: "Meet & Greet",
@@ -1409,8 +1411,40 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
   const handleBook = async () => {
     if (!state.airport || !state.date) return
     set({ booking: true })
-    await new Promise((r) => setTimeout(r, 1800))
-    set({ booking: false, booked: true })
+    
+    // Prepare booking data to pass to checkout
+    const bookingData = {
+      trip: {
+        type: state.serviceType === 'connection' ? 'Connection' : 'Arrival',
+        airport: `${state.airport.city} (${state.airport.code})`,
+        arrivalFlight: state.flightNumber || '',
+        departureFlight: state.connectionFlightNumber || '',
+        date: new Date(state.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      },
+      leadPassenger: {
+        email: state.email,
+        name: '',
+        phone: '',
+      },
+      passengers: {
+        adults: state.adults,
+        children: state.children,
+        infants: state.infants,
+      },
+      luggage: {
+        checked: state.checked || 2,
+        cabin: state.cabin || 1,
+      },
+      service: state.service,
+    }
+    
+    // Store in sessionStorage to pass to checkout
+    sessionStorage.setItem('bookingFormData', JSON.stringify(bookingData))
+    
+    // Redirect to checkout
+    await new Promise((r) => setTimeout(r, 800))
+    set({ booking: false })
+    router.push('/checkout')
   }
 
   if (state.booked) {
