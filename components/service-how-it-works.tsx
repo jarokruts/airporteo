@@ -144,7 +144,7 @@ export function ServiceHowItWorks({ service }: ServiceHowItWorksProps) {
   if (timings.length === 0) return null
 
   return (
-    <section className="py-10 md:py-16 px-4 md:px-8 bg-background relative z-0">
+    <section className="hidden md:block py-10 md:py-16 px-4 md:px-8 bg-background relative z-0">
       <div className="mx-auto max-w-7xl">
         <div
           className="rounded-lg p-6 md:p-8 border border-white/15 relative overflow-hidden space-y-4"
