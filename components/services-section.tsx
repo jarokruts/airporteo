@@ -3,7 +3,7 @@
 "use client"
 
 import Image from "next/image"
-import { AirplaneLanding, ArrowsDownUp, CaretRight } from "@phosphor-icons/react"
+import { AirplaneLanding, AirplaneTakeoff, ArrowsDownUp, CaretRight } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 import { useCurrency } from "./currency-context"
 
@@ -23,7 +23,7 @@ const SERVICES = [
     imageAlt: "Business professionals arriving at airport terminal with luggage",
   },
   {
-    icon: AirplaneLanding,
+    icon: AirplaneTakeoff,
     title: "Departure Service",
     description: "Breeze through check-in, security, and passport control with priority access. Relax in a private lounge before your flight.",
     features: [
