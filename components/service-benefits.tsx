@@ -61,7 +61,7 @@ export function ServiceBenefits({ service }: ServiceBenefitsProps) {
                 <div
                   key={idx}
                   className="rounded-3xl p-6 md:p-8"
-                  style={{ backgroundColor: '#F0F2F8' }}
+                  style={{ backgroundColor: '#FFFFFF' }}
                 >
                   {/* Icon and Title */}
                   <div className="flex items-start gap-4 mb-4">
