@@ -113,13 +113,10 @@ export function ServiceHowItWorks({ service }: ServiceHowItWorksProps) {
 
   // Fast Track Solari Board
   const lines = [
-    'STEP 1 — BOOK ONLINE — CHOOSE YOUR AIRPORT, FLIGHT, AND SERVICE ',
-    '',
-    'STEP 2 — WE ASSIGN YOUR AGENT — TRAINED, MULTILINGUAL PROFESSIONAL ',
-    '',
-    'STEP 3 — AGENT MEETS YOU — AT THE AIRCRAFT DOOR WITH NAME BOARD ',
-    '',
-    'STEP 4 — DOOR-TO-DOOR ESCORT — THROUGH IMMIGRATION, BAGGAGE, TO YOUR VEHICLE ',
+    'STEP 1 BOOK ONLINE — CHOOSE YOUR AIRPORT, FLIGHT, AND SERVICE ',
+    'STEP 2 WE ASSIGN YOUR AGENT — TRAINED, MULTILINGUAL PROFESSIONAL ',
+    'STEP 3 AGENT MEETS YOU — AT THE AIRCRAFT DOOR WITH NAME BOARD ',
+    'STEP 4 DOOR-TO-DOOR ESCORT — THROUGH IMMIGRATION, BAGGAGE, TO YOUR VEHICLE ',
   ]
 
   const [timings, setTimings] = useState<number[][]>([])
@@ -156,13 +153,7 @@ export function ServiceHowItWorks({ service }: ServiceHowItWorksProps) {
           }}
         >
           {lines.map((line, lineIndex) => {
-            if (line === '') {
-              return (
-                <div key={`spacer-${lineIndex}`} className="h-3" />
-              )
-            }
-
-            const stepMatch = line.match(/^(STEP \d+) — (.*)/)
+            const stepMatch = line.match(/^(STEP \d+) (.*)/)
             if (!stepMatch) return null
 
             const stepLabel = stepMatch[1]
