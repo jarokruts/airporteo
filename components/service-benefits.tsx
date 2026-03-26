@@ -24,10 +24,10 @@ const BENEFITS_PLACEHOLDER = {
 
 export function ServiceBenefits({ service }: ServiceBenefitsProps) {
   return (
-    <section className="bg-[#F8F9FA] py-16 md:py-24 px-4 md:px-8">
+    <section className="bg-[#F8F9FA] py-10 md:py-16 px-4 md:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-[var(--navy)] mb-16" style={{ fontFamily: 'var(--font-playfair)' }}>
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[var(--navy)] mb-12" style={{ fontFamily: 'var(--font-playfair)' }}>
           What&apos;s Included
         </h2>
 

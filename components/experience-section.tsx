@@ -21,7 +21,7 @@ const HIGHLIGHTS = [
 
 export function ExperienceSection() {
   return (
-    <section className="bg-background py-16 lg:py-24 overflow-hidden">
+    <section className="bg-background py-10 lg:py-16 overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
           {/* Left: Image Collage */}

@@ -58,7 +58,7 @@ const FEATURES = [
 
 export function BentoFeatures() {
   return (
-    <section id="features" className="bg-secondary/50 py-16 lg:py-24">
+    <section id="features" className="bg-secondary/50 py-10 lg:py-16">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Bento Grid */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

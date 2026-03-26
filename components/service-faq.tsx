@@ -12,7 +12,7 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-12 md:py-20 px-4 md:px-8 bg-white">
+    <section className="py-10 md:py-16 px-4 md:px-8 bg-white">
       <div className="mx-auto max-w-4xl">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--navy)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
