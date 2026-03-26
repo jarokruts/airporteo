@@ -50,7 +50,7 @@ export function ServiceBenefits({ service }: ServiceBenefitsProps) {
 
           {/* Subtitle */}
           <p className="text-base text-muted-foreground mb-12 max-w-2xl" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Experience the ultimate in airport convenience and efficiency with our premium fast track service
+            Skip the queues at security, immigration, and customs with dedicated priority lanes. Our agents escort you through every checkpoint, so you spend minutes — not hours — at the airport.
           </p>
 
           {/* Benefits Grid */}
