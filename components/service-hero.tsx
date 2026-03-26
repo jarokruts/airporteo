@@ -20,6 +20,7 @@ export function ServiceHero({ service }: ServiceHeroProps) {
           alt={service.name}
           fill
           className="object-cover"
+          style={{ objectPosition: '50% 20%' }}
           priority
         />
       )}
