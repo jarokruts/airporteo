@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Airplane, CaretDown, Envelope, Suitcase, Briefcase, X, AirplaneIcon, AirplaneLanding, CaretLeft, CaretRight, Baby, Smiley, Calendar, Users, Backpack, AirplaneTakeoff } from '@phosphor-icons/react'
 import { Airport } from '@/lib/airports'
+import { useRouter } from 'next/navigation'
 
 interface AirportBookingFormProps {
   airport: Airport
@@ -989,6 +990,7 @@ function BottomSheet({
 }
 
 export function AirportBookingForm({ airport, preSelectedService }: AirportBookingFormProps) {
+  const router = useRouter()
   const [direction, setDirection] = useState('Arrival')
   const [service, setService] = useState(preSelectedService || 'Meet & Greet')
   const [airportValue, setAirportValue] = useState(airport.code ? `${airport.city} ${airport.code}` : '')
@@ -1256,6 +1258,41 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
       <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>
         <button
           type="button"
+          onClick={() => {
+            if (airportValue && date && email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && adults >= 1) {
+              // Prepare booking data to pass to checkout
+              const bookingData = {
+                trip: {
+                  type: tripType,
+                  airport: `${airportValue.split('|')[1]} ${airportValue.split('|')[0]}`,
+                  arrivalFlight: arrivalFlightNumber || '',
+                  departureFlight: connectionFlightNumber || '',
+                  date: new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+                },
+                leadPassenger: {
+                  email: email,
+                  name: '',
+                  phone: '',
+                },
+                passengers: {
+                  adults,
+                  children,
+                  infants,
+                },
+                luggage: {
+                  checked: checkedBags,
+                  cabin: cabinBags,
+                },
+                cabinClass: cabinClass,
+              }
+              
+              // Store in sessionStorage to pass to checkout
+              sessionStorage.setItem('bookingFormData', JSON.stringify(bookingData))
+              
+              // Redirect to checkout
+              router.push('/checkout')
+            }
+          }}
           style={{
             width: '60%',
             height: '44px',
