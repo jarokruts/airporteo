@@ -7,6 +7,7 @@ import { ServiceHero } from '@/components/service-hero'
 import { ServiceHowItWorks } from '@/components/service-how-it-works'
 import { ServiceBenefits } from '@/components/service-benefits'
 import { ServiceFAQ } from '@/components/service-faq'
+import { PopularAirports } from '@/components/popular-airports'
 
 interface ServicePageProps {
   params: {
@@ -69,6 +70,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
         
         {/* Section 4: FAQ */}
         <ServiceFAQ service={service} />
+        
+        {/* Section 5: Popular Airports */}
+        <PopularAirports />
       </main>
       <Footer />
     </>
