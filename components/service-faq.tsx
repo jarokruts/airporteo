@@ -16,7 +16,7 @@ export function ServiceFAQ({ service }: ServiceFAQProps) {
     <section className="bg-white py-10 lg:py-16">
       <div className="mx-auto max-w-4xl px-4 md:px-5 lg:px-8">
         {/* Header */}
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 md:mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6 md:mb-8">
           FAQs
         </h2>
 
