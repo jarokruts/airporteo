@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from "react";
 
 const NAVY = "#1D215E";
