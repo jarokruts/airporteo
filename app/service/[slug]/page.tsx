@@ -6,7 +6,6 @@ import { Footer } from '@/components/footer'
 import { ServiceHero } from '@/components/service-hero'
 import { ServiceHowItWorks } from '@/components/service-how-it-works'
 import { ServiceBenefits } from '@/components/service-benefits'
-import { ServicePricingCompact } from '@/components/service-pricing-compact'
 import { ServiceFAQ } from '@/components/service-faq'
 
 interface ServicePageProps {
@@ -68,10 +67,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         {/* Section 3: What's Included */}
         <ServiceBenefits service={service} />
         
-        {/* Section 4: Pricing */}
-        <ServicePricingCompact service={service} />
-        
-        {/* Section 5: FAQ */}
+        {/* Section 4: FAQ */}
         <ServiceFAQ service={service} />
       </main>
       <Footer />
