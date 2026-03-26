@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Link from 'next/link'
@@ -43,8 +44,21 @@ export default function AboutPage() {
       <Navbar />
       <main>
         {/* Hero Strip */}
-        <section className="bg-[var(--navy)] text-white py-12 md:py-16 px-4 md:px-8 flex items-center">
-          <div className="mx-auto max-w-7xl w-full">
+        <section className="relative w-full bg-[var(--navy)] text-white py-12 md:py-16 px-4 md:px-8 flex items-center overflow-hidden">
+          {/* Background Image */}
+          <Image
+            src="/images/about-us-hero.jpg"
+            alt="Modern airport terminal"
+            fill
+            className="absolute inset-0 object-cover"
+            priority
+          />
+          
+          {/* Navy Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85" />
+          
+          {/* Content */}
+          <div className="mx-auto max-w-7xl w-full relative z-10">
             {/* Breadcrumbs */}
             <div className="mb-6">
               <p className="text-xs md:text-sm uppercase tracking-widest opacity-50" style={{ fontFamily: 'var(--font-dm-sans)' }}>
