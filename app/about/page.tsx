@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { Article, Star, ChatDots, ShieldCheck } from '@phosphor-icons/react'
 
 export const metadata: Metadata = {
   title: 'About Us | Airporteo - Premium Airport Services',
@@ -14,25 +14,25 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const discoverCards = [
     {
-      icon: '📖',
+      icon: Article,
       title: 'Blog',
       description: 'Travel tips and airport insights',
       href: '#',
     },
     {
-      icon: '⭐',
+      icon: Star,
       title: 'Testimonials',
       description: 'What our travelers say',
       href: '#',
     },
     {
-      icon: '💬',
+      icon: ChatDots,
       title: 'Contact Us',
       description: 'Get in touch with our team',
       href: '#',
     },
     {
-      icon: '🛡️',
+      icon: ShieldCheck,
       title: 'Trust & Safety',
       description: 'Our commitment to you',
       href: '#',
@@ -129,36 +129,45 @@ export default function AboutPage() {
         </section>
 
         {/* Discover More Section */}
-        <section className="bg-gray-50 py-16 md:py-20 px-4 md:px-8">
+        <section className="py-10 md:py-16 px-4 md:px-8" style={{ backgroundColor: '#F0F2F5' }}>
           <div className="mx-auto max-w-7xl">
-            {/* Section Title */}
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
-                Discover More About Airporteo
-              </h2>
-            </div>
+            {/* Heading */}
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-12">
+              Discover More About Airporteo
+            </h2>
 
             {/* Cards Grid */}
-            <div className="grid md:grid-cols-4 gap-6">
-              {discoverCards.map((card, idx) => (
-                <Link
-                  key={idx}
-                  href={card.href}
-                  className="group p-8 bg-[var(--navy)] rounded-2xl text-white hover:shadow-xl transition-all"
-                >
-                  <div className="text-4xl mb-4">{card.icon}</div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--gold)] transition-colors" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                    {card.title}
-                  </h3>
-                  <p className="text-sm opacity-90" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                    {card.description}
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-[var(--gold)] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                    Learn More
-                    <ArrowRight size={16} />
-                  </div>
-                </Link>
-              ))}
+            <div className="grid md:grid-cols-2 gap-5">
+              {discoverCards.map((card, idx) => {
+                const IconComponent = card.icon
+                return (
+                  <Link
+                    key={idx}
+                    href={card.href}
+                    className="rounded-3xl p-6 md:p-8"
+                    style={{ backgroundColor: '#FFFFFF' }}
+                  >
+                    {/* Icon and Title */}
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="flex-shrink-0">
+                        <IconComponent
+                          size={28}
+                          weight="light"
+                          style={{ color: '#1D215E' }}
+                        />
+                      </div>
+                      <h3 className="text-lg md:text-xl font-bold text-foreground" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                        {card.title}
+                      </h3>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm md:text-base text-muted-foreground" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                      {card.description}
+                    </p>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </section>
