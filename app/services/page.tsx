@@ -3,6 +3,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ServiceBookingForm } from '@/components/service-booking-form'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
+import { ServicesSolariBoard } from '@/components/services-solari-board'
 import Link from 'next/link'
 import { getAllServices } from '@/lib/services'
 
@@ -81,14 +82,8 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Section 2: SEO Text Strip */}
-        <section className="bg-[#F0F2F5] py-12 px-4 md:px-8">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="text-sm md:text-base text-[#6B7280] leading-relaxed">
-              Airporteo provides premium airport concierge services at over 120 airports worldwide — including meet and greet, fast track security, VIP terminal access, luggage assistance, private transfers, and electric buggy transport. Every airport offers a unique combination of services depending on terminal layout, local regulations, and available facilities. Select your airport to see real-time availability, pricing, and service options tailored to your specific journey.
-            </p>
-          </div>
-        </section>
+        {/* Section 2: Solari Board */}
+        <ServicesSolariBoard />
 
         {/* Section 3: Service Cards Grid */}
         <section className="bg-white py-16 md:py-24 px-4 md:px-8">
