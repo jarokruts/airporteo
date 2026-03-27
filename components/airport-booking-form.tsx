@@ -1247,7 +1247,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             background: 'transparent',
             border: 'none',
             outline: 'none',
-            fontSize: '14px',
+            fontSize: '12px',
             color: '#1D215E',
             padding: 0
           }}

@@ -6,11 +6,11 @@ import { Menu, X, ChevronDown, Globe, DollarSign, LogIn } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const LANGUAGES = [
-  { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "es", label: "Español", flag: "🇪🇸" },
-  { code: "ar", label: "العربية", flag: "🇸🇦" },
-  { code: "zh", label: "普通话", flag: "🇨🇳" },
-  { code: "hi", label: "हिन्दी", flag: "🇮🇳" },
+  { code: "en", label: "GB English" },
+  { code: "es", label: "ES Español" },
+  { code: "ar", label: "AR العربية" },
+  { code: "zh", label: "CN 普通话" },
+  { code: "hi", label: "IN हिन्दी" },
 ]
 
 const CURRENCIES = [
@@ -307,7 +307,6 @@ export function Navbar() {
                       : "text-foreground"
                   )}
                 >
-                  <span className="text-base leading-none" suppressHydrationWarning>{lang.flag}</span>
                   <span>{lang.label}</span>
                   {selectedLang.code === lang.code && (
                     <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue" />

@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from "react";
+import { Crown } from "@phosphor-icons/react";
+import { Navbar } from "@/components/navbar";
 
 const NAVY = "#1D215E";
 const BLUE = "#3F5CA6";
@@ -63,9 +65,13 @@ export default function Step2({ data, updateData, onContinue }) {
     data?.transfer || { address: "", vehicle: "" }
   );
 
+  const [vipUpgrade, setVipUpgrade] = useState(
+    data?.vipUpgrade || false
+  );
+
   // simple total using existing totalAmount or base 1250
   const baseTotal = data?.totalAmount ?? 1250;
-  const total = baseTotal; // adjust here if you later add dynamic luggage pricing
+  const total = vipUpgrade ? baseTotal + 2000 : baseTotal;
 
   const isFormValid =
     lead.name.trim() !== "" &&
@@ -94,6 +100,7 @@ export default function Step2({ data, updateData, onContinue }) {
     requests,
     showTransfer,
     transfer,
+    vipUpgrade,
     totalAmount: total,
   };
   updateData(updatedData);
@@ -128,29 +135,28 @@ export default function Step2({ data, updateData, onContinue }) {
         .step-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; margin: 0 auto 8px; }
       `}</style>
 
-      <nav style={{ background: NAVY, padding: "20px 0" }}>
-        <div style={{ textAlign: "center", marginBottom: 20 }}>
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, color: "#fff", letterSpacing: 1 }}>AIRPORTEO</span>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", color: "#fff" }}>
+      <Navbar />
+
+      <nav style={{ background: "#FFFFFF", padding: "20px 0", borderBottom: "1px solid #E2E5EB" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", color: NAVY }}>
           <div style={{ textAlign: "center", opacity: 0.6 }}>
-            <div className="step-circle" style={{ background: "#fff", color: NAVY }}>✓</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase" }}>Trip Details</div>
+            <div className="step-circle" style={{ background: "#E8EAF0", color: NAVY }}>✓</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", color: NAVY }}>Trip Details</div>
           </div>
-          <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.3)" }} />
+          <div style={{ width: 40, height: 1, background: "#E2E5EB" }} />
           <div style={{ textAlign: "center" }}>
             <div className="step-circle" style={{ background: BLUE, color: "#fff" }}>2</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase", fontWeight: 700 }}>Your Quote</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", fontWeight: 700, color: NAVY }}>Your Quote</div>
           </div>
-          <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.3)" }} />
+          <div style={{ width: 40, height: 1, background: "#E2E5EB" }} />
           <div style={{ textAlign: "center", opacity: 0.6 }}>
-            <div className="step-circle" style={{ border: "1px solid #fff" }}>3</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase" }}>Confirm & Pay</div>
+            <div className="step-circle" style={{ border: `1px solid ${NAVY}` }}>3</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", color: NAVY }}>Confirm & Pay</div>
           </div>
         </div>
       </nav>
 
-      <div style={{ maxWidth: 1150, margin: "40px auto", padding: "0 20px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 30 }}>
+      <div style={{ maxWidth: 1150, margin: "40px auto", padding: "0 20px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 30, background: "#FFFFFF" }}>
         
         <div className="left-col">
           <div className="section-card">
@@ -274,6 +280,70 @@ export default function Step2({ data, updateData, onContinue }) {
               )}
             </div>
           )}
+
+          <div className="section-card" style={{ border: `1px solid ${GOLD}` }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+              <div>
+                <h3 style={{ fontSize: 18, color: NAVY, display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <Crown size={20} weight="fill" color={GOLD} />
+                  VIP Platinum Upgrade
+                </h3>
+                <p style={{ fontSize: 13, color: GRAY_TEXT }}>Private terminal, tarmac limousine, personal VIP advisor</p>
+              </div>
+              <div className="toggle-track" style={{ background: vipUpgrade ? GOLD : "#D1D5DB" }} onClick={() => setVipUpgrade(!vipUpgrade)}>
+                <div className="toggle-knob" style={{ left: vipUpgrade ? 22 : 2 }} />
+              </div>
+            </div>
+            {vipUpgrade && (
+              <div style={{ marginTop: 20, paddingTop: 20, borderTop: `1px solid ${BORDER}` }}>
+                {[
+                  "Dedicated Personal VIP Advisor throughout",
+                  "Private lounge access for up to 3 hours",
+                  "Individual limousine transfer from/to the aircraft",
+                  "Personal greeting at the aircraft",
+                  "Customs and passport control via premium fast-track lanes",
+                  "No airport crowds — total privacy and serenity"
+                ].map((item, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: i < 5 ? 12 : 0, color: NAVY, fontSize: 13 }}>
+                    <span style={{ color: GOLD, fontWeight: 700 }}>✓</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div style={{ display: "flex", gap: 12, marginTop: 32 }}>
+            <button 
+              style={{
+                flex: "0 0 35%",
+                border: "none",
+                borderRadius: 12,
+                padding: 18,
+                fontWeight: 600,
+                width: "100%",
+                fontSize: 16,
+                marginTop: 10,
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+                background: "#FFFFFF",
+                color: NAVY,
+                boxShadow: `0 1px 3px rgba(0,0,0,0.1)`,
+                boxSizing: "border-box"
+              }}
+              onClick={() => goToStep(1)}
+            >
+              Back
+            </button>
+            <button 
+              className="payment-btn"
+              style={{ flex: "0 0 65%" }}
+              disabled={!isFormValid} 
+              onClick={handleContinue}
+            >
+              Confirm and Pay
+            </button>
+          </div>
         </div>
 
         <aside>
@@ -307,30 +377,18 @@ export default function Step2({ data, updateData, onContinue }) {
                 <span style={{ color: GRAY_TEXT }}>Luggage Assistance</span>
                 <span style={{ fontWeight: 600 }}>{data.trip.luggagePrice} USD</span>
               </div>
+              {vipUpgrade && (
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ color: GRAY_TEXT }}>VIP Platinum Upgrade</span>
+                  <span style={{ fontWeight: 600 }}>+$2,000</span>
+                </div>
+              )}
             </div>
             <div style={{ background: GRAY_BG, padding: "20px", borderRadius: 12 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span style={{ fontWeight: 700, fontSize: 16, color: NAVY }}>Total</span>
                 <span style={{ fontSize: 32, fontWeight: 700, color: NAVY, fontFamily: "'Playfair Display', serif" }}>${total}</span>
               </div>
-            </div>
-
-            <button className="payment-btn" disabled={!isFormValid} onClick={handleContinue}>
-              Continue to Payment
-            </button>
-
-            <div style={{ 
-              marginTop: "20px", border: `1px solid ${GOLD}`, borderRadius: 12, padding: "16px", 
-              background: "rgba(184, 145, 58, 0.03)", textAlign: "left" 
-            }}>
-              <div style={{ color: GOLD, fontSize: 10, fontWeight: 800, textTransform: "uppercase", marginBottom: 4 }}>Upgrade Available</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: NAVY, marginBottom: 12 }}>Switch to VIP Platinum</div>
-              <button style={{ 
-                background: "#fff", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "6px 12px", 
-                fontSize: 12, cursor: "pointer", width: "100%", fontWeight: 600 
-              }}>
-                See what's included
-              </button>
             </div>
           </div>
         </aside>
