@@ -1,0 +1,165 @@
+'use client'
+
+import { useState, useMemo } from 'react'
+import { Navbar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
+import { ServiceBookingForm } from '@/components/service-booking-form'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Search } from 'lucide-react'
+
+const AIRPORTS_DATA = [
+  { city: 'London', code: 'LHR', price: 150, image: '/images/airport-london.jpg' },
+  { city: 'Dubai', code: 'DXB', price: 180, image: '/images/airport-dubai.jpg' },
+  { city: 'Paris', code: 'CDG', price: 120, image: '/images/airport-paris.jpg' },
+  { city: 'New York', code: 'JFK', price: 150, image: '/images/airport-jfk.jpg' },
+  { city: 'Barcelona', code: 'BCN', price: 45, image: '/images/airport-barcelona.jpg' },
+  { city: 'Singapore', code: 'SIN', price: 200, image: '/images/airport-singapore.jpg' },
+]
+
+export default function AirportsPage() {
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const heroService = {
+    name: 'Airports',
+    slug: 'airports',
+    shortDescription: 'Premium concierge services at over 120 airports across 50+ countries.',
+    description: '',
+    icon: 'Plane',
+    color: '#3F5CA6',
+    duration: 'Varies',
+    pricing: [{ currency: '$', price: 45 }],
+    airports: [],
+  }
+
+  // Filter airports based on search query
+  const filteredAirports = useMemo(() => {
+    if (!searchQuery.trim()) return AIRPORTS_DATA
+
+    const query = searchQuery.toLowerCase()
+    return AIRPORTS_DATA.filter(airport =>
+      airport.city.toLowerCase().includes(query) ||
+      airport.code.toLowerCase().includes(query)
+    )
+  }, [searchQuery])
+
+  return (
+    <>
+      <Navbar />
+      <main>
+        {/* Section 1: Hero */}
+        <section
+          className="relative w-full flex flex-col overflow-visible pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 px-4 md:px-8 bg-[var(--navy)]"
+        >
+          {/* Navy Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85" />
+
+          <div className="relative z-10 mx-auto max-w-7xl w-full">
+            <div className="grid md:grid-cols-[55%_45%] gap-8 md:gap-12 items-start">
+              {/* Left Column */}
+              <div className="flex flex-col text-white">
+                {/* Breadcrumbs */}
+                <div className="flex items-center gap-2 mb-6 md:mb-8 text-xs md:text-sm opacity-75">
+                  <Link href="/" className="hover:opacity-100">Home</Link>
+                  <span>/</span>
+                  <span>Airports</span>
+                </div>
+
+                {/* Heading */}
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+                  Our Airports
+                </h1>
+
+                {/* Subtitle */}
+                <p className="text-white/90 text-sm md:text-base mb-8 leading-relaxed">
+                  Premium concierge services at over 120 airports across 50+ countries. Find your airport, check available services, and book instantly.
+                </p>
+
+                {/* Search Bar */}
+                <div className="relative">
+                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <Search size={20} />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search by city, airport name, or code (e.g. Barcelona, Heathrow, JFK)"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 md:py-4 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold)] bg-white"
+                  />
+                </div>
+              </div>
+
+              {/* Right Column - Booking Form */}
+              <div>
+                <ServiceBookingForm service={heroService} preSelectedService="Airports" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 2: Popular Airports */}
+        <section className="bg-[var(--gray-bg)] py-10 md:py-12 px-4 md:px-8">
+          <div className="mx-auto max-w-7xl">
+            {/* Heading */}
+            <div className="mb-12 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--navy)] mb-2">
+                Popular Airports
+              </h2>
+              <p className="text-[var(--gray-text)]">
+                {searchQuery ? `Search results for "${searchQuery}"` : 'Top destinations served by Airporteo'}
+              </p>
+            </div>
+
+            {/* Airport Cards Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+              {filteredAirports.length > 0 ? (
+                filteredAirports.map((airport) => (
+                  <Link
+                    key={airport.code}
+                    href={`/airports/${airport.code.toLowerCase()}`}
+                    className="group flex flex-col items-center gap-3 hover:-translate-y-1 transition-transform duration-200"
+                  >
+                    {/* Image with Overlay */}
+                    <div className="relative w-full aspect-square overflow-hidden rounded-xl border-2 border-[var(--border)] group-hover:border-[var(--gold)] shadow-sm group-hover:shadow-lg transition-all duration-200">
+                      <Image
+                        src={airport.image}
+                        alt={`${airport.city} ${airport.code}`}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      {/* Dark Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+                      {/* Text Overlay */}
+                      <div className="absolute inset-0 flex flex-col justify-end p-3 md:p-4 text-white">
+                        <h3 className="font-bold text-sm md:text-base">
+                          {airport.city}
+                        </h3>
+                        <p className="text-xs md:text-sm text-white/80">
+                          {airport.code}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Price Info */}
+                    <div className="text-center">
+                      <p className="text-xs md:text-sm text-[var(--gray-text)]">
+                        from <span className="font-bold text-[var(--gold)]">${airport.price}</span>
+                      </p>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-8 text-[var(--gray-text)]">
+                  No airports found for "{searchQuery}"
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
+}
