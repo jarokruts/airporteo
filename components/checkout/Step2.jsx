@@ -64,9 +64,13 @@ export default function Step2({ data, updateData, onContinue }) {
     data?.transfer || { address: "", vehicle: "" }
   );
 
+  const [vipUpgrade, setVipUpgrade] = useState(
+    data?.vipUpgrade || false
+  );
+
   // simple total using existing totalAmount or base 1250
   const baseTotal = data?.totalAmount ?? 1250;
-  const total = baseTotal; // adjust here if you later add dynamic luggage pricing
+  const total = vipUpgrade ? baseTotal + 2000 : baseTotal;
 
   const isFormValid =
     lead.name.trim() !== "" &&
@@ -95,6 +99,7 @@ export default function Step2({ data, updateData, onContinue }) {
     requests,
     showTransfer,
     transfer,
+    vipUpgrade,
     totalAmount: total,
   };
   updateData(updatedData);
@@ -274,6 +279,37 @@ export default function Step2({ data, updateData, onContinue }) {
               )}
             </div>
           )}
+
+          <div className="section-card" style={{ border: `1px solid ${GOLD}` }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+              <div>
+                <h3 style={{ fontSize: 18, color: NAVY, display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  👑 VIP Platinum Upgrade
+                </h3>
+                <p style={{ fontSize: 13, color: GRAY_TEXT }}>Private terminal, tarmac limousine, personal VIP advisor</p>
+              </div>
+              <div className="toggle-track" style={{ background: vipUpgrade ? GOLD : "#D1D5DB" }} onClick={() => setVipUpgrade(!vipUpgrade)}>
+                <div className="toggle-knob" style={{ left: vipUpgrade ? 22 : 2 }} />
+              </div>
+            </div>
+            {vipUpgrade && (
+              <div style={{ marginTop: 20, paddingTop: 20, borderTop: `1px solid ${BORDER}` }}>
+                {[
+                  "Dedicated Personal VIP Advisor throughout",
+                  "Private lounge access for up to 3 hours",
+                  "Individual limousine transfer from/to the aircraft",
+                  "Personal greeting at the aircraft",
+                  "Customs and passport control via premium fast-track lanes",
+                  "No airport crowds — total privacy and serenity"
+                ].map((item, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: i < 5 ? 12 : 0, color: NAVY, fontSize: 13 }}>
+                    <span style={{ color: GOLD, fontWeight: 700 }}>✓</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         <aside>
@@ -307,6 +343,12 @@ export default function Step2({ data, updateData, onContinue }) {
                 <span style={{ color: GRAY_TEXT }}>Luggage Assistance</span>
                 <span style={{ fontWeight: 600 }}>{data.trip.luggagePrice} USD</span>
               </div>
+              {vipUpgrade && (
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ color: GRAY_TEXT }}>VIP Platinum Upgrade</span>
+                  <span style={{ fontWeight: 600 }}>+$2,000</span>
+                </div>
+              )}
             </div>
             <div style={{ background: GRAY_BG, padding: "20px", borderRadius: 12 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -318,20 +360,6 @@ export default function Step2({ data, updateData, onContinue }) {
             <button className="payment-btn" disabled={!isFormValid} onClick={handleContinue}>
               Continue to Payment
             </button>
-
-            <div style={{ 
-              marginTop: "20px", border: `1px solid ${GOLD}`, borderRadius: 12, padding: "16px", 
-              background: "rgba(184, 145, 58, 0.03)", textAlign: "left" 
-            }}>
-              <div style={{ color: GOLD, fontSize: 10, fontWeight: 800, textTransform: "uppercase", marginBottom: 4 }}>Upgrade Available</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: NAVY, marginBottom: 12 }}>Switch to VIP Platinum</div>
-              <button style={{ 
-                background: "#fff", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "6px 12px", 
-                fontSize: 12, cursor: "pointer", width: "100%", fontWeight: 600 
-              }}>
-                See what's included
-              </button>
-            </div>
           </div>
         </aside>
       </div>
