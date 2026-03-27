@@ -5,7 +5,6 @@ import { ServiceBookingForm } from '@/components/service-booking-form'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
 import { ServicesSolariBoard } from '@/components/services-solari-board'
 import Link from 'next/link'
-import { getAllServices } from '@/lib/services'
 
 export const metadata: Metadata = {
   title: 'Airport Services | Airporteo',
@@ -14,9 +13,6 @@ export const metadata: Metadata = {
 }
 
 export default function ServicesPage() {
-  const services = getAllServices()
-  
-  // Create a service object for the hero with empty airport field
   const heroService = {
     name: 'Our Services',
     slug: 'services',
@@ -33,6 +29,7 @@ export default function ServicesPage() {
     <>
       <Navbar />
       <main>
+        {/* Hero Section */}
         <section 
           className="relative w-full flex flex-col overflow-visible pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 px-4 md:px-8 bg-cover bg-center"
           style={{
@@ -53,7 +50,7 @@ export default function ServicesPage() {
                   Our Services
                 </h1>
                 
-                <p className="text-white/80 text-sm md:text-base mb-8 leading-relaxed">
+                <p className="text-white/90 text-sm md:text-base mb-8 leading-relaxed">
                   Services, availability, and pricing are unique to each airport. Start by selecting your airport and flight — we'll show you exactly what's available, from fast track lanes to private VIP terminals.
                 </p>
 
@@ -86,7 +83,7 @@ export default function ServicesPage() {
         <ServicesSolariBoard />
 
         {/* Section 3: Service Cards Grid */}
-        <section className="bg-white py-16 md:py-24 px-4 md:px-8">
+        <section className="bg-white py-10 md:py-16 px-4 md:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="grid md:grid-cols-3 gap-8">
               {[
@@ -177,17 +174,17 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Section 4: "Not Sure?" CTA */}
-        <section className="bg-[#F0F2F5] py-16 md:py-24 px-4 md:px-8">
+        {/* Section 4: Contact CTA */}
+        <section className="bg-[#F0F2F5] py-10 md:py-16 px-4 md:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1D215E] mb-4">
-              Not sure which service is right?
+              Want to know more?
             </h2>
             <p className="text-base md:text-lg text-[#6B7280] mb-10">
-              Tell us about your trip details, and our travel experts will provide personalized recommendations to match your journey perfectly.
+              Get detailed information about any service — what's included, how it works at your specific airport, and exact pricing for your journey.
             </p>
             <button className="px-8 py-4 bg-[#B8913A] text-white font-semibold rounded-lg hover:shadow-lg transition-all">
-              Get a Recommendation
+              Contact Us
             </button>
           </div>
         </section>
