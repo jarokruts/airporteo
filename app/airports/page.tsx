@@ -23,6 +23,7 @@ const REGIONS = ['All', 'Europe', 'Middle East', 'Asia', 'Americas', 'Africa', '
 export default function AirportsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedRegion, setSelectedRegion] = useState('All')
+  const [expandedCountry, setExpandedCountry] = useState<string | null>(null)
 
   const heroService = {
     name: 'Airports',
@@ -209,38 +210,83 @@ export default function AirportsPage() {
 
             {/* Directory Grid */}
             {Object.keys(groupedAirports).length > 0 ? (
-              <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-8 md:gap-12">
-                {Object.entries(groupedAirports).map(([country, airports]) => (
-                  <div key={country} className="space-y-4">
-                    <h3 className="text-lg font-bold text-[var(--navy)] border-b border-[var(--border)] pb-2">
-                      {country}
-                    </h3>
-                    <div className="space-y-3">
-                      {airports.map(airport => (
-                        <Link
-                          key={airport.code}
-                          href={`/airports/${airport.slug}`}
-                          className="group flex items-center justify-between p-3 rounded-lg hover:bg-[var(--gray-bg)] transition-colors"
-                        >
-                          <div className="flex-1">
-                            <p className="font-semibold text-[var(--navy)] group-hover:text-[var(--gold)]">
-                              {airport.city}
-                            </p>
-                            <p className="text-sm text-[var(--gray-text)]">
-                              {airport.airport}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-3 ml-4">
-                            <span className="text-xs bg-[var(--border)] text-[var(--navy)] px-2 py-1 rounded font-mono">
-                              {airport.code}
-                            </span>
-                          </div>
-                        </Link>
-                      ))}
+              <>
+                {/* Mobile Accordion View */}
+                <div className="md:hidden space-y-2">
+                  {Object.entries(groupedAirports).map(([country, airports]) => (
+                    <div key={country} className="border border-[var(--border)] rounded-lg overflow-hidden">
+                      <button
+                        onClick={() => setExpandedCountry(expandedCountry === country ? null : country)}
+                        className="w-full flex items-center justify-between p-4 hover:bg-[var(--gray-bg)] transition-colors bg-white"
+                      >
+                        <h3 className="text-base font-bold text-[var(--navy)]">
+                          {country}
+                        </h3>
+                        <span className={`text-[var(--navy)] transition-transform duration-300 ${expandedCountry === country ? 'rotate-180' : ''}`}>
+                          ▾
+                        </span>
+                      </button>
+                      {expandedCountry === country && (
+                        <div className="bg-[var(--gray-bg)] space-y-2 p-3 border-t border-[var(--border)]">
+                          {airports.map(airport => (
+                            <Link
+                              key={airport.code}
+                              href={`/airports/${airport.slug}`}
+                              className="group flex items-center justify-between p-3 rounded-lg hover:bg-white transition-colors"
+                            >
+                              <div className="flex-1">
+                                <p className="font-semibold text-[var(--navy)] group-hover:text-[var(--gold)] text-sm">
+                                  {airport.city}
+                                </p>
+                                <p className="text-xs text-[var(--gray-text)]">
+                                  {airport.airport}
+                                </p>
+                              </div>
+                              <span className="text-xs bg-white text-[var(--navy)] px-2 py-1 rounded font-mono ml-2">
+                                {airport.code}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+
+                {/* Desktop Grid View */}
+                <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-3 gap-8 md:gap-12">
+                  {Object.entries(groupedAirports).map(([country, airports]) => (
+                    <div key={country} className="space-y-4">
+                      <h3 className="text-lg font-bold text-[var(--navy)] border-b border-[var(--border)] pb-2">
+                        {country}
+                      </h3>
+                      <div className="space-y-3">
+                        {airports.map(airport => (
+                          <Link
+                            key={airport.code}
+                            href={`/airports/${airport.slug}`}
+                            className="group flex items-center justify-between p-3 rounded-lg hover:bg-[var(--gray-bg)] transition-colors"
+                          >
+                            <div className="flex-1">
+                              <p className="font-semibold text-[var(--navy)] group-hover:text-[var(--gold)]">
+                                {airport.city}
+                              </p>
+                              <p className="text-sm text-[var(--gray-text)]">
+                                {airport.airport}
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-3 ml-4">
+                              <span className="text-xs bg-[var(--border)] text-[var(--navy)] px-2 py-1 rounded font-mono">
+                                {airport.code}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
             ) : (
               <div className="text-center py-12 text-[var(--gray-text)]">
                 <p className="text-lg">No airports found matching your search.</p>
