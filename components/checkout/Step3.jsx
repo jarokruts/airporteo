@@ -10,6 +10,61 @@ const BORDER = "#E2E5EB";
 const GRAY_BG = "#F0F2F5";
 const GRAY_TEXT = "#6B7280";
 
+// Payment logo SVGs
+const PaymentLogos = {
+  VISA: (
+    <svg viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 32 }}>
+      <rect width="48" height="32" rx="4" fill="#1A1F71"/>
+      <text x="8" y="22" fontSize="12" fontWeight="bold" fill="white" fontFamily="Arial">VISA</text>
+    </svg>
+  ),
+  MasterCard: (
+    <svg viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 32 }}>
+      <rect width="48" height="32" rx="4" fill="white" stroke={BORDER} strokeWidth="1"/>
+      <circle cx="18" cy="16" r="8" fill="#EB001B"/>
+      <circle cx="30" cy="16" r="8" fill="#F79E1B"/>
+    </svg>
+  ),
+  AmEx: (
+    <svg viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 32 }}>
+      <rect width="48" height="32" rx="4" fill="#006FCF"/>
+      <text x="8" y="22" fontSize="10" fontWeight="bold" fill="white" fontFamily="Arial">AMEX</text>
+    </svg>
+  ),
+  "Apple Pay": (
+    <svg viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 32 }}>
+      <rect width="48" height="32" rx="4" fill="black"/>
+      <text x="6" y="22" fontSize="8" fontWeight="bold" fill="white" fontFamily="Arial">Apple</text>
+      <text x="24" y="22" fontSize="8" fontWeight="bold" fill="white" fontFamily="Arial">Pay</text>
+    </svg>
+  ),
+  "Google Pay": (
+    <svg viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 32 }}>
+      <rect width="48" height="32" rx="4" fill="white" stroke={BORDER} strokeWidth="1"/>
+      <circle cx="12" cy="16" r="5" fill="#4285F4"/>
+      <circle cx="18" cy="16" r="5" fill="#EA4335"/>
+      <circle cx="24" cy="16" r="5" fill="#FBBC04"/>
+      <circle cx="30" cy="16" r="5" fill="#34A853"/>
+    </svg>
+  ),
+  Crypto: (
+    <svg viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 32 }}>
+      <rect width="48" height="32" rx="4" fill="white" stroke={BORDER} strokeWidth="1"/>
+      <circle cx="24" cy="16" r="8" fill="#F7931A"/>
+      <text x="18" y="20" fontSize="12" fontWeight="bold" fill="white" fontFamily="Arial">₿</text>
+    </svg>
+  ),
+  "Bank Transfer": (
+    <svg viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 32 }}>
+      <rect width="48" height="32" rx="4" fill="white" stroke={BORDER} strokeWidth="1"/>
+      <path d="M24 8L32 12V14H16V12L24 8Z" fill={NAVY}/>
+      <rect x="16" y="14" width="16" height="10" fill="none" stroke={NAVY} strokeWidth="1.5"/>
+      <line x1="20" y1="17" x2="28" y2="17" stroke={NAVY} strokeWidth="1"/>
+      <line x1="20" y1="20" x2="28" y2="20" stroke={NAVY} strokeWidth="1"/>
+    </svg>
+  )
+};
+
 export default function Step3({ data, onBack }) {
   const [agreedTerms, setAgreedTerms] = useState(false);
   const [agreedBcn, setAgreedBcn] = useState(false);
@@ -262,12 +317,12 @@ export default function Step3({ data, onBack }) {
 
           {/* ── PAYMENT TRUST ── */}
           <div style={{ textAlign: "center" }}>
-            <div style={{ fontSize: 12, color: GRAY_TEXT, marginBottom: 10 }}>Secure payments via</div>
-            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }}>
+            <div style={{ fontSize: 12, color: GRAY_TEXT, marginBottom: 12 }}>Secure payments via</div>
+            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, alignItems: "center" }}>
               {["VISA", "MasterCard", "AmEx", "Apple Pay", "Google Pay", "Crypto", "Bank Transfer"].map((method) => (
-                <span key={method} style={{ fontSize: 12, padding: "6px 14px", border: `1px solid ${BORDER}`, borderRadius: 8, color: GRAY_TEXT, background: "white" }}>
-                  {method}
-                </span>
+                <div key={method} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                  {PaymentLogos[method]}
+                </div>
               ))}
             </div>
           </div>
