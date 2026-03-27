@@ -95,7 +95,13 @@ export default function AirportsPage() {
       <main>
         {/* Section 1: Hero */}
         <section
-          className="relative w-full flex flex-col overflow-visible pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 px-4 md:px-8 bg-[var(--navy)]"
+          className="relative w-full flex flex-col overflow-visible pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 px-4 md:px-8 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(/images/airports-hero-bg.png)',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed'
+          }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85" />
 
