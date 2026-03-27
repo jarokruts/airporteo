@@ -32,9 +32,19 @@ export default function ServicesPage() {
     <>
       <Navbar />
       <main>
-        {/* Hero Section - Matching Barcelona airport page style */}
-        <section className="relative w-full bg-[var(--navy)] py-12 md:py-16 lg:py-20 px-4 md:px-8">
-          <div className="mx-auto max-w-7xl">
+        <section 
+          className="relative w-full py-12 md:py-16 lg:py-20 px-4 md:px-8 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(/images/services-hero-bg.jpg)',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed'
+          }}
+        >
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/50"></div>
+          
+          <div className="relative z-10 mx-auto max-w-7xl">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
               {/* Left Column - Text & Info */}
               <div className="flex flex-col text-white">
