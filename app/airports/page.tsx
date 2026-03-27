@@ -4,7 +4,6 @@ import { useState, useMemo } from 'react'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
-import { ServiceBookingForm } from '@/components/service-booking-form'
 import { AIRPORTS_DATA } from '@/lib/airports-directory'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -101,9 +100,9 @@ export default function AirportsPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85" />
 
           <div className="relative z-10 mx-auto max-w-7xl w-full">
-            <div className="grid md:grid-cols-[55%_45%] gap-8 md:gap-12 items-start">
+            <div className="flex flex-col">
               {/* Left Column */}
-              <div className="flex flex-col text-white">
+              <div className="flex flex-col text-white max-w-2xl">
                 <div className="flex items-center gap-2 mb-6 md:mb-8 text-xs md:text-sm opacity-75">
                   <Link href="/" className="hover:opacity-100">Home</Link>
                   <span>/</span>
@@ -131,11 +130,6 @@ export default function AirportsPage() {
                     className="w-full pl-12 pr-4 py-3 md:py-4 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold)] bg-white"
                   />
                 </div>
-              </div>
-
-              {/* Right Column - Booking Form */}
-              <div>
-                <ServiceBookingForm service={heroService} preSelectedService="Airports" />
               </div>
             </div>
           </div>
