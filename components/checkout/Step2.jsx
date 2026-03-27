@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { Navbar } from "@/components/navbar";
 
 const NAVY = "#1D215E";
 const BLUE = "#3F5CA6";
@@ -128,10 +129,9 @@ export default function Step2({ data, updateData, onContinue }) {
         .step-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; margin: 0 auto 8px; }
       `}</style>
 
-      <nav style={{ background: NAVY, padding: "20px 0" }}>
-        <div style={{ textAlign: "center", marginBottom: 20 }}>
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, color: "#fff", letterSpacing: 1 }}>AIRPORTEO</span>
-        </div>
+      <Navbar />
+
+      <nav style={{ background: NAVY, padding: "20px 0", borderBottom: "1px solid #E2E5EB" }}>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", color: "#fff" }}>
           <div style={{ textAlign: "center", opacity: 0.6 }}>
             <div className="step-circle" style={{ background: "#fff", color: NAVY }}>✓</div>
@@ -148,6 +148,7 @@ export default function Step2({ data, updateData, onContinue }) {
             <div style={{ fontSize: 11, textTransform: "uppercase" }}>Confirm & Pay</div>
           </div>
         </div>
+      </nav>
       </nav>
 
       <div style={{ maxWidth: 1150, margin: "40px auto", padding: "0 20px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 30 }}>
