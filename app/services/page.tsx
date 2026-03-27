@@ -33,7 +33,7 @@ export default function ServicesPage() {
       <Navbar />
       <main>
         <section 
-          className="relative w-full py-12 md:py-16 lg:py-20 px-4 md:px-8 bg-cover bg-center"
+          className="relative w-full flex flex-col overflow-visible pt-4 md:pt-6 lg:pt-8 pb-8 md:pb-12 lg:pb-16 px-4 md:px-8 bg-cover bg-center"
           style={{
             backgroundImage: 'url(/images/services-hero-bg.jpg)',
             backgroundPosition: 'center',
@@ -44,11 +44,11 @@ export default function ServicesPage() {
           {/* Gradient overlay shadow matching Barcelona airport page */}
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85"></div>
           
-          <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="relative z-10 mx-auto max-w-7xl w-full">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
               {/* Left Column - Text & Info */}
               <div className="flex flex-col text-white">
-                <h1 className="text-4xl font-bold text-white leading-tight mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4" style={{ fontFamily: 'Georgia, serif' }}>
                   Our Services
                 </h1>
                 
