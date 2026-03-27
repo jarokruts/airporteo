@@ -89,13 +89,56 @@ export default function ServicesPage() {
         <section className="bg-white py-16 md:py-24 px-4 md:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="grid md:grid-cols-3 gap-8">
-              {services.map((service) => (
+              {[
+                {
+                  name: 'Meet & Greet',
+                  description: 'Your personal assistant from aircraft door to arrivals hall',
+                  price: 45,
+                  slug: 'meet-and-greet',
+                  isVIP: false
+                },
+                {
+                  name: 'Fast Track',
+                  description: 'Skip the queues at security and immigration',
+                  price: 35,
+                  slug: 'fast-track',
+                  isVIP: false
+                },
+                {
+                  name: 'Luggage Assistance',
+                  description: 'Professional handling from curb to carousel',
+                  price: 20,
+                  slug: 'luggage-assistance',
+                  isVIP: false
+                },
+                {
+                  name: 'Hotel Transfer',
+                  description: 'Private chauffeur from terminal to your destination',
+                  price: 80,
+                  slug: 'hotel-transfer',
+                  isVIP: false
+                },
+                {
+                  name: 'Airport Buggy',
+                  description: 'Electric cart transport across the terminal',
+                  price: 30,
+                  slug: 'airport-buggy',
+                  isVIP: false
+                },
+                {
+                  name: 'VIP Platinum',
+                  description: 'The ultimate private airport experience',
+                  price: 150,
+                  slug: 'vip-platinum',
+                  isVIP: true
+                }
+              ].map((service) => (
                 <Link
-                  key={service.id}
-                  href={`/service/${service.slug}`}
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
                   className="group flex flex-col h-full"
                 >
-                  <div className="flex flex-col h-full bg-white rounded-xl border border-[#E2E5EB] overflow-hidden hover:shadow-lg transition-all duration-300">
+                  <div className={`flex flex-col h-full bg-white rounded-xl border overflow-hidden hover:shadow-lg transition-all duration-300 ${service.isVIP ? 'border-[#B8913A]' : 'border-[#E2E5EB]'}`}>
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                         <span className="text-gray-400 text-4xl">✈</span>
@@ -114,16 +157,12 @@ export default function ServicesPage() {
                       </h3>
 
                       <p className={`text-sm font-semibold mb-3 ${service.isVIP ? 'text-[#B8913A]' : 'text-[#3F5CA6]'}`}>
-                        {service.shortDescription}
-                      </p>
-
-                      <p className="text-sm text-[#6B7280] mb-6 flex-1 leading-relaxed">
                         {service.description}
                       </p>
 
-                      <div className="flex items-center justify-between pt-4 border-t border-[#E2E5EB]">
+                      <div className="flex items-center justify-between pt-4 border-t border-[#E2E5EB] mt-auto">
                         <span className="text-sm font-semibold text-[#6B7280]">
-                          From <span className="text-[#B8913A]">${service.pricing?.[0]?.price || 35}</span>
+                          From <span className="text-[#B8913A]">${service.price}</span>
                         </span>
                         <div className="flex items-center gap-1 text-[#B8913A] font-semibold group-hover:gap-2 transition-all">
                           Learn more
