@@ -4,7 +4,7 @@ import { Footer } from '@/components/footer'
 import { BookingWidget } from '@/components/booking-widget'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
 import Link from 'next/link'
-import { ArrowRight, Airplane, Zap, Gem } from 'lucide-react'
+import { AirplaneTakeoff, Lightning, Crown } from '@phosphor-icons/react'
 
 export const metadata: Metadata = {
   title: 'Airport Services | Airporteo',
@@ -102,7 +102,7 @@ export default function ServicesPage() {
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                      <Airplane size={20} className="text-[var(--gold)]" />
+                      <AirplaneTakeoff size={20} className="text-[var(--gold)]" />
                     </div>
                     <div>
                       <p className="font-semibold">120+ airports worldwide, each with its own service set</p>
@@ -111,7 +111,7 @@ export default function ServicesPage() {
 
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                      <Zap size={20} className="text-[var(--gold)]" />
+                      <Lightning size={20} className="text-[var(--gold)]" />
                     </div>
                     <div>
                       <p className="font-semibold">Real-time availability based on your flight and terminal</p>
@@ -120,7 +120,7 @@ export default function ServicesPage() {
 
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                      <Gem size={20} className="text-[var(--gold)]" />
+                      <Crown size={20} className="text-[var(--gold)]" />
                     </div>
                     <div>
                       <p className="font-semibold">From express fast track to full VIP Platinum experience</p>
@@ -195,7 +195,7 @@ export default function ServicesPage() {
                         </span>
                         <div className="flex items-center gap-1 text-[var(--gold)] font-semibold group-hover:gap-2 transition-all">
                           Learn more
-                          <ArrowRight size={16} />
+                          <AirplaneTakeoff size={16} />
                         </div>
                       </div>
                     </div>
