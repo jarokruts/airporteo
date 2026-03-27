@@ -4,6 +4,7 @@ import { Footer } from '@/components/footer'
 import { ServiceBookingForm } from '@/components/service-booking-form'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
 import { ServicesSolariBoard } from '@/components/services-solari-board'
+import { ReviewsSection } from '@/components/reviews-section'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -189,7 +190,10 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Section 5: Discover More */}
+        {/* Section 5: Reviews */}
+        <ReviewsSection />
+
+        {/* Section 6: Discover More */}
         <div className="bg-white">
           <DiscoverMoreSection />
         </div>
