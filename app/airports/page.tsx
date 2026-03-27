@@ -175,11 +175,7 @@ export default function AirportsPage() {
                       </div>
                     </div>
 
-                    <div className="text-center">
-                      <p className="text-xs md:text-sm text-[var(--gray-text)]">
-                        from <span className="font-bold text-[var(--gold)]">${airport.price}</span>
-                      </p>
-                    </div>
+                    <div className="text-center" />
                   </Link>
                 ))
               ) : (
@@ -237,9 +233,6 @@ export default function AirportsPage() {
                           <div className="flex items-center gap-3 ml-4">
                             <span className="text-xs bg-[var(--border)] text-[var(--navy)] px-2 py-1 rounded font-mono">
                               {airport.code}
-                            </span>
-                            <span className="text-sm font-semibold text-[var(--gold)] whitespace-nowrap">
-                              from ${airport.price}
                             </span>
                           </div>
                         </Link>
