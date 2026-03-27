@@ -41,8 +41,8 @@ export default function ServicesPage() {
             backgroundAttachment: 'fixed'
           }}
         >
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-black/50"></div>
+          {/* Gradient overlay shadow matching Barcelona airport page */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/70 via-[var(--navy)]/75 to-[var(--navy)]/85"></div>
           
           <div className="relative z-10 mx-auto max-w-7xl">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
