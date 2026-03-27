@@ -12,83 +12,20 @@ export const metadata: Metadata = {
   keywords: ['airport services', 'fast track', 'meet and greet', 'VIP service', 'airport concierge'],
 }
 
-export const metadata: Metadata = {
-  title: 'Airport Services | Airporteo',
-  description: 'Explore premium airport concierge services at 120+ airports worldwide. Fast Track, Meet & Greet, VIP Platinum, and more.',
-  keywords: ['airport services', 'fast track', 'meet and greet', 'VIP service', 'airport concierge'],
-}
-
-const SERVICES = [
-  {
-    id: 1,
-    name: 'Meet & Greet',
-    tagline: 'Your personal assistant from aircraft door to arrivals hall',
-    description: 'Our professional Meet & Greet service provides seamless airport support. A dedicated assistant meets you at the aircraft door and accompanies you through immigration, baggage claim, and customs.',
-    price: 45,
-    image: '/images/service-meet-greet.jpg',
-    slug: 'meet-and-greet',
-  },
-  {
-    id: 2,
-    name: 'Fast Track',
-    tagline: 'Skip the queues at security and immigration',
-    description: 'Bypass long queues and fast-track through security screening and immigration control. Experience expedited processing so you can reach your destination faster.',
-    price: 35,
-    image: '/images/service-fast-track.jpg',
-    slug: 'fast-track',
-  },
-  {
-    id: 3,
-    name: 'Luggage Assistance',
-    tagline: 'Professional handling from curb to carousel',
-    description: 'Our luggage experts handle your bags with care from airport curb to your destination. Professional packing, handling, and delivery support included.',
-    price: 20,
-    image: '/images/service-luggage.jpg',
-    slug: 'luggage-assistance',
-  },
-  {
-    id: 4,
-    name: 'Hotel Transfer',
-    tagline: 'Private chauffeur from terminal to your destination',
-    description: 'Comfortable, private transportation in luxury vehicles. Professional drivers ensure safe, timely arrival to your hotel or residence with complimentary luggage handling.',
-    price: 80,
-    image: '/images/service-transfer.jpg',
-    slug: 'hotel-transfer',
-  },
-  {
-    id: 5,
-    name: 'Airport Buggy',
-    tagline: 'Electric cart transport across the terminal',
-    description: 'Navigate large airports effortlessly with our electric buggy service. Perfect for travelers with limited mobility or those wanting to conserve energy.',
-    price: 30,
-    image: '/images/service-buggy.jpg',
-    slug: 'airport-buggy',
-  },
-  {
-    id: 6,
-    name: 'VIP Platinum',
-    tagline: 'The ultimate private airport experience',
-    description: 'Our premium offering includes dedicated VIP advisor, private lounge access, individual limousine transfer, personal greeting, and premium fast-track lanes through customs.',
-    price: 150,
-    image: '/images/service-vip.jpg',
-    slug: 'vip-platinum',
-    isVIP: true,
-  },
-]
-
 export default function ServicesPage() {
   const services = getAllServices()
   
-  // Create a service object for the hero that matches the structure
+  // Create a service object for the hero with empty airport field
   const heroService = {
     name: 'Our Services',
     slug: 'services',
     shortDescription: 'Services, availability, and pricing are unique to each airport. Start by selecting your airport and flight — we\'ll show you exactly what\'s available, from fast track lanes to private VIP terminals.',
+    description: 'Services, availability, and pricing are unique to each airport. Start by selecting your airport and flight — we\'ll show you exactly what\'s available, from fast track lanes to private VIP terminals.',
     icon: 'Plane',
     color: '#3F5CA6',
-    duration: 'Varies',
+    duration: 'Varies by service',
     pricing: [{ currency: '$', price: 35 }],
-    // Empty airport - not pre-filled
+    airports: [],
   }
 
   return (
@@ -140,12 +77,12 @@ export default function ServicesPage() {
                       </p>
 
                       <p className="text-sm text-[#6B7280] mb-6 flex-1 leading-relaxed">
-                        {service.duration}
+                        {service.description}
                       </p>
 
                       <div className="flex items-center justify-between pt-4 border-t border-[#E2E5EB]">
                         <span className="text-sm font-semibold text-[#6B7280]">
-                          From <span className="text-[#B8913A]">${service.pricing[0].price}</span>
+                          From <span className="text-[#B8913A]">${service.pricing?.[0]?.price || 35}</span>
                         </span>
                         <div className="flex items-center gap-1 text-[#B8913A] font-semibold group-hover:gap-2 transition-all">
                           Learn more
