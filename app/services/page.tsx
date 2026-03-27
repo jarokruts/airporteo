@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
-import { ServiceHero } from '@/components/service-hero'
+import { ServiceBookingForm } from '@/components/service-booking-form'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
 import Link from 'next/link'
 import { getAllServices } from '@/lib/services'
@@ -32,8 +32,44 @@ export default function ServicesPage() {
     <>
       <Navbar />
       <main>
-        {/* Hero Section - Using ServiceHero Component for exact styling match */}
-        <ServiceHero service={heroService} />
+        {/* Hero Section - Matching Barcelona airport page style */}
+        <section className="relative w-full bg-[var(--navy)] py-12 md:py-16 lg:py-20 px-4 md:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+              {/* Left Column - Text & Info */}
+              <div className="flex flex-col text-white">
+                <h1 className="text-4xl font-bold text-white leading-tight mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+                  Our Services
+                </h1>
+                
+                <p className="text-white/80 text-sm md:text-base mb-8 leading-relaxed">
+                  Services, availability, and pricing are unique to each airport. Start by selecting your airport and flight — we'll show you exactly what's available, from fast track lanes to private VIP terminals.
+                </p>
+
+                {/* Info Points */}
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg text-[var(--gold)] flex-shrink-0">✓</span>
+                    <p className="text-white/90 text-sm">120+ airports worldwide with service combinations</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg text-[var(--gold)] flex-shrink-0">✓</span>
+                    <p className="text-white/90 text-sm">Real-time availability based on your flight details</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg text-[var(--gold)] flex-shrink-0">✓</span>
+                    <p className="text-white/90 text-sm">From express fast track to full VIP Platinum experience</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column - Booking Form */}
+              <div>
+                <ServiceBookingForm service={heroService} preSelectedService="Services" />
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Section 2: SEO Text Strip */}
         <section className="bg-[#F0F2F5] py-12 px-4 md:px-8">
