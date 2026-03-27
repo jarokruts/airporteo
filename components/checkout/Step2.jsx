@@ -284,7 +284,7 @@ export default function Step2({ data, updateData, onContinue }) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
               <div>
                 <h3 style={{ fontSize: 18, color: NAVY, display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                  👑 VIP Platinum Upgrade
+                  ���� VIP Platinum Upgrade
                 </h3>
                 <p style={{ fontSize: 13, color: GRAY_TEXT }}>Private terminal, tarmac limousine, personal VIP advisor</p>
               </div>
@@ -309,6 +309,34 @@ export default function Step2({ data, updateData, onContinue }) {
                 ))}
               </div>
             )}
+          </div>
+
+          <div style={{ display: "flex", gap: 12, marginTop: 32 }}>
+            <button 
+              style={{
+                flex: "0 0 35%",
+                padding: "12px 16px",
+                borderRadius: 8,
+                border: `2px solid ${NAVY}`,
+                background: "#FFFFFF",
+                color: NAVY,
+                fontSize: 14,
+                fontWeight: 700,
+                cursor: "pointer",
+                transition: "all 0.3s ease"
+              }}
+              onClick={() => goToStep(1)}
+            >
+              Back
+            </button>
+            <button 
+              className="payment-btn"
+              style={{ flex: "0 0 65%" }}
+              disabled={!isFormValid} 
+              onClick={handleContinue}
+            >
+              Confirm and Pay
+            </button>
           </div>
         </div>
 
@@ -356,10 +384,6 @@ export default function Step2({ data, updateData, onContinue }) {
                 <span style={{ fontSize: 32, fontWeight: 700, color: NAVY, fontFamily: "'Playfair Display', serif" }}>${total}</span>
               </div>
             </div>
-
-            <button className="payment-btn" disabled={!isFormValid} onClick={handleContinue}>
-              Continue to Payment
-            </button>
           </div>
         </aside>
       </div>
