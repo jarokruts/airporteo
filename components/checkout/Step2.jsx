@@ -131,26 +131,26 @@ export default function Step2({ data, updateData, onContinue }) {
 
       <Navbar />
 
-      <nav style={{ background: NAVY, padding: "20px 0", borderBottom: "1px solid #E2E5EB" }}>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", color: "#fff" }}>
+      <nav style={{ background: "#FFFFFF", padding: "20px 0", borderBottom: "1px solid #E2E5EB" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", color: NAVY }}>
           <div style={{ textAlign: "center", opacity: 0.6 }}>
-            <div className="step-circle" style={{ background: "#fff", color: NAVY }}>✓</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase" }}>Trip Details</div>
+            <div className="step-circle" style={{ background: "#E8EAF0", color: NAVY }}>✓</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", color: NAVY }}>Trip Details</div>
           </div>
-          <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.3)" }} />
+          <div style={{ width: 40, height: 1, background: "#E2E5EB" }} />
           <div style={{ textAlign: "center" }}>
             <div className="step-circle" style={{ background: BLUE, color: "#fff" }}>2</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase", fontWeight: 700 }}>Your Quote</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", fontWeight: 700, color: NAVY }}>Your Quote</div>
           </div>
-          <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.3)" }} />
+          <div style={{ width: 40, height: 1, background: "#E2E5EB" }} />
           <div style={{ textAlign: "center", opacity: 0.6 }}>
-            <div className="step-circle" style={{ border: "1px solid #fff" }}>3</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase" }}>Confirm & Pay</div>
+            <div className="step-circle" style={{ border: `1px solid ${NAVY}` }}>3</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", color: NAVY }}>Confirm & Pay</div>
           </div>
         </div>
       </nav>
 
-      <div style={{ maxWidth: 1150, margin: "40px auto", padding: "0 20px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 30 }}>
+      <div style={{ maxWidth: 1150, margin: "40px auto", padding: "0 20px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 30, background: "#FFFFFF" }}>
         
         <div className="left-col">
           <div className="section-card">

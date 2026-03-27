@@ -48,26 +48,26 @@ export default function Step3({ data, onBack }) {
     <>
       <Navbar />
 
-      <nav style={{ background: NAVY, padding: "20px 0", borderBottom: "1px solid #E2E5EB" }}>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", color: "#fff" }}>
+      <nav style={{ background: "#FFFFFF", padding: "20px 0", borderBottom: "1px solid #E2E5EB" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px", color: NAVY }}>
           <div style={{ textAlign: "center", opacity: 0.6 }}>
-            <div style={{ width: 32, height: 32, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, background: "#fff", color: NAVY, margin: "0 auto 8px" }}>✓</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase" }}>Trip Details</div>
+            <div style={{ width: 32, height: 32, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, background: "#E8EAF0", color: NAVY, margin: "0 auto 8px" }}>✓</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", color: NAVY }}>Trip Details</div>
           </div>
-          <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.3)" }} />
+          <div style={{ width: 40, height: 1, background: "#E2E5EB" }} />
           <div style={{ textAlign: "center", opacity: 0.6 }}>
-            <div style={{ width: 32, height: 32, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, background: "rgba(255,255,255,0.2)", color: "#fff", margin: "0 auto 8px" }}>✓</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase" }}>Your Quote</div>
+            <div style={{ width: 32, height: 32, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, background: "#E8EAF0", color: NAVY, margin: "0 auto 8px" }}>✓</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", color: NAVY }}>Your Quote</div>
           </div>
-          <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.3)" }} />
+          <div style={{ width: 40, height: 1, background: "#E2E5EB" }} />
           <div style={{ textAlign: "center" }}>
             <div style={{ width: 32, height: 32, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, background: "#3F5CA6", color: "#fff", margin: "0 auto 8px" }}>3</div>
-            <div style={{ fontSize: 11, textTransform: "uppercase", fontWeight: 700 }}>Confirm & Pay</div>
+            <div style={{ fontSize: 11, textTransform: "uppercase", fontWeight: 700, color: NAVY }}>Confirm & Pay</div>
           </div>
         </div>
       </nav>
 
-      <div style={{ background: GRAY_BG, minHeight: "100vh", padding: "48px 20px 80px" }}>
+      <div style={{ background: "#FFFFFF", minHeight: "100vh", padding: "48px 20px 80px" }}>
 
         {/* Page title */}
         <div style={{ maxWidth: 700, margin: "0 auto 32px" }}>
