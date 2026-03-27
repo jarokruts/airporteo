@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { Crown } from "@phosphor-icons/react";
 import { Navbar } from "@/components/navbar";
 
 const NAVY = "#1D215E";
@@ -284,7 +285,8 @@ export default function Step2({ data, updateData, onContinue }) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
               <div>
                 <h3 style={{ fontSize: 18, color: NAVY, display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                  ���� VIP Platinum Upgrade
+                  <Crown size={20} weight="fill" color={GOLD} />
+                  VIP Platinum Upgrade
                 </h3>
                 <p style={{ fontSize: 13, color: GRAY_TEXT }}>Private terminal, tarmac limousine, personal VIP advisor</p>
               </div>
@@ -315,15 +317,17 @@ export default function Step2({ data, updateData, onContinue }) {
             <button 
               style={{
                 flex: "0 0 35%",
-                padding: "12px 16px",
-                borderRadius: 8,
-                border: `2px solid ${NAVY}`,
+                padding: "18px 16px",
+                borderRadius: 12,
+                border: `none`,
                 background: "#FFFFFF",
                 color: NAVY,
-                fontSize: 14,
-                fontWeight: 700,
+                fontSize: 16,
+                fontWeight: 600,
                 cursor: "pointer",
-                transition: "all 0.3s ease"
+                transition: "all 0.3s ease",
+                outline: `2px solid ${NAVY}`,
+                outlineOffset: 0
               }}
               onClick={() => goToStep(1)}
             >
