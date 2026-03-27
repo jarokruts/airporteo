@@ -149,7 +149,6 @@ export default function Step2({ data, updateData, onContinue }) {
           </div>
         </div>
       </nav>
-      </nav>
 
       <div style={{ maxWidth: 1150, margin: "40px auto", padding: "0 20px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 30 }}>
         
