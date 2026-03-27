@@ -1792,7 +1792,7 @@ export function BookingWidget({ defaultAirport }: { defaultAirport?: { code: str
                   MozAppearance: 'none',
                   width: '100%',
                   color: '#1D215E',
-                  fontSize: '12px',
+                  fontSize: '15px',
                   marginLeft: '8px',
                   padding: '0',
                   WebkitTextFillColor: '#1D215E'
