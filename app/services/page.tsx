@@ -1,9 +1,16 @@
 import { Metadata } from 'next'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
-import { BookingWidget } from '@/components/booking-widget'
+import { ServiceHero } from '@/components/service-hero'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
 import Link from 'next/link'
+import { getAllServices } from '@/lib/services'
+
+export const metadata: Metadata = {
+  title: 'Airport Services | Airporteo',
+  description: 'Explore premium airport concierge services at 120+ airports worldwide. Fast Track, Meet & Greet, VIP Platinum, and more.',
+  keywords: ['airport services', 'fast track', 'meet and greet', 'VIP service', 'airport concierge'],
+}
 
 export const metadata: Metadata = {
   title: 'Airport Services | Airporteo',
@@ -70,76 +77,31 @@ const SERVICES = [
 ]
 
 export default function ServicesPage() {
+  const services = getAllServices()
+  
+  // Create a service object for the hero that matches the structure
+  const heroService = {
+    name: 'Our Services',
+    slug: 'services',
+    shortDescription: 'Services, availability, and pricing are unique to each airport. Start by selecting your airport and flight — we\'ll show you exactly what\'s available, from fast track lanes to private VIP terminals.',
+    icon: 'Plane',
+    color: '#3F5CA6',
+    duration: 'Varies',
+    pricing: [{ currency: '$', price: 35 }],
+    // Empty airport - not pre-filled
+  }
+
   return (
     <>
       <Navbar />
       <main>
-        {/* Section 1: Hero - Two Columns */}
-        <section className="bg-[var(--navy)] text-white py-16 md:py-24 px-4 md:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid md:grid-cols-[55%_45%] gap-12 items-center">
-              {/* Left Column */}
-              <div>
-                {/* Breadcrumbs */}
-                <div className="flex items-center gap-2 mb-8 text-sm opacity-75">
-                  <Link href="/" className="hover:opacity-100">Home</Link>
-                  <span>/</span>
-                  <span>Services</span>
-                </div>
-
-                {/* Heading */}
-                <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                  Every journey starts with your airport
-                </h1>
-
-                {/* Paragraph */}
-                <p className="text-base md:text-lg opacity-90 mb-12 leading-relaxed">
-                  Services, availability, and pricing are unique to each airport. Start by selecting your airport and flight — we'll show you exactly what's available, from fast track lanes to private VIP terminals.
-                </p>
-
-                {/* Three Info Points */}
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                      <span className="text-2xl text-[var(--gold)]">✈️</span>
-                    </div>
-                    <div>
-                      <p className="font-semibold">120+ airports worldwide, each with its own service set</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                      <span className="text-2xl text-[var(--gold)]">⚡</span>
-                    </div>
-                    <div>
-                      <p className="font-semibold">Real-time availability based on your flight and terminal</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                      <span className="text-2xl text-[var(--gold)]">👑</span>
-                    </div>
-                    <div>
-                      <p className="font-semibold">From express fast track to full VIP Platinum experience</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Booking Form */}
-              <div>
-                <BookingWidget />
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Hero Section - Using ServiceHero Component for exact styling match */}
+        <ServiceHero service={heroService} />
 
         {/* Section 2: SEO Text Strip */}
-        <section className="bg-[var(--light-gray)] py-12 px-4 md:px-8">
+        <section className="bg-[#F0F2F5] py-12 px-4 md:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <p className="text-sm md:text-base text-[var(--gray-text)] leading-relaxed">
+            <p className="text-sm md:text-base text-[#6B7280] leading-relaxed">
               Airporteo provides premium airport concierge services at over 120 airports worldwide — including meet and greet, fast track security, VIP terminal access, luggage assistance, private transfers, and electric buggy transport. Every airport offers a unique combination of services depending on terminal layout, local regulations, and available facilities. Select your airport to see real-time availability, pricing, and service options tailored to your specific journey.
             </p>
           </div>
@@ -149,50 +111,43 @@ export default function ServicesPage() {
         <section className="bg-white py-16 md:py-24 px-4 md:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="grid md:grid-cols-3 gap-8">
-              {SERVICES.map((service) => (
+              {services.map((service) => (
                 <Link
                   key={service.id}
                   href={`/service/${service.slug}`}
                   className="group flex flex-col h-full"
                 >
-                  <div className="flex flex-col h-full bg-white rounded-xl border border-[var(--border)] overflow-hidden hover:shadow-lg transition-all duration-300">
-                    {/* Image */}
+                  <div className="flex flex-col h-full bg-white rounded-xl border border-[#E2E5EB] overflow-hidden hover:shadow-lg transition-all duration-300">
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                         <span className="text-gray-400 text-4xl">✈</span>
                       </div>
                     </div>
 
-                    {/* Content */}
                     <div className="flex flex-col flex-1 p-6">
-                      {/* VIP Badge */}
                       {service.isVIP && (
-                        <div className="mb-3 inline-flex w-fit px-2 py-1 bg-[var(--gold)]/10 rounded text-xs font-semibold text-[var(--gold)]">
+                        <div className="mb-3 inline-flex w-fit px-2 py-1 bg-[#B8913A]/10 rounded text-xs font-semibold text-[#B8913A]">
                           VIP
                         </div>
                       )}
 
-                      {/* Service Name */}
-                      <h3 className="text-xl font-bold text-[var(--navy)] mb-2">
+                      <h3 className="text-xl font-bold text-[#1D215E] mb-2">
                         {service.name}
                       </h3>
 
-                      {/* Tagline */}
-                      <p className={`text-sm font-semibold mb-3 ${service.isVIP ? 'text-[var(--gold)]' : 'text-[var(--blue)]'}`}>
-                        {service.tagline}
+                      <p className={`text-sm font-semibold mb-3 ${service.isVIP ? 'text-[#B8913A]' : 'text-[#3F5CA6]'}`}>
+                        {service.shortDescription}
                       </p>
 
-                      {/* Description */}
-                      <p className="text-sm text-[var(--gray-text)] mb-6 flex-1 leading-relaxed">
-                        {service.description}
+                      <p className="text-sm text-[#6B7280] mb-6 flex-1 leading-relaxed">
+                        {service.duration}
                       </p>
 
-                      {/* Price and Link */}
-                      <div className="flex items-center justify-between pt-4 border-t border-[var(--border)]">
-                        <span className="text-sm font-semibold text-[var(--gray-text)]">
-                          Starting from <span className="text-[var(--gold)]">${service.price}</span>
+                      <div className="flex items-center justify-between pt-4 border-t border-[#E2E5EB]">
+                        <span className="text-sm font-semibold text-[#6B7280]">
+                          From <span className="text-[#B8913A]">${service.pricing[0].price}</span>
                         </span>
-                        <div className="flex items-center gap-1 text-[var(--gold)] font-semibold group-hover:gap-2 transition-all">
+                        <div className="flex items-center gap-1 text-[#B8913A] font-semibold group-hover:gap-2 transition-all">
                           Learn more
                           <span className="text-lg">→</span>
                         </div>
@@ -206,15 +161,15 @@ export default function ServicesPage() {
         </section>
 
         {/* Section 4: "Not Sure?" CTA */}
-        <section className="bg-[var(--light-gray)] py-16 md:py-24 px-4 md:px-8">
+        <section className="bg-[#F0F2F5] py-16 md:py-24 px-4 md:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--navy)] mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1D215E] mb-4">
               Not sure which service is right?
             </h2>
-            <p className="text-base md:text-lg text-[var(--gray-text)] mb-10">
+            <p className="text-base md:text-lg text-[#6B7280] mb-10">
               Tell us about your trip details, and our travel experts will provide personalized recommendations to match your journey perfectly.
             </p>
-            <button className="px-8 py-4 bg-[var(--gold)] text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+            <button className="px-8 py-4 bg-[#B8913A] text-white font-semibold rounded-lg hover:shadow-lg transition-all">
               Get a Recommendation
             </button>
           </div>
