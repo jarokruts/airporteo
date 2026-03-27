@@ -5,6 +5,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
 import { ServiceBookingForm } from '@/components/service-booking-form'
+import { AIRPORTS_DATA } from '@/lib/airports-directory'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Search } from 'lucide-react'
@@ -16,39 +17,6 @@ const POPULAR_AIRPORTS = [
   { city: 'New York', code: 'JFK', price: 150, image: '/images/airport-jfk.jpg' },
   { city: 'Barcelona', code: 'BCN', price: 45, image: '/images/airport-barcelona.jpg' },
   { city: 'Singapore', code: 'SIN', price: 200, image: '/images/airport-singapore.jpg' },
-]
-
-// Full airports directory organized by country and region
-const AIRPORTS_DIRECTORY = [
-  // Europe
-  { city: 'London', airport: 'Heathrow', code: 'LHR', price: 150, region: 'Europe', country: 'United Kingdom', slug: 'london-lhr' },
-  { city: 'Paris', airport: 'Charles de Gaulle', code: 'CDG', price: 120, region: 'Europe', country: 'France', slug: 'paris-cdg' },
-  { city: 'Barcelona', airport: 'El Prat', code: 'BCN', price: 45, region: 'Europe', country: 'Spain', slug: 'barcelona-bcn' },
-  { city: 'Frankfurt', airport: 'Frankfurt am Main', code: 'FRA', price: 95, region: 'Europe', country: 'Germany', slug: 'frankfurt-fra' },
-  { city: 'Amsterdam', airport: 'Amsterdam Airport Schiphol', code: 'AMS', price: 80, region: 'Europe', country: 'Netherlands', slug: 'amsterdam-ams' },
-  { city: 'Rome', airport: 'Leonardo da Vinci Fiumicino', code: 'FCO', price: 85, region: 'Europe', country: 'Italy', slug: 'rome-fco' },
-  { city: 'Madrid', airport: 'Adolfo Suárez Madrid-Barajas', code: 'MAD', price: 75, region: 'Europe', country: 'Spain', slug: 'madrid-mad' },
-  { city: 'Istanbul', airport: 'Istanbul Airport', code: 'IST', price: 110, region: 'Europe', country: 'Turkey', slug: 'istanbul-ist' },
-  { city: 'Athens', airport: 'Athens International Airport', code: 'ATH', price: 65, region: 'Europe', country: 'Greece', slug: 'athens-ath' },
-  { city: 'Zurich', airport: 'Zurich Airport', code: 'ZRH', price: 130, region: 'Europe', country: 'Switzerland', slug: 'zurich-zrh' },
-  // Middle East
-  { city: 'Dubai', airport: 'Dubai International', code: 'DXB', price: 180, region: 'Middle East', country: 'United Arab Emirates', slug: 'dubai-dxb' },
-  { city: 'Doha', airport: 'Hamad International Airport', code: 'DOH', price: 160, region: 'Middle East', country: 'Qatar', slug: 'doha-doh' },
-  { city: 'Abu Dhabi', airport: 'Abu Dhabi International', code: 'AUH', price: 170, region: 'Middle East', country: 'United Arab Emirates', slug: 'abu-dhabi-auh' },
-  { city: 'Riyadh', airport: 'Riyadh International', code: 'RUH', price: 140, region: 'Middle East', country: 'Saudi Arabia', slug: 'riyadh-ruh' },
-  // Asia
-  { city: 'Singapore', airport: 'Singapore Changi', code: 'SIN', price: 200, region: 'Asia', country: 'Singapore', slug: 'singapore-sin' },
-  { city: 'Bangkok', airport: 'Suvarnabhumi Airport', code: 'BKK', price: 95, region: 'Asia', country: 'Thailand', slug: 'bangkok-bkk' },
-  { city: 'Tokyo', airport: 'Narita International', code: 'NRT', price: 210, region: 'Asia', country: 'Japan', slug: 'tokyo-nrt' },
-  { city: 'Hong Kong', airport: 'Hong Kong International', code: 'HKG', price: 185, region: 'Asia', country: 'China', slug: 'hong-kong-hkg' },
-  // Americas
-  { city: 'New York', airport: 'John F. Kennedy International', code: 'JFK', price: 150, region: 'Americas', country: 'United States', slug: 'new-york-jfk' },
-  { city: 'Miami', airport: 'Miami International', code: 'MIA', price: 130, region: 'Americas', country: 'United States', slug: 'miami-mia' },
-  { city: 'Los Angeles', airport: 'Los Angeles International', code: 'LAX', price: 140, region: 'Americas', country: 'United States', slug: 'los-angeles-lax' },
-  { city: 'São Paulo', airport: 'Guarulhos International', code: 'GRU', price: 175, region: 'Americas', country: 'Brazil', slug: 'sao-paulo-gru' },
-  // Africa
-  { city: 'Johannesburg', airport: 'OR Tambo International', code: 'JNB', price: 165, region: 'Africa', country: 'South Africa', slug: 'johannesburg-jnb' },
-  { city: 'Cairo', airport: 'Cairo International', code: 'CAI', price: 125, region: 'Africa', country: 'Egypt', slug: 'cairo-cai' },
 ]
 
 const REGIONS = ['All', 'Europe', 'Middle East', 'Asia', 'Americas', 'Africa', 'Oceania']
@@ -71,7 +39,7 @@ export default function AirportsPage() {
 
   // Filter airports based on search query and region
   const filteredDirectoryAirports = useMemo(() => {
-    let filtered = AIRPORTS_DIRECTORY
+    let filtered = AIRPORTS_DATA
 
     // Filter by region
     if (selectedRegion !== 'All') {
