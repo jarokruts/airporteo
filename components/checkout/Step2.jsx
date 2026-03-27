@@ -317,17 +317,19 @@ export default function Step2({ data, updateData, onContinue }) {
             <button 
               style={{
                 flex: "0 0 35%",
-                padding: "18px 16px",
+                border: "none",
                 borderRadius: 12,
-                border: `none`,
+                padding: 18,
+                fontWeight: 600,
+                width: "100%",
+                fontSize: 16,
+                marginTop: 10,
+                transition: "all 0.3s ease",
+                cursor: "pointer",
                 background: "#FFFFFF",
                 color: NAVY,
-                fontSize: 16,
-                fontWeight: 600,
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                outline: `2px solid ${NAVY}`,
-                outlineOffset: 0
+                boxShadow: `0 1px 3px rgba(0,0,0,0.1)`,
+                boxSizing: "border-box"
               }}
               onClick={() => goToStep(1)}
             >
