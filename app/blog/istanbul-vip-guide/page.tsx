@@ -68,37 +68,34 @@ export default function ArticlePage() {
             margin: '0 auto',
             padding: '40px 24px 60px',
             display: 'grid',
-            gridTemplateColumns: '780px 280px',
+            gridTemplateColumns: '1fr 280px',
             gap: '40px',
             alignItems: 'start',
           }}
-          className="two-column-layout"
+          className="article-layout"
         >
           {/* Left: Article Content */}
           <ArticleContent />
 
-          {/* Right: Sidebar - Hidden below 1000px */}
+          {/* Right: Sidebar - Sticky on desktop */}
           <aside
             style={{
-              display: 'none',
+              position: 'sticky',
+              top: '24px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px',
+              height: 'fit-content',
             }}
-            className="lg:block"
+            className="sidebar"
           >
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-              }}
-            >
-              <ArticleToc items={tocItems} />
-              <ArticleCta />
-              <ArticleShare />
-            </div>
+            <ArticleToc items={tocItems} />
+            <ArticleCta />
+            <ArticleShare />
           </aside>
         </div>
 
-        {/* Mobile Sidebar - Below 1000px */}
+        {/* Mobile Sidebar Cards - Below 1000px */}
         <div
           style={{
             maxWidth: '1100px',
@@ -108,28 +105,42 @@ export default function ArticlePage() {
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '20px',
           }}
-          className="two-column-mobile lg:hidden"
+          className="mobile-sidebar"
         >
           <ArticleCta />
           <ArticleShare />
         </div>
 
-        {/* Mobile Single Column for Sidebar Cards - Below 640px */}
+        {/* Responsive Styles */}
         <style>{`
+          /* Desktop: Show sidebar on the right */
+          @media (min-width: 1001px) {
+            .mobile-sidebar {
+              display: none;
+            }
+          }
+
+          /* Tablet & Mobile: Hide sticky sidebar, show cards below article */
           @media (max-width: 1000px) {
-            .two-column-layout {
+            .article-layout {
               grid-template-columns: 1fr;
               padding: 32px 20px 48px;
+              gap: 0;
             }
-            .two-column-mobile {
+            .sidebar {
+              display: none;
+            }
+            .mobile-sidebar {
               padding: 0 20px 48px;
             }
           }
+
+          /* Mobile: Single column for sidebar cards */
           @media (max-width: 640px) {
-            .two-column-layout {
+            .article-layout {
               padding: 24px 16px 32px;
             }
-            .two-column-mobile {
+            .mobile-sidebar {
               grid-template-columns: 1fr;
               padding: 0 16px 32px;
             }
