@@ -136,14 +136,14 @@ export default function BlogPage() {
       {/* Blog Grid Section */}
       <main className="flex-1 w-full mx-auto max-w-6xl">
         <div
-          className="blog-grid w-full px-6 py-12 sm:px-4 sm:py-8"
+          className="blog-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '24px',
             padding: '40px 24px 60px',
             maxWidth: '1200px',
             margin: '0 auto',
+            width: '100%',
           }}
         >
           {currentPosts.map((post, index) => (
@@ -165,10 +165,10 @@ export default function BlogPage() {
 
       {/* Responsive Grid Styles */}
       <style>{`
-        /* Desktop — 3 columns */
+        /* Desktop — 3 columns (1024px and up) */
         .blog-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(3, 1fr) !important;
           gap: 24px;
           padding: 40px 24px 60px;
           max-width: 1200px;
@@ -176,18 +176,18 @@ export default function BlogPage() {
           width: 100%;
         }
 
-        /* Tablet — 2 columns */
-        @media (max-width: 900px) {
+        /* Tablet — 2 columns (641px to 900px) */
+        @media screen and (max-width: 900px) {
           .blog-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr) !important;
             gap: 20px;
           }
         }
 
-        /* Mobile — 1 column */
-        @media (max-width: 560px) {
+        /* Mobile — 1 column (640px and below) */
+        @media screen and (max-width: 640px) {
           .blog-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
             gap: 16px;
             padding: 32px 16px 48px;
           }
