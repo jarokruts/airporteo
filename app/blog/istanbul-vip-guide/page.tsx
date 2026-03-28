@@ -95,13 +95,13 @@ export default function ArticlePage() {
           </aside>
         </div>
 
-        {/* Mobile Sidebar Cards - Below 1000px */}
+        {/* Mobile Sidebar Cards - Below article on tablets/mobile only */}
         <div
           style={{
             maxWidth: '1100px',
             margin: '0 auto',
             padding: '0 24px 60px',
-            display: 'grid',
+            display: 'none',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '20px',
           }}
@@ -113,14 +113,45 @@ export default function ArticlePage() {
 
         {/* Responsive Styles */}
         <style>{`
-          /* Desktop: Show sidebar on the right */
+          .article-layout {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 40px;
+            align-items: start;
+          }
+
+          .sidebar {
+            position: sticky;
+            top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: fit-content;
+          }
+
+          .mobile-sidebar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+            display: none;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+          }
+
+          /* Desktop (1001px and up): Show sidebar on right, hide mobile cards */
           @media (min-width: 1001px) {
+            .sidebar {
+              display: flex;
+            }
             .mobile-sidebar {
-              display: none;
+              display: none !important;
             }
           }
 
-          /* Tablet & Mobile: Hide sticky sidebar, show cards below article */
+          /* Tablet & Mobile (1000px and below): Hide sidebar, show mobile cards in 2-column grid */
           @media (max-width: 1000px) {
             .article-layout {
               grid-template-columns: 1fr;
@@ -131,11 +162,12 @@ export default function ArticlePage() {
               display: none;
             }
             .mobile-sidebar {
+              display: grid;
               padding: 0 20px 48px;
             }
           }
 
-          /* Mobile: Single column for sidebar cards */
+          /* Mobile (640px and below): Single column for sidebar cards */
           @media (max-width: 640px) {
             .article-layout {
               padding: 24px 16px 32px;
