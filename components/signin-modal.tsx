@@ -116,7 +116,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
         `}</style>
 
         <div
-          className="relative rounded-[20px] p-[40px] md:p-10 overflow-hidden modal-content"
+          className="relative rounded-[20px] p-[30px] md:p-8 overflow-hidden modal-content"
           style={{
             background: '#1D215E',
             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -180,7 +180,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                 animationDelay: childVariants[1] + 's',
               }}
             >
-              Welcome back
+              Welcome to Sign In
             </h1>
 
             {/* Subtext */}
@@ -194,7 +194,6 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                 animationDelay: childVariants[2] + 's',
               }}
             >
-              Sign in to manage your bookings and VIP services
             </p>
 
             {/* Social Buttons */}

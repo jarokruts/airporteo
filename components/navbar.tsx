@@ -275,7 +275,7 @@ export function Navbar() {
           <img
             src="/images/airporteo-logo.svg"
             alt="Airporteo"
-            className="h-48 w-48 object-contain"
+            className="h-6 w-auto object-contain"
           />
         </a>
 
