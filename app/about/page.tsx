@@ -17,7 +17,7 @@ export default function AboutPage() {
       <Navbar />
       <main>
         {/* Hero Strip */}
-        <section className="relative w-full bg-[var(--navy)] text-white py-12 md:py-16 px-4 md:px-8 flex items-center overflow-hidden">
+        <section className="relative w-full bg-[var(--navy)] text-white py-14 md:py-20 px-4 md:px-8 flex items-center overflow-hidden">
           {/* Background Image */}
           <Image
             src="/images/about-us-hero.jpg"
@@ -39,10 +39,28 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* Page Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white" style={{ fontFamily: 'var(--font-playfair)' }}>
-              About Us
-            </h1>
+            {/* Page Title and Subtitle Container */}
+            <div className="text-center">
+              {/* Page Title */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white" style={{ fontFamily: 'var(--font-playfair)' }}>
+                About Us
+              </h1>
+              
+              {/* Subtitle */}
+              <p 
+                className="text-sm md:text-base text-center mt-4 leading-relaxed max-w-2xl mx-auto"
+                style={{
+                  fontFamily: 'var(--font-dm-sans)',
+                  color: 'rgba(255, 255, 255, 0.75)',
+                  fontSize: '16px',
+                  lineHeight: '1.7',
+                  maxWidth: '640px',
+                  fontWeight: 400,
+                }}
+              >
+                Airporteo delivers premium VIP airport services across 200+ airports worldwide. Since 2022, we've helped thousands of travelers experience seamless, stress-free arrivals and departures — from meet & greet and fast track to luxury transfers and exclusive lounge access.
+              </p>
+            </div>
           </div>
         </section>
 
