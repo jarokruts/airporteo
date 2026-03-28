@@ -659,6 +659,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             </div>
           </div>
         </div>
+        </div>
       </div>
     </>
   )
