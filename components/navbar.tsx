@@ -394,6 +394,7 @@ export function Navbar() {
           ))}
         </div>
       </div>
+      </nav>
 
       {/* Sign In Modal */}
       <SigninModal isOpen={isSigninOpen} onClose={() => setIsSigninOpen(false)} />
