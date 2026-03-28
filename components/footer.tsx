@@ -134,8 +134,14 @@ export function Footer() {
             <div
               className="flex items-center gap-3 px-5 py-3 rounded-[12px] border transition-colors"
               style={{
-                background: '#182430',
-                border: '1px solid rgba(255,255,255,0.07)',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
               }}
             >
               <svg width="24" height="24" viewBox="0 0 24 24" className="flex-shrink-0">
@@ -161,8 +167,14 @@ export function Footer() {
             <div
               className="flex items-center gap-3 px-5 py-3 rounded-[12px] border transition-colors"
               style={{
-                background: '#182430',
-                border: '1px solid rgba(255,255,255,0.07)',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
               }}
             >
               <Star size={24} weight="fill" className="text-[#00b67a] flex-shrink-0" />
@@ -215,22 +227,20 @@ export function Footer() {
           <div
             className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
             style={{
-              background: '#182430',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.1)',
               animation: 'fadeInUp 0.6s ease forwards',
               animationDelay: '0.1s',
               opacity: 0,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
-              e.currentTarget.style.background = '#1e2d3d'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
-              e.currentTarget.style.background = '#182430'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.1)]">
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
               Contact Us
             </h3>
             <div className="space-y-3">
@@ -239,14 +249,14 @@ export function Footer() {
                   <div
                     className="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0 transition-all"
                     style={{
-                      background: 'rgba(212, 160, 74, 0.08)',
+                      background: 'transparent',
                       border: '1px solid rgba(212, 160, 74, 0.15)',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(212, 160, 74, 0.15)'
+                      e.currentTarget.style.borderColor = 'rgba(212, 160, 74, 0.3)'
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'rgba(212, 160, 74, 0.08)'
+                      e.currentTarget.style.borderColor = 'rgba(212, 160, 74, 0.15)'
                     }}
                   >
                     <item.icon size={16} weight="regular" className="text-[#d4a04a]" />
@@ -263,22 +273,20 @@ export function Footer() {
           <div
             className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
             style={{
-              background: '#182430',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.1)',
               animation: 'fadeInUp 0.6s ease forwards',
               animationDelay: '0.2s',
               opacity: 0,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
-              e.currentTarget.style.background = '#1e2d3d'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
-              e.currentTarget.style.background = '#182430'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.1)]">
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
               Our Services
             </h3>
             <div className="space-y-2 mb-4">
@@ -293,7 +301,7 @@ export function Footer() {
                 </a>
               ))}
             </div>
-            <div className="pt-4 border-t border-[rgba(255,255,255,0.1)]">
+            <div className="pt-4 border-t border-[rgba(255,255,255,0.08)]">
               <span style={{ fontSize: '12px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', color: '#d4a04a' }}>
                 Solutions
               </span>
@@ -316,22 +324,20 @@ export function Footer() {
           <div
             className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
             style={{
-              background: '#182430',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.1)',
               animation: 'fadeInUp 0.6s ease forwards',
               animationDelay: '0.3s',
               opacity: 0,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
-              e.currentTarget.style.background = '#1e2d3d'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
-              e.currentTarget.style.background = '#182430'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.1)]">
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
               Top Airports
             </h3>
             <div className="space-y-2">
@@ -352,22 +358,20 @@ export function Footer() {
           <div
             className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
             style={{
-              background: '#182430',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.1)',
               animation: 'fadeInUp 0.6s ease forwards',
               animationDelay: '0.4s',
               opacity: 0,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
-              e.currentTarget.style.background = '#1e2d3d'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
-              e.currentTarget.style.background = '#182430'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.1)]">
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
               About Us
             </h3>
             <div className="space-y-2 mb-4">
@@ -382,7 +386,7 @@ export function Footer() {
                 </a>
               ))}
             </div>
-            <div className="pt-4 border-t border-[rgba(255,255,255,0.1)]">
+            <div className="pt-4 border-t border-[rgba(255,255,255,0.08)]">
               <span style={{ fontSize: '12px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', color: '#d4a04a' }}>
                 Partners
               </span>
@@ -403,7 +407,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-7 md:flex md:items-center md:justify-between flex-col md:flex-row gap-6 md:gap-0 border-t border-[rgba(255,255,255,0.04)]">
+        <div className="py-7 md:flex md:items-center md:justify-between flex-col md:flex-row gap-6 md:gap-0 border-t border-[rgba(255,255,255,0.08)]">
           {/* Legal Links */}
           <div className="flex flex-wrap gap-7 text-center md:text-left">
             {LEGAL_LINKS.map((link, i) => (
@@ -427,19 +431,21 @@ export function Footer() {
                 aria-label={social.label}
                 className="w-11 h-11 rounded-full flex items-center justify-center border transition-all hover:-translate-y-0.5"
                 style={{
-                  background: '#182430',
-                  border: '1px solid rgba(255,255,255,0.07)',
+                  background: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.1)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(212, 160, 74, 0.4)'
-                  e.currentTarget.style.background = 'rgba(212, 160, 74, 0.08)'
+                  const icon = e.currentTarget.querySelector('svg')
+                  if (icon) icon.style.color = '#d4a04a'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
-                  e.currentTarget.style.background = '#182430'
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
+                  const icon = e.currentTarget.querySelector('svg')
+                  if (icon) icon.style.color = 'white'
                 }}
               >
-                <social.icon size={18} weight="regular" className="text-white hover:text-[#d4a04a] transition-colors" />
+                <social.icon size={18} weight="regular" className="text-white transition-colors" />
               </a>
             ))}
           </div>
