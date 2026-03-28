@@ -18,27 +18,28 @@ export function ArticleHero({ breadcrumbs, title, date, readTime }: ArticleHeroP
         <div className="mb-6 flex items-center flex-wrap gap-1">
           {breadcrumbs.map((crumb, idx) => (
             <div key={idx} className="flex items-center gap-1">
-              <Link href={crumb.href}>
-                <a
-                  className="transition-colors"
-                  style={{
-                    fontFamily: 'var(--font-dm-sans)',
-                    fontSize: '13px',
-                    color: idx === breadcrumbs.length - 1 ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.5)',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (idx !== breadcrumbs.length - 1) {
-                      (e.currentTarget as HTMLAnchorElement).style.color = '#d4a04a'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (idx !== breadcrumbs.length - 1) {
-                      (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.5)'
-                    }
-                  }}
-                >
-                  {crumb.label}
-                </a>
+              <Link
+                href={crumb.href}
+                className="transition-colors"
+                style={{
+                  fontFamily: 'var(--font-dm-sans)',
+                  fontSize: '13px',
+                  color: idx === breadcrumbs.length - 1 ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.5)',
+                  textDecoration: 'none',
+                  cursor: idx === breadcrumbs.length - 1 ? 'default' : 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  if (idx !== breadcrumbs.length - 1) {
+                    (e.currentTarget as HTMLAnchorElement).style.color = '#d4a04a'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (idx !== breadcrumbs.length - 1) {
+                    (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.5)'
+                  }
+                }}
+              >
+                {crumb.label}
               </Link>
               {idx < breadcrumbs.length - 1 && (
                 <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '13px' }}>/</span>
