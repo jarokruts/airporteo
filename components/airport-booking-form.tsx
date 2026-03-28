@@ -781,9 +781,10 @@ function SimpleDropdown({
           border: '1px solid #E2E8F0',
           background: 'white',
           cursor: 'pointer',
-          fontSize: '14px',
+          fontSize: '16px',
           fontWeight: 500,
           color: '#1D215E',
+          fontFamily: 'DM Sans, sans-serif',
           transition: 'all 200ms',
           userSelect: 'none'
         }}
@@ -791,7 +792,7 @@ function SimpleDropdown({
         onMouseLeave={(e) => !isOpen && (e.currentTarget.style.background = 'white')}
       >
         <span>{value}</span>
-        <CaretDown size={14} weight="light" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+        <CaretDown size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', marginLeft: '4px', flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
       </button>
 
       {/* Dropdown Menu - Opens Downward */}
@@ -827,8 +828,9 @@ function SimpleDropdown({
           border: 'none',
           borderBottom: idx < options.length - 1 ? '1px solid #E2E8F0' : 'none',
           cursor: 'pointer',
-          fontSize: '14px',
+          fontSize: '16px',
           fontWeight: 500,
+          fontFamily: 'DM Sans, sans-serif',
           color: value === option ? '#B8913A' : '#1D215E',
                 transition: 'all 200ms'
               }}
@@ -1107,11 +1109,12 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
                 paddingLeft:'36px',
                 border:'1px solid #E2E8F0',
                 borderRadius:'10px',
-                fontSize:'14px',
+                fontSize:'16px',
                 fontWeight: 500,
                 color: '#1D215E',
                 backgroundColor: 'white',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                fontFamily: 'DM Sans, sans-serif'
               }}
             />
           </div>
@@ -1131,11 +1134,12 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
                 paddingLeft:'36px',
                 border:'1px solid #E2E8F0',
                 borderRadius:'10px',
-                fontSize:'14px',
+                fontSize:'16px',
                 fontWeight: 500,
                 color: '#1D215E',
                 backgroundColor: 'white',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                fontFamily: 'DM Sans, sans-serif'
               }}
             />
           </div>
@@ -1164,11 +1168,11 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
           onMouseEnter={(e) => !showDatePicker && (e.currentTarget.style.background = '#F5F7FA')}
           onMouseLeave={(e) => !showDatePicker && (e.currentTarget.style.background = 'white')}
         >
-          <Calendar size={14} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
-          <span style={{ flex: 1, textAlign: 'left', fontSize: '14px', color: date ? '#1D215E' : '#94A3B8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <Calendar size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0, marginRight: '6px' }} />
+          <span style={{ flex: 1, textAlign: 'left', fontSize: '16px', fontWeight: 500, fontFamily: 'DM Sans, sans-serif', color: date ? '#1D215E' : 'rgba(29, 33, 94, 0.45)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {date ? new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Select date'}
           </span>
-          <CaretDown size={12} weight="light" style={{ color: '#94A3B8', marginLeft: '4px', flexShrink: 0, transform: showDatePicker ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+          <CaretDown size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', marginLeft: '4px', flexShrink: 0, transform: showDatePicker ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
         </button>
         
         <DatePickerDropdown 
@@ -1201,17 +1205,17 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
           onMouseLeave={(e) => !showPassengersDropdown && (e.currentTarget.style.background = 'white')}
         >
           <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', gap: '4px', borderRight: '1px solid #E2E8F0' }}>
-            <Users size={13} style={{ color: '#94A3B8', flexShrink: 0 }} />
-            <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{adults} Pax</span>
+            <Users size={18} style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0 }} />
+            <span style={{ fontSize: '16px', fontWeight: 500, fontFamily: 'DM Sans, sans-serif', color: '#1D215E' }}>{adults} Pax</span>
           </div>
           <div style={{ display: 'flex', flex: 1, alignItems: 'center', paddingLeft: '10px', paddingRight: '10px', gap: '2px' }}>
-            <Backpack size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0 }} />
-            <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{cabinBags}</span>
-            <Suitcase size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginLeft: '4px' }} />
-            <span style={{ fontSize: '14px', color: '#1D215E', fontWeight: 500 }}>{checkedBags}</span>
+            <Backpack size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0 }} />
+            <span style={{ fontSize: '16px', fontWeight: 500, fontFamily: 'DM Sans, sans-serif', color: '#1D215E' }}>{cabinBags}</span>
+            <Suitcase size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0, marginLeft: '4px' }} />
+            <span style={{ fontSize: '16px', fontWeight: 500, fontFamily: 'DM Sans, sans-serif', color: '#1D215E' }}>{checkedBags}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', paddingRight: '10px' }}>
-            <CaretDown size={12} weight="light" style={{ color: '#94A3B8', transform: showPassengersDropdown ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+            <CaretDown size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', transform: showPassengersDropdown ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
           </div>
         </button>
 
@@ -1236,7 +1240,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
 
       {/* Row 6: Email */}
       <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
-        <Envelope size={13} weight="light" style={{ color: '#94A3B8', flexShrink: 0, marginRight: '6px' }} />
+        <Envelope size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0, marginRight: '6px' }} />
         <input
           type="email"
           value={email}
@@ -1247,9 +1251,14 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             background: 'transparent',
             border: 'none',
             outline: 'none',
-            fontSize: '12px',
+            fontSize: '16px',
+            fontWeight: 500,
+            fontFamily: 'DM Sans, sans-serif',
             color: '#1D215E',
-            padding: 0
+            padding: 0,
+            '::placeholder': {
+              color: 'rgba(29, 33, 94, 0.45)'
+            }
           }}
         />
       </div>
