@@ -234,7 +234,7 @@ export function Footer() {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'var(--font-playfair)' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
               Contact Us
             </h3>
             <div className="space-y-3">
@@ -280,7 +280,7 @@ export function Footer() {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'var(--font-playfair)' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
               Our Services
             </h3>
             <div className="space-y-2 mb-4">
@@ -331,7 +331,7 @@ export function Footer() {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'var(--font-playfair)' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
               Top Airports
             </h3>
             <div className="space-y-2">
@@ -365,7 +365,7 @@ export function Footer() {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
             }}
           >
-            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'var(--font-playfair)' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)]">
               About Us
             </h3>
             <div className="space-y-2 mb-4">
