@@ -2,6 +2,8 @@
 
 import { CalendarBlank, ClockCounterClockwise, User, UsersThree, Bell, SignOut } from '@phosphor-icons/react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 
 interface AccountSidebarProps {
   activeSection: 'upcoming' | 'past' | 'personal' | 'travelers' | 'notifications'
@@ -18,6 +20,13 @@ const navItems = [
 ]
 
 export function AccountSidebar({ activeSection, setActiveSection, sidebarOpen }: AccountSidebarProps) {
+  const router = useRouter()
+  const supabase = createClient()
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut()
+    router.push('/')
+  }
   return (
     <>
       {/* Sidebar */}
@@ -134,6 +143,7 @@ export function AccountSidebar({ activeSection, setActiveSection, sidebarOpen }:
         {/* Footer - Sign Out */}
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '16px 12px' }}>
           <button
+            onClick={handleSignOut}
             style={{
               padding: '11px 14px',
               borderRadius: '8px',

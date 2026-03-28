@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { X, Eye, EyeSlash, Phone, EnvelopeSimple } from '@phosphor-icons/react'
+import { createClient } from '@/lib/supabase/client'
 
 const AIRPORTEO_LOGO = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="29" viewBox="0 0 499.83 80.6" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; fill-rule:evenodd; clip-rule:evenodd">
   <defs>
@@ -44,6 +46,38 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
   const [password, setPassword] = useState('')
   const [phoneCode, setPhoneCode] = useState('+359')
   const [phoneNumber, setPhoneNumber] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const router = useRouter()
+  const supabase = createClient()
+
+  const handleEmailSignIn = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    try {
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (authError) {
+        setError(authError.message)
+        setLoading(false)
+        return
+      }
+
+      if (data.session) {
+        // Sign in successful, redirect to account page
+        onClose()
+        router.push('/account')
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.')
+      setLoading(false)
+    }
+  }
 
   if (!isOpen) return null
 
@@ -469,9 +503,11 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
 
                 {/* Sign In Button */}
                 <button
+                  onClick={handleEmailSignIn}
+                  disabled={loading}
                   className="stagger-child submit-btn w-full h-[48px] rounded-[8px] font-semibold transition-all mt-1"
                   style={{
-                    background: 'linear-gradient(135deg, #d4a04a, #c08a30)',
+                    background: loading ? 'rgba(212, 160, 74, 0.5)' : 'linear-gradient(135deg, #d4a04a, #c08a30)',
                     color: '#1D215E',
                     fontSize: '15px',
                     fontWeight: '600',
@@ -482,28 +518,39 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                     animationDelay: childVariants[8] + 's',
                     boxShadow: '0 2px 8px rgba(212, 160, 74, 0.2)',
                     boxSizing: 'border-box',
+                    cursor: loading ? 'not-allowed' : 'pointer',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 4px 24px rgba(212,160,74,0.35)'
-                    e.currentTarget.style.transform = 'translateY(-1px)'
+                    if (!loading) {
+                      (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 16px rgba(212, 160, 74, 0.3)'
+                      ;(e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)'
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(212, 160, 74, 0.2)'
-                    e.currentTarget.style.transform = 'translateY(0)'
+                    if (!loading) {
+                      (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 8px rgba(212, 160, 74, 0.2)'
+                      ;(e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'
+                    }
                   }}
                 >
-                  <span style={{ position: 'relative', zIndex: 1 }}>Sign In</span>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15) 100%)',
-                      opacity: 0,
-                      transition: 'opacity 0.3s ease',
-                    }}
-                    className="shine-overlay"
-                  />
+                  {loading ? 'Signing in...' : 'Sign In'}
                 </button>
+
+                {/* Error Message */}
+                {error && (
+                  <div
+                    className="stagger-child mt-3 p-3 rounded-[8px] text-center"
+                    style={{
+                      background: 'rgba(220, 38, 38, 0.1)',
+                      color: '#dc2626',
+                      fontSize: '13px',
+                      fontWeight: 500,
+                      animationDelay: childVariants[9] + 's',
+                    }}
+                  >
+                    {error}
+                  </div>
+                )}
               </>
             ) : (
               <>

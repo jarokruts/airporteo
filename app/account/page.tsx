@@ -1,6 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 import { AccountSidebar } from '@/components/account/sidebar'
 import { AccountTopBar } from '@/components/account/top-bar'
 import { UpcomingBookingsSection } from '@/components/account/sections/upcoming-bookings'
@@ -12,6 +14,40 @@ import { NotificationsSection } from '@/components/account/sections/notification
 export default function AccountPage() {
   const [activeSection, setActiveSection] = useState<'upcoming' | 'past' | 'personal' | 'travelers' | 'notifications'>('upcoming')
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [authenticated, setAuthenticated] = useState(false)
+  const router = useRouter()
+  const supabase = createClient()
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (!session) {
+        // Not authenticated, redirect to home
+        router.push('/')
+      } else {
+        setAuthenticated(true)
+      }
+      setLoading(false)
+    }
+
+    checkAuth()
+  }, [router, supabase.auth])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div style={{ textAlign: 'center', color: '#1D215E' }}>
+          <div style={{ fontSize: '18px', fontWeight: 600, marginBottom: '16px' }}>Loading...</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!authenticated) {
+    return null
+  }
 
   const sectionTitles = {
     upcoming: 'Upcoming Bookings',
