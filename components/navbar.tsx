@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { Menu, X, ChevronDown, Globe, DollarSign, LogIn } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { SigninModal } from "@/components/signin-modal"
+import { SignInModal } from "@/components/signin-modal"
 
 const LANGUAGES = [
   { code: "en", label: "GB English" },
@@ -397,7 +397,7 @@ export function Navbar() {
       </nav>
 
       {/* Sign In Modal */}
-      <SigninModal isOpen={isSigninOpen} onClose={() => setIsSigninOpen(false)} />
+      <SignInModal isOpen={isSigninOpen} onClose={() => setIsSigninOpen(false)} />
     </>
   )
 }
