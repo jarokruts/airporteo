@@ -7,7 +7,7 @@ import { DiscoverMoreSection } from '@/components/discover-more-section'
 
 export const metadata: Metadata = {
   title: 'About Us | Airporteo - Premium Airport Services',
-  description: 'Learn about Airporteo, our mission to make airport experiences seamless, and how we serve travelers at 120+ airports worldwide with professional concierge services.',
+  description: 'Learn about Airporteo, our mission to make airport experiences seamless, and how we serve travelers at 200+ airports worldwide with professional concierge services.',
   keywords: ['about airporteo', 'airport concierge', 'our mission', 'premium services'],
 }
 
@@ -73,7 +73,7 @@ export default function AboutPage() {
                 Who We Are
               </h2>
               <p className="text-base md:text-lg text-gray-700 leading-relaxed" style={{ fontFamily: 'var(--font-dm-sans)', lineHeight: '1.8' }}>
-                Airporteo is a global airport concierge service providing premium meet and greet, fast track, VIP, and luggage assistance at over 120 airports worldwide. We believe that the airport experience should be seamless, stress-free, and even enjoyable — whether you are a first-time traveler or a seasoned business executive.
+                Airporteo is a global airport concierge service providing premium meet and greet, fast track, VIP, and luggage assistance at over 200 airports worldwide. We believe that the airport experience should be seamless, stress-free, and even enjoyable — whether you are a first-time traveler or a seasoned business executive.
               </p>
             </div>
 

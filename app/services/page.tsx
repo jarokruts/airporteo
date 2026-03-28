@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Airport Services | Airporteo',
-  description: 'Explore premium airport concierge services at 120+ airports worldwide. Fast Track, Meet & Greet, VIP Platinum, and more.',
+  description: 'Explore premium airport concierge services at 200+ airports worldwide. Fast Track, Meet & Greet, VIP Platinum, and more.',
   keywords: ['airport services', 'fast track', 'meet and greet', 'VIP service', 'airport concierge'],
 }
 
@@ -59,7 +59,7 @@ export default function ServicesPage() {
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <span className="text-lg text-[var(--gold)] flex-shrink-0">✓</span>
-                    <p className="text-white/90 text-sm">120+ airports worldwide with service combinations</p>
+                    <p className="text-white/90 text-sm">200+ airports worldwide with service combinations</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="text-lg text-[var(--gold)] flex-shrink-0">✓</span>

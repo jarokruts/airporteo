@@ -43,7 +43,7 @@ export function HeroSection() {
           <div className="flex items-center pb-4">
             {[
               { value: "27K+", label: "Happy travellers" },
-              { value: "120+", label: "Airports served" },
+              { value: "200+", label: "Airports served" },
               { value: "4.9★", label: "Average rating" },
             ].map(({ value, label }) => (
               <div key={label} className="px-6 first:pl-0">
