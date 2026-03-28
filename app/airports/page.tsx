@@ -28,7 +28,7 @@ export default function AirportsPage() {
   const heroService = {
     name: 'Airports',
     slug: 'airports',
-    shortDescription: 'Premium concierge services at over 120 airports across 50+ countries.',
+    shortDescription: 'Premium concierge services at over 200 airports across 50+ countries.',
     description: '',
     icon: 'Plane',
     color: '#3F5CA6',

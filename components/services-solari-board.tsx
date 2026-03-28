@@ -69,7 +69,7 @@ const FlipChar = ({ char, charIndex, resolveTime, animationCycle }: FlipCharProp
 }
 
 export function ServicesSolariBoard() {
-  const text = 'Airporteo provides premium airport concierge services at over 120 airports worldwide — including meet and greet, fast track security, VIP terminal access, luggage assistance, private transfers, and electric buggy transport. Every airport offers a unique combination of services depending on terminal layout, local regulations, and available facilities. Select your airport to see real-time availability, pricing, and service options tailored to your specific journey.'
+  const text = 'Airporteo provides premium airport concierge services at over 200 airports worldwide — including meet and greet, fast track security, VIP terminal access, luggage assistance, private transfers, and electric buggy transport. Every airport offers a unique combination of services depending on terminal layout, local regulations, and available facilities. Select your airport to see real-time availability, pricing, and service options tailored to your specific journey.'
 
   const [timings, setTimings] = useState<number[]>([])
   const [animationCycle, setAnimationCycle] = useState(0)
