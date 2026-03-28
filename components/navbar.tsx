@@ -2,21 +2,15 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
-import { Menu, X, ChevronDown, Globe, DollarSign, LogIn, CaretDown } from "lucide-react"
+import { Menu, X, ChevronDown, Globe, DollarSign, LogIn } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SignInModal } from "@/components/signin-modal"
 
 const LANGUAGES = [
   { code: "en", flag: "🇬🇧", label: "English" },
-  { code: "de", flag: "🇩🇪", label: "Deutsch" },
-  { code: "fr", flag: "🇫🇷", label: "Français" },
-  { code: "es", flag: "🇪🇸", label: "Español" },
-  { code: "it", flag: "🇮🇹", label: "Italiano" },
-  { code: "ru", flag: "🇷🇺", label: "Русский" },
-  { code: "zh", flag: "🇨🇳", label: "中文" },
-  { code: "ja", flag: "🇯🇵", label: "日本語" },
   { code: "ar", flag: "🇸🇦", label: "العربية" },
-  { code: "bg", flag: "🇧🇬", label: "Български" },
+  { code: "zh", flag: "🇨🇳", label: "中文" },
+  { code: "hi", flag: "🇮🇳", label: "हिन्दी" },
 ]
 
 const CURRENCIES = [
@@ -434,7 +428,7 @@ export function Navbar() {
               <span className="text-[14px] font-medium text-[#1D215E] flex items-center gap-1.5">
                 {selectedLang.flag}
                 <span>{selectedLang.code.toUpperCase()}</span>
-                <CaretDown className="h-3 w-3 text-[rgba(29,33,94,0.4)]" />
+                <ChevronDown className="h-3 w-3 text-[rgba(29,33,94,0.4)]" />
               </span>
 
               {/* Language Dropdown */}
@@ -468,7 +462,7 @@ export function Navbar() {
               <span className="text-[14px] font-medium text-[#1D215E] flex items-center gap-1.5">
                 <span>{selectedCurrency.symbol}</span>
                 <span>{selectedCurrency.code}</span>
-                <CaretDown className="h-3 w-3 text-[rgba(29,33,94,0.4)]" />
+                <ChevronDown className="h-3 w-3 text-[rgba(29,33,94,0.4)]" />
               </span>
 
               {/* Currency Dropdown */}
