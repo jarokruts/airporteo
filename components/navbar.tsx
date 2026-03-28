@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { Menu, X, ChevronDown, Globe, DollarSign, LogIn } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { SigninModal } from "@/components/signin-modal"
 
 const LANGUAGES = [
   { code: "en", label: "GB English" },
@@ -257,6 +258,7 @@ function MobileAccordionItem({
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [isSigninOpen, setIsSigninOpen] = useState(false)
   const [selectedLang, setSelectedLang] = useState(LANGUAGES[0])
   const [selectedCurrency, setSelectedCurrency] = useState(CURRENCIES[0])
 
@@ -265,7 +267,8 @@ export function Navbar() {
   }
 
   return (
-    <nav style={{ backgroundColor: 'var(--hero-navy)' }} className="sticky top-0 z-40 backdrop-blur-lg">
+    <>
+      <nav style={{ backgroundColor: 'var(--hero-navy)' }} className="sticky top-0 z-40 backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-8">
         {/* Logo - Left */}
         <a href="#" className="flex items-center gap-2">
@@ -355,6 +358,7 @@ export function Navbar() {
 
           <button
             type="button"
+            onClick={() => setIsSigninOpen(true)}
             className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white"
           >
             <LogIn className="h-3.5 w-3.5" />
@@ -390,6 +394,9 @@ export function Navbar() {
           ))}
         </div>
       </div>
-    </nav>
+
+      {/* Sign In Modal */}
+      <SigninModal isOpen={isSigninOpen} onClose={() => setIsSigninOpen(false)} />
+    </>
   )
 }
