@@ -51,13 +51,14 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
 
   return (
     <>
-      {/* Backdrop Overlay */}
+      {/* Backdrop Overlay with Flexbox Centering */}
       <div
-        className="fixed inset-0 z-40"
+        className="fixed inset-0 z-40 flex items-center justify-center p-4 md:p-0"
         style={{
           background: 'rgba(12, 14, 40, 0.75)',
           backdropFilter: 'blur(8px)',
           animation: 'fadeIn 0.3s ease forwards',
+          padding: '16px',
         }}
         onClick={onClose}
       >
@@ -74,13 +75,17 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             background: 'radial-gradient(circle, rgba(212,160,74,0.05) 0%, transparent 70%)',
           }}
         />
-      </div>
 
-      {/* Modal Card */}
-      <div
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-[420px] mx-4"
-        onClick={(e) => e.stopPropagation()}
-      >
+        {/* Modal Card */}
+        <div
+          className="relative z-50 w-full max-w-[420px] md:max-w-[480px]"
+          onClick={(e) => e.stopPropagation()}
+          style={{
+            maxHeight: 'calc(100vh - 32px)',
+            overflowY: 'auto',
+            boxSizing: 'border-box',
+          }}
+        >
         <style>{`
           @keyframes fadeIn {
             from { opacity: 0; }
@@ -113,13 +118,56 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             animation: childFadeIn 0.4s ease forwards;
             opacity: 0;
           }
+          
+          /* Mobile responsive styles */
+          @media (max-width: 480px) {
+            .overlay {
+              padding: 16px;
+            }
+            .modal-card {
+              width: 100%;
+              max-width: none;
+              margin: 0;
+              border-radius: 16px;
+              padding: 24px;
+              position: relative;
+              box-sizing: border-box;
+              max-height: calc(100vh - 32px);
+              overflow-y: auto;
+            }
+            .modal-logo svg {
+              max-width: 160px;
+              height: auto;
+            }
+            .social-btn,
+            .signin-form input,
+            .signin-form button,
+            .submit-btn {
+              width: 100%;
+              box-sizing: border-box;
+            }
+          }
+          
+          @media (max-width: 360px) {
+            .overlay {
+              padding: 12px;
+            }
+            .modal-card {
+              padding: 20px;
+              max-height: calc(100vh - 24px);
+            }
+            .modal-logo svg {
+              max-width: 140px;
+            }
+          }
         `}</style>
 
         <div
-          className="relative rounded-[20px] p-[30px] md:p-8 overflow-hidden modal-content"
+          className="relative rounded-[20px] p-[30px] md:p-8 overflow-hidden modal-content modal-card"
           style={{
             background: '#1D215E',
             border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxSizing: 'border-box',
           }}
         >
           {/* Decorative top line */}
@@ -161,10 +209,14 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
           {/* Content */}
           <div className="relative z-10 space-y-0">
             {/* Logo */}
-            <div className="stagger-child text-center mb-7" style={{ animationDelay: childVariants[0] + 's' }}>
+            <div className="stagger-child text-center mb-7 modal-logo" style={{ animationDelay: childVariants[0] + 's' }}>
               <div
                 dangerouslySetInnerHTML={{ __html: AIRPORTEO_LOGO }}
                 className="inline-block"
+                style={{
+                  maxWidth: '180px',
+                  height: 'auto',
+                }}
               />
             </div>
 
@@ -199,7 +251,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             {/* Social Buttons */}
             <div className="stagger-child space-y-2.5 mb-6" style={{ animationDelay: childVariants[3] + 's' }}>
               <button
-                className="w-full h-[46px] rounded-[8px] flex items-center justify-center gap-3 transition-all"
+                className="social-btn w-full h-[46px] rounded-[8px] flex items-center justify-center gap-3 transition-all"
                 style={{
                   border: '1px solid rgba(255, 255, 255, 0.1)',
                   background: 'transparent',
@@ -207,6 +259,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                   fontSize: '14px',
                   fontWeight: '500',
                   letterSpacing: '0.2px',
+                  boxSizing: 'border-box',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)'
@@ -268,10 +321,10 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             </div>
 
             {/* Email/Password Form or Phone Form */}
-            {isEmailForm ? (
-              <>
-                {/* Email Field */}
-                <div className="stagger-child mb-4" style={{ animationDelay: childVariants[5] + 's' }}>
+                {isEmailForm ? (
+                  <>
+                    {/* Email Field */}
+                    <div className="stagger-child mb-4 signin-form" style={{ animationDelay: childVariants[5] + 's' }}>
                   <label style={{ fontSize: '12px', fontWeight: '500', letterSpacing: '0.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', display: 'block', marginBottom: '8px' }}>
                     Email Address
                   </label>
@@ -281,14 +334,15 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
-                    className="w-full h-[46px] rounded-[8px] px-4 transition-all"
-                    style={{
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      background: 'transparent',
-                      color: '#ffffff',
-                      fontSize: '14px',
-                      outline: 'none',
-                    }}
+                      className="w-full h-[46px] rounded-[8px] px-4 pr-12 transition-all"
+                      style={{
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        background: 'transparent',
+                        color: '#ffffff',
+                        fontSize: '14px',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                      }}
                     onFocus={(e) => {
                       e.target.style.borderColor = 'rgba(212, 160, 74, 0.5)'
                       e.target.style.boxShadow = '0 0 0 3px rgba(212, 160, 74, 0.15)'
@@ -329,6 +383,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                         color: '#ffffff',
                         fontSize: '14px',
                         outline: 'none',
+                        boxSizing: 'border-box',
                       }}
                       onFocus={(e) => {
                         e.target.style.borderColor = 'rgba(212, 160, 74, 0.5)'
@@ -414,7 +469,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
 
                 {/* Sign In Button */}
                 <button
-                  className="stagger-child w-full h-[48px] rounded-[8px] font-semibold transition-all mt-1"
+                  className="stagger-child submit-btn w-full h-[48px] rounded-[8px] font-semibold transition-all mt-1"
                   style={{
                     background: 'linear-gradient(135deg, #d4a04a, #c08a30)',
                     color: '#1D215E',
@@ -426,6 +481,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                     overflow: 'hidden',
                     animationDelay: childVariants[8] + 's',
                     boxShadow: '0 2px 8px rgba(212, 160, 74, 0.2)',
+                    boxSizing: 'border-box',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.boxShadow = '0 4px 24px rgba(212,160,74,0.35)'
@@ -452,7 +508,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
             ) : (
               <>
                 {/* Phone Field */}
-                <div className="stagger-child mb-4" style={{ animationDelay: childVariants[5] + 's' }}>
+                <div className="stagger-child mb-4 signin-form" style={{ animationDelay: childVariants[5] + 's' }}>
                   <label style={{ fontSize: '12px', fontWeight: '500', letterSpacing: '0.5px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', display: 'block', marginBottom: '8px' }}>
                     Phone Number
                   </label>
@@ -460,13 +516,15 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                     <select
                       value={phoneCode}
                       onChange={(e) => setPhoneCode(e.target.value)}
-                      className="w-[90px] h-[46px] rounded-[8px] px-3 transition-all"
+                      className="h-[46px] rounded-[8px] px-3 transition-all"
                       style={{
+                        width: '90px',
                         border: '1px solid rgba(255, 255, 255, 0.1)',
                         background: 'transparent',
                         color: '#ffffff',
                         fontSize: '14px',
                         outline: 'none',
+                        boxSizing: 'border-box',
                       }}
                       onFocus={(e) => {
                         e.target.style.borderColor = 'rgba(212, 160, 74, 0.5)'
@@ -495,6 +553,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                         color: '#ffffff',
                         fontSize: '14px',
                         outline: 'none',
+                        boxSizing: 'border-box',
                       }}
                       onFocus={(e) => {
                         e.target.style.borderColor = 'rgba(212, 160, 74, 0.5)'
@@ -513,7 +572,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
 
                 {/* Send Code Button */}
                 <button
-                  className="stagger-child w-full h-[48px] rounded-[8px] font-semibold transition-all mt-4"
+                  className="stagger-child submit-btn w-full h-[48px] rounded-[8px] font-semibold transition-all mt-4"
                   style={{
                     background: 'linear-gradient(135deg, #d4a04a, #c08a30)',
                     color: '#1D215E',
@@ -523,6 +582,7 @@ export function SignInModal({ isOpen, onClose }: SignInModalProps) {
                     border: 'none',
                     animationDelay: childVariants[6] + 's',
                     boxShadow: '0 2px 8px rgba(212, 160, 74, 0.2)',
+                    boxSizing: 'border-box',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.boxShadow = '0 4px 24px rgba(212,160,74,0.35)'
