@@ -16,14 +16,11 @@ const LANGUAGES = [
 const CURRENCIES = [
   { code: "USD", symbol: "$" },
   { code: "EUR", symbol: "€" },
-  { code: "GBP", symbol: "£" },
-  { code: "JPY", symbol: "¥" },
+  { code: "SAR", symbol: "﷼" },
+  { code: "AED", symbol: "د.إ" },
+  { code: "QAR", symbol: "﷼" },
   { code: "CNY", symbol: "¥" },
   { code: "INR", symbol: "₹" },
-  { code: "CHF", symbol: "CHF" },
-  { code: "AED", symbol: "د.إ" },
-  { code: "SAR", symbol: "﷼" },
-  { code: "BGN", symbol: "лв" },
 ]
 
 interface NavItem {
