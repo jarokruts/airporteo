@@ -136,8 +136,11 @@ export default function BlogPage() {
       {/* Blog Grid Section */}
       <main className="flex-1 w-full mx-auto max-w-6xl">
         <div
-          className="w-full grid grid-cols-3 gap-6 px-6 py-12 lg:grid-cols-2 md:gap-5 sm:grid-cols-1 sm:gap-4 sm:px-4 sm:py-8"
+          className="blog-grid w-full px-6 py-12 sm:px-4 sm:py-8"
           style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '24px',
             padding: '40px 24px 60px',
             maxWidth: '1200px',
             margin: '0 auto',
@@ -162,6 +165,18 @@ export default function BlogPage() {
 
       {/* Responsive Grid Styles */}
       <style>{`
+        /* Desktop — 3 columns */
+        .blog-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          padding: 40px 24px 60px;
+          max-width: 1200px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        /* Tablet — 2 columns */
         @media (max-width: 900px) {
           .blog-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -169,10 +184,12 @@ export default function BlogPage() {
           }
         }
 
+        /* Mobile — 1 column */
         @media (max-width: 560px) {
           .blog-grid {
             grid-template-columns: 1fr;
             gap: 16px;
+            padding: 32px 16px 48px;
           }
         }
       `}</style>
