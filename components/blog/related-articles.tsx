@@ -154,10 +154,11 @@ export function RelatedArticles() {
   return (
     <section
       style={{
-        paddingTop: '36px',
+        paddingTop: '0',
         borderTop: '1px solid rgba(0,0,0,0.07)',
-        marginTop: '36px',
-        paddingBottom: '60px',
+        marginTop: '0',
+        paddingBottom: '32px',
+        marginBottom: '20px',
       }}
     >
       {/* Heading */}
@@ -167,7 +168,8 @@ export function RelatedArticles() {
           fontSize: '22px',
           fontWeight: 700,
           color: '#1D215E',
-          marginBottom: '24px',
+          marginBottom: '16px',
+          marginTop: '20px',
           textAlign: 'left',
         }}
       >
