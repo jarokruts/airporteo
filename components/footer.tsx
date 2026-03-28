@@ -115,9 +115,9 @@ export function Footer() {
             <Image
               src="/images/airporteo-logo.svg"
               alt="Airporteo Logo"
-              width={160}
-              height={24}
-              className="h-6 w-auto"
+              width={208}
+              height={32}
+              className="h-8 w-auto"
               style={{ filter: 'brightness(1) invert(0)' }}
             />
           </div>
