@@ -13,118 +13,118 @@ interface RelatedArticleCardProps {
 
 const RelatedArticleCard = ({ date, title, slug, image }: RelatedArticleCardProps) => {
   return (
-    <Link href={`/blog/${slug}`}>
-      <a
-        className="block h-full transition-all duration-300"
+    <Link
+      href={`/blog/${slug}`}
+      className="block h-full transition-all duration-300"
+      style={{
+        background: '#ffffff',
+        border: '1px solid rgba(0,0,0,0.07)',
+        borderRadius: '14px',
+        overflow: 'hidden',
+        cursor: 'pointer',
+        display: 'block',
+      }}
+      onMouseEnter={(e) => {
+        const card = e.currentTarget as HTMLAnchorElement
+        card.style.borderColor = 'rgba(0,0,0,0.12)'
+        card.style.transform = 'translateY(-3px)'
+        card.style.boxShadow = '0 8px 30px rgba(29,33,94,0.08)'
+      }}
+      onMouseLeave={(e) => {
+        const card = e.currentTarget as HTMLAnchorElement
+        card.style.borderColor = 'rgba(0,0,0,0.07)'
+        card.style.transform = 'translateY(0)'
+        card.style.boxShadow = 'none'
+      }}
+    >
+      {/* Image */}
+      <div
         style={{
-          background: '#ffffff',
-          border: '1px solid rgba(0,0,0,0.07)',
-          borderRadius: '14px',
+          position: 'relative',
+          width: '100%',
+          aspectRatio: '16 / 10',
           overflow: 'hidden',
-          cursor: 'pointer',
+          background: '#f0f0f0',
         }}
         onMouseEnter={(e) => {
-          const card = e.currentTarget as HTMLAnchorElement
-          card.style.borderColor = 'rgba(0,0,0,0.12)'
-          card.style.transform = 'translateY(-3px)'
-          card.style.boxShadow = '0 8px 30px rgba(29,33,94,0.08)'
+          const img = e.currentTarget.querySelector('img') as HTMLImageElement
+          if (img) {
+            img.style.transform = 'scale(1.04)'
+          }
         }}
         onMouseLeave={(e) => {
-          const card = e.currentTarget as HTMLAnchorElement
-          card.style.borderColor = 'rgba(0,0,0,0.07)'
-          card.style.transform = 'translateY(0)'
-          card.style.boxShadow = 'none'
+          const img = e.currentTarget.querySelector('img') as HTMLImageElement
+          if (img) {
+            img.style.transform = 'scale(1)'
+          }
         }}
       >
-        {/* Image */}
-        <div
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-300"
+        />
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: '18px 20px 20px' }}>
+        {/* Date */}
+        <p
           style={{
-            position: 'relative',
-            width: '100%',
-            aspectRatio: '16 / 10',
-            overflow: 'hidden',
-            background: '#f0f0f0',
-          }}
-          onMouseEnter={(e) => {
-            const img = e.currentTarget.querySelector('img') as HTMLImageElement
-            if (img) {
-              img.style.transform = 'scale(1.04)'
-            }
-          }}
-          onMouseLeave={(e) => {
-            const img = e.currentTarget.querySelector('img') as HTMLImageElement
-            if (img) {
-              img.style.transform = 'scale(1)'
-            }
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            color: 'rgba(26,26,46,0.35)',
+            fontFamily: 'var(--font-dm-sans)',
+            margin: '0 0 8px',
+            fontWeight: 600,
           }}
         >
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover transition-transform duration-300"
-          />
+          {date}
+        </p>
+
+        {/* Title */}
+        <h3
+          style={{
+            fontFamily: 'var(--font-playfair)',
+            fontSize: '16px',
+            fontWeight: 700,
+            color: '#1D215E',
+            margin: '0 0 12px',
+            lineHeight: 1.3,
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            transition: 'color 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLHeadingElement).style.color = '#d4a04a'
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLHeadingElement).style.color = '#1D215E'
+          }}
+        >
+          {title}
+        </h3>
+
+        {/* Read More */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '12px',
+            fontWeight: 600,
+            color: '#d4a04a',
+            fontFamily: 'var(--font-dm-sans)',
+          }}
+        >
+          Read more
+          <ArrowRight size={12} weight="bold" />
         </div>
-
-        {/* Body */}
-        <div style={{ padding: '18px 20px 20px' }}>
-          {/* Date */}
-          <p
-            style={{
-              fontSize: '11px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px',
-              color: 'rgba(26,26,46,0.35)',
-              fontFamily: 'var(--font-dm-sans)',
-              margin: '0 0 8px',
-              fontWeight: 600,
-            }}
-          >
-            {date}
-          </p>
-
-          {/* Title */}
-          <h3
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: '16px',
-              fontWeight: 700,
-              color: '#1D215E',
-              margin: '0 0 12px',
-              lineHeight: 1.3,
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLHeadingElement).style.color = '#d4a04a'
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLHeadingElement).style.color = '#1D215E'
-            }}
-          >
-            {title}
-          </h3>
-
-          {/* Read More */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '12px',
-              fontWeight: 600,
-              color: '#d4a04a',
-              fontFamily: 'var(--font-dm-sans)',
-            }}
-          >
-            Read more
-            <ArrowRight size={12} weight="bold" />
-          </div>
-        </div>
-      </a>
+      </div>
     </Link>
   )
 }
