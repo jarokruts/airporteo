@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 interface BlogHeroProps {
   label?: string
   heading: string
@@ -9,13 +11,31 @@ interface BlogHeroProps {
 export function BlogHero({ label = 'Airporteo Blog', heading, subtitle }: BlogHeroProps) {
   return (
     <div
-      className="w-full relative"
+      className="w-full relative overflow-hidden"
       style={{
-        background: '#1D215E',
+        position: 'relative',
         padding: '56px 40px 52px',
       }}
     >
-      <div className="mx-auto max-w-6xl">
+      {/* Background Image */}
+      <Image
+        src="/images/blog-hero.jpg"
+        alt="Aircraft at airport terminal"
+        fill
+        className="absolute inset-0 object-cover"
+        priority
+      />
+      
+      {/* Navy Gradient Overlay - Shadow Effect */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(135deg, rgba(29, 33, 94, 0.75) 0%, rgba(29, 33, 94, 0.7) 50%, rgba(29, 33, 94, 0.8) 100%)',
+        }}
+      />
+
+      {/* Content Container */}
+      <div className="mx-auto max-w-6xl relative z-10">
         {/* Label */}
         <div className="text-center mb-6">
           <p
@@ -61,7 +81,7 @@ export function BlogHero({ label = 'Airporteo Blog', heading, subtitle }: BlogHe
 
       {/* Decorative Gold Line */}
       <div
-        className="mt-8"
+        className="mt-8 relative z-10"
         style={{
           height: '1px',
           background: 'linear-gradient(90deg, transparent, rgba(212,160,74,0.25), transparent)',
