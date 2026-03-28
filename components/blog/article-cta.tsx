@@ -74,33 +74,35 @@ export function ArticleCta() {
         </p>
 
         {/* Button */}
-        <Link href="https://airporteo.com/airport/istanbul-international-ist/">
-          <a
-            className="inline-flex items-center gap-2 transition-all"
-            style={{
-              background: 'linear-gradient(135deg, #d4a04a, #c08a30)',
-              color: '#1D215E',
-              fontSize: '13px',
-              fontWeight: 600,
-              padding: '10px 20px',
-              borderRadius: '8px',
-              border: 'none',
-              cursor: 'pointer',
-              textDecoration: 'none',
-              boxShadow: '0 2px 8px rgba(212,160,74,0.2)',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 16px rgba(212,160,74,0.3)'
-              ;(e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)'
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 2px 8px rgba(212,160,74,0.2)'
-              ;(e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)'
-            }}
-          >
-            Request a Quote
-            <ArrowRight size={14} weight="bold" />
-          </a>
+        <Link
+          href="https://airporteo.com/airport/istanbul-international-ist/"
+          className="inline-flex items-center gap-2 transition-all"
+          style={{
+            background: 'linear-gradient(135deg, #d4a04a, #c08a30)',
+            color: '#1D215E',
+            fontSize: '13px',
+            fontWeight: 600,
+            padding: '10px 20px',
+            borderRadius: '8px',
+            border: 'none',
+            cursor: 'pointer',
+            textDecoration: 'none',
+            boxShadow: '0 2px 8px rgba(212,160,74,0.2)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 16px rgba(212,160,74,0.3)'
+            ;(e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)'
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 2px 8px rgba(212,160,74,0.2)'
+            ;(e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)'
+          }}
+        >
+          Request a Quote
+          <ArrowRight size={14} weight="bold" />
         </Link>
       </div>
     </div>

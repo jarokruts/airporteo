@@ -22,32 +22,32 @@ export function BlogCard({ post, index }: BlogCardProps) {
   const delaySeconds = 0.05 + index * 0.05
 
   return (
-    <Link href={`/blog/${post.slug}`}>
-      <a
-        className="block h-full bg-white rounded-xl overflow-hidden border transition-all duration-300"
-        style={{
-          border: '1px solid rgba(0,0,0,0.07)',
-          cursor: 'pointer',
-          animation: `fadeInUp 0.5s ease-out ${delaySeconds}s both`,
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-        onMouseEnter={(e) => {
-          const el = e.currentTarget as HTMLAnchorElement
-          el.style.borderColor = 'rgba(0,0,0,0.13)'
-          el.style.transform = 'translateY(-3px)'
-          el.style.boxShadow = '0 8px 30px rgba(29,33,94,0.08)'
-          const titleEl = el.querySelector('[data-blog-title]') as HTMLElement
-          if (titleEl) titleEl.style.color = '#d4a04a'
-        }}
-        onMouseLeave={(e) => {
-          const el = e.currentTarget as HTMLAnchorElement
-          el.style.borderColor = 'rgba(0,0,0,0.07)'
-          el.style.transform = 'translateY(0)'
-          el.style.boxShadow = 'none'
-          const titleEl = el.querySelector('[data-blog-title]') as HTMLElement
-          if (titleEl) titleEl.style.color = '#1D215E'
-        }}
+    <Link
+      href={`/blog/${post.slug}`}
+      className="block h-full bg-white rounded-xl overflow-hidden border transition-all duration-300"
+      style={{
+        border: '1px solid rgba(0,0,0,0.07)',
+        cursor: 'pointer',
+        animation: `fadeInUp 0.5s ease-out ${delaySeconds}s both`,
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLAnchorElement
+        el.style.borderColor = 'rgba(0,0,0,0.13)'
+        el.style.transform = 'translateY(-3px)'
+        el.style.boxShadow = '0 8px 30px rgba(29,33,94,0.08)'
+        const titleEl = el.querySelector('[data-blog-title]') as HTMLElement
+        if (titleEl) titleEl.style.color = '#d4a04a'
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLAnchorElement
+        el.style.borderColor = 'rgba(0,0,0,0.07)'
+        el.style.transform = 'translateY(0)'
+        el.style.boxShadow = 'none'
+        const titleEl = el.querySelector('[data-blog-title]') as HTMLElement
+        if (titleEl) titleEl.style.color = '#1D215E'
+      }}
       >
         {/* Featured Image */}
         <div className="relative w-full overflow-hidden bg-gray-200" style={{ aspectRatio: '16/10' }}>
@@ -154,7 +154,6 @@ export function BlogCard({ post, index }: BlogCardProps) {
             <ArrowRight size={14} weight="bold" style={{ transition: 'transform 0.3s ease' }} />
           </div>
         </div>
-      </a>
 
       <style>{`
         @keyframes fadeInUp {
