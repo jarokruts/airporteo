@@ -126,9 +126,12 @@ export default function ArticlePage() {
           /* Tablet & Mobile (1000px and below): Hide sidebar completely */
           @media (max-width: 1000px) {
             .article-layout {
-              grid-template-columns: 1fr;
-              padding: 32px 20px 48px;
-              gap: 0;
+              grid-template-columns: 1fr !important;
+              max-width: 100% !important;
+              margin: 0 !important;
+              padding: 32px 20px 48px !important;
+              gap: 0 !important;
+              width: 100% !important;
             }
             .sidebar {
               display: none !important;
@@ -138,7 +141,10 @@ export default function ArticlePage() {
           /* Mobile (640px and below): Adjust padding */
           @media (max-width: 640px) {
             .article-layout {
-              padding: 24px 16px 32px;
+              max-width: 100% !important;
+              width: 100% !important;
+              padding: 24px 16px 32px !important;
+              margin: 0 !important;
             }
           }
         `}</style>
