@@ -1,278 +1,498 @@
-import Image from "next/image"
-import { Facebook, MessageCircle, Instagram, Send } from "lucide-react"
-import { SolariBackground } from "./solari-background"
+'use client'
 
-const FOOTER_LINKS = [
-  {
-    heading: "Services",
-    links: [
-      { label: "Meet and Greet", href: "#services" },
-      { label: "VIP Platinum", href: "#services" },
-      { label: "Private Car Transfers", href: "#services" },
-      { label: "Golf Cart and Buggy", href: "#services" },
-      { label: "Luggage Assistance", href: "#services" },
-      { label: "Fast Track Service", href: "#services" },
-    ],
-  },
-  {
-    heading: "Company",
-    links: [
-      { label: "About Us", href: "#" },
-      { label: "Reviews", href: "#" },
-      { label: "Blog", href: "#" },
-    ],
-  },
-  {
-    heading: "Support",
-    links: [
-      { label: "Contact Us", href: "#" },
-      { label: "Live Chat", href: "#" },
-      { label: "FAQs", href: "#" },
-    ],
-  },
+import { useState, useEffect } from 'react'
+import {
+  EnvelopeSimple,
+  ChatCircleDots,
+  MapPin,
+  Clock,
+  FacebookLogo,
+  LinkedinLogo,
+  XLogo,
+  InstagramLogo,
+  YoutubeLogo,
+  WhatsappLogo,
+  ArrowUpRight,
+  ArrowUp,
+  AirplaneTilt,
+  Star,
+} from '@phosphor-icons/react'
+
+const CONTACT_ITEMS = [
+  { icon: EnvelopeSimple, text: 'info@airporteo.com' },
+  { icon: ChatCircleDots, text: 'Live Chat & WhatsApp' },
+  { icon: MapPin, text: '200+ Airports Worldwide' },
+  { icon: Clock, text: '24 / 7 Customer Support' },
+]
+
+const SERVICES = [
+  'Meet & Greet',
+  'Fast Track',
+  'VIP Lounge Access',
+  'Airport Transfers',
+  'Porter Assistance',
+  'VIP Exclusive Suite',
+]
+
+const SERVICES_SOLUTIONS = [
+  'For Corporations',
+  'For Elderly Travelers',
+]
+
+const TOP_AIRPORTS = [
+  'London Heathrow (LHR)',
+  'Dubai (DXB)',
+  'Frankfurt (FRA)',
+  'Paris CDG',
+  'JFK New York',
+  'Singapore Changi',
+  'Doha Hamad (DOH)',
+  'All Airports →',
+]
+
+const ABOUT_LINKS = [
+  'About Airporteo',
+  'How It Works',
+  'Blog',
+  'FAQ',
+  'Press',
+]
+
+const ABOUT_PARTNERS = [
+  'Become a Partner',
+  'Affiliate Program',
+]
+
+const LEGAL_LINKS = [
+  'Privacy Policy',
+  'Terms & Conditions',
+  'AML Policy',
+  'GDPR',
+  'Cookies',
+  'Sitemap',
+]
+
+const SOCIAL_ICONS = [
+  { icon: FacebookLogo, label: 'Facebook', href: '#' },
+  { icon: LinkedinLogo, label: 'LinkedIn', href: '#' },
+  { icon: XLogo, label: 'X', href: '#' },
+  { icon: InstagramLogo, label: 'Instagram', href: '#' },
+  { icon: YoutubeLogo, label: 'YouTube', href: '#' },
+  { icon: WhatsappLogo, label: 'WhatsApp', href: '#' },
 ]
 
 export function Footer() {
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <footer className="bg-[var(--navy)] text-white relative overflow-hidden">
-      <SolariBackground />
-      <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8 relative z-10">
-        {/* Main Footer Content - Desktop only (hidden on mobile) */}
-        <div className="hidden md:grid grid-cols-4 gap-12 items-start">
-          {/* Left Column - Brand (30% width) - Hidden on mobile, shown on desktop */}
-          <div>
-            <a href="#" className="inline-block">
-              <Image
-                src="/images/airporteo-logo.svg"
-                alt="Airporteo logo"
-                width={120}
-                height={120}
-                className="h-28 w-28 object-contain"
-              />
-            </a>
-            {/* Description */}
-            <p className="mt-4 text-sm leading-relaxed text-gray-400">
-              Premium airport concierge services at 120+ airports worldwide. Making every airport moment seamless since 2018.
-            </p>
-            {/* Social Icons */}
-            <div className="mt-5 flex gap-4">
-              <a
-                href="#"
-                className="text-white transition-opacity hover:opacity-70"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-white transition-opacity hover:opacity-70"
-                aria-label="WhatsApp"
-              >
-                <MessageCircle size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-white transition-opacity hover:opacity-70"
-                aria-label="Instagram"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-white transition-opacity hover:opacity-70"
-                aria-label="Telegram"
-              >
-                <Send size={20} />
-              </a>
+    <footer className="relative bg-[#0f1923] text-white overflow-hidden">
+      {/* Decorative gradient line at top */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,160,74,0.3)] to-transparent" />
+
+      {/* Radial glow effect */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-radial-gradient pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle, rgba(212,160,74,0.04) 0%, transparent 70%)'
+      }} />
+
+      <div className="relative z-10 max-w-[1280px] mx-auto px-8">
+        {/* Top Bar */}
+        <div className="pt-12 pb-10 md:pb-10 grid md:grid-cols-[1fr_auto_1fr] gap-6 md:gap-12 items-center md:flex-row flex-col">
+          {/* Logo and Brand */}
+          <div className="flex items-center gap-3">
+            <div
+              className="w-12 h-12 rounded-[12px] flex items-center justify-center flex-shrink-0"
+              style={{
+                background: 'linear-gradient(135deg, #d4a04a, #c08a30)',
+                boxShadow: '0 4px 20px rgba(212, 160, 74, 0.25)'
+              }}
+            >
+              <AirplaneTilt size={22} weight="regular" className="text-white" />
+            </div>
+            <div
+              className="text-[22px] font-bold tracking-[0.5px] uppercase"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              Airporteo
             </div>
           </div>
 
-          {/* Right Columns - Links (3 columns, equal width ~23% each) */}
-          {FOOTER_LINKS.map((group) => (
-            <div key={group.heading}>
-              <h3 className="text-base font-semibold text-white">
-                {group.heading}
-              </h3>
-              <ul className="mt-4 space-y-2">
-                {group.links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-gray-400 transition-colors hover:text-white whitespace-nowrap"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
+          {/* Rating Badges - Center on desktop, stacked on mobile */}
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center order-3 md:order-2 w-full md:w-auto">
+            {/* Google Badge */}
+            <div
+              className="flex items-center gap-3 px-5 py-3 rounded-[12px] border transition-colors"
+              style={{
+                background: '#182430',
+                border: '1px solid rgba(255,255,255,0.07)',
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" className="flex-shrink-0">
+                <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="18" fontWeight="700" fill="#d4a04a">G</text>
+              </svg>
+              <div className="flex flex-col gap-1">
+                <span style={{ fontSize: '11px', letterSpacing: '0.8px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)' }} className="font-medium">
+                  Google rating
+                </span>
+                <div className="flex items-center gap-1">
+                  <span style={{ fontSize: '18px', fontWeight: '700' }}>5.0</span>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={12} weight="fill" className="text-[#f5c518]" />
+                    ))}
+                  </div>
+                </div>
+                <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)' }}>Based on 120+ reviews</span>
+              </div>
+            </div>
+
+            {/* Trustpilot Badge */}
+            <div
+              className="flex items-center gap-3 px-5 py-3 rounded-[12px] border transition-colors"
+              style={{
+                background: '#182430',
+                border: '1px solid rgba(255,255,255,0.07)',
+              }}
+            >
+              <Star size={24} weight="fill" className="text-[#00b67a] flex-shrink-0" />
+              <div className="flex flex-col gap-1">
+                <span style={{ fontSize: '11px', letterSpacing: '0.8px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)' }} className="font-medium">
+                  Trustpilot rating
+                </span>
+                <div className="flex items-center gap-1">
+                  <span style={{ fontSize: '18px', fontWeight: '700' }}>4.8</span>
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <div key={i} className="w-[18px] h-[18px] bg-[#00b67a] rounded-[2px] flex items-center justify-center">
+                        <Star size={10} weight="fill" className="text-white" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)' }}>Based on 25 reviews</span>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Button - Right on desktop, full width on mobile */}
+          <button
+            className="group px-7 py-3.5 rounded-full border-[1.5px] text-[14px] font-semibold transition-all flex items-center justify-center gap-2 hover:shadow-lg hover:-translate-y-0.5 order-2 md:order-3 w-full md:w-auto"
+            style={{
+              color: '#d4a04a',
+              borderColor: 'rgba(212, 160, 74, 0.5)',
+              background: 'transparent',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(212, 160, 74, 0.15)'
+              e.currentTarget.style.borderColor = '#d4a04a'
+              e.currentTarget.style.boxShadow = '0 0 30px rgba(212,160,74,0.15)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent'
+              e.currentTarget.style.borderColor = 'rgba(212, 160, 74, 0.5)'
+              e.currentTarget.style.boxShadow = 'none'
+            }}
+          >
+            Book VIP Service now
+            <ArrowUpRight size={16} weight="regular" className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </button>
+        </div>
+
+        {/* Card Grid */}
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5">
+          {/* Contact Us Card */}
+          <div
+            className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
+            style={{
+              background: '#182430',
+              border: '1px solid rgba(255,255,255,0.07)',
+              animation: 'fadeInUp 0.6s ease forwards',
+              animationDelay: '0.1s',
+              opacity: 0,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
+              e.currentTarget.style.background = '#1e2d3d'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+              e.currentTarget.style.background = '#182430'
+            }}
+          >
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.1)]">
+              Contact Us
+            </h3>
+            <div className="space-y-3">
+              {CONTACT_ITEMS.map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div
+                    className="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0 transition-all"
+                    style={{
+                      background: 'rgba(212, 160, 74, 0.08)',
+                      border: '1px solid rgba(212, 160, 74, 0.15)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(212, 160, 74, 0.15)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(212, 160, 74, 0.08)'
+                    }}
+                  >
+                    <item.icon size={16} weight="regular" className="text-[#d4a04a]" />
+                  </div>
+                  <span style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }} className="hover:text-white transition-colors">
+                    {item.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Our Services Card */}
+          <div
+            className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
+            style={{
+              background: '#182430',
+              border: '1px solid rgba(255,255,255,0.07)',
+              animation: 'fadeInUp 0.6s ease forwards',
+              animationDelay: '0.2s',
+              opacity: 0,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
+              e.currentTarget.style.background = '#1e2d3d'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+              e.currentTarget.style.background = '#182430'
+            }}
+          >
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.1)]">
+              Our Services
+            </h3>
+            <div className="space-y-2 mb-4">
+              {SERVICES.map((service, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                  className="block hover:text-white hover:pl-1 transition-all"
+                >
+                  {service}
+                </a>
+              ))}
+            </div>
+            <div className="pt-4 border-t border-[rgba(255,255,255,0.1)]">
+              <span style={{ fontSize: '12px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', color: '#d4a04a' }}>
+                Solutions
+              </span>
+              <div className="space-y-2 mt-3">
+                {SERVICES_SOLUTIONS.map((item, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                    className="block hover:text-white hover:pl-1 transition-all"
+                  >
+                    {item}
+                  </a>
                 ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile-only content - shown on mobile, hidden on desktop */}
-        <div className="md:hidden flex flex-col px-0">
-          {/* 2-Column Link Grid */}
-          <div className="grid grid-cols-2 gap-8 mb-8">
-            {/* LEFT COLUMN - Services & Support */}
-            <div className="text-left">
-              {/* Services Section */}
-              <div className="mb-8">
-                <h3 className="font-semibold text-white text-base mb-3">Services</h3>
-                <ul className="space-y-2">
-                  {FOOTER_LINKS[0].links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-gray-400 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Support Section */}
-              <div>
-                <h3 className="font-semibold text-white text-base mb-3">Support</h3>
-                <ul className="space-y-2">
-                  {FOOTER_LINKS[2].links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-gray-400 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN - Company & Legal */}
-            <div className="text-left">
-              {/* Company Section */}
-              <div className="mb-8">
-                <h3 className="font-semibold text-white text-base mb-3">Company</h3>
-                <ul className="space-y-2">
-                  {FOOTER_LINKS[1].links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-gray-400 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Legal Section */}
-              <div>
-                <h3 className="font-semibold text-white text-base mb-3">Legal</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-sm text-gray-400 transition-colors hover:text-white"
-                    >
-                      Privacy
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-sm text-gray-400 transition-colors hover:text-white"
-                    >
-                      Terms
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-sm text-gray-400 transition-colors hover:text-white"
-                    >
-                      AML Policy
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-sm text-gray-400 transition-colors hover:text-white"
-                    >
-                      GDPR
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-sm text-gray-400 transition-colors hover:text-white"
-                    >
-                      Cookies
-                    </a>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
 
-          {/* Divider Line */}
-          <div className="my-6 border-t border-white/10" />
-
-          {/* Social Icons Row - Centered */}
-          <div className="flex gap-6 justify-center mb-6">
-            <a
-              href="#"
-              className="text-white transition-opacity hover:opacity-70"
-              aria-label="Facebook"
-            >
-              <Facebook size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-white transition-opacity hover:opacity-70"
-              aria-label="WhatsApp"
-            >
-              <MessageCircle size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-white transition-opacity hover:opacity-70"
-              aria-label="Instagram"
-            >
-              <Instagram size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-white transition-opacity hover:opacity-70"
-              aria-label="Telegram"
-            >
-              <Send size={24} />
-            </a>
+          {/* Top Airports Card */}
+          <div
+            className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
+            style={{
+              background: '#182430',
+              border: '1px solid rgba(255,255,255,0.07)',
+              animation: 'fadeInUp 0.6s ease forwards',
+              animationDelay: '0.3s',
+              opacity: 0,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
+              e.currentTarget.style.background = '#1e2d3d'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+              e.currentTarget.style.background = '#182430'
+            }}
+          >
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.1)]">
+              Top Airports
+            </h3>
+            <div className="space-y-2">
+              {TOP_AIRPORTS.map((airport, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                  className="block hover:text-white hover:pl-1 transition-all"
+                >
+                  {airport}
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Copyright Line - Centered */}
-          <p className="text-center text-sm text-gray-400">
-            {"\u00A9"} 2026 Airporteo. All rights reserved.
-          </p>
+          {/* About Us Card */}
+          <div
+            className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
+            style={{
+              background: '#182430',
+              border: '1px solid rgba(255,255,255,0.07)',
+              animation: 'fadeInUp 0.6s ease forwards',
+              animationDelay: '0.4s',
+              opacity: 0,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
+              e.currentTarget.style.background = '#1e2d3d'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+              e.currentTarget.style.background = '#182430'
+            }}
+          >
+            <h3 style={{ fontSize: '18px', fontWeight: '700', fontFamily: 'Playfair Display, serif' }} className="mb-4 pb-3 border-b border-[rgba(255,255,255,0.1)]">
+              About Us
+            </h3>
+            <div className="space-y-2 mb-4">
+              {ABOUT_LINKS.map((link, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                  className="block hover:text-white hover:pl-1 transition-all"
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
+            <div className="pt-4 border-t border-[rgba(255,255,255,0.1)]">
+              <span style={{ fontSize: '12px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', color: '#d4a04a' }}>
+                Partners
+              </span>
+              <div className="space-y-2 mt-3">
+                {ABOUT_PARTNERS.map((item, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                    className="block hover:text-white hover:pl-1 transition-all"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom Bar - Desktop only */}
-        <div className="hidden md:flex mt-8 items-center justify-between gap-4 border-t border-white/10 pt-6">
-          <p className="text-sm text-gray-400">
-            {"\u00A9"} 2026 Airporteo. All rights reserved.
+        {/* Bottom Bar */}
+        <div className="py-7 md:flex md:items-center md:justify-between flex-col md:flex-row gap-6 md:gap-0 border-t border-[rgba(255,255,255,0.04)]">
+          {/* Legal Links */}
+          <div className="flex flex-wrap gap-7 text-center md:text-left">
+            {LEGAL_LINKS.map((link, i) => (
+              <a
+                key={i}
+                href="#"
+                style={{ fontSize: '13px', fontWeight: '400', color: 'rgba(255,255,255,0.55)' }}
+                className="hover:text-white transition-colors"
+              >
+                {link}
+              </a>
+            ))}
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex gap-2 justify-center md:justify-end">
+            {SOCIAL_ICONS.map((social, i) => (
+              <a
+                key={i}
+                href={social.href}
+                aria-label={social.label}
+                className="w-11 h-11 rounded-full flex items-center justify-center border transition-all hover:-translate-y-0.5"
+                style={{
+                  background: '#182430',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(212, 160, 74, 0.4)'
+                  e.currentTarget.style.background = 'rgba(212, 160, 74, 0.08)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+                  e.currentTarget.style.background = '#182430'
+                }}
+              >
+                <social.icon size={18} weight="regular" className="text-white hover:text-[#d4a04a] transition-colors" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Copyright Row */}
+        <div className="py-5 md:flex md:items-center md:justify-between flex-col md:flex-row gap-4 md:gap-0 border-t border-[rgba(255,255,255,0.04)] text-center md:text-left">
+          <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)' }}>
+            © 2026 Airporteo Tourism W.L.L. — All rights reserved
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Privacy</a>
-            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Terms</a>
-            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">AML Policy</a>
-            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">GDPR</a>
-            <a href="#" className="text-sm text-gray-400 transition-colors hover:text-white">Cookies</a>
+          <div className="flex items-center justify-center md:justify-end gap-2">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={14} weight="fill" className="text-[#f5c518]" />
+            ))}
+            <a href="#" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }} className="hover:text-white transition-colors ml-2">
+              Reviews on Trustpilot & Google
+            </a>
           </div>
         </div>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 w-12 h-12 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-1"
+          style={{
+            background: 'linear-gradient(135deg, #d4a04a, #c08a30)',
+            boxShadow: '0 4px 20px rgba(212, 160, 74, 0.35)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = '0 6px 28px rgba(212, 160, 74, 0.45)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(212, 160, 74, 0.35)'
+          }}
+        >
+          <ArrowUp size={20} weight="regular" />
+        </button>
+      )}
+
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </footer>
   )
 }
