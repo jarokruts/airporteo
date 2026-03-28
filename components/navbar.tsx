@@ -2,24 +2,34 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
-import { Menu, X, ChevronDown, Globe, DollarSign, LogIn } from "lucide-react"
+import { Menu, X, ChevronDown, Globe, DollarSign, LogIn, CaretDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SignInModal } from "@/components/signin-modal"
 
 const LANGUAGES = [
-  { code: "en", label: "GB English" },
-  { code: "es", label: "ES Español" },
-  { code: "ar", label: "AR العربية" },
-  { code: "zh", label: "CN 普通话" },
-  { code: "hi", label: "IN हिन्दी" },
+  { code: "en", flag: "🇬🇧", label: "English" },
+  { code: "de", flag: "🇩🇪", label: "Deutsch" },
+  { code: "fr", flag: "🇫🇷", label: "Français" },
+  { code: "es", flag: "🇪🇸", label: "Español" },
+  { code: "it", flag: "🇮🇹", label: "Italiano" },
+  { code: "ru", flag: "🇷🇺", label: "Русский" },
+  { code: "zh", flag: "🇨🇳", label: "中文" },
+  { code: "ja", flag: "🇯🇵", label: "日本語" },
+  { code: "ar", flag: "🇸🇦", label: "العربية" },
+  { code: "bg", flag: "🇧🇬", label: "Български" },
 ]
 
 const CURRENCIES = [
-  { code: "USD", symbol: "$", label: "US Dollar" },
-  { code: "EUR", symbol: "€", label: "Euro" },
-  { code: "QAR", symbol: "﷼", label: "Qatari Riyal" },
-  { code: "SAR", symbol: "﷼", label: "Saudi Riyal" },
-  { code: "AED", symbol: "د.إ", label: "UAE Dirham" },
+  { code: "USD", symbol: "$" },
+  { code: "EUR", symbol: "€" },
+  { code: "GBP", symbol: "£" },
+  { code: "JPY", symbol: "¥" },
+  { code: "CNY", symbol: "¥" },
+  { code: "INR", symbol: "₹" },
+  { code: "CHF", symbol: "CHF" },
+  { code: "AED", symbol: "د.إ" },
+  { code: "SAR", symbol: "﷼" },
+  { code: "BGN", symbol: "лв" },
 ]
 
 interface NavItem {
@@ -381,7 +391,7 @@ export function Navbar() {
       <div
         className={cn(
           "overflow-hidden border-b border-border bg-background transition-all duration-300 lg:hidden",
-          mobileOpen ? "max-h-[600px]" : "max-h-0 border-none"
+          mobileOpen ? "max-h-screen" : "max-h-0 border-none"
         )}
       >
         <div className="flex flex-col gap-0.5 px-5 py-4">
@@ -392,6 +402,98 @@ export function Navbar() {
               onNavigate={closeMobile}
             />
           ))}
+
+          {/* Divider */}
+          <div className="my-2 border-t border-[rgba(0,0,0,0.06)]" />
+
+          {/* Sign In Button */}
+          <button
+            type="button"
+            onClick={() => {
+              setIsSigninOpen(true)
+              closeMobile()
+            }}
+            className="flex items-center justify-center gap-2 mx-0 my-3 px-5 py-3 rounded-[8px] bg-[#1D215E] text-white font-semibold text-[15px] transition-all active:opacity-90 active:scale-98"
+          >
+            <LogIn className="h-[18px] w-[18px]" />
+            <span>Sign In</span>
+          </button>
+
+          {/* Create Account Link */}
+          <p className="text-center text-[13px] text-[#666] mt-2 mb-4">
+            Don&apos;t have an account?{" "}
+            <span className="text-[#d4a04a] font-semibold cursor-pointer hover:underline">
+              Create one
+            </span>
+          </p>
+
+          {/* Language & Currency Row */}
+          <div className="flex gap-0 rounded-[10px] border border-[rgba(0,0,0,0.08)] overflow-hidden bg-[#f5f5f7] h-12 my-3">
+            {/* Language Selector */}
+            <div className="flex-1 flex items-center justify-center cursor-pointer hover:bg-[rgba(0,0,0,0.04)] transition-colors relative group">
+              <span className="text-[14px] font-medium text-[#1D215E] flex items-center gap-1.5">
+                {selectedLang.flag}
+                <span>{selectedLang.code.toUpperCase()}</span>
+                <CaretDown className="h-3 w-3 text-[rgba(29,33,94,0.4)]" />
+              </span>
+
+              {/* Language Dropdown */}
+              <div className="absolute top-full left-0 right-0 bg-white border border-[rgba(0,0,0,0.08)] rounded-lg mt-1 shadow-lg hidden group-hover:block z-50 max-h-48 overflow-y-auto">
+                {LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    type="button"
+                    onClick={() => {
+                      setSelectedLang(lang)
+                    }}
+                    className={cn(
+                      "w-full text-left px-4 py-2.5 text-[14px] font-medium transition-colors flex items-center gap-2",
+                      selectedLang.code === lang.code
+                        ? "bg-[#1D215E] text-white"
+                        : "text-[#1D215E] hover:bg-[#f5f5f7]"
+                    )}
+                  >
+                    <span>{lang.flag}</span>
+                    <span>{lang.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Vertical Divider */}
+            <div className="w-px bg-[rgba(0,0,0,0.08)]" />
+
+            {/* Currency Selector */}
+            <div className="flex-1 flex items-center justify-center cursor-pointer hover:bg-[rgba(0,0,0,0.04)] transition-colors relative group">
+              <span className="text-[14px] font-medium text-[#1D215E] flex items-center gap-1.5">
+                <span>{selectedCurrency.symbol}</span>
+                <span>{selectedCurrency.code}</span>
+                <CaretDown className="h-3 w-3 text-[rgba(29,33,94,0.4)]" />
+              </span>
+
+              {/* Currency Dropdown */}
+              <div className="absolute top-full right-0 bg-white border border-[rgba(0,0,0,0.08)] rounded-lg mt-1 shadow-lg hidden group-hover:block z-50 max-h-48 overflow-y-auto min-w-32">
+                {CURRENCIES.map((currency) => (
+                  <button
+                    key={currency.code}
+                    type="button"
+                    onClick={() => {
+                      setSelectedCurrency(currency)
+                    }}
+                    className={cn(
+                      "w-full text-left px-4 py-2.5 text-[14px] font-medium transition-colors flex items-center gap-2",
+                      selectedCurrency.code === currency.code
+                        ? "bg-[#1D215E] text-white"
+                        : "text-[#1D215E] hover:bg-[#f5f5f7]"
+                    )}
+                  >
+                    <span className="w-6 text-center">{currency.symbol}</span>
+                    <span>{currency.code}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       </nav>
