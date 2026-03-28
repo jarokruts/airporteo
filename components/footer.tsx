@@ -97,7 +97,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative bg-[#0f1923] text-white overflow-hidden">
+    <footer className="relative bg-[#1D215E] text-white overflow-hidden">
       {/* Decorative gradient line at top */}
       <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,160,74,0.3)] to-transparent" />
 
