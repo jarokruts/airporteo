@@ -77,7 +77,7 @@ export default function ArticlePage() {
           {/* Left: Article Content */}
           <ArticleContent />
 
-          {/* Right: Sidebar - Sticky on desktop */}
+          {/* Right: Sidebar - Sticky on desktop only */}
           <aside
             style={{
               position: 'sticky',
@@ -93,22 +93,6 @@ export default function ArticlePage() {
             <ArticleCta />
             <ArticleShare />
           </aside>
-        </div>
-
-        {/* Mobile Sidebar Cards - Below article on tablets/mobile only */}
-        <div
-          style={{
-            maxWidth: '1100px',
-            margin: '0 auto',
-            padding: '0 24px 60px',
-            display: 'none',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '20px',
-          }}
-          className="mobile-sidebar"
-        >
-          <ArticleCta />
-          <ArticleShare />
         </div>
 
         {/* Responsive Styles */}
@@ -132,26 +116,14 @@ export default function ArticlePage() {
             height: fit-content;
           }
 
-          .mobile-sidebar {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px 60px;
-            display: none;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-          }
-
-          /* Desktop (1001px and up): Show sidebar on right, hide mobile cards */
+          /* Desktop (1001px and up): Show sidebar */
           @media (min-width: 1001px) {
             .sidebar {
-              display: flex;
-            }
-            .mobile-sidebar {
-              display: none !important;
+              display: flex !important;
             }
           }
 
-          /* Tablet & Mobile (1000px and below): Hide sidebar, show mobile cards in 2-column grid */
+          /* Tablet & Mobile (1000px and below): Hide sidebar completely */
           @media (max-width: 1000px) {
             .article-layout {
               grid-template-columns: 1fr;
@@ -159,34 +131,27 @@ export default function ArticlePage() {
               gap: 0;
             }
             .sidebar {
-              display: none;
-            }
-            .mobile-sidebar {
-              display: grid;
-              padding: 0 20px 48px;
+              display: none !important;
             }
           }
 
-          /* Mobile (640px and below): Single column for sidebar cards */
+          /* Mobile (640px and below): Adjust padding */
           @media (max-width: 640px) {
             .article-layout {
               padding: 24px 16px 32px;
-            }
-            .mobile-sidebar {
-              grid-template-columns: 1fr;
-              padding: 0 16px 32px;
             }
           }
         `}</style>
       </main>
 
-      {/* Related Articles Section */}
+      {/* Related Articles Section - Hidden on mobile */}
       <div
         style={{
           background: '#ffffff',
           borderTop: '1px solid rgba(0,0,0,0.07)',
           padding: '60px 24px',
         }}
+        className="related-section"
       >
         <div
           style={{
@@ -196,6 +161,15 @@ export default function ArticlePage() {
         >
           <RelatedArticles />
         </div>
+
+        {/* Hide related articles section on mobile */}
+        <style>{`
+          @media (max-width: 1000px) {
+            .related-section {
+              display: none !important;
+            }
+          }
+        `}</style>
       </div>
 
       <Footer />
