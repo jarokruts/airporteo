@@ -216,7 +216,7 @@ export function Footer() {
         </div>
 
         {/* Card Grid */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5">
+        <div className="py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5">
           {/* Contact Us Card */}
           <div
             className="rounded-[14px] p-7 md:p-7 border transition-all hover:shadow-lg"
