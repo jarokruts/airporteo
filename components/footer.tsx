@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import {
   EnvelopeSimple,
   ChatCircleDots,
@@ -110,22 +111,15 @@ export function Footer() {
         {/* Top Bar */}
         <div className="pt-12 pb-10 md:pb-10 grid md:grid-cols-[1fr_auto_1fr] gap-6 md:gap-12 items-center md:flex-row flex-col">
           {/* Logo and Brand */}
-          <div className="flex items-center gap-3">
-            <div
-              className="w-12 h-12 rounded-[12px] flex items-center justify-center flex-shrink-0"
-              style={{
-                background: 'linear-gradient(135deg, #d4a04a, #c08a30)',
-                boxShadow: '0 4px 20px rgba(212, 160, 74, 0.25)'
-              }}
-            >
-              <AirplaneTilt size={22} weight="regular" className="text-white" />
-            </div>
-            <div
-              className="text-[22px] font-bold tracking-[0.5px] uppercase"
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
-              Airporteo
-            </div>
+          <div className="flex items-center gap-2">
+            <Image
+              src="/images/airporteo-logo.svg"
+              alt="Airporteo Logo"
+              width={160}
+              height={24}
+              className="h-6 w-auto"
+              style={{ filter: 'brightness(1) invert(0)' }}
+            />
           </div>
 
           {/* Rating Badges - Center on desktop, stacked on mobile */}
