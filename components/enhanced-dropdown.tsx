@@ -1,6 +1,6 @@
 'use client'
 
-import { HandWaving, Zap, Briefcase, Car, Users, Gift, Crown, Star, Coffee, Gem, Building2, Plane } from 'lucide-react'
+import { Handshake, Zap, Suitcase, Car, Users, Gift, Crown, Star, Coffee, Diamond, Building, Airplane } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 interface DropdownItemConfig {
@@ -60,7 +60,7 @@ export const AIRPORT_SERVICES_ITEMS: DropdownItemConfig[] = [
     label: 'Meet & Greet',
     description: 'Personal welcome and escort service',
     href: '#services',
-    icon: <HandWaving size={24} weight="thin" />
+    icon: <Handshake size={24} weight="thin" />
   },
   {
     label: 'Fast Track',
@@ -72,7 +72,7 @@ export const AIRPORT_SERVICES_ITEMS: DropdownItemConfig[] = [
     label: 'Luggage Assistance',
     description: 'Professional baggage handling',
     href: '#features',
-    icon: <Briefcase size={24} weight="thin" />
+    icon: <Suitcase size={24} weight="thin" />
   },
   {
     label: 'Hotel Transfer',
@@ -105,7 +105,7 @@ export const VIP_PLATINUM_ITEMS: DropdownItemConfig[] = [
     label: 'VIP Tarmac',
     description: 'Limousine to aircraft steps',
     href: '#experience',
-    icon: <Star size={24} weight="thin" />
+    icon: <Airplane size={24} weight="thin" />
   },
   {
     label: 'VIP Lounge',
@@ -117,7 +117,7 @@ export const VIP_PLATINUM_ITEMS: DropdownItemConfig[] = [
     label: 'VIP Exclusive Suite',
     description: 'Ultimate privacy and luxury',
     href: '#experience',
-    icon: <Gem size={24} weight="thin" />
+    icon: <Diamond size={24} weight="thin" />
   },
 ]
 
@@ -126,13 +126,13 @@ export const FOR_BUSINESS_ITEMS: DropdownItemConfig[] = [
     label: 'Corporate Services',
     description: 'Solutions for business travel',
     href: '#features',
-    icon: <Building2 size={24} weight="thin" />
+    icon: <Building size={24} weight="thin" />
   },
   {
     label: 'Travel Agency',
     description: 'Partner with Airporteo',
     href: '#features',
-    icon: <Plane size={24} weight="thin" />
+    icon: <Airplane size={24} weight="thin" />
   },
   {
     label: 'Services for Groups',
