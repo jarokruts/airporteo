@@ -1,5 +1,6 @@
 import { BookingWidget } from "./booking-widget"
 import { SolariBackground } from "./solari-background"
+import { RotatingHeading } from "./rotating-heading"
 import { Shield, Star, Clock } from "lucide-react"
 
 export function HeroSection() {
@@ -20,9 +21,7 @@ export function HeroSection() {
 
           {/* Headline */}
           <div className="max-w-3xl">
-            <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-white lg:text-3xl whitespace-nowrap">
-              Navigate Airports Without the Stress
-            </h1>
+            <RotatingHeading />
           </div>
 
           {/* Booking Widget */}
