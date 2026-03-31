@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 
-const rotatingWords = ['in Comfort', 'in Style', 'Securely', 'Fast']
+const rotatingWords = ['in Comfort', 'in Style', 'in Luxury', 'with Ease', 'Like a VIP', 'Without Queues', 'with Confidence', 'Fast']
 
 export function RotatingHeading() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
