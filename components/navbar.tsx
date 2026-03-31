@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Menu, X, ChevronDown, Globe, DollarSign, LogIn } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SignInModal } from "@/components/signin-modal"
+import { EnhancedDropdownContent, AIRPORT_SERVICES_ITEMS, VIP_PLATINUM_ITEMS, FOR_BUSINESS_ITEMS } from "@/components/enhanced-dropdown"
 
 const LANGUAGES = [
   { code: "en", flag: "🇬🇧", label: "English" },
@@ -146,6 +147,18 @@ function DesktopDropdown({ item }: { item: NavItem }) {
     )
   }
 
+  // Check if this is an enhanced dropdown
+  const isEnhanced = item.label === "Airport Services" || item.label === "VIP Platinum" || item.label === "For Business"
+  let enhancedItems = []
+  
+  if (item.label === "Airport Services") {
+    enhancedItems = AIRPORT_SERVICES_ITEMS
+  } else if (item.label === "VIP Platinum") {
+    enhancedItems = VIP_PLATINUM_ITEMS
+  } else if (item.label === "For Business") {
+    enhancedItems = FOR_BUSINESS_ITEMS
+  }
+
   return (
     <div
       ref={containerRef}
@@ -169,29 +182,33 @@ function DesktopDropdown({ item }: { item: NavItem }) {
         />
       </button>
 
-      <div
-        className={cn(
-          "absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 transition-all duration-200",
-          open
-            ? "pointer-events-auto translate-y-0 opacity-100"
-            : "pointer-events-none -translate-y-1 opacity-0"
-        )}
-      >
-        <div className="min-w-[220px] overflow-hidden rounded-xl border border-border bg-background shadow-lg shadow-foreground/5">
-          <div className="p-1.5">
-            {item.children.map((child) => (
-              <a
-                key={child.label}
-                href={child.href}
-                onClick={() => setOpen(false)}
-                className="flex items-center rounded-lg px-3.5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary hover:text-gold"
-              >
-                {child.label}
-              </a>
-            ))}
+      {isEnhanced ? (
+        <EnhancedDropdownContent items={enhancedItems} isOpen={open} />
+      ) : (
+        <div
+          className={cn(
+            "absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 transition-all duration-200",
+            open
+              ? "pointer-events-auto translate-y-0 opacity-100"
+              : "pointer-events-none -translate-y-1 opacity-0"
+          )}
+        >
+          <div className="min-w-[220px] overflow-hidden rounded-xl border border-border bg-background shadow-lg shadow-foreground/5">
+            <div className="p-1.5">
+              {item.children.map((child) => (
+                <a
+                  key={child.label}
+                  href={child.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center rounded-lg px-3.5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary hover:text-gold"
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
