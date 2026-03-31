@@ -1,6 +1,6 @@
 'use client'
 
-import { HandWaving, Zap, Suitcase, Car, Wheelchair, Scooter, Crown, Star, Coffee, Diamond, Building2, Plane, UsersThree } from 'lucide-react'
+import { HandWaving, Zap, Briefcase, Car, Users, Gift, Crown, Star, Coffee, Gem, Building2, Plane } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface DropdownItemConfig {
@@ -72,7 +72,7 @@ export const AIRPORT_SERVICES_ITEMS: DropdownItemConfig[] = [
     label: 'Luggage Assistance',
     description: 'Professional baggage handling',
     href: '#features',
-    icon: <Suitcase size={24} weight="thin" />
+    icon: <Briefcase size={24} weight="thin" />
   },
   {
     label: 'Hotel Transfer',
@@ -84,13 +84,13 @@ export const AIRPORT_SERVICES_ITEMS: DropdownItemConfig[] = [
     label: 'Special Needs',
     description: 'Accessibility and mobility support',
     href: '#services',
-    icon: <Wheelchair size={24} weight="thin" />
+    icon: <Gift size={24} weight="thin" />
   },
   {
     label: 'Airport Buggy',
     description: 'Electric cart terminal transport',
     href: '#services',
-    icon: <Scooter size={24} weight="thin" />
+    icon: <Users size={24} weight="thin" />
   },
 ]
 
@@ -117,7 +117,7 @@ export const VIP_PLATINUM_ITEMS: DropdownItemConfig[] = [
     label: 'VIP Exclusive Suite',
     description: 'Ultimate privacy and luxury',
     href: '#experience',
-    icon: <Diamond size={24} weight="thin" />
+    icon: <Gem size={24} weight="thin" />
   },
 ]
 
@@ -138,6 +138,6 @@ export const FOR_BUSINESS_ITEMS: DropdownItemConfig[] = [
     label: 'Services for Groups',
     description: 'Group bookings and events',
     href: '#features',
-    icon: <UsersThree size={24} weight="thin" />
+    icon: <Users size={24} weight="thin" />
   },
 ]
