@@ -1,6 +1,6 @@
 'use client'
 
-import { Handshake, Zap, Suitcase, Car, Users, Gift, Crown, Star, Coffee, Diamond, Building, Airplane } from '@phosphor-icons/react'
+import { Handshake, AirplaneLanding, Suitcase, Car, Users, Gift, Crown, Star, Coffee, Shield, Building, Airplane } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 interface DropdownItemConfig {
@@ -66,7 +66,7 @@ export const AIRPORT_SERVICES_ITEMS: DropdownItemConfig[] = [
     label: 'Fast Track',
     description: 'Skip security and immigration queues',
     href: '#services',
-    icon: <Zap size={24} weight="thin" />
+    icon: <AirplaneLanding size={24} weight="thin" />
   },
   {
     label: 'Luggage Assistance',
@@ -117,7 +117,7 @@ export const VIP_PLATINUM_ITEMS: DropdownItemConfig[] = [
     label: 'VIP Exclusive Suite',
     description: 'Ultimate privacy and luxury',
     href: '#experience',
-    icon: <Diamond size={24} weight="thin" />
+    icon: <Shield size={24} weight="thin" />
   },
 ]
 
