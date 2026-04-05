@@ -32,7 +32,7 @@ const DISCOVER_CARDS = [
 
 export function DiscoverMoreSection() {
   return (
-    <section className="py-10 md:py-16 px-4 md:px-8" style={{ backgroundColor: '#F0F2F5' }}>
+    <section className="py-10 md:py-16 px-1 md:px-8" style={{ backgroundColor: '#F0F2F5' }}>
       <div className="mx-auto max-w-7xl">
         {/* Heading */}
         <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-12">

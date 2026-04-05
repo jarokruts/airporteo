@@ -15,7 +15,7 @@ export function RelatedServices({ relatedSlugs }: RelatedServicesProps) {
   if (services.length === 0) return null
 
   return (
-    <section className="py-10 md:py-16 px-4 md:px-8 bg-white">
+    <section className="py-10 md:py-16 px-1 md:px-8 bg-white">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Explore Our Other Services</h2>

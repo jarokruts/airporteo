@@ -12,7 +12,7 @@ export function AirportTerminals({ airport }: AirportTerminalsProps) {
   const [expandedTerminal, setExpandedTerminal] = useState<number>(0)
 
   return (
-    <section className="py-8 md:py-16 px-5 lg:px-8 bg-secondary">
+    <section className="py-8 md:py-16 px-1 lg:px-8 bg-secondary">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 md:mb-12">
           <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
