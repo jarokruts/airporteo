@@ -112,7 +112,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Airports",
-    href: "#trust",
+    href: "/airports",
   },
   {
     label: "For Business",
