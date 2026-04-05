@@ -52,11 +52,11 @@ const TOP_AIRPORTS = [
 ]
 
 const ABOUT_LINKS = [
-  'About Airporteo',
-  'How It Works',
-  'Blog',
-  'FAQ',
-  'Press',
+  { label: 'About Airporteo', href: '/about' },
+  { label: 'How It Works', href: '#' },
+  { label: 'Blog', href: '#' },
+  { label: 'FAQ', href: '#' },
+  { label: 'Press', href: '#' },
 ]
 
 const ABOUT_PARTNERS = [
@@ -372,11 +372,11 @@ export function Footer() {
               {ABOUT_LINKS.map((link, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={typeof link === 'string' ? '#' : link.href}
                   style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
                   className="block hover:text-white hover:pl-1 transition-all"
                 >
-                  {link}
+                  {typeof link === 'string' ? link : link.label}
                 </a>
               ))}
             </div>
