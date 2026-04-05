@@ -8,7 +8,7 @@ interface ServicePricingCompactProps {
 
 export function ServicePricingCompact({ service }: ServicePricingCompactProps) {
   return (
-    <section className="bg-white py-10 md:py-16 px-1 md:px-8">
+    <section className="bg-white py-10 md:py-16 px-4 md:px-8">
       <div className="mx-auto max-w-7xl text-center">
         {/* CTA Button */}
         <button
