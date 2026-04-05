@@ -136,6 +136,12 @@ export function SolariBackground() {
         const inner = charEl.querySelector(".char-inner") as HTMLElement;
         if (!inner) return;
 
+        // Handle space character separately
+        if (targetChar === " ") {
+          inner.textContent = " ";
+          return;
+        }
+
         let ci = 0;
         let ti = CHARS.indexOf(targetChar);
         if (ti === -1) ti = 0;
