@@ -9,7 +9,7 @@ interface ServiceBookingProps {
 
 export function ServiceBooking({ service }: ServiceBookingProps) {
   return (
-    <section id="booking" className="py-10 md:py-16 px-4 md:px-8 bg-gray-50">
+    <section id="booking" className="py-10 md:py-16 px-1 md:px-8 bg-gray-50">
       <div className="mx-auto max-w-4xl">
         <div className="mb-12 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-[var(--navy)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>

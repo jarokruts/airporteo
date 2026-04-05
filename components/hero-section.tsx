@@ -7,17 +7,17 @@ export function HeroSection() {
   return (
     <section id="hero" className="relative" style={{ backgroundColor: 'var(--hero-navy)' }}>
       <SolariBackground />
-      <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
+      <div className="relative mx-auto max-w-7xl">
 
         {/* ── MOBILE LAYOUT ── */}
-        <div className="block sm:hidden pt-4 pb-8 flex flex-col items-center">
+        <div className="block sm:hidden pt-4 pb-8 px-1 flex flex-col items-center">
           <div className="rounded-2xl bg-white shadow-2xl shadow-black/40 overflow-visible w-full" style={{ position: 'relative', zIndex: 9999, isolation: 'isolate', borderRadius: '16px', WebkitMaskImage: 'radial-gradient(white, white)', WebkitBackfaceVisibility: 'hidden', MozBackfaceVisibility: 'hidden', transform: 'translateZ(0)' }}>
             <BookingWidget />
           </div>
         </div>
 
         {/* ── DESKTOP LAYOUT ── */}
-        <div className="hidden sm:flex flex-col gap-4 py-8">
+        <div className="hidden sm:flex flex-col gap-4 py-8 px-5 lg:px-8">
 
           {/* Headline */}
           <div className="max-w-3xl">

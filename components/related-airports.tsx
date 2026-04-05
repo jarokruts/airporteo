@@ -14,7 +14,7 @@ export function RelatedAirports({ currentAirportCode }: RelatedAirportsProps) {
   const relatedAirports = getRelatedAirports(currentAirportCode, 6)
 
   return (
-    <section className="py-8 md:py-16 px-5 lg:px-8 bg-background">
+    <section className="py-8 md:py-16 px-1 lg:px-8 bg-background">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 md:mb-12">
           <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">

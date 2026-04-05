@@ -9,7 +9,7 @@ interface CustomQuoteCTAProps {
 
 export function CustomQuoteCTA({ airportName }: CustomQuoteCTAProps) {
   return (
-    <section className="py-8 md:py-16 px-5 lg:px-8 bg-gradient-to-r from-navy to-blue">
+    <section className="py-8 md:py-16 px-1 lg:px-8 bg-gradient-to-r from-navy to-blue">
       <div className="mx-auto max-w-4xl">
         <div className="text-center">
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4">
