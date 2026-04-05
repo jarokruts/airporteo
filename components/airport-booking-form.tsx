@@ -993,8 +993,18 @@ function BottomSheet({
 
 export function AirportBookingForm({ airport, preSelectedService }: AirportBookingFormProps) {
   const router = useRouter()
+  const serviceOptions = ['Meet & Greet', 'VIP Platinum', 'Hotel Transfer']
+  
+  // Ensure preSelectedService is one of the valid options, otherwise default to 'Meet & Greet'
+  const getInitialService = () => {
+    if (preSelectedService && serviceOptions.includes(preSelectedService)) {
+      return preSelectedService
+    }
+    return 'Meet & Greet'
+  }
+  
   const [direction, setDirection] = useState('Arrival')
-  const [service, setService] = useState(preSelectedService || 'Meet & Greet')
+  const [service, setService] = useState(getInitialService())
   const [airportValue, setAirportValue] = useState(airport.code ? `${airport.city} ${airport.code}` : '')
   const [flightNumber, setFlightNumber] = useState('')
   const [connectionFlightNumber, setConnectionFlightNumber] = useState('')
@@ -1010,9 +1020,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
   const [showPassengersDropdown, setShowPassengersDropdown] = useState(false)
   const dateButtonRef = useRef<HTMLButtonElement>(null)
   const passengersButtonRef = useRef<HTMLButtonElement>(null)
-
   const directionOptions = ['Arrival', 'Departure', 'Connection']
-  const serviceOptions = ['Meet & Greet', 'VIP Platinum', 'Hotel Transfer']
 
   // Compute filtered options based on current selections
   const getFilteredServiceOptions = () => {
