@@ -29,7 +29,7 @@ export function RelatedServices({ relatedSlugs }: RelatedServicesProps) {
             return (
               <Link
                 key={service.id}
-                href={`/service/${service.slug}`}
+                href={`/services/${service.slug}`}
                 className="group p-6 border border-border rounded-xl hover:shadow-lg hover:border-[var(--gold)] transition-all"
               >
                 <div className="mb-4 flex items-center justify-between">
