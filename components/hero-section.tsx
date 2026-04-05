@@ -25,7 +25,7 @@ export function HeroSection() {
           </div>
 
           {/* Booking Widget */}
-          <div className="w-full">
+          <div className="w-full" style={{ maxWidth: '100%' }}>
             <div className="overflow-visible rounded-2xl border border-white/10 bg-background shadow-2xl shadow-black/40">
               <div className="flex border-b border-border px-5 py-3.5 items-center justify-between">
                 <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Search for Your Airport Service</h2>

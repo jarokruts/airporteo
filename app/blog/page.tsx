@@ -134,14 +134,14 @@ export default function BlogPage() {
       />
 
       {/* Blog Grid Section */}
-      <main className="flex-1 w-full mx-auto max-w-6xl">
+      <main className="flex-1 w-full mx-auto max-w-7xl">
         <div
           className="blog-grid"
           style={{
             display: 'grid',
             gap: '24px',
             padding: '40px 24px 60px',
-            maxWidth: '1200px',
+            maxWidth: '100%',
             margin: '0 auto',
             width: '100%',
           }}
@@ -171,7 +171,7 @@ export default function BlogPage() {
           grid-template-columns: repeat(3, 1fr) !important;
           gap: 24px;
           padding: 40px 24px 60px;
-          max-width: 1200px;
+          max-width: 100%;
           margin: 0 auto;
           width: 100%;
         }
