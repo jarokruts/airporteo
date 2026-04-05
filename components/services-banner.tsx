@@ -46,8 +46,8 @@ const services = [
 
 export function ServicesBanner() {
   return (
-    <section className="py-8 md:py-12 px-5 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section className="py-8 md:py-12">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div
           className="rounded-2xl p-6 md:p-12 flex flex-col lg:flex-row gap-6 md:gap-12 items-start lg:items-center"
           style={{
