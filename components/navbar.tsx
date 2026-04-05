@@ -90,14 +90,14 @@ function TopBarDropdown({
 const NAV_ITEMS: NavItem[] = [
   {
     label: "Airport Services",
-    href: "/service",
+    href: "/services",
     children: [
-      { label: "Meet & Greet", href: "/service/meet-and-greet" },
-      { label: "Fast Track Lane", href: "/service/fast-track" },
-      { label: "Luggage Assistance", href: "/service/luggage" },
-      { label: "Golf Cart & Buggy", href: "/service/buggy" },
-      { label: "Special Needs", href: "/service/special" },
-      { label: "Private Car Transfers", href: "/service/transfers" },
+      { label: "Meet & Greet", href: "/services/meet-and-greet" },
+      { label: "Fast Track Lane", href: "/services/fast-track" },
+      { label: "Luggage Assistance", href: "/services/luggage" },
+      { label: "Golf Cart & Buggy", href: "/services/buggy" },
+      { label: "Special Needs", href: "/services/special" },
+      { label: "Private Car Transfers", href: "/services/transfers" },
     ],
   },
   {
