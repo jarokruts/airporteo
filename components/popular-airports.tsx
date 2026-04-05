@@ -43,7 +43,7 @@ const AIRPORTS = [
 export function PopularAirports() {
   return (
     <section className="bg-secondary py-10 md:py-12">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Heading */}
         <div className="mb-8 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-gold">

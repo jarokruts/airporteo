@@ -19,7 +19,7 @@ const airlines = [
 export function AirlinesSection() {
   return (
     <section className="py-14 bg-secondary overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 mb-10 text-center">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 mb-10 text-center">
         <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
           Partnered with leading airlines worldwide
         </h2>

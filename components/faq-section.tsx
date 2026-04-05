@@ -105,7 +105,7 @@ export function FAQSection() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="mx-auto max-w-4xl px-4 md:px-5 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
         {/* Header */}
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 md:mb-8">
           FAQs

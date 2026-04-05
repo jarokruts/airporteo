@@ -134,7 +134,7 @@ export default function ServicesPage() {
 
         {/* CTA Section */}
         <section className="py-10 md:py-16 px-4 md:px-8 bg-[var(--navy)] text-white">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className="mx-auto max-w-7xl text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Transform Your Airport Experience?
             </h2>
