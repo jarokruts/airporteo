@@ -414,13 +414,7 @@ export function Footer() {
                   color: 'rgba(255,255,255,0.55)',
                   transition: 'color 200ms ease-in-out'
                 }}
-                className="hover:text-white"
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'white'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.55)'
-                }}
+                className="hover:text-white hover:pl-1 transition-all"
               >
                 {link}
               </a>
