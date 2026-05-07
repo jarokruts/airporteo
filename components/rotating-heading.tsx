@@ -21,7 +21,13 @@ export function RotatingHeading() {
   }, [])
 
   return (
-    <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-white lg:text-3xl">
+    <h1 className="text-white lg:text-3xl" style={{ 
+      fontSize: 'var(--font-heading)',
+      lineHeight: 'var(--font-heading-line-height)',
+      fontWeight: 'var(--font-heading-weight)',
+      letterSpacing: 'tight',
+      fontFamily: 'var(--font-dm-sans)'
+    }}>
       Navigate Airports{' '}
       <span
         style={{
