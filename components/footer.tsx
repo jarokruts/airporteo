@@ -291,7 +291,7 @@ export function Footer() {
                     style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
                     className="block hover:text-white hover:translate-x-1 transition-all"
                   >
-                    {item}
+                    {service}
                   </a>
               ))}
             </div>
@@ -305,7 +305,7 @@ export function Footer() {
                     key={i}
                     href="#"
                     style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
-                    className="block hover:text-white hover:pl-1 transition-all"
+                    className="block hover:text-white hover:translate-x-1 transition-all"
                   >
                     {item}
                   </a>
