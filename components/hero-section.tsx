@@ -29,17 +29,20 @@ export function HeroSection() {
             <div className="overflow-visible rounded-2xl border border-white/10 bg-background shadow-2xl shadow-black/40">
               <div className="flex border-b border-border px-5 py-3.5 items-center justify-between">
                 <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Search for Your Airport Service</h2>
-                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                  Instant confirmation in selected airports
+                <div className="inline-flex items-center gap-2" style={{ background: 'rgba(184, 145, 58, 0.1)', padding: 'var(--space-2) var(--space-4)', borderRadius: '999px' }}>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 14.5C11.5899 14.5 14.5 11.5899 14.5 8C14.5 4.41015 11.5899 1.5 8 1.5C4.41015 1.5 1.5 4.41015 1.5 8C1.5 11.5899 4.41015 14.5 8 14.5Z" stroke="#1D215E" strokeWidth="1.5" fill="none"/>
+                    <path d="M5.5 8L7 9.5L10.5 5.5" stroke="#1D215E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span style={{ fontSize: '13px', fontWeight: '500', color: '#1D215E' }}>Instant confirmation in selected airports</span>
                 </div>
               </div>
               <BookingWidget />
             </div>
           </div>
 
-          {/* Stats row */}
-          <div className="flex items-center pb-4">
+          {/* Stats row - with improved integration */}
+          <div className="flex items-center pt-var(--space-12) border-t border-white/10" style={{ paddingTop: 'var(--space-12)' }}>
             {[
               { value: "27K+", label: "Happy travellers" },
               { value: "200+", label: "Airports served" },

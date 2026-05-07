@@ -285,14 +285,14 @@ export function Footer() {
             </h3>
             <div className="space-y-2 mb-4">
               {SERVICES.map((service, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
-                  className="block hover:text-white hover:pl-1 transition-all"
-                >
-                  {service}
-                </a>
+                  <a
+                    key={i}
+                    href="#"
+                    style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                    className="block hover:text-white hover:translate-x-1 transition-all"
+                  >
+                    {service}
+                  </a>
               ))}
             </div>
             <div className="pt-4 border-t border-[rgba(255,255,255,0.08)]">
@@ -305,7 +305,7 @@ export function Footer() {
                     key={i}
                     href="#"
                     style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
-                    className="block hover:text-white hover:pl-1 transition-all"
+                    className="block hover:text-white hover:translate-x-1 transition-all"
                   >
                     {item}
                   </a>
@@ -336,14 +336,14 @@ export function Footer() {
             </h3>
             <div className="space-y-2">
               {TOP_AIRPORTS.map((airport, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
-                  className="block hover:text-white hover:pl-1 transition-all"
-                >
-                  {airport}
-                </a>
+              <a
+                key={i}
+                href="#"
+                style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                className="block hover:text-white hover:translate-x-1 transition-all"
+              >
+                {airport}
+              </a>
               ))}
             </div>
           </div>
@@ -374,7 +374,7 @@ export function Footer() {
                   key={i}
                   href={typeof link === 'string' ? '#' : link.href}
                   style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
-                  className="block hover:text-white hover:pl-1 transition-all"
+                  className="block hover:text-white hover:translate-x-1 transition-all"
                 >
                   {typeof link === 'string' ? link : link.label}
                 </a>
@@ -408,8 +408,12 @@ export function Footer() {
               <a
                 key={i}
                 href="#"
-                style={{ fontSize: '13px', fontWeight: '400', color: 'rgba(255,255,255,0.55)' }}
-                className="hover:text-white transition-colors"
+                style={{ 
+                  fontSize: '13px', 
+                  fontWeight: '400', 
+                  color: 'rgba(255,255,255,0.55)'
+                }}
+                className="hover:text-white hover:translate-x-1 transition-all"
               >
                 {link}
               </a>
@@ -446,18 +450,10 @@ export function Footer() {
         </div>
 
         {/* Copyright Row */}
-        <div className="py-5 md:flex md:items-center md:justify-between flex-col md:flex-row gap-4 md:gap-0 border-t border-[rgba(255,255,255,0.04)] text-center md:text-left">
+        <div className="py-5 text-center border-t border-[rgba(255,255,255,0.04)]">
           <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)' }}>
             © 2026 Airporteo Tourism W.L.L. — All rights reserved
           </p>
-          <div className="flex items-center justify-center md:justify-end gap-2">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} weight="fill" className="text-[#f5c518]" />
-            ))}
-            <a href="#" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }} className="hover:text-white transition-colors ml-2">
-              Reviews on Trustpilot & Google
-            </a>
-          </div>
         </div>
       </div>
 

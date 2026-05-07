@@ -84,9 +84,9 @@ export default function ServicesPage() {
         <ServicesSolariBoard />
 
         {/* Section 3: Service Cards Grid */}
-        <section className="bg-white py-10 md:py-16 px-4 md:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid md:grid-cols-3 gap-8">
+        <section className="bg-white py-10 md:py-16 px-4 md:px-6 lg:px-4">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
                   name: 'Meet & Greet',

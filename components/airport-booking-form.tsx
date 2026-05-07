@@ -1056,107 +1056,145 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
   }
 
   return (
-    <div className="bg-white rounded-2xl p-4 md:p-6 space-y-2" style={{ overflow: 'visible' }}>
+    <div className="bg-white rounded-2xl p-4 md:p-6 space-y-4" style={{ overflow: 'visible' }}>
       {/* Row 1: Direction + Service - Two separate equal-width dropdowns */}
-      <div style={{ display: 'flex', gap: '12px' }}>
-        <SimpleDropdown 
-          value={direction}
-          onChange={handleDirectionChange}
-          options={getFilteredDirectionOptions()}
-          label="Direction"
-        />
-        <SimpleDropdown 
-          value={service}
-          onChange={handleServiceChange}
-          options={getFilteredServiceOptions()}
-          label="Service"
-        />
+      <div>
+        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
+          Direction
+        </label>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <SimpleDropdown 
+            value={direction}
+            onChange={handleDirectionChange}
+            options={getFilteredDirectionOptions()}
+            label="Direction"
+          />
+          <div style={{ flex: 1 }}>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
+              Service Type
+            </label>
+            <SimpleDropdown 
+              value={service}
+              onChange={handleServiceChange}
+              options={getFilteredServiceOptions()}
+              label="Service"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Row 2: Airport field with autocomplete search */}
-      <AirportSearchField value={airportValue} onChange={setAirportValue} direction={direction} />
+      <div>
+        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
+          Select Airport
+        </label>
+        <AirportSearchField value={airportValue} onChange={setAirportValue} direction={direction} />
+      </div>
 
       {/* Row 3: Flight # - splits into two fields for Connection */}
       {direction !== 'Connection' ? (
-        <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
-          <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
-          <input
-            type="text"
-            value={flightNumber}
-            onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
-            placeholder="e.g. BA206"
-            maxLength={6}
-            style={{
-              marginLeft: '8px',
-              flex: 1,
-              minWidth: 0,
-              background: 'transparent',
-              border: 'none',
-              outline: 'none',
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#1D215E',
-              padding: 0
-            }}
-          />
-        </div>
-      ) : (
-        <>
-          {/* Arrival Flight # for Connection */}
-          <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-            <AirplaneLanding size={16} weight="light" color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+        <div>
+          <label htmlFor="flight-number" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
+            Enter Flight Number
+          </label>
+          <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
+            <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
             <input
+              id="flight-number"
               type="text"
               value={flightNumber}
               onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
-              placeholder="Arrival Flight #"
+              placeholder="e.g. BA206"
               maxLength={6}
               style={{
-                width:'100%',
-                height:'40px',
-                paddingLeft:'36px',
-                border:'1px solid #E2E8F0',
-                borderRadius:'10px',
-                fontSize:'16px',
+                marginLeft: '8px',
+                flex: 1,
+                minWidth: 0,
+                background: 'transparent',
+                border: 'none',
+                outline: 'none',
+                fontSize: '14px',
                 fontWeight: 500,
                 color: '#1D215E',
-                backgroundColor: 'white',
-                boxSizing: 'border-box',
-                fontFamily: 'DM Sans, sans-serif'
+                padding: 0
               }}
             />
           </div>
-          
-          {/* Departure Flight # for Connection */}
-          <div style={{position:'relative', display:'flex', alignItems:'center'}}>
-            <AirplaneTakeoff weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
-            <input
-              type="text"
-              value={connectionFlightNumber}
-              onChange={(e) => setConnectionFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
-              placeholder="Departure Flight #"
-              maxLength={6}
-              style={{
-                width:'100%',
-                height:'40px',
-                paddingLeft:'36px',
-                border:'1px solid #E2E8F0',
-                borderRadius:'10px',
-                fontSize:'16px',
-                fontWeight: 500,
-                color: '#1D215E',
-                backgroundColor: 'white',
-                boxSizing: 'border-box',
-                fontFamily: 'DM Sans, sans-serif'
-              }}
-            />
-          </div>
-        </>
+        </div>
+      ) : (
+        <div>
+          <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
+            Enter Flight Numbers
+          </label>
+          <>
+            {/* Arrival Flight # for Connection */}
+            <div style={{position:'relative', display:'flex', alignItems:'center', marginBottom: '12px'}}>
+              <label htmlFor="arrival-flight" style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}>
+                Arrival Flight Number
+              </label>
+              <AirplaneLanding size={16} weight="light" color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+              <input
+                id="arrival-flight"
+                type="text"
+                value={flightNumber}
+                onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+                placeholder="Arrival Flight #"
+                maxLength={6}
+                style={{
+                  width:'100%',
+                  height:'40px',
+                  paddingLeft:'36px',
+                  border:'1px solid #E2E8F0',
+                  borderRadius:'10px',
+                  fontSize:'16px',
+                  fontWeight: 500,
+                  color: '#1D215E',
+                  backgroundColor: 'white',
+                  boxSizing: 'border-box',
+                  fontFamily: 'DM Sans, sans-serif'
+                }}
+              />
+            </div>
+            
+            {/* Departure Flight # for Connection */}
+            <div style={{position:'relative', display:'flex', alignItems:'center'}}>
+              <label htmlFor="departure-flight" style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}>
+                Departure Flight Number
+              </label>
+              <AirplaneTakeoff weight="light" size={16} color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
+              <input
+                id="departure-flight"
+                type="text"
+                value={connectionFlightNumber}
+                onChange={(e) => setConnectionFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
+                placeholder="Departure Flight #"
+                maxLength={6}
+                style={{
+                  width:'100%',
+                  height:'40px',
+                  paddingLeft:'36px',
+                  border:'1px solid #E2E8F0',
+                  borderRadius:'10px',
+                  fontSize:'16px',
+                  fontWeight: 500,
+                  color: '#1D215E',
+                  backgroundColor: 'white',
+                  boxSizing: 'border-box',
+                  fontFamily: 'DM Sans, sans-serif'
+                }}
+              />
+            </div>
+          </>
+        </div>
       )}
 
       {/* Row 4: Date */}
       <div style={{ position: 'relative', width: '100%' }}>
+        <label htmlFor="date-picker" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
+          Travel Date
+        </label>
         <button
+          id="date-picker"
           ref={dateButtonRef}
           type="button"
           onClick={() => setShowDatePicker(!showDatePicker)}
@@ -1194,7 +1232,11 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
 
       {/* Row 5: Passengers + Luggage */}
       <div style={{ position: 'relative', width: '100%' }}>
+        <label htmlFor="passengers-luggage" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
+          Passengers & Luggage
+        </label>
         <button
+          id="passengers-luggage"
           ref={passengersButtonRef}
           type="button"
           onClick={() => setShowPassengersDropdown(!showPassengersDropdown)}
@@ -1247,11 +1289,16 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
       </div>
 
       {/* Row 6: Email */}
-      <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
-        <Envelope size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0, marginRight: '6px' }} />
-        <input
-          type="email"
-          value={email}
+      <div>
+        <label htmlFor="email-input" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
+          Email Address
+        </label>
+        <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
+          <Envelope size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0, marginRight: '6px' }} />
+          <input
+            id="email-input"
+            type="email"
+            value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           style={{
@@ -1323,7 +1370,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             transition: 'background 300ms ease'
           }}
         >
-          Get a Quote
+          Get Your Free Quote
         </button>
       </div>
     </div>

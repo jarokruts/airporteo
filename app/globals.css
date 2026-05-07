@@ -7,6 +7,30 @@
   --font-playfair: 'Playfair Display', serif;
   --font-dm-sans: 'DM Sans', sans-serif;
   --font-inter: 'Inter', sans-serif;
+  
+  /* Typography scale - standardized to 3 sizes */
+  --font-heading: 32px;
+  --font-heading-line-height: 1.2;
+  --font-heading-weight: 700;
+  
+  --font-subheading: 20px;
+  --font-subheading-line-height: 1.4;
+  --font-subheading-weight: 600;
+  
+  --font-body: 16px;
+  --font-body-line-height: 1.5;
+  --font-body-weight: 400;
+  
+  /* Spacing scale - 4px increments */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  
   /* Brand: Deep Blue #1D215E + Gold #B8913A + White */
   --background: #ffffff;
   --foreground: #1D215E;

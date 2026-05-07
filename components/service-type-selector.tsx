@@ -53,41 +53,99 @@ export function ServiceTypeSelector({ value, onChange }: ServiceTypeSelectorProp
               key={type}
               type="button"
               onClick={() => onChange(type)}
-              className={cn(
-                "group relative flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all duration-200",
-                isSelected
-                  ? "border-blue bg-blue-light shadow-sm"
-                  : "border-border bg-card hover:border-slate-light hover:bg-secondary"
-              )}
               aria-pressed={isSelected}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '16px',
+                borderRadius: '12px',
+                border: isSelected ? '1px solid #21245b' : '1px solid #E5E7EB',
+                background: isSelected ? '#21245b' : 'transparent',
+                cursor: 'pointer',
+                transition: 'all 200ms ease-in-out',
+                position: 'relative',
+                boxShadow: isSelected ? 'inset 0 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                outline: 'none'
+              }}
+              onMouseEnter={(e) => {
+                if (!isSelected) {
+                  (e.currentTarget as HTMLButtonElement).style.background = 'rgba(184, 145, 58, 0.08)'
+                  e.currentTarget.style.borderColor = '#C9AF5A'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isSelected) {
+                  (e.currentTarget as HTMLButtonElement).style.background = 'transparent'
+                  e.currentTarget.style.borderColor = '#E5E7EB'
+                }
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.outline = '2px solid #B8913A'
+                e.currentTarget.style.outlineOffset = '2px'
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.outline = 'none'
+              }}
             >
+              {/* Icon container */}
               <div
-                className={cn(
-                  "flex h-11 w-11 items-center justify-center rounded-lg transition-all duration-200",
-                  isSelected
-                    ? "bg-blue text-primary-foreground"
-                    : "bg-secondary text-muted-foreground group-hover:text-foreground"
-                )}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '44px',
+                  width: '44px',
+                  borderRadius: '8px',
+                  background: isSelected ? '#FFFFFF' : '#f0f1f8',
+                  color: isSelected ? '#21245b' : '#6b6e94',
+                  transition: 'all 200ms ease-in-out'
+                }}
               >
                 <Icon size={20} weight="light" />
               </div>
-              <div className="text-center">
+              
+              {/* Text container */}
+              <div style={{ textAlign: 'center' }}>
                 <p
-                  className={cn(
-                    "text-sm font-semibold transition-colors",
-                    isSelected ? "text-blue" : "text-foreground"
-                  )}
+                  style={{
+                    fontSize: 'var(--font-body)',
+                    fontWeight: '600',
+                    lineHeight: 'var(--font-body-line-height)',
+                    color: isSelected ? '#FFFFFF' : '#1D215E',
+                    margin: 0,
+                    transition: 'color 200ms ease-in-out'
+                  }}
                 >
                   {label}
                 </p>
-                <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
+                <p 
+                  style={{
+                    fontSize: '13px',
+                    lineHeight: '1.4',
+                    color: isSelected ? 'rgba(255, 255, 255, 0.8)' : '#6b6e94',
+                    margin: '4px 0 0 0',
+                    transition: 'color 200ms ease-in-out'
+                  }}
+                >
+                  {desc}
+                </p>
               </div>
+              
+              {/* Bottom border accent for selected */}
               {isSelected && (
-                <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-blue">
-                  <svg className="h-3 w-3 text-primary-foreground" viewBox="0 0 12 12" fill="none">
-                    <path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    background: '#B8913A',
+                    borderRadius: '0 0 12px 12px'
+                  }}
+                />
               )}
             </button>
           )
