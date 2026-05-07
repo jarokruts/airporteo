@@ -408,7 +408,12 @@ export function Footer() {
               <a
                 key={i}
                 href="#"
-                style={{ fontSize: '13px', fontWeight: '400', color: 'rgba(255,255,255,0.55)' }}
+                style={{ 
+                  fontSize: '13px', 
+                  fontWeight: '400', 
+                  color: link === 'Terms & Conditions' ? '#7A6A2F' : 'rgba(255,255,255,0.55)',
+                  textDecoration: link === 'Terms & Conditions' ? 'underline' : 'none'
+                }}
                 className="hover:text-white transition-colors"
               >
                 {link}
