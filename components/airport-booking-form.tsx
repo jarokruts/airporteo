@@ -1299,23 +1299,24 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             id="email-input"
             type="email"
             value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="your@email.com"
-          style={{
-            flex: 1,
-            background: 'transparent',
-            border: 'none',
-            outline: 'none',
-            fontSize: '16px',
-            fontWeight: 500,
-            fontFamily: 'DM Sans, sans-serif',
-            color: '#1D215E',
-            padding: 0,
-            '::placeholder': {
-              color: 'rgba(29, 33, 94, 0.45)'
-            }
-          }}
-        />
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com"
+            style={{
+              flex: 1,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              fontSize: '16px',
+              fontWeight: 500,
+              fontFamily: 'DM Sans, sans-serif',
+              color: '#1D215E',
+              padding: 0,
+              '::placeholder': {
+                color: 'rgba(29, 33, 94, 0.45)'
+              }
+            }}
+          />
+        </div>
       </div>
 
       {/* Row 7: CTA Button */}
