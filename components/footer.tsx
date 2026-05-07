@@ -285,14 +285,14 @@ export function Footer() {
             </h3>
             <div className="space-y-2 mb-4">
               {SERVICES.map((service, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
-                  className="block hover:text-white hover:pl-1 transition-all"
-                >
-                  {service}
-                </a>
+                  <a
+                    key={i}
+                    href="#"
+                    style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                    className="block hover:text-white hover:translate-x-1 transition-all"
+                  >
+                    {item}
+                  </a>
               ))}
             </div>
             <div className="pt-4 border-t border-[rgba(255,255,255,0.08)]">
@@ -336,14 +336,14 @@ export function Footer() {
             </h3>
             <div className="space-y-2">
               {TOP_AIRPORTS.map((airport, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
-                  className="block hover:text-white hover:pl-1 transition-all"
-                >
-                  {airport}
-                </a>
+              <a
+                key={i}
+                href="#"
+                style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
+                className="block hover:text-white hover:translate-x-1 transition-all"
+              >
+                {airport}
+              </a>
               ))}
             </div>
           </div>
@@ -374,7 +374,7 @@ export function Footer() {
                   key={i}
                   href={typeof link === 'string' ? '#' : link.href}
                   style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.7)' }}
-                  className="block hover:text-white hover:pl-1 transition-all"
+                  className="block hover:text-white hover:translate-x-1 transition-all"
                 >
                   {typeof link === 'string' ? link : link.label}
                 </a>
@@ -411,10 +411,9 @@ export function Footer() {
                 style={{ 
                   fontSize: '13px', 
                   fontWeight: '400', 
-                  color: 'rgba(255,255,255,0.55)',
-                  transition: 'color 200ms ease-in-out'
+                  color: 'rgba(255,255,255,0.55)'
                 }}
-                className="hover:text-white hover:pl-1 transition-all"
+                className="hover:text-white hover:translate-x-1 transition-all"
               >
                 {link}
               </a>
