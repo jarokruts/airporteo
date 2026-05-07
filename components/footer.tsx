@@ -411,10 +411,16 @@ export function Footer() {
                 style={{ 
                   fontSize: '13px', 
                   fontWeight: '400', 
-                  color: link === 'Terms & Conditions' ? '#7A6A2F' : 'rgba(255,255,255,0.55)',
-                  textDecoration: link === 'Terms & Conditions' ? 'underline' : 'none'
+                  color: 'rgba(255,255,255,0.55)',
+                  transition: 'color 200ms ease-in-out'
                 }}
-                className="hover:text-white transition-colors"
+                className="hover:text-white"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'white'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.55)'
+                }}
               >
                 {link}
               </a>
