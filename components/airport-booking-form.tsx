@@ -1059,9 +1059,6 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
     <div className="bg-white rounded-2xl p-4 md:p-6 space-y-4" style={{ overflow: 'visible' }}>
       {/* Row 1: Direction + Service - Two separate equal-width dropdowns */}
       <div>
-        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
-          Direction
-        </label>
         <div style={{ display: 'flex', gap: '12px' }}>
           <SimpleDropdown 
             value={direction}
@@ -1070,9 +1067,6 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             label="Direction"
           />
           <div style={{ flex: 1 }}>
-            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
-              Service Type
-            </label>
             <SimpleDropdown 
               value={service}
               onChange={handleServiceChange}
@@ -1085,18 +1079,12 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
 
       {/* Row 2: Airport field with autocomplete search */}
       <div>
-        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
-          Select Airport
-        </label>
         <AirportSearchField value={airportValue} onChange={setAirportValue} direction={direction} />
       </div>
 
       {/* Row 3: Flight # - splits into two fields for Connection */}
       {direction !== 'Connection' ? (
         <div>
-          <label htmlFor="flight-number" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
-            Enter Flight Number
-          </label>
           <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
             <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
             <input
@@ -1123,9 +1111,6 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
         </div>
       ) : (
         <div>
-          <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
-            Enter Flight Numbers
-          </label>
           <>
             {/* Arrival Flight # for Connection */}
             <div style={{position:'relative', display:'flex', alignItems:'center', marginBottom: '12px'}}>
@@ -1190,9 +1175,6 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
 
       {/* Row 4: Date */}
       <div style={{ position: 'relative', width: '100%' }}>
-        <label htmlFor="date-picker" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
-          Travel Date
-        </label>
         <button
           id="date-picker"
           ref={dateButtonRef}
@@ -1232,9 +1214,6 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
 
       {/* Row 5: Passengers + Luggage */}
       <div style={{ position: 'relative', width: '100%' }}>
-        <label htmlFor="passengers-luggage" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
-          Passengers & Luggage
-        </label>
         <button
           id="passengers-luggage"
           ref={passengersButtonRef}
@@ -1290,9 +1269,6 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
 
       {/* Row 6: Email */}
       <div>
-        <label htmlFor="email-input" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1D215E', marginBottom: '6px' }}>
-          Email Address
-        </label>
         <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
           <Envelope size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0, marginRight: '6px' }} />
           <input
