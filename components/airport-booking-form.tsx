@@ -6,7 +6,7 @@ import { Airport } from '@/lib/airports'
 import { useRouter } from 'next/navigation'
 
 interface AirportBookingFormProps {
-  airport: Airport
+  airport?: Airport
   preSelectedService?: string
 }
 
@@ -561,16 +561,28 @@ function PassengersLuggageDropdown({
 function AirportSearchField({
   value,
   onChange,
-  direction = 'Arrival'
+  direction = 'Arrival',
+  autoFocus = false,
+  onConfirmChange
 }: {
   value: string
   onChange: (value: string) => void
   direction?: string
+  autoFocus?: boolean
+  onConfirmChange?: (confirmed: boolean) => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  // Auto-focus the airport field on mount when requested (required first step)
+  useEffect(() => {
+    if (autoFocus) {
+      inputRef.current?.focus({ preventScroll: true })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -597,6 +609,8 @@ function AirportSearchField({
     setQuery('')
     onChange(displayValue)
     setIsOpen(false)
+    // A valid airport was chosen from the dropdown -> confirm it
+    onConfirmChange?.(true)
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -604,6 +618,8 @@ function AirportSearchField({
     setQuery(newValue)
     onChange(newValue)
     setIsOpen(true)
+    // Free-typed text is not a valid selection until chosen from the dropdown
+    onConfirmChange?.(false)
   }
 
   return (
@@ -1003,9 +1019,14 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
     return 'Meet & Greet'
   }
   
+  const hasPreselectedAirport = Boolean(airport?.code)
+
   const [direction, setDirection] = useState('Arrival')
   const [service, setService] = useState(getInitialService())
-  const [airportValue, setAirportValue] = useState(airport.code ? `${airport.city} ${airport.code}` : '')
+  const [airportValue, setAirportValue] = useState(airport?.code ? `${airport.city} ${airport.code}` : '')
+  // Airport selection is the required first step. It is only "confirmed" when a
+  // pre-selected airport exists or one is chosen from the dropdown.
+  const [airportConfirmed, setAirportConfirmed] = useState(hasPreselectedAirport)
   const [flightNumber, setFlightNumber] = useState('')
   const [connectionFlightNumber, setConnectionFlightNumber] = useState('')
   const [date, setDate] = useState('')
@@ -1020,7 +1041,34 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
   const [showPassengersDropdown, setShowPassengersDropdown] = useState(false)
   const dateButtonRef = useRef<HTMLButtonElement>(null)
   const passengersButtonRef = useRef<HTMLButtonElement>(null)
+  const flightInputRef = useRef<HTMLInputElement>(null)
+  const justConfirmedRef = useRef(false)
   const directionOptions = ['Arrival', 'Departure', 'Connection']
+
+  // When an airport is selected from the dropdown, enable the rest of the form
+  // and move focus to the Flight # field.
+  const handleAirportConfirmChange = (confirmed: boolean) => {
+    setAirportConfirmed(confirmed)
+    if (confirmed) {
+      justConfirmedRef.current = true
+    }
+  }
+
+  useEffect(() => {
+    if (airportConfirmed && justConfirmedRef.current) {
+      justConfirmedRef.current = false
+      // Wait for the disabled fields to re-enable before focusing.
+      const id = setTimeout(() => flightInputRef.current?.focus({ preventScroll: true }), 0)
+      return () => clearTimeout(id)
+    }
+  }, [airportConfirmed])
+
+  // Shared style for fields that are gated until an airport is selected.
+  const gatedFieldStyle = (enabled: boolean) => ({
+    opacity: enabled ? 1 : 0.5,
+    pointerEvents: (enabled ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],
+    background: enabled ? 'white' : '#F1F5F9',
+  })
 
   // Compute filtered options based on current selections
   const getFilteredServiceOptions = () => {
@@ -1055,6 +1103,15 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
     }
   }
 
+  // The CTA stays disabled until the airport is confirmed and required fields are filled.
+  const isFormValid =
+    airportConfirmed &&
+    Boolean(airportValue) &&
+    Boolean(date) &&
+    Boolean(email) &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
+    adults >= 1
+
   return (
     <div className="bg-white rounded-2xl p-4 md:p-6 space-y-4" style={{ overflow: 'visible' }}>
       {/* Row 1: Direction + Service - Two separate equal-width dropdowns */}
@@ -1077,20 +1134,33 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
         </div>
       </div>
 
-      {/* Row 2: Airport field with autocomplete search */}
+      {/* Row 2: Airport field with autocomplete search (required first step) */}
       <div>
-        <AirportSearchField value={airportValue} onChange={setAirportValue} direction={direction} />
+        <AirportSearchField
+          value={airportValue}
+          onChange={setAirportValue}
+          direction={direction}
+          autoFocus={!hasPreselectedAirport}
+          onConfirmChange={handleAirportConfirmChange}
+        />
+        {!airportConfirmed && (
+          <p style={{ marginTop: '6px', fontSize: '13px', fontWeight: 500, color: '#B8913A' }}>
+            Start by selecting your airport.
+          </p>
+        )}
       </div>
 
       {/* Row 3: Flight # - splits into two fields for Connection */}
       {direction !== 'Connection' ? (
         <div>
-          <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', background: 'white' }}>
+          <div style={{ display: 'flex', height: '40px', alignItems: 'center', borderRadius: '10px', border: '1px solid #E2E8F0', paddingLeft: '10px', paddingRight: '10px', ...gatedFieldStyle(airportConfirmed) }}>
             <span style={{ fontSize: '14px', fontWeight: 500, color: '#1D215E', flexShrink: 0 }}>Flight #</span>
             <input
+              ref={flightInputRef}
               id="flight-number"
               type="text"
               value={flightNumber}
+              disabled={!airportConfirmed}
               onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
               placeholder="e.g. BA206"
               maxLength={6}
@@ -1119,9 +1189,11 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
               </label>
               <AirplaneLanding size={16} weight="light" color="#1D215E" style={{position:'absolute', left:'12px', zIndex:1}} />
               <input
+                ref={flightInputRef}
                 id="arrival-flight"
                 type="text"
                 value={flightNumber}
+                disabled={!airportConfirmed}
                 onChange={(e) => setFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
                 placeholder="Arrival Flight #"
                 maxLength={6}
@@ -1134,9 +1206,9 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
                   fontSize:'16px',
                   fontWeight: 500,
                   color: '#1D215E',
-                  backgroundColor: 'white',
                   boxSizing: 'border-box',
-                  fontFamily: 'DM Sans, sans-serif'
+                  fontFamily: 'DM Sans, sans-serif',
+                  ...gatedFieldStyle(airportConfirmed)
                 }}
               />
             </div>
@@ -1151,6 +1223,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
                 id="departure-flight"
                 type="text"
                 value={connectionFlightNumber}
+                disabled={!airportConfirmed}
                 onChange={(e) => setConnectionFlightNumber(e.target.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 6))}
                 placeholder="Departure Flight #"
                 maxLength={6}
@@ -1163,9 +1236,9 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
                   fontSize:'16px',
                   fontWeight: 500,
                   color: '#1D215E',
-                  backgroundColor: 'white',
                   boxSizing: 'border-box',
-                  fontFamily: 'DM Sans, sans-serif'
+                  fontFamily: 'DM Sans, sans-serif',
+                  ...gatedFieldStyle(airportConfirmed)
                 }}
               />
             </div>
@@ -1179,6 +1252,7 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
           id="date-picker"
           ref={dateButtonRef}
           type="button"
+          disabled={!airportConfirmed}
           onClick={() => setShowDatePicker(!showDatePicker)}
           style={{
             width: '100%',
@@ -1189,12 +1263,12 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             border: '1px solid #E2E8F0',
             paddingLeft: '10px',
             paddingRight: '10px',
-            background: 'white',
-            cursor: 'pointer',
-            transition: 'all 200ms'
+            cursor: airportConfirmed ? 'pointer' : 'not-allowed',
+            transition: 'all 200ms',
+            ...gatedFieldStyle(airportConfirmed)
           }}
-          onMouseEnter={(e) => !showDatePicker && (e.currentTarget.style.background = '#F5F7FA')}
-          onMouseLeave={(e) => !showDatePicker && (e.currentTarget.style.background = 'white')}
+          onMouseEnter={(e) => airportConfirmed && !showDatePicker && (e.currentTarget.style.background = '#F5F7FA')}
+          onMouseLeave={(e) => airportConfirmed && !showDatePicker && (e.currentTarget.style.background = 'white')}
         >
           <Calendar size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0, marginRight: '6px' }} />
           <span style={{ flex: 1, textAlign: 'left', fontSize: '16px', fontWeight: 500, fontFamily: 'DM Sans, sans-serif', color: date ? '#1D215E' : 'rgba(29, 33, 94, 0.45)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -1269,12 +1343,13 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
 
       {/* Row 6: Email */}
       <div>
-        <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', padding: '0 12px', height: '40px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', borderRadius: '10px', border: '1.5px solid #E2E8F0', padding: '0 12px', height: '40px', ...gatedFieldStyle(airportConfirmed) }}>
           <Envelope size={18} weight="light" style={{ color: 'rgba(29, 33, 94, 0.35)', flexShrink: 0, marginRight: '6px' }} />
           <input
             id="email-input"
             type="email"
             value={email}
+            disabled={!airportConfirmed}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
             style={{
@@ -1299,14 +1374,15 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
       <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>
         <button
           type="button"
+          disabled={!isFormValid}
           onClick={() => {
-            if (airportValue && date && email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && adults >= 1) {
+            if (isFormValid) {
               // Prepare booking data to pass to checkout
               const bookingData = {
                 trip: {
-                  type: tripType,
-                  airport: `${airportValue.split('|')[1]} ${airportValue.split('|')[0]}`,
-                  arrivalFlight: arrivalFlightNumber || '',
+                  type: direction,
+                  airport: airportValue,
+                  arrivalFlight: flightNumber || '',
                   departureFlight: connectionFlightNumber || '',
                   date: new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
                 },
@@ -1341,9 +1417,9 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
             fontSize: '13px',
             fontWeight: 700,
             color: 'white',
-            background: (airportValue && date && email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && adults >= 1) ? '#B8913A' : 'rgba(184, 145, 58, 0.45)',
+            background: isFormValid ? '#B8913A' : 'rgba(184, 145, 58, 0.45)',
             border: 'none',
-            cursor: (airportValue && date && email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && adults >= 1) ? 'pointer' : 'not-allowed',
+            cursor: isFormValid ? 'pointer' : 'not-allowed',
             transition: 'background 300ms ease'
           }}
         >

@@ -9,21 +9,6 @@ interface ServiceBookingFormProps {
 }
 
 export function ServiceBookingForm({ service, preSelectedService }: ServiceBookingFormProps) {
-  // Create a mock airport object without pre-filling
-  const mockAirport = {
-    code: '',
-    name: '',
-    city: '',
-    country: '',
-    description: '',
-    longDescription: '',
-    services: [],
-    facilities: [],
-    reviews: [],
-    reviews_count: 0,
-    rating: 0,
-    featured: false,
-  }
-
-  return <AirportBookingForm airport={mockAirport} preSelectedService={preSelectedService} />
+  // No airport is pre-filled here, so airport selection is the required first step.
+  return <AirportBookingForm preSelectedService={preSelectedService} />
 }

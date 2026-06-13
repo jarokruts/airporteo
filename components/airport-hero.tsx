@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { Airport } from '@/lib/airports'
 import { AirportBookingForm } from './airport-booking-form'
-import { BookingWidget } from './booking-widget'
 
 interface AirportHeroProps {
   airport: Airport
@@ -138,7 +137,7 @@ export function AirportHero({ airport }: AirportHeroProps) {
 
             {/* Mobile Booking Form */}
             <div className="pt-2">
-              <BookingWidget defaultAirport={{ code: airport.code, city: airport.city }} />
+              <AirportBookingForm airport={airport} />
             </div>
           </div>
         </div>
