@@ -1,12 +1,10 @@
 import { BookingWidget } from "./booking-widget"
-import { SolariBackground } from "./solari-background"
 import { RotatingHeading } from "./rotating-heading"
 import { Shield, Star, Clock } from "lucide-react"
 
 export function HeroSection() {
   return (
     <section id="hero" className="relative" style={{ backgroundColor: 'var(--hero-navy)' }}>
-      <SolariBackground />
       <div className="relative mx-auto max-w-7xl">
 
         {/* ── MOBILE LAYOUT ── */}
