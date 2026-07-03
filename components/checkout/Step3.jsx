@@ -98,6 +98,26 @@ export default function Step3({ data, onBack }) {
   const passengerCount = 1 + (data.additionalPassengers?.length || 0);
   const addOns = Object.entries(data.requests || {}).filter(([, v]) => v).map(([k]) => k);
 
+  // Parse airport string (e.g. "Barcelona BCN") into city + IATA code for the header chip
+  const airportStr = (trip.airport || "Barcelona BCN").trim();
+  const airportParts = airportStr.split(/\s+/);
+  const airportCode = /^[A-Z]{3}$/.test(airportParts[airportParts.length - 1])
+    ? airportParts[airportParts.length - 1]
+    : airportParts[airportParts.length - 1] || "BCN";
+  const airportCity = airportParts.length > 1 ? airportParts.slice(0, -1).join(" ") : airportStr;
+
+  // Parse date string (e.g. "April 15, 2026") into short date + year for the header chip
+  const MONTH_ABBR = { January: "Jan", February: "Feb", March: "Mar", April: "Apr", May: "May", June: "Jun", July: "Jul", August: "Aug", September: "Sep", October: "Oct", November: "Nov", December: "Dec" };
+  let dateShort = trip.date || "—";
+  let dateYear = "";
+  if (trip.date) {
+    const m = trip.date.match(/^([A-Za-z]+)\s+(\d+),?\s*(\d{4})?$/);
+    if (m) {
+      dateShort = `${MONTH_ABBR[m[1]] || m[1]} ${m[2]}`;
+      dateYear = m[3] || "";
+    }
+  }
+
   // Shared label/value styles for the details grid
   const labelStyle = {
     fontSize: 11,
@@ -146,33 +166,50 @@ export default function Step3({ data, onBack }) {
 
         <div style={{ maxWidth: 700, margin: "0 auto", display: "flex", flexDirection: "column", gap: 16 }}>
 
-          {/* ── SECTION 1: Service & Order Number ── */}
+          {/* ── SECTION 1: Airport Photo Hero Header ── */}
           <div style={{
-            background: "#ffffff",
-            border: "1px solid rgba(0,0,0,0.07)",
-            borderLeft: "3px solid #d4a04a",
-            borderRadius: 12,
-            padding: "20px 24px",
+            position: "relative",
+            borderRadius: 16,
+            overflow: "hidden",
+            minHeight: 200,
+            padding: "28px 32px",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "space-between",
-            alignItems: "flex-start",
-            gap: 16,
-            flexWrap: "wrap",
+            gap: 24,
+            backgroundImage: `linear-gradient(135deg, rgba(29,33,94,0.92) 0%, rgba(29,33,94,0.75) 100%), url(/images/airport-terminal-header.png)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}>
+            {/* Top: label + service name */}
             <div>
-              <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 1, fontWeight: 600, color: "rgba(29,33,94,0.45)", marginBottom: 4 }}>
+              <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 2, color: "rgba(255,255,255,0.5)" }}>
                 Airporteo VIP Service
               </div>
-              <div style={{ fontSize: 20, fontWeight: 700, color: NAVY }}>
+              <div style={{ width: 40, height: 2, background: "#d4a04a", margin: "10px 0 14px" }} />
+              <div style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)", fontSize: 26, fontWeight: 700, color: "#ffffff" }}>
                 {serviceLabel}
               </div>
             </div>
-            <div style={{ textAlign: "right" }}>
-              <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 1, fontWeight: 600, color: "rgba(29,33,94,0.45)", marginBottom: 4 }}>
-                Order
+
+            {/* Bottom: info chips */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+              {/* Chip 1 — Airport */}
+              <div style={{ background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "12px 18px" }}>
+                <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: 1, color: "rgba(255,255,255,0.45)", marginBottom: 4 }}>Airport</div>
+                <div style={{ fontSize: 20, fontWeight: 700, color: "#ffffff", lineHeight: 1.1 }}>{airportCode}</div>
+                <div style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", marginTop: 2 }}>{airportCity}</div>
               </div>
-              <div style={{ fontSize: 20, fontWeight: 700, color: NAVY }}>
-                #{data.orderId || "000000"}
+              {/* Chip 2 — Date */}
+              <div style={{ background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "12px 18px" }}>
+                <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: 1, color: "rgba(255,255,255,0.45)", marginBottom: 4 }}>Date</div>
+                <div style={{ fontSize: 20, fontWeight: 700, color: "#d4a04a", lineHeight: 1.1 }}>{dateShort}</div>
+                {dateYear && <div style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", marginTop: 2 }}>{dateYear}</div>}
+              </div>
+              {/* Chip 3 — Order */}
+              <div style={{ background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "12px 18px" }}>
+                <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: 1, color: "rgba(255,255,255,0.45)", marginBottom: 4 }}>Order</div>
+                <div style={{ fontSize: 20, fontWeight: 700, color: "#ffffff", lineHeight: 1.1 }}>No.{data.orderId || "000000"}</div>
               </div>
             </div>
           </div>
@@ -180,9 +217,10 @@ export default function Step3({ data, onBack }) {
           {/* ── SECTION 2: Service Details (+ conditional add-ons) ── */}
           <div style={{
             background: "#ffffff",
-            border: "1px solid rgba(0,0,0,0.07)",
-            borderRadius: 12,
-            padding: 24,
+            border: "1px solid rgba(0,0,0,0.06)",
+            borderTop: "2px solid #d4a04a",
+            borderRadius: 14,
+            padding: 28,
           }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px 24px" }}>
               {/* Passenger — most prominent */}
@@ -227,7 +265,7 @@ export default function Step3({ data, onBack }) {
             {/* Section 2.1: Add-ons — only if any exist */}
             {addOns.length > 0 && (
               <>
-                <div style={{ height: 1, background: "rgba(0,0,0,0.05)", margin: "16px 0" }} />
+                <div style={{ borderTop: "1px dashed rgba(0,0,0,0.08)", margin: "20px 0" }} />
                 <div style={{ paddingTop: 0 }}>
                   <div style={{ ...labelStyle, marginBottom: 10 }}>Add-ons</div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -252,7 +290,7 @@ export default function Step3({ data, onBack }) {
           </div>
 
           {/* ── SECTION 3: Order Summary ── */}
-          <div style={{ background: "#ffffff", borderRadius: 12, padding: 24, border: "1px solid rgba(0,0,0,0.07)" }}>
+          <div style={{ background: "#ffffff", borderRadius: 14, padding: 24, border: "1px solid rgba(0,0,0,0.06)", borderTop: `2px solid ${NAVY}` }}>
             <div style={{ fontSize: 15, fontWeight: 700, color: NAVY, marginBottom: 16 }}>Order Summary</div>
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, fontWeight: 400, color: "rgba(26,26,46,0.7)", marginBottom: 10 }}>
               <span>VIP Meet &amp; Greet Service</span>
