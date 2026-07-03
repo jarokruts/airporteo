@@ -1,7 +1,7 @@
 'use client'
 
 import { Service } from '@/lib/services'
-import { AirportBookingForm } from './airport-booking-form'
+import { BookingWidget } from './booking-widget'
 
 interface ServiceBookingProps {
   service: Service
@@ -21,7 +21,7 @@ export function ServiceBooking({ service }: ServiceBookingProps) {
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg p-8">
-          <AirportBookingForm preSelectedService={service.name} />
+          <BookingWidget />
         </div>
 
         {/* Booking Info */}

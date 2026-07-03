@@ -1,4 +1,4 @@
-import { AirportBookingForm } from "./airport-booking-form"
+import { BookingWidget } from "./booking-widget"
 import { SolariBackground } from "./solari-background"
 import { RotatingHeading } from "./rotating-heading"
 import { Shield, Star, Clock } from "lucide-react"
@@ -12,7 +12,7 @@ export function HeroSection() {
         {/* ── MOBILE LAYOUT ── */}
         <div className="block sm:hidden pt-4 pb-8 px-1 flex flex-col items-center">
           <div className="rounded-2xl bg-white shadow-2xl shadow-black/40 overflow-visible w-full" style={{ position: 'relative', zIndex: 9999, isolation: 'isolate', borderRadius: '16px', WebkitMaskImage: 'radial-gradient(white, white)', WebkitBackfaceVisibility: 'hidden', MozBackfaceVisibility: 'hidden', transform: 'translateZ(0)' }}>
-            <AirportBookingForm />
+            <BookingWidget />
           </div>
         </div>
 
@@ -37,7 +37,7 @@ export function HeroSection() {
                   <span style={{ fontSize: '13px', fontWeight: '500', color: '#1D215E' }}>Instant confirmation in selected airports</span>
                 </div>
               </div>
-              <AirportBookingForm />
+              <BookingWidget />
             </div>
           </div>
 
