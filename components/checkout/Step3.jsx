@@ -95,9 +95,22 @@ export default function Step3({ data, onBack }) {
   const trip = data.trip || {};
   const flight = trip.type === "Departure" ? trip.departureFlight : trip.arrivalFlight;
   const serviceLabel = trip.type === "Departure" ? "Departure Assistance" : "Arrivals Meet & Greet";
-  const serviceDescription = trip.type === "Departure"
-    ? "Your dedicated Airporteo agent will meet you at the hotel or address, assist with luggage and escort you through the departure terminal."
-    : "Your dedicated Airporteo agent will be waiting for you in the arrivals hall with a name sign, assist with luggage and escort you to your transfer.";
+  const passengerCount = 1 + (data.additionalPassengers?.length || 0);
+  const addOns = Object.entries(data.requests || {}).filter(([, v]) => v).map(([k]) => k);
+
+  // Shared label/value styles for the details grid
+  const labelStyle = {
+    fontSize: 11,
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
+    fontWeight: 600,
+    color: "rgba(29,33,94,0.35)",
+  };
+  const valueStyle = {
+    fontSize: 15,
+    fontWeight: 600,
+    color: "#1a1a2e",
+  };
 
   return (
     <>
@@ -133,118 +146,132 @@ export default function Step3({ data, onBack }) {
 
         <div style={{ maxWidth: 700, margin: "0 auto", display: "flex", flexDirection: "column", gap: 16 }}>
 
-          {/* ── SERVICE CONFIRMATION CARD ── */}
-          <div style={{ borderRadius: 20, overflow: "hidden", boxShadow: "0 8px 40px rgba(29,33,94,0.18)" }}>
-
-          {/* Gold top bar */}
-  <div style={{ background: GOLD, padding: "16px 28px", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-    <div>
-      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: NAVY, opacity: 0.7, marginBottom: 4 }}>
-        Airporteo VIP Service
-      </div>
-      <div style={{ fontSize: 22, fontWeight: 800, color: NAVY }}>
-        {serviceLabel}
-      </div>
-    </div>
-    <div style={{ textAlign: "right" }}>
-      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: NAVY, opacity: 0.7, marginBottom: 4 }}>
-        Order
-      </div>
-      <div style={{ fontSize: 22, fontWeight: 800, color: NAVY }}>
-        #{data.orderId || "000000"}
-      </div>
-    </div>
-  </div>
-
-            {/* Navy body */}
-            <div style={{ background: NAVY, padding: 28 }}>
-
-              {/* Personal greeting */}
-              <div style={{ marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 6 }}>Dear</div>
-                <div style={{ fontSize: 26, fontWeight: 800, color: "white" }}>
-                  {data.leadPassenger.name || "Valued Guest"}
-                </div>
-                <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", marginTop: 6, lineHeight: 1.6 }}>
-                  {serviceDescription}
-                </div>
+          {/* ── SECTION 1: Service & Order Number ── */}
+          <div style={{
+            background: "#ffffff",
+            border: "1px solid rgba(0,0,0,0.07)",
+            borderLeft: "3px solid #d4a04a",
+            borderRadius: 12,
+            padding: "20px 24px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: 16,
+            flexWrap: "wrap",
+          }}>
+            <div>
+              <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 1, fontWeight: 600, color: "rgba(29,33,94,0.45)", marginBottom: 4 }}>
+                Airporteo VIP Service
               </div>
-
-              {/* Service details grid */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                <div>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 6 }}>Date of Service</div>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: GOLD }}>{trip.date || "—"}</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 6 }}>Airport</div>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: "white" }}>{trip.airport || "Barcelona BCN"}</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 6 }}>Luggage Handled</div>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: "white" }}>
-                    {data.luggage?.checked || 0} Checked · {data.luggage?.cabin || 0} Cabin
-                  </div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 6 }}>Passengers</div>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: "white" }}>
-                    {1 + (data.additionalPassengers?.length || 0)} {1 + (data.additionalPassengers?.length || 0) === 1 ? "Person" : "People"}
-                  </div>
-                </div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: NAVY }}>
+                {serviceLabel}
               </div>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 1, fontWeight: 600, color: "rgba(29,33,94,0.45)", marginBottom: 4 }}>
+                Order
+              </div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: NAVY }}>
+                #{data.orderId || "000000"}
+              </div>
+            </div>
+          </div>
 
-              {/* Special requests */}
-              {Object.entries(data.requests || {}).filter(([, v]) => v).length > 0 && (
-                <div style={{ marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 10 }}>Special Requests Included</div>
+          {/* ── SECTION 2: Service Details (+ conditional add-ons) ── */}
+          <div style={{
+            background: "#ffffff",
+            border: "1px solid rgba(0,0,0,0.07)",
+            borderRadius: 12,
+            padding: 24,
+          }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px 24px" }}>
+              {/* Passenger — most prominent */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Passenger</span>
+                <span style={{ fontSize: 18, fontWeight: 700, color: "#1a1a2e" }}>{data.leadPassenger.name || "Valued Guest"}</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Date of Service</span>
+                <span style={{ ...valueStyle, color: "#d4a04a" }}>{trip.date || "—"}</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Airport</span>
+                <span style={valueStyle}>{trip.airport || "Barcelona BCN"}</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Flight</span>
+                <span style={valueStyle}>{flight || "—"}</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Passengers</span>
+                <span style={valueStyle}>{passengerCount} {passengerCount === 1 ? "Adult" : "Adults"}</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Luggage</span>
+                <span style={valueStyle}>{data.luggage?.checked || 0} Checked · {data.luggage?.cabin || 0} Cabin</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Class</span>
+                <span style={valueStyle}>{data.cabinClass || trip.cabinClass || "Economy"}</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Contact Email</span>
+                <span style={valueStyle}>{data.leadPassenger.email || "—"}</span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={labelStyle}>Contact Phone</span>
+                <span style={valueStyle}>{data.leadPassenger.countryCode} {data.leadPassenger.phone || "—"}</span>
+              </div>
+            </div>
+
+            {/* Section 2.1: Add-ons — only if any exist */}
+            {addOns.length > 0 && (
+              <>
+                <div style={{ height: 1, background: "rgba(0,0,0,0.05)", margin: "16px 0" }} />
+                <div style={{ paddingTop: 0 }}>
+                  <div style={{ ...labelStyle, marginBottom: 10 }}>Add-ons</div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                    {Object.entries(data.requests || {}).filter(([, v]) => v).map(([k]) => (
-                      <span key={k} style={{ fontSize: 13, padding: "4px 12px", borderRadius: 999, border: `1px solid ${GOLD}`, color: GOLD, textTransform: "capitalize" }}>
-                        ✓ {k}
+                    {addOns.map((k) => (
+                      <span key={k} style={{
+                        fontSize: 13,
+                        fontWeight: 500,
+                        padding: "6px 14px",
+                        borderRadius: 20,
+                        border: "1px solid rgba(212,160,74,0.25)",
+                        background: "rgba(212,160,74,0.06)",
+                        color: NAVY,
+                        textTransform: "capitalize",
+                      }}>
+                        ✓ {k.replace(/([A-Z])/g, " $1")}
                       </span>
                     ))}
                   </div>
                 </div>
-              )}
-
-              {/* Flight reference — secondary, small */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 4 }}>Flight Reference</div>
-                  <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }}>{flight || "—"}</div>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 4 }}>Contact</div>
-                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>{data.leadPassenger.email || "—"}</div>
-                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>{data.leadPassenger.countryCode} {data.leadPassenger.phone || "—"}</div>
-                </div>
-              </div>
-
-            </div>
+              </>
+            )}
           </div>
 
-          {/* ── ORDER SUMMARY ── */}
-          <div style={{ background: "white", borderRadius: 16, padding: 24, border: `1px solid ${BORDER}` }}>
+          {/* ── SECTION 3: Order Summary ── */}
+          <div style={{ background: "#ffffff", borderRadius: 12, padding: 24, border: "1px solid rgba(0,0,0,0.07)" }}>
             <div style={{ fontSize: 15, fontWeight: 700, color: NAVY, marginBottom: 16 }}>Order Summary</div>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, color: GRAY_TEXT, marginBottom: 10 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, fontWeight: 400, color: "rgba(26,26,46,0.7)", marginBottom: 10 }}>
               <span>VIP Meet &amp; Greet Service</span>
               <span>$1,000</span>
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, color: GRAY_TEXT, marginBottom: 16 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, fontWeight: 400, color: "rgba(26,26,46,0.7)", marginBottom: 16 }}>
               <span>Luggage Assistance</span>
               <span>$250</span>
             </div>
             {discount > 0 && (
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, color: "green", marginBottom: 16 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, fontWeight: 500, color: GOLD, marginBottom: 16 }}>
                 <span>Promo discount</span>
                 <span>-${discount.toFixed(0)}</span>
               </div>
             )}
-            <div style={{ height: 1, background: BORDER, marginBottom: 16 }} />
+            <div style={{ height: 1, background: "rgba(0,0,0,0.07)", marginBottom: 16 }} />
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: 18, fontWeight: 700, color: NAVY }}>Total Due</span>
-              <span style={{ fontSize: 38, fontWeight: 800, color: NAVY, fontFamily: "serif" }}>${finalTotal}</span>
+              <span style={{ fontSize: 16, fontWeight: 700, color: NAVY }}>Total</span>
+              <span style={{ fontSize: 16, fontWeight: 700, color: NAVY }}>${finalTotal}</span>
             </div>
           </div>
 
