@@ -553,6 +553,30 @@ function PassengersLuggageDropdown({
           ))}
         </div>
       </div>
+
+      {/* Done button - closes the dropdown */}
+      <button
+        type="button"
+        onClick={onClose}
+        style={{
+          width: '100%',
+          height: '44px',
+          marginTop: '16px',
+          background: '#1D215E',
+          color: '#ffffff',
+          fontFamily: 'DM Sans, sans-serif',
+          fontSize: '14px',
+          fontWeight: 600,
+          border: 'none',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          transition: 'background 0.2s'
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = '#282d6e' }}
+        onMouseLeave={(e) => { e.currentTarget.style.background = '#1D215E' }}
+      >
+        Done
+      </button>
     </div>
   )
 }
