@@ -1328,9 +1328,9 @@ export function AirportBookingForm({ airport, preSelectedService }: AirportBooki
               // Prepare booking data to pass to checkout
               const bookingData = {
                 trip: {
-                  type: tripType,
-                  airport: `${airportValue.split('|')[1]} ${airportValue.split('|')[0]}`,
-                  arrivalFlight: arrivalFlightNumber || '',
+                  type: direction,
+                  airport: airportValue,
+                  arrivalFlight: flightNumber || '',
                   departureFlight: connectionFlightNumber || '',
                   date: new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
                 },
