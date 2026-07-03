@@ -3,7 +3,6 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ServiceBookingForm } from '@/components/service-booking-form'
 import { DiscoverMoreSection } from '@/components/discover-more-section'
-import { ServicesSolariBoard } from '@/components/services-solari-board'
 import { ReviewsSection } from '@/components/reviews-section'
 import Link from 'next/link'
 
@@ -79,9 +78,6 @@ export default function ServicesPage() {
             </div>
           </div>
         </section>
-
-        {/* Section 2: Solari Board */}
-        <ServicesSolariBoard />
 
         {/* Section 3: Service Cards Grid */}
         <section className="bg-white py-10 md:py-16 px-4 md:px-6 lg:px-4">
